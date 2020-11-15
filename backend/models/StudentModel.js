@@ -11,34 +11,34 @@ const StudentSchema = new mongoose.Schema({
       required: true,
     },
     title: {
-        type: [String],
-        required: true,
+      type: [String],
+      required: true,
     },
     salary: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     relocation: {
-        type: Boolean,
+      type: Boolean,
     },
     industry: {
-        type: String,
+      type: String,
     },
   },
   demographics: {
     ethnicity: {
-        type: String,
-      },
-      gender: {
-        type: String,
-      },
-      disability: {
-        type: String,
-      },
-      vetran: {
-        type: Boolean,
-      },
-   },
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    disability: {
+      type: String,
+    },
+    vetran: {
+      type: Boolean,
+    },
+  },
   date: { type: Date, default: Date.now() },
 });
 

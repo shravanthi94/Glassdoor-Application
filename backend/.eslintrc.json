@@ -19,9 +19,11 @@
         "react"
     ],
     "rules": {
-        "indent": ["error", 4],
+        "indent": ["error", 2],
         "no-console":"off",
         "no-unused-vars":"off",
-        "eol-last": 0
+        "eol-last": 0,
+        "linebreak-style": "off",
+        "consistent-return": "off"
     }
 }
