@@ -11,33 +11,28 @@ const Student = require('../../models/StudentModel');
 auth();
 
 router.post('/', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    //  1. Query to check if customer exists
-    let student = await Student.findOne({ email });
+    // 1. See if student exists
+    const student = await Student.findOne({ email });
 
-    if (student) {
+    if (!student) {
       return res
         .status(400)
-        .json({ errors: [{ msg: 'Student already exits' }] });
+        .json({ errors: [{ msg: 'Invalid Credentials' }] });
     }
 
-    //  3. Create student
-    student = new Student({
-      name,
-      email,
-      password,
-    });
+    // 2. Match student's password matches
+    const isMatch = await bcrypt.compare(password, student.password);
 
-    //  2. If customer does not exist, hash the password
-    const salt = await bcrypt.genSalt(10);
-    student.password = await bcrypt.hash(password, salt);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Invalid Credentials' }] });
+    }
 
-    //  4. save to database
-    await student.save();
-
-    //  5. Pass the jsonwebtoken for that customer
+    // 3. return jsonWebToken
     const payload = {
       student: {
         id: student.id,
@@ -50,7 +45,7 @@ router.post('/', async (req, res) => {
     jwt.sign(
       payload,
       config.get('jwtSecret'),
-      { expiresIn: 6000000 },
+      { expiresIn: '10 hours' },
       (err, token) => {
         if (err) throw err;
         res.json({
@@ -62,8 +57,8 @@ router.post('/', async (req, res) => {
       },
     );
   } catch (err) {
-    console.log(err);
-    res.status(500).send('Server Error');
+    console.log(err.message);
+    res.send(500).send('Server Error');
   }
 });
 
