@@ -8,18 +8,20 @@ const Student = require('../../models/StudentModel');
 router.post('/', checkAuth, async (req, res) => {
   const studentId = req.user.id;
   const {
-    ethnicity,
-    gender,
-    disability,
-    vetran,
+    status,
+    title,
+    relocation,
+    salary,
+    industry,
   } = req.body;
 
   try {
     const student = await Student.findById(studentId).select('-password');
-    student.demographics.ethnicity = ethnicity;
-    student.demographics.gender = gender;
-    student.demographics.disability = disability;
-    student.demographics.vetran = vetran;
+    student.jobPreferance.status = status;
+    student.jobPreferance.title = title;
+    student.jobPreferance.relocation = relocation;
+    student.jobPreferance.salary = salary;
+    student.jobPreferance.industry = industry;
 
     await student.save();
 
