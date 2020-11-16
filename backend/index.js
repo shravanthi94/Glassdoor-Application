@@ -2,7 +2,7 @@
 const app = require('./app');
 //  Connect database
 const connectDB = require('./config/db');
-const sqlConnectDB = require('./config/sqlConnection');
+const sqlConnectDB = require('./config/sqlConnectionPool');
 
 // Student
 const signupStudent = require('./routes/student/signup');
