@@ -14,6 +14,7 @@ const jobPreferences = require('./routes/student/jobPreferences');
 // Company
 const signupCompany = require('./routes/company/signup');
 const loginCompany = require('./routes/company/login');
+const profileCompany = require('./routes/company/profile');
 
 connectDB();
 
@@ -32,8 +33,10 @@ app.use('/student/jobPreferences', jobPreferences);
 /*  Routes for Company */
 // Company - SIGNUP
 app.use('/company/signup', signupCompany);
-//  Student - LOGIN
+//  Company - LOGIN
 app.use('/company/login', loginCompany);
+//  Company - PROFILE
+app.use('/company/profile', profileCompany);
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
