@@ -58,7 +58,6 @@ router.post('/', [companyCheckAuth, [
     if (founded) cmpnyProfileFields.founded = founded;
     if (mission) cmpnyProfileFields.mission = mission;
     try {
-        console.log("Profile of Company", req.company.email)
         mysqlConnectionPool.query(
             `SELECT * FROM company WHERE email= '${req.company.email}'`,
             async(error, result) => {
@@ -67,10 +66,11 @@ router.post('/', [companyCheckAuth, [
                     return res.status(500).send('Server Error');
                 }
                 if (result) {
-                    let company = await Company.findOne({ company: req.company.email });
+                    let company = await Company.findOne({ "email": req.company.email });
+                    console.log("create profile find query", company)
                     if (company) {
                         // update
-                        company = await Company.findOneAndUpdate({ company: req.company.email }, { $set: cmpnyProfileFields }, { new: true });
+                        company = await Company.findOneAndUpdate({ "email": req.company.email }, { $set: cmpnyProfileFields }, { new: true });
                         return res.json(company);
                     }
                     company = new Company(cmpnyProfileFields);
@@ -89,8 +89,21 @@ router.post('/', [companyCheckAuth, [
 });
 
 
-// @route  GET /company/profile/me
+// @route  GET /company/profile
 // @Desc   Get current logged in company profile
 // @access Private
+
+router.get('/', companyCheckAuth, async(req, res) => {
+    try {
+        const company = await Company.findOne({ "email": req.company.email });
+        if (!company) {
+            return res.status(400).json({ msg: 'There is no profile for this company' });
+        }
+        res.json(company);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+});
 
 module.exports = router;
