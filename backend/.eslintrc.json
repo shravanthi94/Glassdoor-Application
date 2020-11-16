@@ -19,11 +19,13 @@
         "react"
     ],
     "rules": {
-        "indent": ["error", 2],
+        "indent": ["error", 4],
         "no-console":"off",
         "no-unused-vars":"off",
         "eol-last": 0,
         "linebreak-style": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        // Indent with 4 spaces
+
     }
 }
