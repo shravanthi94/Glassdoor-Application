@@ -16,6 +16,8 @@ const signupCompany = require('./routes/company/signup');
 const loginCompany = require('./routes/company/login');
 const profileCompany = require('./routes/company/profile');
 const reviewCompany = require('./routes/company/review');
+const overviewCompany = require('./routes/company/overview');
+const salaryCompany = require('./routes/company/salary');
 
 connectDB();
 
@@ -38,10 +40,13 @@ app.use('/company/signup', signupCompany);
 app.use('/company/login', loginCompany);
 //  Company - PROFILE
 app.use('/company/profile', profileCompany);
-
+//  Company - REVIEW
 app.use('/company/review', reviewCompany);
+//  Company - OVERVIEW
+app.use('/company/overview', overviewCompany);
+//  Company - SALARY
+app.use('/company/salary', salaryCompany);
 
-//app.use();
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;

@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
         if (!reviews) {
             return res.status(400).json({ msg: 'No reviews yet!' });
         }
-        res.json(reviews);
+        res.status(200).json(reviews);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error: Database');
@@ -45,11 +45,9 @@ router.post('/', async (req, res) => {
             pros: req.body.pros,
             cons: req.body.cons,
             overAllRating: req.body.overAllRating,
-            ceoApprovalRating: req.body.ceoApprovalRating,
-            recommendationRating: req.body.recommendationRating,
             comment: req.body.comment
 
-         })
+         });
 
          await review.save((error, data) => {
             if (error) {

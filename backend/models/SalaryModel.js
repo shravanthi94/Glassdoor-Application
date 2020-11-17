@@ -3,11 +3,14 @@ const mongoose = require('mongoose');
 const SalarySchema = new mongoose.Schema({
     company: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'company'
+        ref: 'company',
     },
     baseSalary: {
         type: String,
         required: true
+    },
+    avgTotalPay: {
+        type: String
     },
     bonuses: {
         type: String
@@ -19,6 +22,10 @@ const SalarySchema = new mongoose.Schema({
         type: String
     },
     location: {
+        type: String,
+        required: true
+    },
+    employerName:{
         type: String,
         required: true
     },
