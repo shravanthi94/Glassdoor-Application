@@ -25,7 +25,7 @@ const SalarySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    employerName:{
+    companyName:{
         type: String,
         required: true
     },

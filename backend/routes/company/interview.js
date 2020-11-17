@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         const interview =  new Interview({ 
 
             company: req.body.company,
-            employerName: req.body.employerName,
+            companyName: req.body.companyName,
             overallInterviewExp: req.body.overallInterviewExp,
             title: req.body.title,
             description: req.body.description,

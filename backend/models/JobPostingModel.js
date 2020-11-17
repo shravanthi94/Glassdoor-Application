@@ -5,6 +5,10 @@ const JobPostingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'company',
     },
+    companyName: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

@@ -5,7 +5,7 @@ const InterviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'company'
     },
-    employerName:{
+    companyName:{
         type: String,
         required: true
     },
