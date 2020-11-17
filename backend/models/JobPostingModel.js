@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const JobPostingSchema = new mongoose.Schema({
     company: {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'company',
     },
     companyName: {
@@ -17,14 +18,14 @@ const JobPostingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    responsibilities: [{
-        type: String,
+    responsibilities: {
+        type: [String],
         required: true
-    }],
-    qualifications: [{
-        type: String,
+    },
+    qualifications: {
+        type: [String],
         required: true
-    }],
+    },
     industry: {
         type: String,
         required: true
@@ -33,11 +34,11 @@ const JobPostingSchema = new mongoose.Schema({
         type: String
     },
     Remote: {
-        type: Boolean,
+        type: String,
         required: true
     },
     inPerson: {
-        type: Boolean,
+        type: String,
         required: true
     },
     street: {
