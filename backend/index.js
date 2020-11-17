@@ -15,6 +15,7 @@ const jobPreferences = require('./routes/student/jobPreferences');
 const signupCompany = require('./routes/company/signup');
 const loginCompany = require('./routes/company/login');
 const profileCompany = require('./routes/company/profile');
+const reviewCompany = require('./routes/company/review');
 
 connectDB();
 
@@ -37,6 +38,10 @@ app.use('/company/signup', signupCompany);
 app.use('/company/login', loginCompany);
 //  Company - PROFILE
 app.use('/company/profile', profileCompany);
+
+app.use('/company/review', reviewCompany);
+
+//app.use();
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
