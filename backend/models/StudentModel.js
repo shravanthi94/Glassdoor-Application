@@ -5,7 +5,7 @@ const StudentSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   image: { type: String },
-  jobPreferance: {
+  jobPreference: {
     status: {
       type: String,
       required: true,
@@ -35,7 +35,7 @@ const StudentSchema = new mongoose.Schema({
     disability: {
       type: String,
     },
-    vetran: {
+    veteran: {
       type: Boolean,
     },
   },
