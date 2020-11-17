@@ -11,8 +11,7 @@ const ReviewSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now(),
-        required: true
+        default: Date.now()
     },
     approvalStatus: {
         type: String,
@@ -28,12 +27,6 @@ const ReviewSchema = new mongoose.Schema({
         type: String
     },
     overAllRating: {
-        type: String
-    },
-    ceoApprovalRating: {
-        type: String
-    },
-    recommendationRating: {
         type: String
     },
     comment: {

@@ -50,6 +50,21 @@ const CompanySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    overAllRating: {
+        type: String,
+        default: "90"
+    },
+    ceoApprovalRating: {
+        type: String,
+        default: "95"
+    },
+    recommendationRating: {
+        type: String,
+        default: "85"
+    },
+    logo:{
+        type: String
+    },
     images: [{
         type: String
     }],
