@@ -16,6 +16,8 @@ const signupCompany = require('./routes/company/signup');
 const loginCompany = require('./routes/company/login');
 const profileCompany = require('./routes/company/profile');
 const reviewCompany = require('./routes/company/review');
+const jobPosting = require('./routes/company/jobPosting');
+
 
 connectDB();
 
@@ -38,6 +40,8 @@ app.use('/company/signup', signupCompany);
 app.use('/company/login', loginCompany);
 //  Company - PROFILE
 app.use('/company/profile', profileCompany);
+//  Company - JOBPOSTING
+app.use('/company/jobposting', jobPosting);
 
 app.use('/company/review', reviewCompany);
 
