@@ -5,6 +5,10 @@ const InterviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'company'
     },
+    companyName:{
+        type: String,
+        required: true
+    },
     overallInterviewExp: {
         type: String,
         required: true
