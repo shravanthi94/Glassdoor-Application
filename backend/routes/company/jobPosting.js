@@ -86,7 +86,8 @@ router.post('/', [companyCheckAuth, [
 });
 
 // get job by id by currently logged in company
-// get number of applicants
+
+// get all the job postings 
 
 
 module.exports = router;
