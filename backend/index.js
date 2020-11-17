@@ -21,6 +21,10 @@ const jobPosting = require('./routes/company/jobPosting');
 const overviewCompany = require('./routes/company/overview');
 const salaryCompany = require('./routes/company/salary');
 
+// Admin
+const signupAdmin = require('./routes/admin/signup');
+const loginAdmin = require('./routes/admin/login');
+
 connectDB();
 
 /*  Routes for Students */
@@ -52,6 +56,11 @@ app.use('/company/overview', overviewCompany);
 //  Company - SALARY
 app.use('/company/salary', salaryCompany);
 
+/*  Routes for Admin */
+// Admin - SIGNUP
+app.use('/admin/signup', signupAdmin);
+//  Admin - LOGIN
+app.use('/admin/login', loginAdmin);
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
