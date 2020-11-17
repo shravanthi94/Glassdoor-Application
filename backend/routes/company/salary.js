@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
             yearsOfExperience: req.body.yearsOfExperience,
             location: req.body.location,
             salaryGender: req.body.salaryGender,
-            employerName: req.body.employerName
+            companyName: req.body.companyName
          });
 
          await salary.save((error, data) => {

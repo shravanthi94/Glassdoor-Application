@@ -20,6 +20,8 @@ const jobPosting = require('./routes/company/jobPosting');
 
 const overviewCompany = require('./routes/company/overview');
 const salaryCompany = require('./routes/company/salary');
+const interviewCompany = require('./routes/company/interview');
+const jobCompany = require('./routes/company/job');
 
 // Admin
 const signupAdmin = require('./routes/admin/signup');
@@ -49,12 +51,18 @@ app.use('/company/profile', profileCompany);
 //  Company - JOBPOSTING
 app.use('/company/jobposting', jobPosting);
 
+
 //  Company - REVIEW
 app.use('/company/review', reviewCompany);
 //  Company - OVERVIEW
 app.use('/company/overview', overviewCompany);
 //  Company - SALARY
 app.use('/company/salary', salaryCompany);
+
+//  Company - SALARY
+app.use('/company/interview', interviewCompany);
+//  Company - JOB
+app.use('/company/job', jobCompany);
 
 /*  Routes for Admin */
 // Admin - SIGNUP
