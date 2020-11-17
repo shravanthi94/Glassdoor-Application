@@ -34,6 +34,8 @@ router.post('/', [companyCheckAuth, [
 
     // build profile object
     const {
+        email,
+        name,
         title,
         description,
         responsibilities,
@@ -48,7 +50,9 @@ router.post('/', [companyCheckAuth, [
         zip
     } = req.body;
     const jobPostingFields = {};
-    jobPostingFields.company = req.company.name;
+    jobPostingFields.company = req.body.company;
+    jobPostingFields.name = req.company.name;
+    jobPostingFields.email = req.company.email;
     if (title) jobPostingFields.title = title;
     if (description) jobPostingFields.description = description;
     if (responsibilities) {
