@@ -18,6 +18,7 @@ const profileCompany = require('./routes/company/profile');
 const reviewCompany = require('./routes/company/review');
 const overviewCompany = require('./routes/company/overview');
 const salaryCompany = require('./routes/company/salary');
+const interviewCompany = require('./routes/company/interview');
 
 connectDB();
 
@@ -46,6 +47,8 @@ app.use('/company/review', reviewCompany);
 app.use('/company/overview', overviewCompany);
 //  Company - SALARY
 app.use('/company/salary', salaryCompany);
+//  Company - SALARY
+app.use('/company/interview', interviewCompany);
 
 
 //  Connection to a port
