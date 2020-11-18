@@ -6,7 +6,7 @@ const { checkAuth } = require('../../middleware/studentAuth');
 const Student = require('../../models/StudentModel');
 
 router.post('/', checkAuth, async (req, res) => {
-  const studentId = req.user.id;
+  const studentEmail = req.user.email;
   const {
     status,
     title,
@@ -16,7 +16,7 @@ router.post('/', checkAuth, async (req, res) => {
   } = req.body;
 
   try {
-    const student = await Student.findById(studentId).select('-password');
+    const student = await Student.find({ email : studentEmail });
     student.jobPreferance.status = status;
     student.jobPreferance.title = title;
     student.jobPreferance.relocation = relocation;

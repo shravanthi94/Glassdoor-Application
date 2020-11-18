@@ -5,6 +5,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const Student = require('../models/StudentModel');
+const mysqlConnectionPool = require('../config/sqlConnectionPool');
 
 // Setup work and export for the JWT passport strategy
 function auth() {
@@ -14,17 +15,29 @@ function auth() {
   };
   passport.use(
     new JwtStrategy(opts, (payload, callback) => {
-      const id = payload._id;
-      Student.findById(id, (err, results) => {
-        if (err) {
-          return callback(err, false);
-        }
-        if (results) {
-          callback(null, results);
-        } else {
-          callback(null, false);
-        }
-      });
+      // const id = payload._id;
+      // Student.findById(id, (err, results) => {
+      //   if (err) {
+      //     return callback(err, false);
+      //   }
+      //   if (results) {
+      //     callback(null, results);
+      //   } else {
+      //     callback(null, false);
+      //   }
+      const id = payload.id;
+        mysqlConnectionPool.query(
+          `SELECT * FROM student WHERE id= '${id}'`,
+          (error, results) => {
+              if (error) {
+                  return callback(err, false);
+              }
+              if (results) {
+                  callback(null, results);
+              } else {
+                  callback(null, false);
+              }
+        });
     }),
   );
 }

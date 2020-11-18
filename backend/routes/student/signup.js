@@ -4,67 +4,86 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('config');
+const { check, validationResult } = require('express-validator');
 const { auth } = require('../../middleware/studentAuth');
 
 const Student = require('../../models/StudentModel');
+const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 
 auth();
 
-router.post('/', async (req, res) => {
-  const { name, email, password } = req.body;
-
-  try {
-    //  1. Query to check if customer exists
-    let student = await Student.findOne({ email });
-
-    if (student) {
-      return res
-        .status(400)
-        .json({ errors: [{ msg: 'Student already exits' }] });
-    }
-
-    //  3. Create student
-    student = new Student({
-      name,
-      email,
-      password,
-    });
-
-    //  2. If customer does not exist, hash the password
-    const salt = await bcrypt.genSalt(10);
-    student.password = await bcrypt.hash(password, salt);
-
-    //  4. save to database
-    await student.save();
-
-    //  5. Pass the jsonwebtoken for that customer
-    const payload = {
-      student: {
-        id: student.id,
-        name: student.name,
-        email: student.email,
-        usertype: 'student',
-      },
-    };
-
-    jwt.sign(
-      payload,
-      config.get('jwtSecret'),
-      { expiresIn: 6000000 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({
-          token,
-          id: student.id,
-          name: student.name,
-          email: student.email,
-        });
-      },
-    );
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Server Error');
+router.post('/', [
+  check('name', 'Name is required').not().isEmpty(),
+  check('email', 'Please include valid email').isEmail(),
+  check(
+      'password',
+      'Please enter a password with 4 or more characters'
+  ).isLength({ min: 4 }),
+  ], async (req, res) => {
+  
+  const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
   }
+
+        const { name, email, password } = req.body;
+        // See if user exists
+        try {
+            mysqlConnectionPool.query(
+                `SELECT email FROM student WHERE email= '${email}'`,
+                async(error, result) => {
+                    if (error) {
+                        console.log(error);
+                        return res.status(500).send('Server Error');
+                    }
+                    if (result.length > 0) {
+                        return res.status(400).json({
+                            errors: [{ msg: 'User already exists' }],
+                        });
+                    }
+
+                    //Encrypt password using bcrypt
+                    const salt = await bcrypt.genSalt(10);
+                    const passwordEncrypted = await bcrypt.hash(password, salt);
+
+                    mysqlConnectionPool.query(
+                        `INSERT into student (name, email, password) 
+                        VALUES ('${name}', '${email}', '${passwordEncrypted}')`,
+                        (error, result) => {
+                            if (error) {
+                                console.log(error);
+                                return res.status(500).send('Server Error');
+                            }
+                            const payload = {
+                                user: {
+                                    id: result.insertId,
+                                    name: name,
+                                    email: email,
+                                    usertype: 'student'
+                                },
+                            };
+                            jwt.sign(
+                                payload,
+                                config.get('jwtSecret'), { expiresIn: 6000000 },
+                                (error, token) => {
+                                    if (error) throw error;
+                                    res.json({
+                                        token,
+                                        id: result.insertId,
+                                        name: name,
+                                        email: email
+                                    });
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+        } catch (error) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+
 });
 
 module.exports = router;

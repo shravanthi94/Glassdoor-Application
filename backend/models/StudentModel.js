@@ -3,20 +3,16 @@ const mongoose = require('mongoose');
 const StudentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
   image: { type: String },
   jobPreference: {
     status: {
       type: String,
-      required: true,
     },
     title: {
       type: String,
-      required: true,
     },
     salary: {
       type: String,
-      required: true,
     },
     relocation: {
       type: Boolean,
