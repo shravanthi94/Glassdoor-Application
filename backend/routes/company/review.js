@@ -74,13 +74,14 @@ router.get('/my/reviews', companyCheckAuth, async(req, res) => {
         if (company) {
             // console.log("company Id", company._id)
             const reviews = await Review.find({ "company": company._id })
-            if (reviews.length > 0) {
+            if (reviews) {
                 // console.log(reviews)
                 return res.status(200).json(reviews)
             }
             return res.status(400).json({ msg: 'No reviews for this company' });
-        } else {
-            return res.status(400).json({ msg: 'No company found' });
+            // }
+            // else {
+            //     return res.status(400).json({ msg: 'No company found' });
         }
 
     } catch (err) {
