@@ -29,12 +29,6 @@ const ReviewSchema = new mongoose.Schema({
     overAllRating: {
         type: String
     },
-    ceoApprovalRating: {
-        type: String
-    },
-    recommendationRating: {
-        type: String
-    },
     comment: {
         type: String
     },

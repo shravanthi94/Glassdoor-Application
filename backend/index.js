@@ -16,6 +16,16 @@ const signupCompany = require('./routes/company/signup');
 const loginCompany = require('./routes/company/login');
 const profileCompany = require('./routes/company/profile');
 const reviewCompany = require('./routes/company/review');
+const jobPosting = require('./routes/company/jobPosting');
+
+const overviewCompany = require('./routes/company/overview');
+const salaryCompany = require('./routes/company/salary');
+const interviewCompany = require('./routes/company/interview');
+const jobCompany = require('./routes/company/job');
+
+// Admin
+const signupAdmin = require('./routes/admin/signup');
+const loginAdmin = require('./routes/admin/login');
 
 connectDB();
 
@@ -38,10 +48,27 @@ app.use('/company/signup', signupCompany);
 app.use('/company/login', loginCompany);
 //  Company - PROFILE
 app.use('/company/profile', profileCompany);
+//  Company - JOBPOSTING
+app.use('/company/jobposting', jobPosting);
 
+
+//  Company - REVIEW
 app.use('/company/review', reviewCompany);
+//  Company - OVERVIEW
+app.use('/company/overview', overviewCompany);
+//  Company - SALARY
+app.use('/company/salary', salaryCompany);
 
-//app.use();
+//  Company - SALARY
+app.use('/company/interview', interviewCompany);
+//  Company - JOB
+app.use('/company/job', jobCompany);
+
+/*  Routes for Admin */
+// Admin - SIGNUP
+app.use('/admin/signup', signupAdmin);
+//  Admin - LOGIN
+app.use('/admin/login', loginAdmin);
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
