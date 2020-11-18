@@ -2,9 +2,25 @@ const express = require('express');
 
 const router = express.Router();
 const { checkAuth } = require('../../middleware/studentAuth');
+const { check, validationResult } = require('express-validator');
 
-const Company = require('../../models/StudentModel');
-const Job = require('../../models/StudentModel');
+const Student = require('../../models/StudentModel');
+const Company = require('../../models/CompanyModel');
+const Job = require('../../models/JobPostingModel');
+
+router.post('/', checkAuth, async (req,res) => {
+  console.log('here: ', req.user);
+  
+  const { name, email } = req.user;
+  student = new Student({
+        name,
+        email,
+  });
+
+  await student.save();
+
+  res.status(200).json(student);
+});
 
 router.get('/:data', checkAuth, async (req, res) => {
   const searchData = req.params.data;
