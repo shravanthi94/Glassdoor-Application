@@ -33,10 +33,12 @@ const ReviewSchema = new mongoose.Schema({
         type: String
     },
     favorite: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     featured: {
-        type: String
+        type: Boolean,
+        default: false
     },
     reply: [{
 
