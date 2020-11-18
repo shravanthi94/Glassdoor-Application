@@ -63,7 +63,7 @@ router.post('/', async(req, res) => {
     }
 });
 
-// @route  GET /company/review
+// @route  GET /company/review/my/reviews
 // @Desc   GET all current company's reviews
 // @access Private
 
@@ -79,13 +79,37 @@ router.get('/my/reviews', companyCheckAuth, async(req, res) => {
                 return res.status(200).json(reviews)
             }
             return res.status(400).json({ msg: 'No reviews for this company' });
+        } else {
+            return res.status(400).json({ msg: 'No company found' });
         }
-        return res.status(400).json({ msg: 'No company found' });
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
 
+// @route  POST /company/review/my/reviews
+// @Desc   POST all current company's reviews
+// @access Private
+
+router.post('/my/reviews/:id', companyCheckAuth, async(req, res) => {
+
+    try {
+        console.log(req.params.id)
+        let review = await Review.findOne({ "_id": req.params.id })
+        if (review) {
+            console.log("company Id", review)
+            review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "favorite": true } }, { new: true });
+            return res.status(200).json(review);
+        } else {
+            return res.status(400).json({ msg: 'No Review found' });
+        }
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports = router;
