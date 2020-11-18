@@ -68,6 +68,55 @@ const CompanySchema = new mongoose.Schema({
     images: [{
         type: String
     }],
+    interview: [{
+        overallInterviewExp: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String
+        },
+        description: {
+            type: String
+        },
+        difficulty: {
+            type: String
+        },
+        offerStatus: {
+            type: String
+        },
+        questions: {
+            type: String
+        },
+        answers: {
+            type: String
+        }
+    }],
+    salary: [{
+        baseSalary: {
+            type: String,
+            required: true
+        },
+        avgTotalPay: {
+            type: String
+        },
+        bonuses: {
+            type: String
+        },
+        jobTitle: {
+            type: String
+        },
+        yearsOfExperience: {
+            type: String
+        },
+        location: {
+            type: String,
+            required: true
+        },
+        salaryGender: {
+            type: String
+        }
+    }],
     date: { type: Date, default: Date.now() },
 });
 
