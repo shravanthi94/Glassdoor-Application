@@ -2,13 +2,15 @@ const mongoose = require('mongoose');
 
 const JobPostingSchema = new mongoose.Schema({
     company: {
-        // type: mongoose.Schema.Types.ObjectId,
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        // type: String,
         ref: 'company',
     },
-    companyName: {
+    name: {
         type: String,
-        required: true
+    },
+    email: {
+        type: String,
     },
     title: {
         type: String,
