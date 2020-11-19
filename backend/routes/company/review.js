@@ -67,21 +67,22 @@ router.post('/', async(req, res) => {
 // @Desc   GET all current company's reviews
 // @access Private
 
-router.get('/my/reviews', companyCheckAuth, async(req, res) => {
+router.get('/my/reviews', async(req, res) => {
 
     try {
         const company = await Company.findOne({ "email": req.company.email })
         if (company) {
             // console.log("company Id", company._id)
             const reviews = await Review.find({ "company": company._id })
-            if (reviews) {
-                // console.log(reviews)
-                return res.status(200).json(reviews)
+                // console.log("after query")
+            if (!reviews) {
+
+                return res.status(400).json({ msg: 'No reviews for this company' });
+
             }
-            return res.status(400).json({ msg: 'No reviews for this company' });
-            // }
-            // else {
-            //     return res.status(400).json({ msg: 'No company found' });
+            res.status(200).json(reviews)
+        } else {
+            return res.status(400).json({ msg: 'No company found' });
         }
 
     } catch (err) {

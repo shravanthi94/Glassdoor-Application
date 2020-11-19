@@ -1,55 +1,55 @@
-const express = require('express');
+// const express = require('express');
 
-const router = express.Router();
-const { checkAuth } = require('../../middleware/studentAuth');
-const { check, validationResult } = require('express-validator');
+// const router = express.Router();
+// const { checkAuth } = require('../../middleware/studentAuth');
+// const { check, validationResult } = require('express-validator');
 
-const Student = require('../../models/StudentModel');
-const Company = require('../../models/CompanyModel');
-const Job = require('../../models/JobPostingModel');
-const Interview = require('../../models/InterviewModel');
-const Salary = require('../../models/SalaryModel');
+// const Student = require('../../models/StudentModel');
+// const Company = require('../../models/CompanyModel');
+// const Job = require('../../models/JobPostingModel');
+// const Interview = require('../../models/InterviewModel');
+// const Salary = require('../../models/SalaryModel');
 
-router.post('/', checkAuth, async (req,res) => {
-  console.log('here: ', req.user);
-  
-  const { name, email } = req.user;
-  student = new Student({
-        name,
-        email,
-  });
+// router.post('/', checkAuth, async (req,res) => {
+//   console.log('here: ', req.user);
 
-  await student.save();
+//   const { name, email } = req.user;
+//   student = new Student({
+//         name,
+//         email,
+//   });
 
-  res.status(200).json(student);
-});
+//   await student.save();
 
-router.get('/:data', checkAuth, async (req, res) => {
-  const searchData = req.params.data;
-  const { query } = req.body;
-  try {
-    let results = [];
-    if (query === 'JOB') {
-      results = await Job.find({ title: { $regex: `.*${searchData}.*` } });
-    } else if (query === 'COMPANY') {
-      results = await Company.find({ name: { $regex: `.*${searchData}.*` } });
-    } else if (query === 'INTERVIEW') {
-      results = await Interview.find({ companyName: { $regex: `.*${searchData}.*` } });
-    } else if (query === 'SALARY') {
-      results = await Salary.find({ companyName: { $regex: `.*${searchData}.*` } });
-    }
+//   res.status(200).json(student);
+// });
 
-    if (!results) {
-      return res
-        .status(400)
-        .json({ errors: [{ msg: 'No results found.' }] });
-    }
+// router.get('/:data', checkAuth, async (req, res) => {
+//   const searchData = req.params.data;
+//   const { query } = req.body;
+//   try {
+//     let results = [];
+//     if (query === 'JOB') {
+//       results = await Job.find({ title: { $regex: `.*${searchData}.*` } });
+//     } else if (query === 'COMPANY') {
+//       results = await Company.find({ name: { $regex: `.*${searchData}.*` } });
+//     } else if (query === 'INTERVIEW') {
+//       results = await Interview.find({ companyName: { $regex: `.*${searchData}.*` } });
+//     } else if (query === 'SALARY') {
+//       results = await Salary.find({ companyName: { $regex: `.*${searchData}.*` } });
+//     }
 
-    res.status(200).json(results);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Server Error');
-  }
-});
+//     if (!results) {
+//       return res
+//         .status(400)
+//         .json({ errors: [{ msg: 'No results found.' }] });
+//     }
 
-module.exports = router;
+//     res.status(200).json(results);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send('Server Error');
+//   }
+// });
+
+// module.exports = router;
