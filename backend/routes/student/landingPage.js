@@ -7,8 +7,6 @@ const { check, validationResult } = require('express-validator');
 const Student = require('../../models/StudentModel');
 const Company = require('../../models/CompanyModel');
 const Job = require('../../models/JobPostingModel');
-const Interview = require('../../models/InterviewModel');
-const Salary = require('../../models/SalaryModel');
 
 router.post('/', checkAuth, async (req,res) => {
   console.log('here: ', req.user);
@@ -31,14 +29,10 @@ router.get('/:data', checkAuth, async (req, res) => {
     let results = [];
     if (query === 'JOB') {
       results = await Job.find({ title: { $regex: `.*${searchData}.*` } });
-    } else if (query === 'COMPANY') {
+    } else {
       results = await Company.find({ name: { $regex: `.*${searchData}.*` } });
-    } else if (query === 'INTERVIEW') {
-      results = await Interview.find({ companyName: { $regex: `.*${searchData}.*` } });
-    } else if (query === 'SALARY') {
-      results = await Salary.find({ companyName: { $regex: `.*${searchData}.*` } });
     }
-
+    
     if (!results) {
       return res
         .status(400)
