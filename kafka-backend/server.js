@@ -7,6 +7,9 @@ const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
 // const fs = require('fs');
 
+var getReview = require('./services/company/reviews');
+
+
 var options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -53,4 +56,4 @@ function handleTopicRequest(topic_name, fname) {
     });
 }
 
-// handleTopicRequest("authentication", Passport);
+handleTopicRequest("company_reviews", getReview);

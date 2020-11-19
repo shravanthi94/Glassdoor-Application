@@ -2,6 +2,8 @@
 const express = require('express');
 
 const router = express.Router();
+var kafka = require('../../kafka/client');
+
 const Review = require('../../models/ReviewModel');
 const Company = require('../../models/CompanyModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
@@ -12,16 +14,20 @@ companyAuth();
 // @Desc   Get all reviews of the company
 // @access Private
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         console.log("company id: ", req.params.id);
-        const reviews = await Review.find({ "company": req.params.id });
 
-        console.log("reviews list: ", reviews);
-        if (!reviews) {
-            return res.status(400).json({ msg: 'No reviews yet!' });
-        }
-        res.status(200).json(reviews);
+        kafka.make_request('company_reviews', req.params.id, function (err, results) {
+
+            if (err) {
+                console.log("Inside err");
+                res.status(500).send("Kafka Error");
+            }
+            else if (results.status == 200 || results.status == 400) {
+                res.status(results.status).json(results.reviews);
+            }
+        })
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error: Database');
@@ -33,7 +39,7 @@ router.get('/:id', async(req, res) => {
 // @Desc   Post a new review for the company
 // @access Private
 
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         console.log("review details: ", req.body);
         const review = new Review({
@@ -67,7 +73,7 @@ router.post('/', async(req, res) => {
 // @Desc   GET all current company's reviews
 // @access Private
 
-router.get('/my/reviews', companyCheckAuth, async(req, res) => {
+router.get('/my/reviews', companyCheckAuth, async (req, res) => {
 
     try {
         const company = await Company.findOne({ "email": req.company.email })
@@ -94,7 +100,7 @@ router.get('/my/reviews', companyCheckAuth, async(req, res) => {
 // @Desc   POST all current company's reviews
 // @access Private
 
-router.post('/my/reviews/:id', companyCheckAuth, async(req, res) => {
+router.post('/my/reviews/:id', companyCheckAuth, async (req, res) => {
 
     try {
         console.log(req.params.id)
