@@ -1,6 +1,7 @@
 var connection = new require('./kafka/connection');
 
 // var Passport = require('./services/passport');
+var Reviews = require('./services/reviews');
 
 
 const { mongoURI } = require('./config/configuration');
@@ -54,3 +55,4 @@ function handleTopicRequest(topic_name, fname) {
 }
 
 // handleTopicRequest("authentication", Passport);
+handleTopicRequest("reviews", Reviews);
