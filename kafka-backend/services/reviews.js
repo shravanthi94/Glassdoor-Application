@@ -6,7 +6,7 @@ function handle_request(msg, callback) {
   if (msg.path === 'reviews_company_all') {
     console.log('Entered reviews_company_all');
     //5fb2f87d828aa81479d846a2
-    Review.find({ company: "5fb2f87d828aa81479d846a1" }, (error,reviews) => {
+    Review.find({ company: "5fb2f87d828aa81479d846a3" }, (error,reviews) => {
       if (error) {
         console.log('Entered error block');
         res.status = 400;
