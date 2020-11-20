@@ -118,7 +118,7 @@ router.get('/my/reviews/redis', async(req, res) => {
                 // });
 
                 console.log("fetching reviews from mongodb")
-                const reviews = await Review.find({ "company": "5fb2f87d828aa81479d846a1" }) //.select("headline -_id")
+                const reviews = await Review.find({ "company": "5fb2f87d828aa81479d846a1" }).select("headline -_id")
                 console.log("after query")
                 if (!reviews) {
                     return res.status(400).json({ msg: 'No reviews for this company' });
@@ -126,7 +126,7 @@ router.get('/my/reviews/redis', async(req, res) => {
                 console.log("fetching reviews from mongodb finished")
                 redisWrite.setex('myreviews', 36000, JSON.stringify(reviews));
                 console.log("writing reviews to redis finished")
-                return res.status(200).json(reviews);
+                return res.status(200).json(JSON.stringify(reviews));
             }
         })
     } catch (err) {
