@@ -6,6 +6,7 @@ const db = config.get('mongoURI');
 const connectDB = async() => {
     try {
         await mongoose.connect(db, {
+            poolSize: 50,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
