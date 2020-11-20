@@ -7,7 +7,7 @@ const Company = require('../../models/CompanyModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 const redisRead = require('../../config/RedisRead')
 const redisWrite = require('../../config/RedisWrite')
-const kafka = require('../kafka/client');
+const kafka = require('../../kafka/client');
 
 companyAuth();
 
