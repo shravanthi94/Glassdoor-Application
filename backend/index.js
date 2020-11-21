@@ -17,6 +17,7 @@ const loginCompany = require('./routes/company/login');
 const profileCompany = require('./routes/company/profile');
 const reviewCompany = require('./routes/company/review');
 const jobPosting = require('./routes/company/jobPosting');
+const jobApplicant = require('./routes/company/applicant');
 
 const overviewCompany = require('./routes/company/overview');
 const salaryCompany = require('./routes/company/salary');
@@ -50,8 +51,8 @@ app.use('/company/login', loginCompany);
 app.use('/company/profile', profileCompany);
 //  Company - JOBPOSTING
 app.use('/company/jobposting', jobPosting);
-
-
+// Company - Applicant
+app.use('/company/applicant', jobApplicant);
 //  Company - REVIEW
 app.use('/company/review', reviewCompany);
 //  Company - OVERVIEW
