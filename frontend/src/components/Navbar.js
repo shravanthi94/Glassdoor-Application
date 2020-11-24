@@ -6,6 +6,7 @@ import './CSS/navbar.css';
 const Navbar = () => {
   return (
     <Fragment>
+      <div className='landing'>
       <div className='top-nav'>
         <div className='left-nav'>
           <Link to='/' className='header-nav-link'>
@@ -20,6 +21,29 @@ const Navbar = () => {
             Post Jobs
           </Link>
         </div>
+      </div>
+      <div className='container'>
+           <h2> Find The Job That Fits Your Life</h2>  
+           <form className="form">
+                <div className="form-group">
+                    <input
+                            type="email"
+                            placeholder="Create account with Email"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
+                   
+                    <input type="submit" value="Continue with Email" />
+                </form>
+    
+      </div>
       </div>
     </Fragment>
   );
