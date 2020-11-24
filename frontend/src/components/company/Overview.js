@@ -18,9 +18,10 @@ class CompanyOverview extends Component {
     }
 
     render() {
-         const company_name = this.props.company.overview.name;
+        const company_name = this.props.company.overview.name;
         return (
             <div className="overview-all">
+                <div style={{ backgroundColor: "#13aa41", height:"150px"}}> Search bar </div>
                 <div className="profile-row-one">
                     <img className="company-banner-blur" src={require('../../components/images/' + company_name + '_banner.jpg').default} alt="" />
                     <img className="overview-logo" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" />
@@ -36,6 +37,7 @@ class CompanyOverview extends Component {
                     </table>
                 </div>
                 <div className="profile-row-two">
+                <div className="profile-row-two-column1">
 
                     <div className="profile-row-two-inside">
                         <div style={{ fontSize: "25px", color: "#0D0D0D" }}>{company_name} Overview</div>
@@ -55,13 +57,17 @@ class CompanyOverview extends Component {
                             <div className="overview-details-all"><span className="overview-title">Email:</span><span className="overview-data">{this.props.company.overview.email}</span></div><br />
                         </div>
 
-                        <div className="overview-description">{company_name}</div>
+                        <div className="overview-description">{this.props.company.overview.description}</div>
                         <hr className="overview-hr" />
                         <div style={{ marginTop: "20px", fontSize: "22px", color: "#0D0D0D" }}>Glassdoor Awards</div>
                         <div style={{ marginTop: "20px" }}><span style={{ fontSize: "30px", color: "#13aa41" }}><i class="fas fa-trophy"></i></span><span style={{ fontSize: "18px", color: "#404040" }}><span>&emsp;Top CEOs:</span><span style={{ color: "#1861BF" }}>&nbsp;2019 (#34)</span></span></div>
                         <hr className="overview-hr" />
                     </div>
                 </div>
+
+                <div className = "profile-row-two-column2"></div>
+                </div>
+
                 <div className="profile-row-three">
                     <div className="profile-row-three-inside">
                         <div style={{ fontSize: "22px", color: "#0D0D0D" }}>{company_name} Reviews</div>

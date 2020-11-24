@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import Overview from '../components/company/Overview';
+
+import { history } from '../helpers/history';
+
 
 //Create a Main Component
 class Main extends Component {
@@ -9,8 +12,12 @@ class Main extends Component {
     return (
       <div>
         {/*Render Different Component based on Route*/}
-        <Route path='/' component={Navbar} />
-        <Route exact path="/companyOverview" component={Overview} />
+        <Router history={history}>
+          <Switch>
+            <Route exact path='/' component={Navbar} />
+            <Route exact path="/companyOverview" component={Overview} />
+          </Switch>
+        </Router>
       </div>
     );
   }
