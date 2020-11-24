@@ -63,3 +63,25 @@ const ReviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model('review', ReviewSchema);
 module.exports = Review;
+
+/*company
+    student date approvalStatus  headline   pros  cons overAllRating
+    comment  favorite featured
+    reply: [{
+
+        initiatedBy: {
+            type: String
+        },
+        receivedBy: {
+            type: String
+        },
+        message: {
+            type: String
+        },
+        Date: {
+            type: Date,
+            default: Date.now()
+        },
+
+
+    }]
