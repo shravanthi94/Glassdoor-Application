@@ -79,6 +79,9 @@ const CompanySchema = new mongoose.Schema({
         description: {
             type: String
         },
+        jobTitle:{
+            type: String
+        },
         difficulty: {
             type: String
         },

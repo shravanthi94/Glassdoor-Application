@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({
+import  comStore  from './company.reducer';
 
-})
+const rootReducer = combineReducers({
+  comStore
+});
+
+export default rootReducer;

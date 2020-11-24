@@ -1,0 +1,114 @@
+body{
+    background-color: #EAEAEA;
+}
+
+.overview-all{
+    font-family: Lato, sans-serif;
+}
+
+.profile-row-one{
+    height: 250px;
+    width:1000px;
+    background-color: white;
+    margin:20px auto;
+}
+
+.profile-row-two{
+    height:550px;
+    width:1000px;
+    background-color: white;
+    margin:20px auto; 
+}
+
+.profile-row-three{
+    height:600px;
+    width:1000px;
+    background-color: white;
+    margin:20px auto; 
+}
+
+.overview-logo{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #dedede;
+    margin-left: 50px;
+    margin-top: -50px;
+    z-index: 1;
+    position: relative;
+
+}
+
+.company-banner-blur{
+    width: 1000px;
+    height: 80px;
+    -webkit-filter: blur(4px);
+}
+
+.profile-row-one-table {
+    font-size: 18px;
+}
+
+.profile-counts{
+    margin-left: 5px;
+    font-size: 20px;
+    color: #404040;
+    text-align: center;
+}
+
+.profile-title{
+    margin-top: 10px;
+    margin-left: 15px;
+    color: #1861BF;
+}
+
+.vl{
+    border-left: 1px solid #999999;
+    height: 50px;
+}
+
+.profile-row-one-table td{
+    border-right: 2px solid #eaeaea;
+}
+
+.profile-row-two-inside{
+    padding-top: 50px;
+    margin-left: 50px;
+}
+
+.profile-row-two-inside .overview-column-one, .profile-row-two-inside .overview-column-two{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 40px;
+    width: 450px;
+}
+
+.profile-row-three-inside{
+    padding-top: 50px;
+    margin-left: 50px;
+}
+
+.overview-title{
+    font-size: 18px;
+    color: #505863;
+    font-weight: bold;
+}
+
+.overview-data{
+    font-size: 18px;
+    color: #505863;
+    margin-left: 60px;
+}
+
+.overview-description{
+    margin-top: 20px;
+    width: 900px;
+    font-size: 17px;
+    justify-content: center;
+}
+
+.overview-hr{
+    border: 1px solid lightgray;
+    max-width: 900px;
+    margin-top: 30px;
+    margin-left: 0px;
+}

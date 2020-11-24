@@ -5,9 +5,9 @@ const router = express.Router();
 const Review = require('../../models/ReviewModel');
 const Company = require('../../models/CompanyModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
-const redisRead = require('../../config/RedisRead')
-const redisWrite = require('../../config/RedisWrite')
-const kafka = require('../../kafka/client');
+// const redisRead = require('../../config/RedisRead')
+// const redisWrite = require('../../config/RedisWrite')
+// const kafka = require('../../kafka/client');
 
 companyAuth();
 
@@ -97,42 +97,42 @@ router.get('/my/reviews', async(req, res) => {
 });
 
 router.get('/my/reviews/redis', async(req, res) => {
-    try {
-        redisRead.get('myreviews', async (err, redisMyReviews) => {
+    // try {
+    //     redisRead.get('myreviews', async (err, redisMyReviews) => {
 
-            if(redisMyReviews !== null) {
-                console.log("fetching reviews from inside redis")
-                return res.status(200).send(JSON.parse(redisMyReviews));
-            } else {
-                console.log("fetching reviews from kafka call")
-                req.body.path = 'reviews_company_all';
-                kafka.make_request('reviews', req.body, (err, results) => {
-                    if (err) {
-                    res.status(500).end('System Error');
-                    } else {
-                    console.log('results',results);
-                    redisWrite.setex('myreviews', 36000, JSON.stringify(results));
-                    console.log("writing reviews to redis finished")
-                    res.status(results.status).end(JSON.stringify(results.message));
-                    }
-                });
+    //         if(redisMyReviews !== null) {
+    //             console.log("fetching reviews from inside redis")
+    //             return res.status(200).send(JSON.parse(redisMyReviews));
+    //         } else {
+    //             console.log("fetching reviews from kafka call")
+    //             req.body.path = 'reviews_company_all';
+    //             kafka.make_request('reviews', req.body, (err, results) => {
+    //                 if (err) {
+    //                 res.status(500).end('System Error');
+    //                 } else {
+    //                 console.log('results',results);
+    //                 redisWrite.setex('myreviews', 36000, JSON.stringify(results));
+    //                 console.log("writing reviews to redis finished")
+    //                 res.status(results.status).end(JSON.stringify(results.message));
+    //                 }
+    //             });
 
-                // console.log("fetching reviews from mongodb")
-                // const reviews = await Review.find({ "company": "5fb2f87d828aa81479d846a1" }).select("headline -_id")
-                // console.log("after query")
-                // if (!reviews) {
-                //     return res.status(400).json({ msg: 'No reviews for this company' });
-                // }
-                // console.log("fetching reviews from mongodb finished")
-                // redisWrite.setex('myreviews', 36000, JSON.stringify(reviews));
-                // console.log("writing reviews to redis finished")
-                // return res.status(200).json(JSON.stringify(reviews));
-            }
-        })
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+    //             // console.log("fetching reviews from mongodb")
+    //             // const reviews = await Review.find({ "company": "5fb2f87d828aa81479d846a1" }).select("headline -_id")
+    //             // console.log("after query")
+    //             // if (!reviews) {
+    //             //     return res.status(400).json({ msg: 'No reviews for this company' });
+    //             // }
+    //             // console.log("fetching reviews from mongodb finished")
+    //             // redisWrite.setex('myreviews', 36000, JSON.stringify(reviews));
+    //             // console.log("writing reviews to redis finished")
+    //             // return res.status(200).json(JSON.stringify(reviews));
+    //         }
+    //     })
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error');
+    // }
 });
 
 

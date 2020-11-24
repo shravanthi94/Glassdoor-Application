@@ -19,6 +19,9 @@ const Navbar = () => {
           <Link to='#' className='header-nav-link job-link'>
             Post Jobs
           </Link>
+          <Link to='/companyOverview' className='header-nav-link job-link'>
+            Company Overview
+          </Link>
         </div>
       </div>
     </Fragment>
