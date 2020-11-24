@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 // Redux
@@ -7,14 +7,14 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 
-const App = () => 
-<Provider store={store}>
+const App = () => (
+  <Provider store={store}>
     <Router>
-    <Fragment>
-      <h1> Glassdoor </h1>
-    </Fragment>
+      <Fragment>
+        <h1> Glassdoor </h1>
+      </Fragment>
     </Router>
-</Provider>
-
+  </Provider>
+);
 
 export default App;
