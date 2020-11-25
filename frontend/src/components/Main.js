@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
-import Overview from '../components/company/Overview';
+import CompanyOverview from './student/CompanyOverview';
 
 import { history } from '../helpers/history';
 
@@ -15,7 +15,7 @@ class Main extends Component {
         <Router history={history}>
           <Switch>
             <Route exact path='/' component={Navbar} />
-            <Route exact path="/companyOverview" component={Overview} />
+            <Route exact path="/companyOverview" component={CompanyOverview} />
           </Switch>
         </Router>
       </div>
