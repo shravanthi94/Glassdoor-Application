@@ -6,7 +6,8 @@ import {
     COMPANYUSER_LOADED,
     COMPANYAUTH_ERROR,
     COMPANYSIGNIN_SUCCESS,
-    COMPANYSIGNIN_FAIL
+    COMPANYSIGNIN_FAIL,
+    COMPANY_SIGNOUT
 
 } from '../types'
 import setAuthToken from '../../helpers/setAuthToken';
@@ -90,4 +91,10 @@ export const companySignIn = (email, password) => async dispatch => {
         })
 
     }
+}
+
+// Logout 
+
+export const companySignOut = () => dispatch => {
+    dispatch({ type: COMPANY_SIGNOUT })
 }

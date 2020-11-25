@@ -6,6 +6,7 @@ import {
     COMPANYAUTH_ERROR,
     COMPANYSIGNIN_SUCCESS,
     COMPANYSIGNIN_FAIL,
+    COMPANY_SIGNOUT,
     STUDENT_SIGNUP_SUCCESS,
     STUDENT_SIGNUP_FAIL,
     STUDENT_USER_LOADED,
@@ -53,9 +54,11 @@ export default function(state = initialState, action) {
         case COMPANYSIGNUP_FAIL:
         case COMPANYSIGNIN_FAIL:
         case COMPANYAUTH_ERROR:
+        case COMPANY_SIGNOUT:
         case STUDENT_AUTH_ERROR:
         case STUDENT_SIGNUP_FAIL:
         case STUDENT_LOGIN_FAIL:
+
             localStorage.removeItem('token');
             window.localStorage.clear();
             return {

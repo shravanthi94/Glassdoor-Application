@@ -4,10 +4,10 @@ import Navbar from './Navbar';
 import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
-import CompanyOverview from '../components/Student/CompanyOverview';
+import CompanyOverview from '../components/student/CompanyOverview';
 
 // Student Links
-import Login from '../components/Student/Login';
+import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
