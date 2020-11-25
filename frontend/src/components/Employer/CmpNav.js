@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, {Fragment} from 'react'
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
-import '../CSS/EmployerLanding.css'
+// import PropTypes from 'prop-types'
+import '../CSS/CompanyLanding.css'
 
-const EmpNav = props => {
+const CmpNav = props => {
     return (
         <Fragment>
             <div className="employerLandingNav">
@@ -30,8 +30,8 @@ const EmpNav = props => {
     )
 }
 
-EmpNav.propTypes = {
+CmpNav.propTypes = {
 
 }
 
-export default EmpNav
+export default CmpNav
