@@ -8,6 +8,7 @@ import CompanyOverview from '../components/Student/CompanyOverview';
 
 // Student Links
 import Login from '../components/Student/Login';
+import StudentLandingPage from '../components/Student/LandingPage';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -31,6 +32,11 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/student/signin' component={Login} />
+            <Route
+              exact
+              path='/student/profile'
+              component={StudentLandingPage}
+            />
           </Switch>
         </Router>
       </Fragment>
