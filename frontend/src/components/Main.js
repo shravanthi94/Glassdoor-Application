@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
+import CompanyLanding from './Employer/Landing';
+import CmpSignUP from './Employer/CmpSignUP';
 import Overview from '../components/company/Overview';
 
 import { history } from '../helpers/history';
