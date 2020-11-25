@@ -5,6 +5,7 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyOverview from '../components/student/CompanyOverview';
+import CompanyDashboard from '../components/Company/CompanyDashboard';
 
 // Student Links
 import Login from '../components/student/Login';
@@ -29,6 +30,7 @@ class Main extends Component {
             <Route exact path='/company' component={CompanyLanding} />
             <Route exact path='/companysignup' component={CompanySignUP} />
             <Route exact path='/companysignin' component={CompanyLogin} />
+            <Route exact path='/companydashboard' component={CompanyDashboard}/>
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/student/signin' component={Login} />
           </Switch>

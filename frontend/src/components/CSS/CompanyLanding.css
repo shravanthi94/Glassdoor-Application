@@ -9,9 +9,11 @@ nav {
     justify-content: space-around;
     align-items: center;
     min-height: 8vh;
-    border-bottom: 1px solid rgb(51, 50, 50);
+    /* border-bottom: 1px solid rgb(51, 50, 50); */
     font-family: 'Lato', sans-serif;
     font-size: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
 }
 
 .logo-icon {
@@ -32,4 +34,35 @@ nav {
 
 .list-options li {
     list-style: none;
+}
+
+.container_2columns-company {
+    display: flex;
+}
+
+.column1-company {
+    margin: 0 15px 25px;
+    border: none;
+    width: 50%;
+}
+
+.column2-company {
+    margin: 0 15px 25px;
+    border: none;
+    width: 30%;
+}
+
+.text-company {
+    font-family: 'Lato', 'San Serif';
+    font-size: 20px;
+}
+
+.button-company {
+    width: 250px;
+    height: 35px;
+    font-size: 18px;
+    color: white;
+    background-color: #0CAA4F;
+    border: none;
+    border-radius: 5px;
 }

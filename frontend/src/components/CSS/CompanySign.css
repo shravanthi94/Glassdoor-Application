@@ -1,15 +1,28 @@
-.contentholder {
+.contentholder-company {
+    /* padding: 2rem 2rem; */
+    /* margin-top: 6rem; */
+    /*margin-bottom: 3rem;*/
+    /* font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: rgb(46, 45, 45); */
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 2rem;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+}
+
+.contentholder-form-company {
     max-width: 500px;
     margin: auto;
     overflow: hidden;
     padding: 0 2rem;
     margin-top: 6rem;
     margin-bottom: 3rem;
-    font-family: 'Lato', sans-serif;
-    font-size: 22px;
 }
 
-.form-box {
+.form-box-company {
     background-color: white;
     padding-left: 20px;
     padding-top: 20px;
@@ -17,3 +30,78 @@
     border-radius: 5px;
     border-top: 5px solid #0CAA4F;
 }
+
+.form-company .form-group-company {
+    /* margin-top: 0.2rem; */
+    margin-bottom: 1.2rem;
+    font-size: 16px;
+    align-items: center;
+}
+
+
+/* .form-company .form-text-company {
+    margin-top: 0.3rem;
+    color: #888;
+    font-size: 12px;
+    align-items: center;
+} */
+
+.form-company input[type='text'],
+.form-company input[type='name'],
+.form-company input[type='email'],
+.form-company input[type='password'],
+.form-company select,
+.form-company textarea {
+    padding-top: 16px;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 3px;
+    border: 1px solid rgb(196, 199, 204);
+    padding: 0px 48px 0px 12px;
+    font-family: Lato, sans-serif;
+    color: rgb(80, 88, 99);
+    width: 75%;
+}
+
+.form-company {
+    padding-left: 20px;
+}
+
+.btn-sign-company {
+    padding-left: 90px;
+}
+
+
+/* 
+.form-company label {
+    padding-bottom: 4px;
+    transform-origin: 0px 50%;
+    transition: transform 0.2s ease 0s;
+    position: relative;
+    z-index: 1;
+    color: rgb(133, 140, 148);
+    font-size: 16px;
+    top: 37px;
+    margin-top: -23px;
+    left: 12px;
+} */
+
+
+/* .form-company input[type='submit'] {
+    background-color: #1861bf;
+    border-color: #1861bf;
+    color: #abccf7;
+    -webkit-box-shadow: 0 2px 6px 0 transparent;
+    box-shadow: 0 2px 6px 0 transparent;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    font-size: 15px;
+    padding: 10px 20px;
+    font-weight: bolder;
+    text-decoration: none;
+    line-height: 1.3125em;
+    border: none;
+    font-family: Lato;
+} */

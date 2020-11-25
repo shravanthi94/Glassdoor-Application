@@ -36,13 +36,13 @@ const CompanyLogin = ({companySignIn, isAuthenticated}) => {
     return (
         <Fragment>
         <CmpNav/>
-        <div className = "contentholder" >
+        <div className = "contentholder-form-company text-company" >
             <Alert/>
         <p> Your next hire is researching your company on Glassdoor. 
             Take control of the conversation and show ideal candidates why they want to work with you.</p>
-                <div className="form-box">
-                <form className="form" onSubmit={e=> onSubmit(e)}>
-                    <div className="form-group">
+                <div className="form-box-company">
+                <form className="form-company" onSubmit={e=> onSubmit(e)}>
+                    <div className="form-group-company">
                         <p> Email</p>
                         <input
                             type="email"
@@ -52,7 +52,7 @@ const CompanyLogin = ({companySignIn, isAuthenticated}) => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-company">
                         <p>Password</p>
                         <input
                             type="password"
@@ -63,13 +63,14 @@ const CompanyLogin = ({companySignIn, isAuthenticated}) => {
                             required
                         />
                     </div>
-                
-                    <button type="submit" className="btn btn-dark" value="SignUp">Sign In</button>
+                    <div className='btn-sign-company'>
+                    <button type="submit" className="button-company" value="SignUp">Sign In</button>
+                    </div>
                 </form>
                  </div>
                 <p className="my-1">
                     Already have an account ? {' '}
-                    <Link to="/companylogin" className="text-dark">
+                    <Link to="/companysignup" className="text-dark">
                         Create Account
                     </Link>
                 </p>
