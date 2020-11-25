@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import glassdoor from './images/glassdoor.png';
 import './CSS/navbar.css';
-import Landing from './Landing'
 
 const Navbar = () => {
   return (
@@ -26,7 +25,7 @@ const Navbar = () => {
           </Link>
           </div>
         </div>
-      </div>
+      
       <div className='container'>
         <h2> Find The Job That Fits Your Life</h2>  
         <form className="form">
@@ -52,7 +51,7 @@ const Navbar = () => {
              <Link to='/company' className='text-light'>
          Post Jobs
          </Link>
- 
+         </div>
    </div>
     </Fragment>
   );
