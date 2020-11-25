@@ -7,12 +7,7 @@ const Student = require('../../models/StudentModel');
 
 router.post('/', checkAuth, async (req, res) => {
   const studentEmail = req.user.email;
-  const {
-    ethnicity,
-    gender,
-    disability,
-    vetran,
-  } = req.body;
+  const { ethnicity, gender, disability, vetran } = req.body;
 
   try {
     const student = await Student.find({ email: studentEmail });
