@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
-import CompanyOverview from './student/CompanyOverview';
+import CompanyLanding from './Employer/Landing';
+import CmpSignUP from './Employer/CmpSignUP';
+import CompanyOverview from '../components/student/CompanyOverview';
 
 import { history } from '../helpers/history';
 
