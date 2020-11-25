@@ -6,7 +6,15 @@ import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyOverview from '../components/Student/CompanyOverview';
 
+// Student Links
+import Login from '../components/Student/Login';
+
+import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 //Create a Main Component
 class Main extends Component {
@@ -22,6 +30,7 @@ class Main extends Component {
             <Route exact path='/companysignup' component={CompanySignUP} />
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
+            <Route exact path='/student/signin' component={Login} />
           </Switch>
         </Router>
       </Fragment>

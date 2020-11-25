@@ -6,6 +6,8 @@ import {
   STUDENT_SIGNUP_FAIL,
   STUDENT_USER_LOADED,
   STUDENT_AUTH_ERROR,
+  STUDENT_LOGIN_SUCCESS,
+  STUDENT_LOGIN_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +31,7 @@ export default function (state = initialState, action) {
       };
     case COMPANYSIGNUP_SUCCESS:
     case STUDENT_SIGNUP_SUCCESS:
+    case STUDENT_LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
         ...state,
@@ -39,6 +42,7 @@ export default function (state = initialState, action) {
     case STUDENT_AUTH_ERROR:
     case COMPANYSIGNUP_FAIL:
     case STUDENT_SIGNUP_FAIL:
+    case STUDENT_LOGIN_FAIL:
       localStorage.removeItem('token');
       window.localStorage.clear();
       return {

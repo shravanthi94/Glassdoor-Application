@@ -5,6 +5,8 @@ import {
   STUDENT_SIGNUP_FAIL,
   STUDENT_USER_LOADED,
   STUDENT_AUTH_ERROR,
+  STUDENT_LOGIN_SUCCESS,
+  STUDENT_LOGIN_FAIL,
 } from '../types';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../../helpers/setAuthToken';
@@ -12,6 +14,7 @@ import setAuthToken from '../../helpers/setAuthToken';
 //  Load Student
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
+    console.log('inside load user action: ', localStorage.token);
     setAuthToken(localStorage.token);
     const decoded = jwt_decode(localStorage.token);
     localStorage.setItem('usertype', decoded.user.usertype);
@@ -20,8 +23,8 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = await axios.get('/student/profile');
-
+    const res = await axios.get('/student/landing');
+    console.log('load user result: ', res);
     dispatch({
       type: STUDENT_USER_LOADED,
       payload: res.data,
@@ -60,6 +63,37 @@ export const signup = ({ name, email, password }) => async (dispatch) => {
     }
     dispatch({
       type: STUDENT_SIGNUP_FAIL,
+    });
+  }
+};
+
+//  Student Login
+export const login = (email, password) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ email, password });
+
+  try {
+    const res = await axios.post('/student/login', body, config);
+
+    dispatch({
+      type: STUDENT_LOGIN_SUCCESS,
+      payload: res.data,
+    });
+    dispatch(loadUser());
+  } catch (err) {
+    console.log('here', err);
+    console.log(err.response.data.errors);
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: STUDENT_LOGIN_FAIL,
     });
   }
 };

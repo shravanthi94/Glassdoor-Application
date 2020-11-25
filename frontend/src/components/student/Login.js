@@ -2,25 +2,24 @@ import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { signup } from '../actions/student/auth';
-import glassdoor from './images/glassdoor.png';
-import './CSS/navbar.css';
+import { login } from '../../actions/student/auth';
+import glassdoor from '../images/glassdoor.png';
+import '../CSS/navbar.css';
 
-const Navbar = ({ isAuthenticated, signup }) => {
+const Login = ({ isAuthenticated, login }) => {
   const [formData, setformData] = useState({
-    name: '',
     email: '',
     password: '',
   });
 
-  const { name, email, password } = formData;
+  const { email, password } = formData;
 
   const onChange = (e) =>
     setformData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signup({ name, email, password });
+    login(email, password);
   };
 
   if (isAuthenticated) {
@@ -36,8 +35,8 @@ const Navbar = ({ isAuthenticated, signup }) => {
             </Link>
           </div>
           <div className='right-nav'>
-            <Link to='/student/signin' className='header-nav-button'>
-              Signin
+            <Link to='/' className='header-nav-button'>
+              Signup
             </Link>
             <Link to='/company' className='header-nav-link job-link'>
               Post Jobs
@@ -50,21 +49,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
 
         <h1 className='heading'> Find The Job That Fits Your Life</h1>
         <div className='container'>
-          <p className='legal-copy'>
-            By continuing, you agree to our Terms of Use and Privacy Policy.
-          </p>
           <form className='form' onSubmit={(e) => onSubmit(e)}>
-            <div className='form-group'>
-              <input
-                type='name'
-                id='name'
-                name='name'
-                value={name}
-                onChange={(e) => onChange(e)}
-                placeholder='Your Full Name'
-                required
-              />
-            </div>
             <div className='form-group'>
               <input
                 type='email'
@@ -72,7 +57,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
                 name='email'
                 value={email}
                 onChange={(e) => onChange(e)}
-                placeholder='Create account with Email'
+                placeholder='Sign In with Email'
                 required
               />
             </div>
@@ -87,7 +72,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
                 required
               />
             </div>
-            <input type='submit' value='Continue with Email' />
+            <input type='submit' value='Sign In' />
           </form>
           <br />
           <p className='hiring-note'>
@@ -102,12 +87,12 @@ const Navbar = ({ isAuthenticated, signup }) => {
   );
 };
 
-Navbar.propTypes = {
-  signup: PropTypes.func.isRequired,
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { signup })(Navbar);
+export default connect(mapStateToProps, { login })(Login);
