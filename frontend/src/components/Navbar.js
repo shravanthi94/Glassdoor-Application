@@ -16,43 +16,43 @@ const Navbar = () => {
           <div className='right-nav'>
             <Link to='/signin' className='header-nav-button'>
               Signin
-          </Link>
+            </Link>
             <Link to='/company' className='header-nav-link job-link'>
               Post Jobs
-          </Link>
+            </Link>
             <Link to='/companyOverview' className='header-nav-link job-link'>
               Company Overview
-          </Link>
+            </Link>
           </div>
         </div>
-      
-      <div className='container'>
-        <h2> Find The Job That Fits Your Life</h2>  
-        <form className="form">
-             <div className="form-group">
-                 <input
-                         type="email"
-                         placeholder="Create account with Email"
-                         required
-                     />
-                 </div>
-                 <div className="form-group">
-                     <input
-                         type="password"
-                         placeholder="Password"
-                         required
-                     />
-                 </div>
-                 <input type="submit" value="Continue with Email" />
 
-             </form>
-             <br/>
-             Are you Hiring ?
-             <Link to='/company' className='text-light'>
-         Post Jobs
-         </Link>
-         </div>
-   </div>
+        <h1 className='heading'> Find The Job That Fits Your Life</h1>
+        <div className='container'>
+          <p className='legal-copy'>
+            By continuing, you agree to our Terms of Use and Privacy Policy.
+          </p>
+          <form className='form'>
+            <div className='form-group'>
+              <input
+                type='email'
+                placeholder='Create account with Email'
+                required
+              />
+            </div>
+            <div className='form-group'>
+              <input type='password' placeholder='Password' required />
+            </div>
+            <input type='submit' value='Continue with Email' />
+          </form>
+          <br />
+          <p className='hiring-note'>
+            Are you Hiring?{' '}
+            <Link to='/company' className='text-light'>
+              Post Jobs
+            </Link>
+          </p>
+        </div>
+      </div>
     </Fragment>
   );
 };
