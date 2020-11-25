@@ -8,7 +8,7 @@ const sqlConnectDB = require('./config/sqlConnectionPool');
 const signupStudent = require('./routes/student/signup');
 const loginStudent = require('./routes/student/login');
 // const landingPageStudent = require('./routes/student/landingPage');
-const demographics = require('./routes/student/Demographics');
+const demographics = require('./routes/student/deeemographics');
 const jobPreferences = require('./routes/student/jobPreferences');
 
 // Company
