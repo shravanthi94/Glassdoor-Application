@@ -4,11 +4,13 @@ import Navbar from './Navbar';
 import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
+import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyOverview from '../components/student/CompanyOverview';
-import CompanyDashboard from '../components/Company/CompanyDashboard';
 
 // Student Links
 import Login from '../components/student/Login';
+import StudentLandingPage from '../components/student/LandingPage';
+// import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -33,6 +35,11 @@ class Main extends Component {
             <Route exact path='/companydashboard' component={CompanyDashboard}/>
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/student/signin' component={Login} />
+            <Route
+              exact
+              path='/student/profile'
+              component={StudentLandingPage}
+            />
           </Switch>
         </Router>
       </Fragment>

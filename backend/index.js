@@ -27,6 +27,7 @@ const jobCompany = require('./routes/company/job');
 // Admin
 const signupAdmin = require('./routes/admin/signup');
 const loginAdmin = require('./routes/admin/login');
+const review = require('./routes/admin/reviews');
 
 connectDB();
 
@@ -70,6 +71,8 @@ app.use('/company/job', jobCompany);
 app.use('/admin/signup', signupAdmin);
 //  Admin - LOGIN
 app.use('/admin/login', loginAdmin);
+//  Admin - LOGIN
+app.use('/admin/review', review);
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
