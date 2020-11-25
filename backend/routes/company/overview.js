@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
             return res.status(400).json({ msg: 'No company profile found!' });
         }else{
 
-            const reviews = await Review.find({ "company": req.params.id, featured: "yes" });
+            const reviews = await Review.find({ "company": req.params.id, featured: true });
 
             const company= {
                 overview: overview,
