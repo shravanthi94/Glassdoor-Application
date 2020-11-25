@@ -41,7 +41,8 @@ const CompanySchema = new mongoose.Schema({
         type: String
     },
     mission: {
-        // revenue headquarters industry founded  overAllRating ceoApprovalRating recommendationRating logo  images
+        type: String
+    },
     industry: {
         type: String
     },
@@ -81,7 +82,7 @@ const CompanySchema = new mongoose.Schema({
         description: {
             type: String
         },
-        jobTitle:{
+        jobTitle: {
             type: String
         },
         difficulty: {
@@ -122,15 +123,8 @@ const CompanySchema = new mongoose.Schema({
             type: String
         }
     }],
-    date: { type: Date, default: Date.now() },
+    date: { type: Date, default: Date.now() }
 });
 
 const Company = mongoose.model('company', CompanySchema);
 module.exports = Company;
-
-/*
-
-  baseSalary   avgTotalPay bonuses  jobTitle yearsOfExperience location  salaryGender
-   
-    
-    */ */
