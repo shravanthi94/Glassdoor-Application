@@ -33,6 +33,9 @@ const Navbar = () => {
           </p>
           <form className='form'>
             <div className='form-group'>
+              <input type='name' placeholder='Your Full Name' required />
+            </div>
+            <div className='form-group'>
               <input
                 type='email'
                 placeholder='Create account with Email'
