@@ -17,10 +17,10 @@ const CmpNav = props => {
                </div>
                <ul className="list-options">
                     <li>
-                        <Link to="/employersignin"> Sign In</Link>
+                        <Link to="/companysignin"> Sign In</Link>
                     </li>
                     <li>
-                        <Link to="/employersignup"> Sign Up</Link>
+                        <Link to="/companysignup"> Sign Up</Link>
                     </li>
                 </ul>
             

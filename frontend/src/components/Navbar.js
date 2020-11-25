@@ -17,7 +17,7 @@ const Navbar = () => {
             <Link to='/signin' className='header-nav-button'>
               Signin
           </Link>
-            <Link to='#' className='header-nav-link job-link'>
+            <Link to='/company' className='header-nav-link job-link'>
               Post Jobs
           </Link>
             <Link to='/companyOverview' className='header-nav-link job-link'>

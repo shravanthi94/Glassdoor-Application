@@ -18,6 +18,8 @@ class Main extends Component {
           <Switch>
             <Route exact path='/' component={Navbar} />
             <Route exact path="/companyOverview" component={Overview} />
+            <Route exact path='/company' component={CompanyLanding} />
+            <Route exact path='/companysignup' component={CmpSignUP}/>
           </Switch>
         </Router>
       </div>

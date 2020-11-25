@@ -8,7 +8,8 @@ const CmpSignUP = props => {
         <Fragment>
         <CmpNav/>
         <div className = "contentholder" >
-        SignUP form 
+        <p> Your next hire is researching your company on Glassdoor. 
+            Take control of the conversation and show ideal candidates why they want to work with you.</p>
         </div> 
         </Fragment>
 
