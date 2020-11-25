@@ -115,13 +115,23 @@ a.header-nav-button {
 }
 
 .form input[type='submit'],
-button {
+{
     font: inherit;
     background-color: #1861bf;
     border: none;
     color: #abccf7;
     border-radius: 4px;
     height: 30px;
+    width: 50%;
+}
+
+.form button {
+    font: inherit;
+    background-color: #0CAA41;
+    border: none;
+    color: whitesmoke;
+    border-radius: 4px;
+    height: 40px;
     width: 50%;
 }
 

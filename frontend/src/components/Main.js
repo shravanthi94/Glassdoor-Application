@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import CompanyLanding from './Employer/Landing';
-import CmpSignUP from './Employer/CmpSignUP';
+import CompanySignUP from './Employer/CompanySignUP';
+import CompanyLogin from './Employer/CompanyLogin';
 import CompanyOverview from '../components/student/CompanyOverview';
 
 import { history } from '../helpers/history';
@@ -19,7 +20,8 @@ class Main extends Component {
             <Route exact path='/' component={Navbar} />
             <Route exact path="/companyOverview" component={CompanyOverview} />
             <Route exact path='/company' component={CompanyLanding} />
-            <Route exact path='/companysignup' component={CmpSignUP}/>
+            <Route exact path='/companysignup' component={CompanySignUP}/>
+            <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path="/companyOverview" component={CompanyOverview} />
           </Switch>
         </Router>
