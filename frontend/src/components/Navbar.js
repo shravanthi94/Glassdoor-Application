@@ -1,9 +1,31 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { signup } from '../actions/student/auth';
 import glassdoor from './images/glassdoor.png';
 import './CSS/navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, signup }) => {
+  const [formData, setformData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const { name, email, password } = formData;
+
+  const onChange = (e) =>
+    setformData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    signup({ name, email, password });
+  };
+
+  if (isAuthenticated) {
+    return <Redirect to='/student/profile' />;
+  }
   return (
     <Fragment>
       <div className='landing'>
@@ -31,19 +53,39 @@ const Navbar = () => {
           <p className='legal-copy'>
             By continuing, you agree to our Terms of Use and Privacy Policy.
           </p>
-          <form className='form'>
+          <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
-              <input type='name' placeholder='Your Full Name' required />
+              <input
+                type='name'
+                id='name'
+                name='name'
+                value={name}
+                onChange={(e) => onChange(e)}
+                placeholder='Your Full Name'
+                required
+              />
             </div>
             <div className='form-group'>
               <input
                 type='email'
+                id='email'
+                name='email'
+                value={email}
+                onChange={(e) => onChange(e)}
                 placeholder='Create account with Email'
                 required
               />
             </div>
             <div className='form-group'>
-              <input type='password' placeholder='Password' required />
+              <input
+                type='password'
+                id='password'
+                name='password'
+                value={password}
+                onChange={(e) => onChange(e)}
+                placeholder='Password'
+                required
+              />
             </div>
             <input type='submit' value='Continue with Email' />
           </form>
@@ -60,4 +102,12 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  signup: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { signup })(Navbar);

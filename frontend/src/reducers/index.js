@@ -5,9 +5,9 @@ import alert from './alert';
 import auth from './auth';
 
 const rootReducer = combineReducers({
-    comStore,
-    alert,
-    auth
+  comStore,
+  alert,
+  auth,
 });
 
 export default rootReducer;
