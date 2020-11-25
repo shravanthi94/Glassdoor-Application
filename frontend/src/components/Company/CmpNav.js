@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, {Fragment} from 'react'
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {companySignOut} from '../../actions/company/auth'
 import '../CSS/CompanyLanding.css'
 
 const CmpNav = props => {

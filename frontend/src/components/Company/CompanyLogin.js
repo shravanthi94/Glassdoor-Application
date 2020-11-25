@@ -1,13 +1,14 @@
 import React, { Fragment, useState } from 'react'
-import {Link } from 'react-router-dom'
+import {Link, Redirect } from 'react-router-dom'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import CmpNav from './CmpNav'
 import Alert from '../Alert';
 import '../CSS/CompanySign.css'
 import '../CSS/Alert.css'
+import {companySignIn} from '../../actions/company/auth'
 
-
-const CompanyLogin = props => {
+const CompanyLogin = ({companySignIn, isAuthenticated}) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -21,11 +22,15 @@ const CompanyLogin = props => {
 
     const onSubmit = e =>{
         e.preventDefault();
-        if(password.length < 6){
-            console.log("Inavlid Password")
-        }else {
-            console.log(formData)
-        }
+        console.log("SUCCESS1")
+        companySignIn(email, password)
+        console.log("SUCCESS2")
+    }
+
+    // Redirect on successful signin
+
+    if(isAuthenticated){
+        return <Redirect to="/companydashboard"></Redirect>
     }
 
     return (
@@ -75,7 +80,13 @@ const CompanyLogin = props => {
 }
 
 CompanyLogin.propTypes = {
+    companySignIn: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 
 }
 
-export default CompanyLogin
+const mapStateToProps = state =>({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, {companySignIn})(CompanyLogin)

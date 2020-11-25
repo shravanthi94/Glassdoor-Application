@@ -9,6 +9,7 @@ import CompanyOverview from '../components/Student/CompanyOverview';
 // Student Links
 import Login from '../components/Student/Login';
 import StudentLandingPage from '../components/Student/LandingPage';
+// import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';

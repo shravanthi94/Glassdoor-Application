@@ -5,9 +5,34 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
+const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 
-//@route POST /company/signup
-//@desc  company registration
+companyAuth();
+
+//@route GET /company/login
+//@desc  Get registered company user
+//@access Public
+router.get('/', companyCheckAuth, async(req, res) => {
+    const email = req.company.email;
+    try {
+        mysqlConnectionPool.query(
+            `SELECT id, email, name FROM company WHERE email = '${email}'`,
+            (error, result) => {
+                if (error) {
+                    console.log(error);
+                    return res.status(500).send('Database Server Error');
+                }
+                res.json(result);
+            }
+        );
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+//@route POST /company/login
+//@desc  company login
 //@access Public
 router.post(
     '/', [
