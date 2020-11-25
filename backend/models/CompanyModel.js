@@ -40,6 +40,9 @@ const CompanySchema = new mongoose.Schema({
     headquarters: {
         type: String
     },
+    mission: {
+        type: String
+    },
     industry: {
         type: String
     },
@@ -77,6 +80,9 @@ const CompanySchema = new mongoose.Schema({
             type: String
         },
         description: {
+            type: String
+        },
+        jobTitle: {
             type: String
         },
         difficulty: {
@@ -117,7 +123,7 @@ const CompanySchema = new mongoose.Schema({
             type: String
         }
     }],
-    date: { type: Date, default: Date.now() },
+    date: { type: Date, default: Date.now() }
 });
 
 const Company = mongoose.model('company', CompanySchema);

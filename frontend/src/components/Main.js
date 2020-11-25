@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import CompanyLanding from './Employer/Landing';
 import CmpSignUP from './Employer/CmpSignUP';
+import Overview from '../components/company/Overview';
+
+import { history } from '../helpers/history';
+
 
 //Create a Main Component
 class Main extends Component {
@@ -10,10 +14,12 @@ class Main extends Component {
     return (
       <div>
         {/*Render Different Component based on Route*/}
-        <Route exact path='/' component={Navbar} />
-        <Route exact path='/company' component={CompanyLanding} />
-        <Route exact path='/employersignup' component={CmpSignUP} />
-
+        <Router history={history}>
+          <Switch>
+            <Route exact path='/' component={Navbar} />
+            <Route exact path="/companyOverview" component={Overview} />
+          </Switch>
+        </Router>
       </div>
     );
   }

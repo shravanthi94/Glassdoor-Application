@@ -23,7 +23,7 @@ mongoose.connect(mongoURI, options, (err, res) => {
     } else {
         console.log(`MongoDB Connected`);
     }
-});
+});                                     
 
 function handleTopicRequest(topic_name, fname) {
     //var topic_name = 'root_topic';
