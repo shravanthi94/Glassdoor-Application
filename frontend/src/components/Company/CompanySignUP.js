@@ -1,15 +1,24 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import {connect} from 'react-redux';
-import {Link } from 'react-router-dom'
+import {Link, Redirect } from 'react-router-dom'
 import {setAlert} from '../../actions/alert';
-import {companySignUP} from '../../actions/company/auth'
+import {companySignUP, loadCompanyUser} from '../../actions/company/auth'
 import Alert from '../Alert';
 import PropTypes from 'prop-types'
 import CmpNav from './CmpNav'
 import '../CSS/CompanySign.css'
 import '../CSS/Alert.css'
+import setAuthToken from '../../helpers/setAuthToken';
 
-const CompanySignUP = ({setAlert, companySignUP}) => {
+if (localStorage.token){
+    setAuthToken(localStorage.token);
+}
+
+const CompanySignUP = ({setAlert, loadCompanyUser, companySignUP, isAuthenticated}) => {
+
+    useEffect(()=>{
+        loadCompanyUser()
+    })
 
     const [formData, setFormData] = useState({
         name: '',
@@ -27,6 +36,10 @@ const CompanySignUP = ({setAlert, companySignUP}) => {
         e.preventDefault();
         companySignUP({name, email, password})
       
+    }
+
+    if(isAuthenticated){
+        return <Redirect to="/companydashboard"></Redirect>
     }
 
     return ( 
@@ -71,7 +84,7 @@ const CompanySignUP = ({setAlert, companySignUP}) => {
                  </div>
                 <p className="my-1">
                     Already have an account ? {' '}
-                    <Link to="/companylogin" className="text-dark">
+                    <Link to="/companysignin" className="text-dark">
                         Sign In
                     </Link>
                 </p>
@@ -84,6 +97,11 @@ const CompanySignUP = ({setAlert, companySignUP}) => {
 CompanySignUP.propTypes = {
     setAlert: PropTypes.func.isRequired,
     companySignUP: PropTypes.func.isRequired,
+    loadCompanyUser: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 }
 
-export default connect(null, {setAlert, companySignUP})(CompanySignUP)
+const mapStateToProps = state =>({
+    isAuthenticated: state.auth.isAuthenticated
+})
+export default connect(mapStateToProps, {setAlert, companySignUP, loadCompanyUser})(CompanySignUP)
