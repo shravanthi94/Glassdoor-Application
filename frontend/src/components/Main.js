@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
-import CompanyLanding from './Employer/Landing';
-import CompanySignUP from './Employer/CompanySignUP';
-import CompanyLogin from './Employer/CompanyLogin';
+import CompanyLanding from './Company/Landing';
+import CompanySignUP from './Company/CompanySignUP';
+import CompanyLogin from './Company/CompanyLogin';
 import CompanyOverview from '../components/student/CompanyOverview';
 
 import { history } from '../helpers/history';

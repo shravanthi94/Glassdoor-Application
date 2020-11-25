@@ -2,7 +2,10 @@ import React, { Fragment, useState } from 'react'
 import {Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import CmpNav from './CmpNav'
-import '../CSS/CompanyLanding.css'
+import Alert from '../Alert';
+import '../CSS/CompanySign.css'
+import '../CSS/Alert.css'
+
 
 const CompanyLogin = props => {
     const [formData, setFormData] = useState({
@@ -29,6 +32,7 @@ const CompanyLogin = props => {
         <Fragment>
         <CmpNav/>
         <div className = "contentholder" >
+            <Alert/>
         <p> Your next hire is researching your company on Glassdoor. 
             Take control of the conversation and show ideal candidates why they want to work with you.</p>
                 <div className="form-box">

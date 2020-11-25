@@ -2,13 +2,14 @@ import React, { Fragment, useState } from 'react'
 import {connect} from 'react-redux';
 import {Link } from 'react-router-dom'
 import {setAlert} from '../../actions/alert';
+import {companySignUP} from '../../actions/company/auth'
 import Alert from '../Alert';
 import PropTypes from 'prop-types'
 import CmpNav from './CmpNav'
-import '../CSS/CompanyLanding.css'
+import '../CSS/CompanySign.css'
 import '../CSS/Alert.css'
 
-const CompanySignUP = ({setAlert}) => {
+const CompanySignUP = ({setAlert, companySignUP}) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -24,17 +25,13 @@ const CompanySignUP = ({setAlert}) => {
 
     const onSubmit = e =>{
         e.preventDefault();
-        if(password.length < 6){
-           setAlert("Inavlid Password", 'danger')  
-        }else {
-            console.log('SUCCESS')
-        }
+        companySignUP({name, email, password})
+      
     }
 
     return ( 
         <Fragment>
         <CmpNav/>
-        
         <div className = "contentholder" >
         <Alert/>
         <p> Your next hire is researching your company on Glassdoor. 
@@ -48,7 +45,6 @@ const CompanySignUP = ({setAlert}) => {
                             name="name"
                             value={name}
                             onChange={(e) => onChange(e)}
-                            required
                         />
                     </div>
                     <div className="form-group">
@@ -58,7 +54,6 @@ const CompanySignUP = ({setAlert}) => {
                             name="email"
                             value={email}
                             onChange={(e) => onChange(e)}
-                            required
                         />
                     </div>
                     <div className="form-group">
@@ -68,8 +63,6 @@ const CompanySignUP = ({setAlert}) => {
                             name="password"
                             value={password}
                             onChange={(e) => onChange(e)}
-                            // minLength='6'
-                            required
                         />
                     </div>
                 
@@ -90,6 +83,7 @@ const CompanySignUP = ({setAlert}) => {
 
 CompanySignUP.propTypes = {
     setAlert: PropTypes.func.isRequired,
+    companySignUP: PropTypes.func.isRequired,
 }
 
-export default connect(null, {setAlert})(CompanySignUP)
+export default connect(null, {setAlert, companySignUP})(CompanySignUP)
