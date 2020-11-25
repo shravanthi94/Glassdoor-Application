@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import CompanyLanding from './Employer/Landing';
 import CmpSignUP from './Employer/CmpSignUP';
-import Overview from '../components/company/Overview';
+import CompanyOverview from '../components/student/CompanyOverview';
 
 import { history } from '../helpers/history';
 
@@ -17,7 +17,7 @@ class Main extends Component {
         <Router history={history}>
           <Switch>
             <Route exact path='/' component={Navbar} />
-            <Route exact path="/companyOverview" component={Overview} />
+            <Route exact path="/companyOverview" component={CompanyOverview} />
           </Switch>
         </Router>
       </div>
