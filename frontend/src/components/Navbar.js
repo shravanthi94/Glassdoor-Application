@@ -42,9 +42,15 @@ const Navbar = () => {
                 required
               />
             </div>
-
             <input type="submit" value="Continue with Email" />
+
           </form>
+          <br />
+                Are you Hiring ?
+                <Link to='/company' className='text-light'>
+            Post Jobs
+            </Link>
+
         </div>
       </div>
     </Fragment>

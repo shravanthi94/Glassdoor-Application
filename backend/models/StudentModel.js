@@ -35,8 +35,27 @@ const StudentSchema = new mongoose.Schema({
       type: Boolean,
     },
   },
+
+  primaryResume: {
+    type: String,
+  },
+  
+  applications:{
+    type: String,
+  },
+
   date: { type: Date, default: Date.now() },
 });
 
 const Student = mongoose.model('student', StudentSchema);
 module.exports = Student;
+
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */

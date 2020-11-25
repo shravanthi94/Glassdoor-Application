@@ -40,6 +40,8 @@ const CompanySchema = new mongoose.Schema({
     headquarters: {
         type: String
     },
+    mission: {
+        // revenue headquarters industry founded  overAllRating ceoApprovalRating recommendationRating logo  images
     industry: {
         type: String
     },
@@ -125,3 +127,10 @@ const CompanySchema = new mongoose.Schema({
 
 const Company = mongoose.model('company', CompanySchema);
 module.exports = Company;
+
+/*
+
+  baseSalary   avgTotalPay bonuses  jobTitle yearsOfExperience location  salaryGender
+   
+    
+    */ */
