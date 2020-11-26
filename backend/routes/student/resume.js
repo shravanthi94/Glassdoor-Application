@@ -38,6 +38,22 @@ router.get("/:student", checkAuth, async (req, res) => {
 
 });
 
+router.get("/:resume", checkAuth, async (req, res) => {
+
+    try {
+        console.log("resume_id: ", req.params.resume);
+        var Resume = await resume.findOne({ "_id": req.params.resume });
+        if (!Resume) {
+            return res.status(400).json({ msg: 'No resume with given id ' });
+        }
+        res.status(200).json(Resume);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+
+});
+
 
 module.exports = router;
 
