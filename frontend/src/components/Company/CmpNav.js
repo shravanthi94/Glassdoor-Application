@@ -11,7 +11,7 @@ const CmpNav = ({auth: {isAuthenticated, loading}, companySignOut}) => {
     const authLinks = (
         <ul className="list-options-company">
                     <li>
-                        <a onClick={companySignOut} href='/company'> 
+                        <a onClick={companySignOut} href='/'> 
                             <i className="fa fa-sign-out-alt"></i> {' '}Sign Out</a>
                     </li>
         </ul>
@@ -20,13 +20,13 @@ const CmpNav = ({auth: {isAuthenticated, loading}, companySignOut}) => {
 
     const guestLinks = (
         <ul className="list-options-company">
-                    <li>
-                        <Link to="/companysignin"> Sign In</Link>
-                    </li>
-                    <li>
-                        <Link to="/companysignup"> Sign Up</Link>
-                    </li>
-                </ul>
+            <li>
+                <Link to="/companysignin"> Sign In</Link>
+            </li>
+            <li>
+                <Link to="/companysignup"> Sign Up</Link>
+            </li>
+        </ul>
     )
     return (
         <Fragment>

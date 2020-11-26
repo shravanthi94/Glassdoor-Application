@@ -45,11 +45,6 @@ body {
     top: 40px;
 }
 
-.company-banner {
-    width: 970px;
-    height: 80px;
-}
-
 .company-banner-blur {
     width: 970px;
     height: 80px;
@@ -253,33 +248,33 @@ body {
     padding-top: 10px;
 }
 
-.overview-review-headline{
+.overview-review-headline {
     font-size: 20px;
     color: #1861BF;
     font-weight: bold;
 }
 
-.overview-reviews-table-all{
+.overview-reviews-table-all {
     color: #505863;
     font-family: 'Lato', sans-serif;
     /* border-bottom: 1px solid lightgray; */
     padding: 20px;
 }
 
-.overview-reviews-pros-cons{
+.overview-reviews-pros-cons {
     margin-top: 5px;
 }
 
-.overview-reviews-pros-cons-title{
+.overview-reviews-pros-cons-title {
     font-weight: bold;
     margin-top: 15px;
 }
 
-.overview-review-star-ratings{
+.overview-review-star-ratings {
     color: #0caa41
 }
 
-.overview-see-all-reviews{
+.overview-see-all-reviews {
     padding-left: 225px;
     padding-top: 20px;
     color: #1861BF;
@@ -289,15 +284,15 @@ body {
     color: #858C94;
 }
 
-.overview-reviews-table-all td{
+.overview-reviews-table-all td {
     padding: 0px 5px;
 }
 
-.overview-reviews-table-inside{
+.overview-reviews-table-inside {
     width: 450px;
 }
 
-.overview-social-media-logos{
+.overview-social-media-logos {
     background-color: #cccccc;
     border-radius: 50px;
     color: white;
@@ -307,21 +302,21 @@ body {
     margin-left: 10px;
 }
 
-.overview-helpful-button{
+.overview-helpful-button {
     width: 70px;
-    border:none;
-    border:solid 2px #1861BF;
+    border: none;
+    border: solid 2px #1861BF;
     border-radius: 5px;
     border-spacing: 100px;
     padding: 5px;
     text-align: center;
-    background: rgba(255, 255, 255,0);
+    background: rgba(255, 255, 255, 0);
     font-size: 15px;
     font-weight: bold;
     color: #1861BF;
     margin-left: 290px;
 }
 
-.profile-titles-selected{
-    border-bottom:5px solid #00A1DF;
+.profile-titles-selected {
+    border-bottom: 5px solid #00A1DF;
 }

@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
+const Company = require('../../models/CompanyModel');
 
 //@route POST /company/signup
 //@desc  company registration
@@ -26,8 +27,15 @@ router.post(
         }
 
         const { name, email, password } = req.body;
+
         // See if user exists
         try {
+            company = new Company({
+                name,
+                email,
+            });
+
+            await company.save();
             mysqlConnectionPool.query(
                 `SELECT email FROM company WHERE email= '${email}'`,
                 async(error, result) => {
@@ -54,7 +62,8 @@ router.post(
                             }
                             const payload = {
                                 company: {
-                                    id: result.insertId,
+                                    // id: result.insertId,
+                                    id: company._id,
                                     name: name,
                                     email: email,
                                     usertype: 'company'
@@ -64,7 +73,9 @@ router.post(
                                 payload,
                                 config.get('jwtSecret'), { expiresIn: 6000000 },
                                 (error, token) => {
+
                                     if (error) throw error;
+                                    // console.log(token)
                                     res.json({
                                         token,
                                         id: result.insertId,
@@ -78,7 +89,7 @@ router.post(
                 }
             );
             //res.send('Customer Registered');
-        } catch (error) {
+        } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
         }
