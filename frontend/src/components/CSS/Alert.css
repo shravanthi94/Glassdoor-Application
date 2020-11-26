@@ -1,0 +1,25 @@
+:root {
+    --primary-color: #17a2b8;
+    --dark-color: #ec2d2d;
+    --light-color: #f4f4f4;
+    --danger-color: #dc3545;
+    --success-color: #0CAA4F;
+}
+
+.alert {
+    padding: 0.8rem;
+    margin: 1rem 0;
+    opacity: 0.9;
+    background: var(--light-color);
+    color: #333;
+}
+
+.alert-danger {
+    background: none;
+    color: var(--danger-color)
+}
+
+.alert-success {
+    background: none;
+    color: var(--success-color);
+}
