@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 import Navigation from './Navigation';
 import '../CSS/studentLandingPage.css';
 import userIcon from '../images/user_circle.png';
+import Card from 'react-bootstrap/Card';
 
 const LandingPage = () => {
   return (
@@ -69,6 +68,45 @@ const LandingPage = () => {
           <br />
           <br />
           <br />
+        </div>
+        <div className='right-panel'>
+          <h1 className='job-location-title'>Jobs near San Jose, CA</h1>
+          <span>
+            Recommendations are based on your profile, job preferences, and
+            activity on Glassdoor.
+          </span>
+          <br /> <br />
+          <div className='student-cards'>
+            <div className='student-card-single'>
+              <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                  <Card.Title>PayPal</Card.Title>
+                  <Card.Subtitle className='mb-2 text-muted'>
+                    Card Subtitle
+                  </Card.Subtitle>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+            <div className='student-card-single'>
+              <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                  <Card.Title>Apple</Card.Title>
+                  <Card.Subtitle className='mb-2 text-muted'>
+                    Card Subtitle
+                  </Card.Subtitle>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                  <Card.Link href='#'>Card Link</Card.Link>
+                </Card.Body>
+              </Card>
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>
