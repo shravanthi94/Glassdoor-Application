@@ -45,13 +45,13 @@ const CompanySignUP = ({setAlert, loadCompanyUser, companySignUP, isAuthenticate
     return ( 
         <Fragment>
         <CmpNav/>
-        <div className = "contentholder" >
+        <div className = "contentholder-form-company text-company" >
         <Alert/>
         <p> Your next hire is researching your company on Glassdoor. 
             Take control of the conversation and show ideal candidates why they want to work with you.</p>
-                <div className="form-box">
-                <form className="form" onSubmit={e=> onSubmit(e)}>
-                    <div className="form-group">
+                <div className="form-box-company">
+                <form className="form-company" onSubmit={e=> onSubmit(e)}>
+                    <div className="form-group-company">
                         <p>Name</p>
                         <input
                             type="text"
@@ -60,7 +60,7 @@ const CompanySignUP = ({setAlert, loadCompanyUser, companySignUP, isAuthenticate
                             onChange={(e) => onChange(e)}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-company">
                         <p> Email</p>
                         <input
                             type="email"
@@ -69,7 +69,7 @@ const CompanySignUP = ({setAlert, loadCompanyUser, companySignUP, isAuthenticate
                             onChange={(e) => onChange(e)}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-company">
                         <p>Password</p>
                         <input
                             type="password"
@@ -78,8 +78,9 @@ const CompanySignUP = ({setAlert, loadCompanyUser, companySignUP, isAuthenticate
                             onChange={(e) => onChange(e)}
                         />
                     </div>
-                
-                    <button type="submit" className="btn btn-dark" value="SignUp">Create Account</button>
+                    <div className='btn-sign-company'>
+                    <button className="button-company" type="submit" value="SignUp">Create Account</button>
+                    </div>
                 </form>
                  </div>
                 <p className="my-1">
