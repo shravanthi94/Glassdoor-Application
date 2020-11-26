@@ -18,7 +18,7 @@ router.post("/:id/apply", checkAuth, async (req, res) => {
 
 });
 
-router.get("/", checkAuth, async (req, res) => {
+router.get("/", async (req, res) => {
       
     try {
       let jobs = await Jobposting.find();
@@ -47,6 +47,22 @@ router.get("/applied", checkAuth, async (req, res) => {
       res.status(500).send('Server Error: Database');
   }
       
+
+});
+
+router.post("/:id/withdraw", checkAuth, async (req, res) => {
+    
+    try {
+        console.log("job_id to apply: ", req.params.id);
+    let job = await Jobposting.findOne({ _id: req.params.id })
+        job.applicants.pull({ student: req.body.student});
+        job.save();
+        res.status(200).json('application withdrawn');
+        
+    }catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
 
 });
 
