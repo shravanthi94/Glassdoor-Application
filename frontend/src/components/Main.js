@@ -10,12 +10,12 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
-import CompanyOverview from './student/CompanyOverview';
+import CompanyOverview from './Student/CompanyOverview';
 
 // Student Links
-import Login from './student/Login';
-import StudentLandingPage from './student/LandingPage';
-import CompanyReviews from './student/CompanyReviews';
+import Login from './Student/Login';
+import StudentLandingPage from './Student/LandingPage';
+import CompanyReviews from './Student/CompanyReviews';
 // import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
