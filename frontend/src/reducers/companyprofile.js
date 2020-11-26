@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
         case COMPANY_GETPROFILE:
             return {
                 ...state,
-                profile: payload,
+                companyprofile: payload,
                 loading: false
             }
         case COMPANY_PROFILEERROR:
