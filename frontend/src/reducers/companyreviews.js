@@ -1,9 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { COMPANY_GETPROFILE, COMPANY_PROFILEERROR } from '../actions/types';
+import { COMPANY_GETREVIEW, COMPANY_GETREVIEWS, COMPANY_REVIEWS_ERROR } from '../actions/types';
 
 const initialState = {
-    companyprofile: null,
-    companyprofiles: [],
+    companyreview: null,
+    companyreviews: [],
     loading: true,
     error: {}
 }
@@ -12,13 +12,19 @@ export default function(state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case COMPANY_GETPROFILE:
+        case COMPANY_GETREVIEW:
             return {
                 ...state,
-                companyprofile: payload,
+                companyreview: payload,
                 loading: false
             }
-        case COMPANY_PROFILEERROR:
+        case COMPANY_GETREVIEWS:
+            return {
+                ...state,
+                companyreviews: payload,
+                loading: false
+            }
+        case COMPANY_REVIEWS_ERROR:
             return {
                 ...state,
                 error: payload,

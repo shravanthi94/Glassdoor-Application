@@ -129,3 +129,15 @@
   margin-left: 20px;
   text-align: center;
 }
+
+.student-icon5 {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 15px;
+  font-size: 40px;
+  color: #777777;
+}
+
+.material-icons {
+  font-size: 41px;
+}

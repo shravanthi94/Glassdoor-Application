@@ -44,9 +44,24 @@ const Navigation = () => {
         <Link to='/student/search' className='btn-student'>
           Search
         </Link>
-        <div className='right-icons'>
+        {/* <div className='right-icons'>
           <i class='fas fa-inbox fa-2x'></i>
           <i class='far fa-user-circle fa-2x user'></i>
+        </div> */}
+        <div className='icon5'>
+          <div className='dropdown'>
+            <div className='material-icons' data-toggle='dropdown'>
+              account_circle
+            </div>
+            <ul className='dropdown-menu pull-right'>
+              <li>
+                <a href='/customerProfile'>About me</a>
+              </li>
+              <li>
+                <a href='#'>Sign Out</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </Fragment>
