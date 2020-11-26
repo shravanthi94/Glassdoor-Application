@@ -60,8 +60,8 @@ class CompanyOverview extends Component {
                     <div className="overview-all">
                         <div style={{ backgroundColor: "#13aa41", height: "150px" }}> Search bar </div>
                         <div className="profile-row-one">
-                            <img className="company-banner-blur" src={require('../../components/images/' + company_name + '_banner.jpg').default} alt="" />
-                            <img className="overview-logo" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" />
+                            <img className="company-banner-blur" src={require('../../components/images/' + this.props.company.overview.logo +'_banner.jpg').default} alt="" />
+                            <img className="overview-logo" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" />
                             <div className="overview-company-name">{company_name}</div>
                             <table className="profile-row-one-table">
                                 <td className="profile-titles-selected"><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title">Overview&emsp;</div></td>
@@ -164,7 +164,7 @@ class CompanyOverview extends Component {
                                                 <div className="overview-review-date">{(review.date + "").substring(0, 10)}</div>
                                                 <table className="overview-reviews-table-all">
                                                     <tr>
-                                                        <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td>
+                                                        <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td>
                                                         <td>
                                                             <table>
                                                                 <tr className="overview-review-headline"><td>"{review.headline}"</td></tr><br />
@@ -201,13 +201,13 @@ class CompanyOverview extends Component {
                                 <div className="profile-row-two-column2-row2">
                                     <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}> Jobs You May Like </div>
                                     <table className="overview-jobs-like">
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                                     </table>
                                     <br />
                                 </div>
