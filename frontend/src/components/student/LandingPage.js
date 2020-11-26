@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
-// import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import Navigation from './Navigation';
 import '../CSS/studentLandingPage.css';
+import userIcon from '../images/user_circle.png';
 
 const LandingPage = () => {
   return (
@@ -40,8 +41,34 @@ const LandingPage = () => {
       </div>
       <div className='section'>
         <div className='profile-student-box'>
-          <i class='fas fa-user fa-3x'></i>
-          <p>Shravanthi</p>
+          <img
+            src={userIcon}
+            alt='user-icon'
+            height='60px'
+            width='60px'
+            className='user-img pl-25'
+          />
+          <h3 className='name py pl-25'>Shravanthi</h3>
+          <br />
+          <i class='fas fa-briefcase fa-lg pl-25'></i>{' '}
+          <a href='/' className='student-job-link'>
+            Add Job Title
+          </a>
+          <br /> <br />
+          <i class='fas fa-map-marker-alt fa-lg pl-25'></i>{' '}
+          <a href='/' className='student-location'>
+            San Jose, CA
+          </a>
+          <hr />
+          <h4 className='job-text pl-25'>Find the job you'll love</h4>
+          <p className='info-text pl-25'>Next Step: Add Your Contact Info</p>
+          <br />
+          <Link to='/student/profile/update' className='profile-btn'>
+            Finish Your Profile
+          </Link>
+          <br />
+          <br />
+          <br />
         </div>
       </div>
     </Fragment>

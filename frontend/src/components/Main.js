@@ -10,12 +10,12 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
-import CompanyOverview from '../components/student/CompanyOverview';
-import CompanyReviews from '../components/Company/CompanyReviews';
+import CompanyOverview from './student/CompanyOverview';
 
 // Student Links
-import Login from '../components/student/Login';
-import StudentLandingPage from '../components/student/LandingPage';
+import Login from './student/Login';
+import StudentLandingPage from './student/LandingPage';
+import CompanyReviews from './student/CompanyReviews';
 // import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
@@ -34,11 +34,11 @@ class Main extends Component {
         <Router history={history}>
           <Switch>
             <Route exact path='/' component={Navbar} />
-            {/* <Route exact path='/companyOverview' component={CompanyOverview} /> */}
             <Route exact path='/company' component={CompanyLanding} />
             <Route exact path='/companysignup' component={CompanySignUP} />
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
+            <Route exact path='/companyReviews' component={CompanyReviews} />
             <Route exact path='/student/signin' component={Login} />
             <Route
               exact
@@ -46,8 +46,21 @@ class Main extends Component {
               component={StudentLandingPage}
             />
 
-            <PrivateRoute exact path='/companydashboard' component={CompanyDashboard}/>
-            <PrivateRoute exact path='/company/reviewspage' component={CompanyReviews}/>
+            <PrivateRoute
+              exact
+              path='/companydashboard'
+              component={CompanyDashboard}
+            />
+            <PrivateRoute
+              exact
+              path='/companydashboard'
+              component={CompanyDashboard}
+            />
+            <PrivateRoute
+              exact
+              path='/company/reviewspage'
+              component={CompanyReviews}
+            />
           </Switch>
         </Router>
       </Fragment>

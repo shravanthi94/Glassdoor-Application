@@ -36,7 +36,7 @@
 .item-top-nav {
   color: black;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .student-bar h2 {
@@ -82,4 +82,71 @@ strong {
   box-shadow: 0 0 2px #c4c7cc;
   height: 100%;
   width: 400px;
+  /* padding-left: 25px; */
+}
+
+.pl-25 {
+  padding-left: 25px;
+  font-family: 'Lato', sans-serif;
+}
+
+.user-img {
+  padding-top: 1rem;
+}
+
+.name {
+  font-family: Lato, sans-serif;
+  font-weight: 900;
+  margin: 0;
+}
+
+.student-job-link {
+  color: #1861bf;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: Lato, sans-serif;
+  font-size: 19px;
+}
+
+.student-location {
+  text-decoration: none;
+  color: #505863;
+  font-family: 'Lato', sans-serif;
+  font-size: 19px;
+  margin-top: 10px;
+}
+
+.job-text {
+  font-weight: bold;
+  color: #20262e;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: normal;
+  margin: 0;
+}
+
+.info-text {
+  color: #505863;
+  font-size: 14px;
+}
+
+.profile-btn {
+  background-color: rgb(24, 97, 191);
+  padding: 7px 16px;
+  color: rgb(255, 255, 255);
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: color 0.2s ease-out 0s, background-color 0.2s ease-out 0s;
+  font-family: Lato;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 155px;
+  white-space: normal;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  text-decoration: none;
 }

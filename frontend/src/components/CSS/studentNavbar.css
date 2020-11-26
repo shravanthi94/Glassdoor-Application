@@ -141,3 +141,11 @@
 .material-icons {
   font-size: 41px;
 }
+
+.student-dropdown {
+  border: none;
+  background-color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: scroll;
+}

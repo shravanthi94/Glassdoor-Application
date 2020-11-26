@@ -1,9 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import '../CSS/studentNavbar.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/student/auth';
+import { Dropdown } from 'react-bootstrap';
 
-const Navigation = () => {
+const Navigation = ({ logout }) => {
+  const [searchData, setsearchData] = useState('');
+  const [query, setquery] = useState('JOBS');
+
   return (
     <Fragment>
       <div className='nav-student'>
@@ -16,12 +23,19 @@ const Navigation = () => {
           <input
             type='text'
             className='search-box'
+            name='searchData'
+            value={searchData}
+            onChange={(e) => setsearchData(e.target.value)}
             placeholder='Job Title, Keywords, or Company'
             required
           />
         </div>
-        <select className='dropdown'>
-          <option className='dropdownOptionLabel' value='Jobs'>
+        <select
+          className='dropdown'
+          name='query'
+          onChange={(e) => setquery(e.target.value)}
+        >
+          <option className='dropdownOptionLabel' value='JOBS'>
             Jobs
           </option>
           <option className='dropdownOptionLabel' value='Companies'>
@@ -41,14 +55,17 @@ const Navigation = () => {
             placeholder='San Jose, CA'
           />
         </div>
-        <Link to='/student/search' className='btn-student'>
+        <Link
+          to={`/student/search/${searchData}/${query}`}
+          className='btn-student'
+        >
           Search
         </Link>
         {/* <div className='right-icons'>
           <i class='fas fa-inbox fa-2x'></i>
           <i class='far fa-user-circle fa-2x user'></i>
         </div> */}
-        <div className='icon5'>
+        {/* <div className='icon5'>
           <div className='dropdown'>
             <div className='material-icons' data-toggle='dropdown'>
               account_circle
@@ -58,14 +75,32 @@ const Navigation = () => {
                 <a href='/customerProfile'>About me</a>
               </li>
               <li>
-                <a href='#'>Sign Out</a>
+                <a href='/' onClick={logout}>
+                  Sign Out
+                </a>
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
+
+        <Dropdown>
+          <Dropdown.Toggle id='dropdown-basic' className='student-dropdown'>
+            <i class='fas fa-inbox fa-2x'></i>
+            <i class='far fa-user-circle fa-2x user'></i>
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href='/' onClick={logout}>
+              Logout
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
     </Fragment>
   );
 };
 
-export default Navigation;
+Navigation.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+export default connect(null, { logout })(Navigation);
