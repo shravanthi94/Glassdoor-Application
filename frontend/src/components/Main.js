@@ -10,11 +10,11 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
-import CompanyOverview from '../components/student/CompanyOverview';
+import CompanyOverview from './student/CompanyOverview';
 
 // Student Links
-import Login from '../components/student/Login';
-import StudentLandingPage from '../components/student/LandingPage';
+import Login from './student/Login';
+import StudentLandingPage from './student/LandingPage';
 // import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
@@ -45,7 +45,11 @@ class Main extends Component {
               component={StudentLandingPage}
             />
 
-            <PrivateRoute exact path='/companydashboard' component={CompanyDashboard}/>
+            <PrivateRoute
+              exact
+              path='/companydashboard'
+              component={CompanyDashboard}
+            />
           </Switch>
         </Router>
       </Fragment>
