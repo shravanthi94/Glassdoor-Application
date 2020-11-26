@@ -10,8 +10,6 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
-import CompanyOverview from '../components/Student/CompanyOverview';
-import CompanyReviews from '../components/Company/CompanyReviews';
 
 // Student Links
 import Login from './Student/Login';
@@ -36,7 +34,6 @@ class Main extends Component {
         <Router history={history}>
           <Switch>
             <Route exact path='/' component={Navbar} />
-            {/* <Route exact path='/companyOverview' component={CompanyOverview} /> */}
             <Route exact path='/company' component={CompanyLanding} />
             <Route exact path='/companysignup' component={CompanySignUP} />
             <Route exact path='/companysignin' component={CompanyLogin} />
