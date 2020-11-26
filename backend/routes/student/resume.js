@@ -22,7 +22,21 @@ router.post("/:id/resume", checkAuth, async (req, res) => {
 
 });
 
+router.get("/:student", checkAuth, async (req, res) => {
 
+    try {
+        console.log("student_id: ", req.params.student);
+        let resumes = await resume.find({ "student_id": req.params.student});
+        if (!resumes) {
+            return res.status(400).json({ msg: 'No resumes added yet!'});
+        }
+        res.status(200).json(resumes);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+
+});
 
 
 module.exports = router;
