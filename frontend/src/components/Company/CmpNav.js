@@ -11,18 +11,6 @@ const CmpNav = ({auth: {isAuthenticated, loading}, companySignOut}) => {
     const authLinks = (
         <ul className="list-options-company">
                     <li>
-                        <Link to="#!"> Applicants</Link>
-                    </li>
-                    <li>
-                        <Link to="#!"> Job Posts</Link>
-                    </li>
-                    <li>
-                        <Link to="#!"> Reviews</Link>
-                    </li>
-                    <li>
-                        <Link to="#!"> Statistics</Link>
-                    </li>
-                    <li>
                         <a onClick={companySignOut} href='/company'> 
                             <i className="fa fa-sign-out-alt"></i> {' '}Sign Out</a>
                     </li>
