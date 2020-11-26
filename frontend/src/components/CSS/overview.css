@@ -103,6 +103,7 @@ body {
     display: inline-block;
     vertical-align: top;
     justify-content: center;
+    text-decoration: none;
 }
 
 .profile-row-two .profile-row-two-column2 {

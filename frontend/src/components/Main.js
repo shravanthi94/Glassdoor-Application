@@ -11,6 +11,7 @@ import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyOverview from '../components/student/CompanyOverview';
+import CompanyReviews from '../components/Company/CompanyReviews';
 
 // Student Links
 import Login from '../components/student/Login';
@@ -46,6 +47,7 @@ class Main extends Component {
             />
 
             <PrivateRoute exact path='/companydashboard' component={CompanyDashboard}/>
+            <PrivateRoute exact path='/company/reviewspage' component={CompanyReviews}/>
           </Switch>
         </Router>
       </Fragment>
