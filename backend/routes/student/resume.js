@@ -1,29 +1,29 @@
 "use strict"
 const express = require("express");
 const router = express.Router();
-const router = express.Router();
 const { checkAuth } = require('../../middleware/studentAuth');
 
-
+const resume = require('../../models/ResumeModel');
 router.post("/:id/resume", checkAuth, async (req, res) => {
-
-
-});
-
-router.get("/:id/resume", checkAuth, async (req, res) => {
-
     try {
-        console.log("student_id: ", req.params.id);
-        var resumes = await JobPosting.find({ "student_id": req.params.id });
-        if (!resumes) {
-            return res.status(400).json({ msg: 'No resumes added yet!' });
-        }
-        res.status(200).json(resumes);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
+        var newResume = new resume();
+        newResume.student = req.params.id;
+        newResume.file= req.body.file;
+        newResume.format= req.body.format;
+        newResume.preview= req.body.preview;
+
+        await newResume.save();
+    
+        res.json("resume added");
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Server Error');
     }
 
 });
 
+
+
+
 module.exports = router;
+
