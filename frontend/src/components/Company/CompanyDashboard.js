@@ -22,8 +22,8 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
                        </div>:
             <div className="overview-all">
                 <div className="profile-row-one">
-                    <img className="company-banner" src={require('../images/companyplaceholder.jpg')} alt="" />
-                    <img className="overview-logo" src={require('../images/companylogo-placeholder.png')} alt="" />
+                    <img className="company-banner" src={require('../../components/images/' + companyprofile.name + '_banner.jpg').default} alt="" />
+                    <img className="overview-logo" src={require('../../components/images/' + companyprofile.name + '_logo.jpg').default} alt="" />
                     <div className="overview-company-name">{companyprofile.name}</div>
                     <table className="profile-row-one-table">
                         <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title">Overview&emsp;</div></td>

@@ -3,7 +3,6 @@ const express = require('express');
 
 const router = express.Router();
 const Review = require('../../models/ReviewModel');
-const Company = require('../../models/CompanyModel');
 const { adminAuth, adminCheckAuth } = require('../../middleware/adminAuth');
 // const redisRead = require('../../config/RedisRead')
 // const redisWrite = require('../../config/RedisWrite')
@@ -12,12 +11,12 @@ const { adminAuth, adminCheckAuth } = require('../../middleware/adminAuth');
 adminAuth();
 
 // @route  GET /admin/review/newreviews
-// @Desc   Get all reviews of which are pending for approval
+// @Desc   Get all reviews which are pending for approval
 // @access Private
 
 router.get('/newreviews', adminCheckAuth, async(req, res) => {
     try {
-        console.log("Gte all new reviwes from database");
+        console.log("Get all new reviwes from the database");
         const reviews = await Review.find({ "approvalStatus": 'new' });
 
         console.log("reviews list: ", reviews);

@@ -13,6 +13,9 @@ const CompanySchema = new mongoose.Schema({
     profilePic: {
         type: String
     },
+    logo: {
+        type: String
+    },
     ceoName: {
         type: String,
         required: true
@@ -55,17 +58,17 @@ const CompanySchema = new mongoose.Schema({
     },
     overAllRating: {
         type: Number,
-        default: "80"
+        default: 80
     },
     ceoApprovalRating: {
         type: Number,
-        default: "95"
+        default: 95
     },
     recommendationRating: {
         type: Number,
-        default: "75"
+        default: 75
     },
-    logo:{
+    logo: {
         type: String
     },
     images: [{

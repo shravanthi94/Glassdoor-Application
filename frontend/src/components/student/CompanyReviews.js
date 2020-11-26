@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/overview.css';
-import { getCompanyProfile } from '../../actions/company/getCompanyProfile';
+import { getCompanyReviews } from '../../actions/company/getCompanyReviews';
 import { PieChart } from 'react-minimal-pie-chart';
 import StarRatings from 'react-star-ratings';
 import { Redirect } from 'react-router';
 
-class CompanyOverview extends Component {
+class CompanyReviews extends Component {
 
     constructor(props) {
         super(props);
@@ -15,7 +15,7 @@ class CompanyOverview extends Component {
             submitted: false,
             isRedirect: false,
             redirectPath: "",
-            company_id: ""
+            company_id: this.props.location.state.company_id
         }
         // var date = new Date();
         // console.log("overview date: ", (date+"").substring(4,16));
@@ -23,21 +23,20 @@ class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        this.props.getCompanyProfile("5fb2f87d828aa81479d846a3");
+        this.props.getCompanyReviews(this.state.company_id);
     }
 
     redirectHandler = (e) => {
         console.log("redirect value: ", e);
         var path = "";
 
-        if(e == "reviews"){
-            path = "/companyReviews"
+        if (e === "overview") {
+            path = "/companyOverview"
         }
 
         this.setState({
             isRedirect: true,
-            redirectPath: path,
-            company_id: this.props.company.overview._id
+            redirectPath: path
         })
     }
 
@@ -46,13 +45,11 @@ class CompanyOverview extends Component {
         if (this.props.company) {
             company_name = this.props.company.overview.name;
         }
-
         var redirectVar = "";
 
-        if(this.state.isRedirect){
+        if (this.state.isRedirect) {
             redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { company_id: this.state.company_id } }} />
         }
-
         return (
             <div>
                 {redirectVar}
@@ -64,8 +61,8 @@ class CompanyOverview extends Component {
                             <img className="overview-logo" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" />
                             <div className="overview-company-name">{company_name}</div>
                             <table className="profile-row-one-table">
-                                <td className="profile-titles-selected"><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title">Overview&emsp;</div></td>
-                                <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={() => this.redirectHandler("reviews")}>Reviews&emsp;</div></td>
+                                <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={() => this.redirectHandler("overview")}>Overview&emsp;</div></td>
+                                <td className="profile-titles-selected"><div className="profile-counts">4.0k</div><div className="profile-title">Reviews&emsp;</div></td>
                                 <td><div className="profile-counts">867</div><div className="profile-title">Jobs&emsp;</div></td>
                                 <td><div className="profile-counts">8.4k</div><div className="profile-title">Salaries&emsp;</div></td>
                                 <td><div className="profile-counts">1.2k</div><div className="profile-title">Interviews&emsp;</div></td>
@@ -78,27 +75,6 @@ class CompanyOverview extends Component {
                                 <div className="profile-row-two-row1">
 
                                     <div className="profile-row-two-inside">
-                                        <div style={{ fontSize: "20px", color: "#0D0D0D", marginBottom: "20px" }}>{company_name} Overview</div>
-
-                                        <table className="overview-table">
-                                            <tr><td>Website:</td><td>{this.props.company.overview.website}</td><td>Headquarters:</td><td>{this.props.company.overview.headquarters}</td></tr>
-                                            <tr><td>Size:</td><td>{this.props.company.overview.size}</td><td>Founded:</td><td>{this.props.company.overview.founded}</td></tr>
-                                            <tr><td>Type:</td><td>{this.props.company.overview.type}</td><td>Industry:</td><td>{this.props.company.overview.industry}</td></tr>
-                                            <tr><td>Revenue:</td><td>{this.props.company.overview.revenue}</td><td>Email:</td><td>{this.props.company.overview.email}</td></tr>
-                                        </table>
-
-                                        <div className="overview-description">{this.props.company.overview.description}</div>
-                                        <div className="overview-mission"> <span className="overview-mission-title">Mission: </span><span>{this.props.company.overview.mission}</span></div>
-
-                                        <hr className="overview-hr" />
-                                        <div style={{ marginTop: "20px", fontSize: "22px", color: "#0D0D0D" }}>Glassdoor Awards</div>
-                                        <br />
-                                        <div style={{ marginTop: "20px" }}><span style={{ fontSize: "30px", color: "#13aa41" }}><i class="fas fa-trophy"></i></span><span style={{ fontSize: "18px", color: "#404040" }}><span>&emsp;Top CEOs:</span><span style={{ color: "#1861BF" }}>&nbsp;2019 (#34)</span></span></div>
-                                        <hr className="overview-hr" />
-                                    </div>
-                                </div>
-                                <div className="profile-row-two-row2">
-                                    <div className="profile-row-three-inside">
                                         <div style={{ fontSize: "22px", color: "#0D0D0D" }}>{company_name} Reviews</div>
 
                                         <table className="overview-charts">
@@ -111,7 +87,7 @@ class CompanyOverview extends Component {
                                                     totalValue={100}
                                                     lineWidth={25}
                                                     style={{ height: '70px' }}
-                                                    label={({ dataEntry }) => (dataEntry.title == "One" ? dataEntry.value + "%" : "")}
+                                                    label={({ dataEntry }) => (dataEntry.title === "One" ? dataEntry.value + "%" : "")}
                                                     labelStyle={{
                                                         fontSize: '22px',
                                                         fontFamily: 'sans-serif',
@@ -127,7 +103,7 @@ class CompanyOverview extends Component {
                                                     ]} totalValue={100}
                                                     lineWidth={25}
                                                     style={{ height: '70px' }}
-                                                    label={({ dataEntry }) => (dataEntry.title == "One" ? dataEntry.value + "%" : "")}
+                                                    label={({ dataEntry }) => (dataEntry.title === "One" ? dataEntry.value + "%" : "")}
                                                     labelStyle={{
                                                         fontSize: '22px',
                                                         fontFamily: 'sans-serif',
@@ -143,7 +119,7 @@ class CompanyOverview extends Component {
                                                     ]} totalValue={100}
                                                     lineWidth={25}
                                                     style={{ height: '70px' }}
-                                                    label={({ dataEntry }) => (dataEntry.title == "One" ? dataEntry.value + "%" : "")}
+                                                    label={({ dataEntry }) => (dataEntry.title === "One" ? dataEntry.value + "%" : "")}
                                                     labelStyle={{
                                                         fontSize: '22px',
                                                         fontFamily: 'sans-serif',
@@ -157,9 +133,9 @@ class CompanyOverview extends Component {
 
 
                                         <hr className="overview-hr" />
-                                        {(this.props.company.reviews && this.props.company.reviews.length !== 0) ?
+                                        {(this.props.reviews && this.props.reviews.length !== 0) ?
 
-                                            this.props.company.reviews.map(review => (
+                                            this.props.reviews.map(review => (
                                                 <div>
                                                 <div className="overview-review-date">{(review.date + "").substring(0, 10)}</div>
                                                 <table className="overview-reviews-table-all">
@@ -176,11 +152,14 @@ class CompanyOverview extends Component {
                                                         </td>
                                                     </tr>
                                                 </table>
+                                                <div><div className="overview-social-media-logos"><i class="fab fa-facebook-f"></i></div><div className="overview-social-media-logos"><i class="fab fa-twitter"></i></div><div className="overview-social-media-logos"><i class="far fa-envelope"></i></div><div className="overview-social-media-logos"><i class="fas fa-link"></i></div>
+                                                <div className="overview-helpful-button">Helpful</div>
+                                                </div>
                                                 <hr className="overview-hr" />
                                                 </div>
                                             )) : <div> No Reviews Yets</div>
                                         }
-                                        {(this.props.company.reviews && this.props.company.reviews.length !== 0) ? <div className="overview-see-all-reviews" onClick={() => this.redirectHandler("reviews")}>See All 328 Reviews </div> : ""}
+                                        {(this.props.company.reviews && this.props.company.reviews.length !== 0) ? <div className="overview-see-all-reviews">See All 328 Reviews </div> : ""}
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +192,7 @@ class CompanyOverview extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div> : <div> No Company Profile</div>
+                    </div> : <div> No Reviews for the Company Profile</div>
                 }
             </div>
         )
@@ -223,14 +202,15 @@ class CompanyOverview extends Component {
 const mapStateToProps = (state) => {
     console.log(" CompanyOverview - store:", state.comStore);
     return {
-        company: state.comStore.company || ""
+        company: state.comStore.company || "",
+        reviews: state.comStore.reviews || ""
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCompanyProfile: (payload) => dispatch(getCompanyProfile(payload))
+        getCompanyReviews: (payload) => dispatch(getCompanyReviews(payload))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyReviews);
