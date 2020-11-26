@@ -11,7 +11,7 @@ const CompanyReviews = ({getCurrentCompanyReviews}) => {
     return (
         <Fragment>
             <CmpNav/>
-            Load Revies here
+            Load Reviews here
         </Fragment>
     )
 }
