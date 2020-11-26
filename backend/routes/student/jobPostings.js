@@ -18,7 +18,7 @@ router.post("/:id/apply", checkAuth, async (req, res) => {
 
 });
 
-router.get("/", checkAuth, async (req, res) => {
+router.get("/", async (req, res) => {
       
     try {
       let jobs = await Jobposting.find();

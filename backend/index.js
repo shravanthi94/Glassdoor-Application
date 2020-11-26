@@ -44,6 +44,8 @@ app.use('/student/landing', landingPageStudent);
 app.use('/student/demographics', demographics);
 //  Student - JOB PREFERENCES
 app.use('/student/jobPreferences', jobPreferences);
+app.use('/student/resume', resume);
+app.use('/student/jobs', jobPostings);
 
 /*  Routes for Company */
 // Company - SIGNUP
