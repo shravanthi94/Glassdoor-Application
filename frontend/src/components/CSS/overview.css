@@ -302,7 +302,11 @@ body {
     margin-left: 10px;
 }
 
-.overview-helpful-button {
+.overview-social-media-logos svg{
+    padding-top: 8px;
+}
+
+.overview-helpful-button{
     width: 70px;
     border: none;
     border: solid 2px #1861BF;
@@ -317,6 +321,25 @@ body {
     margin-left: 290px;
 }
 
-.profile-titles-selected {
-    border-bottom: 5px solid #00A1DF;
+.profile-titles-selected{
+    border-bottom:5px solid #00A1DF;
+}
+
+.overview-profile-add-button{
+    width: 100px;
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 0px;
+    border-spacing: 100px;
+    padding: 10px;
+    text-align: center;
+    background: #1861BF;
+    font-size: 18px;
+    color: white;    
+}
+
+.profile-add-button-position{
+    position: absolute;
+    right: 14px;
+    top: 185px;
 }
