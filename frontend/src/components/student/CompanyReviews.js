@@ -5,7 +5,7 @@ import { getCompanyReviews } from '../../actions/company/getCompanyReviews';
 import { PieChart } from 'react-minimal-pie-chart';
 import StarRatings from 'react-star-ratings';
 import { Redirect } from 'react-router';
-import Navigation from '../Student/Navigation';
+import Navigation from './Navigation';
 
 class CompanyReviews extends Component {
 

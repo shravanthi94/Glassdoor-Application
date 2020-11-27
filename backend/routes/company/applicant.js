@@ -14,7 +14,7 @@ companyAuth();
 /*** APPLICANT PAGE (COMPANY) ***/
 
 // @route  GET /company/applicant
-// @Desc   Fetch current company's job by jobid
+// @Desc   Fetch current company's jobs by jobid
 // @access Private
 
 router.get('/:id', companyCheckAuth, async(req, res) => {
@@ -42,24 +42,14 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
 });
 
 
-// @route  GET /company/applicant
-// @Desc  Employer can click on job title and can see the list of users applied for the job.
-// @access Private
 
 // @route  GET /company/applicant
 // @Desc   Employer can see the resume and cover letter attached by applicant in front of their name.
 // @access Private
 
-// @route  GET /company/applicant
-// @Desc   Get all reviews of the company by id
-// @access Private
 
-// @route  GET /company/applicant
-// @Desc   Get all reviews of the company by id
-// @access Private
-
-// @route  GET /company/applicant
-// @Desc   Get all reviews of the company by id
+// @route  POST /company/applicant/statusUpdate
+// @Desc   Update the applicant status Submitted, reviewed, initial screening, Interviewing, Hired
 // @access Private
 
 module.exports = router;

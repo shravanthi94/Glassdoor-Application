@@ -42,23 +42,30 @@ router.post('/', async(req, res) => {
 
         var comment = "";
 
-        if(req.body.employment_status != "Intern"){
+        if (req.body.employment_status != "Intern") {
             comment = " employee";
         }
+
+        var d = new Date();
+        var mm = d.getMonth() + 1;
+        var dd = d.getDate();
+        var yy = d.getFullYear();
+        var myDateString = yy + '-' + mm + '-' + dd;
 
         const review = new Review({
 
             company: req.body.company,
             student: req.body.student,
-            approvalStatus: req.body.approvalStatus,
             headline: req.body.headline,
             pros: req.body.pros,
             cons: req.body.cons,
             overAllRating: req.body.rating,
-            comment: req.body.comment+req.body.employment_status+comment,
+            comment: req.body.comment + req.body.employment_status + comment,
             jobTitle: req.body.job_title,
             currentOrFormer: req.body.current_former,
-            approvalStatus: "approved"
+            approvalStatus: "new",
+            date: myDateString
+
         });
 
         await review.save((error, data) => {
@@ -179,6 +186,37 @@ router.post('/featured/:id', companyCheckAuth, async(req, res) => {
         if (review) {
             console.log("company Id", review)
             review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "featured": true } }, { new: true });
+            const {
+                date,
+                favorite,
+                featured,
+                company,
+                student,
+                approvalStatus,
+                headline,
+                pros,
+                cons,
+                overAllRating,
+                comment,
+                currentOrFormer
+            } = review
+            const newFeturedReview = {
+                date,
+                favorite,
+                featured,
+                company,
+                student,
+                approvalStatus,
+                headline,
+                pros,
+                cons,
+                overAllRating,
+                comment,
+                currentOrFormer
+            }
+            let companyprofile = await Company.findById({ '_id': review.company })
+            companyprofile.featuredreviews.unshift(newFeturedReview);
+            await companyprofile.save();
             return res.status(200).json(review);
         } else {
             return res.status(400).json({ msg: 'No Review found' });

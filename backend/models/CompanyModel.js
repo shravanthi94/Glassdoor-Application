@@ -69,8 +69,45 @@ const CompanySchema = new mongoose.Schema({
     logo: {
         type: String
     },
-    images: [{
-        type: String
+    featuredreviews: [{
+        date: {
+            type: String
+        },
+        favorite: {
+            type: Boolean
+        },
+        featured: {
+            type: Boolean
+        },
+        company: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'company',
+        },
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'student',
+        },
+        approvalStatus: {
+            type: String
+        },
+        headline: {
+            type: String
+        },
+        pros: {
+            type: String
+        },
+        cons: {
+            type: String
+        },
+        overAllRating: {
+            type: String
+        },
+        comment: {
+            type: String
+        },
+        currentOrFormer: {
+            type: String
+        }
     }],
     interview: [{
         overallInterviewExp: {
