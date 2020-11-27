@@ -10,7 +10,10 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
-import CompanyOverview from './Student/CompanyOverview';
+import CompanyDashboardReviews from './Company/CompanyReviews';
+import CompanyOverview from './student/CompanyOverview';
+import CompanyEditProfile from './Company/CompanyEditProfile';
+// import CompanyOverview from './Student/CompanyOverview';
 
 // Student Links
 import Login from './Student/Login';
@@ -53,16 +56,17 @@ class Main extends Component {
               path='/companydashboard'
               component={CompanyDashboard}
             />
-            <PrivateRoute
+            {/* <PrivateRoute
               exact
               path='/companydashboard'
               component={CompanyDashboard}
-            />
+            /> */}
             <PrivateRoute
               exact
               path='/company/reviewspage'
-              component={CompanyReviews}
+              component={CompanyDashboardReviews}
             />
+            <PrivateRoute exact path='/company/updateprofile' component={CompanyEditProfile}/>
           </Switch>
         </Router>
       </Fragment>
