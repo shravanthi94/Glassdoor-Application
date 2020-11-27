@@ -13,6 +13,8 @@ import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyDashboardReviews from './Company/CompanyReviews';
 import CompanyOverview from './student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
+import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
+import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 // import CompanyOverview from './Student/CompanyOverview';
 
 // Student Links
@@ -65,6 +67,8 @@ class Main extends Component {
               component={CompanyDashboardReviews}
             />
             <PrivateRoute exact path='/company/updateprofile' component={CompanyEditProfile}/>
+            <PrivateRoute exact path='/company/jobpostings' component={CompanyJobPostings}/>
+            <PrivateRoute exact path='/company/addjob' component={CompanyCreateJob}/>
           </Switch>
         </Router>
       </Fragment>

@@ -37,11 +37,9 @@ const JobPostingSchema = new mongoose.Schema({
     },
     Remote: {
         type: String,
-        required: true
     },
     inPerson: {
         type: String,
-        required: true
     },
     street: {
         type: String
