@@ -1,0 +1,29 @@
+.profile-row-one-company {
+    height: 500px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.company-banner {
+    width: 970px;
+    height: 340px;
+}
+
+.company-logo {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #dedede;
+    z-index: 1;
+    position: absolute;
+    left: 30px;
+    top: 310px;
+}
+
+.dashboard-company-name {
+    position: absolute;
+    left: 150px;
+    top: 360px;
+    font-size: 27px;
+}

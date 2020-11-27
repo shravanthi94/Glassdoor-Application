@@ -23,6 +23,14 @@ const initialState = {
           isAuthenticated: true,
           loading: false
         }   
+
+      case "ADD_COMPANY_REVIEWS":
+        return {
+          ...state,
+          ...payload,
+          isAuthenticated: true,
+          loading: false
+        }   
       
       default:
         return state;

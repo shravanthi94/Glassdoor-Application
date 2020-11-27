@@ -16,14 +16,16 @@ companyAuth();
 // @Desc   Create/ Update company profile
 // @access Private
 
-router.post('/', [companyCheckAuth, [
-    check('ceoName', 'ceoName is required.').not().isEmpty(),
-    check('location', 'location type is required').not().isEmpty(),
-    check('website', 'company website are required').not().isEmpty(),
-    check('type', 'Please mention type of this company').not().isEmpty(),
-    check('revenue', 'Please mention revenue of this company').not().isEmpty(),
+// [
+//     check('ceoName', 'ceoName is required.').not().isEmpty(),
+//     check('location', 'location type is required').not().isEmpty(),
+//     check('website', 'company website are required').not().isEmpty(),
+//     check('type', 'Please mention type of this company').not().isEmpty(),
+//     check('revenue', 'Please mention revenue of this company').not().isEmpty(),
 
-]], async(req, res) => {
+// ]
+
+router.post('/', companyCheckAuth, async(req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });

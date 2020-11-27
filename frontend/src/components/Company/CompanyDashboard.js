@@ -1,38 +1,61 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import PropTypes from 'prop-types' 
-import {Link} from 'react-router-dom'
+import {Link, Redirect, useHistory} from 'react-router-dom'
 import {connect } from 'react-redux'
 import {getCurrentCompanyProfile} from '../../actions/company/companyprofile';
-import CmpNav from './CmpNav';
+import CmpNav2 from './CmpNav2';
 import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
+import '../CSS/CompanyDashboard.css';
+// import CompanyReviews from './CompanyReviews';
 
 const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{companyprofile, loading}}) => {
     useEffect(()=>{
         getCurrentCompanyProfile();
     },[])
 
+    const history = useHistory();
+
+    const reviewsRoute = () =>{ 
+        let path = `/company/reviewspage`; 
+        history.push(path);
+      }
+    const overviewRoute =() =>{
+        let path = `/companydashboard`;
+        history.push(path)
+    }
+
+    const jobsRoute =()=>{
+        let path = `/company/jobpostings`;
+        history.push(path)
+    }
+
+    const applicantsRoute = ()=>{
+        let path=`/company/applicants`;
+        history.push(path)
+    }
+
     return (
         <Fragment>
-            <CmpNav/>
+            <CmpNav2/>
             <div className="contentholder-company text-company">
-            {loading ? <Spinner/> : (companyprofile === null ? 
-                       <div><h4> New to Glassdoor ? </h4> 
-                       <Link to="/creatcompanyprofile"> Create Company Profile</Link>
-                       </div>:
+            {loading  && companyprofile ===null ? <Spinner/> : 
             <div className="overview-all">
-                <div className="profile-row-one">
+                <div className="profile-row-one-company">
                     <img className="company-banner" src={require('../../components/images/' + companyprofile.name + '_banner.jpg').default} alt="" />
-                    <img className="overview-logo" src={require('../../components/images/' + companyprofile.name + '_logo.jpg').default} alt="" />
-                    <div className="overview-company-name">{companyprofile.name}</div>
+                    <img className="company-logo" src={require('../../components/images/' + companyprofile.name + '_logo.jpg').default} alt="" />
+                    <div className="dashboard-company-name">{companyprofile.name}{' '}
+                    <Link to="/company/updateprofile" style={{ fontSize: "14px", color: "#1861BF" }}>Update Profile</Link>
+                    </div>
                     <table className="profile-row-one-table">
-                        <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title">Overview&emsp;</div></td>
-                        <td><div className="profile-counts">4.0k</div><div className="profile-title">Reviews&emsp;</div></td>
-                        <td><div className="profile-counts">867</div><div className="profile-title">Jobs&emsp;</div></td>
+                        <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={overviewRoute}>Overview&emsp;</div></td>
+                        <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={reviewsRoute}> Reviews&emsp;</div></td>
+                        <td><div className="profile-counts">867</div><div className="profile-title" onClick={jobsRoute}>Jobs&emsp;</div></td>
                         <td><div className="profile-counts">8.4k</div><div className="profile-title">Salaries&emsp;</div></td>
-                        <td><div className="profile-counts">1.2k</div><div className="profile-title">Interviews&emsp;</div></td>
-                        <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
+                        <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={applicantsRoute}>Applicants&emsp;</div></td>
                         <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
+                        <td><div className="profile-counts"><i class="fas fa-chart-line"></i></div><div className="profile-title">Statistics&emsp;</div></td>
+                        
                     </table>
                 </div> 
                 <div className="side-by-side-overview">
@@ -116,29 +139,20 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
                     </div>
                     <div className="profile-row-two-column2">
                         <div className="profile-row-two-column2-row1">
-                            <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}>{companyprofile.name}'s Info</div>
-                            <br/>
-                            <hr/>
-                            <Link style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px",}} to="/company/update"> Update Profile</Link>
-                            <br/>
-                            <br/>
-                            <Link style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px",}} to="/company/applicantspage"> Applicants</Link>
-                            <br/>
-                            <br/>
-                            <Link style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px",}} to="/company/reviewspage"> Reviews</Link>
-                            <br/>
-                            <br/>
-                            <Link style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px",}} to="/company/joblistingspage"> Job Postings</Link>
-                            <br/>
-                            <br/>
-                            <Link style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px",}} to="/company/statistics"> Statistics</Link>
-                            <br/>
-                            <br/>
+                            <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}>{companyprofile.name} Locations</div>
+                                <table className="overview-locations">
+                                    <tr>Bengaluru (India)</tr> <br />
+                                    <tr>Blanchardstown (Ireland)</tr> <br />
+                                    <tr>Chandler (AZ)</tr> <br />
+                                    <tr>Chennia (India)</tr> <br />
+                                    <tr>Conshohocken (PA)</tr> <br />
+                                </table>
+                                {/* <hr className="overview-hr" /> */}
+                                <div className="all-locations">See All Locations </div>
                         </div>
                     </div>
                 </div> 
             </div>
-            )
           }
         </div>
         </Fragment>

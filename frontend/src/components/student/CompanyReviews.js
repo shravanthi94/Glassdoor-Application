@@ -5,6 +5,7 @@ import { getCompanyReviews } from '../../actions/company/getCompanyReviews';
 import { PieChart } from 'react-minimal-pie-chart';
 import StarRatings from 'react-star-ratings';
 import { Redirect } from 'react-router';
+import Navigation from '../Student/Navigation';
 
 class CompanyReviews extends Component {
 
@@ -15,10 +16,10 @@ class CompanyReviews extends Component {
             submitted: false,
             isRedirect: false,
             redirectPath: "",
-            company_id: this.props.location.state.company_id
+            company_id: this.props.location.state.company_id,
+            data: ""
         }
-        // var date = new Date();
-        // console.log("overview date: ", (date+"").substring(4,16));
+
         this.redirectHandler = this.redirectHandler.bind(this);
     }
 
@@ -29,16 +30,27 @@ class CompanyReviews extends Component {
     redirectHandler = (e) => {
         console.log("redirect value: ", e);
         var path = "";
+        var data = "";
 
         if (e === "overview") {
             path = "/companyOverview"
+            data = this.state.company_id
+        } else if (e == "add-reviews") {
+            path = "/addCompanyReview"
+            data = {
+                company_id: this.state.company_id,
+                logo: this.props.company.overview.logo,
+                company_name: this.props.company.overview.name
+            }
         }
 
         this.setState({
             isRedirect: true,
-            redirectPath: path
+            redirectPath: path,
+            data: data
         })
     }
+
 
     render() {
         var company_name = ""
@@ -48,17 +60,18 @@ class CompanyReviews extends Component {
         var redirectVar = "";
 
         if (this.state.isRedirect) {
-            redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { company_id: this.state.company_id } }} />
+            redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { data: this.state.data } }} />
         }
         return (
             <div>
                 {redirectVar}
                 { (this.props.company) ?
                     <div className="overview-all">
-                        <div style={{ backgroundColor: "#13aa41", height: "150px" }}> Search bar </div>
+                        {/* <div style={{ backgroundColor: "#13aa41", height: "150px" }}> Search bar </div> */}
+                        <Navigation />
                         <div className="profile-row-one">
-                            <img className="company-banner-blur" src={require('../../components/images/' + company_name + '_banner.jpg').default} alt="" />
-                            <img className="overview-logo" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" />
+                            <img className="company-banner-blur" src={require('../../components/images/' + this.props.company.overview.logo + '_banner.jpg').default} alt="" />
+                            <img className="overview-logo" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" />
                             <div className="overview-company-name">{company_name}</div>
                             <table className="profile-row-one-table">
                                 <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={() => this.redirectHandler("overview")}>Overview&emsp;</div></td>
@@ -69,6 +82,7 @@ class CompanyReviews extends Component {
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
                                 <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
                             </table>
+                            <div className="profile-add-button-position"><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-reviews")}>Add Review</div></div>
                         </div>
                         <div className="side-by-side-overview">
                             <div className="profile-row-two">
@@ -137,25 +151,25 @@ class CompanyReviews extends Component {
 
                                             this.props.reviews.map(review => (
                                                 <div>
-                                                <div className="overview-review-date">{(review.date + "").substring(0, 10)}</div>
-                                                <table className="overview-reviews-table-all">
-                                                    <tr>
-                                                        <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td>
-                                                        <td>
-                                                            <table>
-                                                                <tr className="overview-review-headline"><td>"{review.headline}"</td></tr><br />
-                                                                <tr className="overview-review-star-ratings"> <td>{review.overAllRating}.0 <StarRatings rating={+review.overAllRating} starDimension="20px" starSpacing="1px" starRatedColor="#0caa41" numberOfStars={5} name='rating' /></td></tr>
-                                                                <tr><td>{review.comment}</td></tr>
-                                                                <tr><td><div className="overview-reviews-pros-cons-title">Pros:</div><br/><div className="overview-reviews-pros-cons"> {review.pros} </div></td></tr>
-                                                                <tr><td><div className="overview-reviews-pros-cons-title">Cons:</div><br/><div className="overview-reviews-pros-cons"> {review.cons} </div></td></tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div><div className="overview-social-media-logos"><i class="fab fa-facebook-f"></i></div><div className="overview-social-media-logos"><i class="fab fa-twitter"></i></div><div className="overview-social-media-logos"><i class="far fa-envelope"></i></div><div className="overview-social-media-logos"><i class="fas fa-link"></i></div>
-                                                <div className="overview-helpful-button">Helpful</div>
-                                                </div>
-                                                <hr className="overview-hr" />
+                                                    <div className="overview-review-date">{(review.date + "").substring(0, 10)}</div>
+                                                    <table className="overview-reviews-table-all">
+                                                        <tr>
+                                                            <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td>
+                                                            <td>
+                                                                <table>
+                                                                    <tr className="overview-review-headline"><td>"{review.headline}"</td></tr><br />
+                                                                    <tr className="overview-review-star-ratings"> <td>{review.overAllRating}.0 <StarRatings rating={+review.overAllRating} starDimension="20px" starSpacing="1px" starRatedColor="#0caa41" numberOfStars={5} name='rating' /></td></tr>
+                                                                    <tr><td>{review.comment}</td></tr>
+                                                                    <tr><td><div className="overview-reviews-pros-cons-title">Pros:</div><br /><div className="overview-reviews-pros-cons"> {review.pros} </div></td></tr>
+                                                                    <tr><td><div className="overview-reviews-pros-cons-title">Cons:</div><br /><div className="overview-reviews-pros-cons"> {review.cons} </div></td></tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <div><div className="overview-social-media-logos"><i class="fab fa-facebook-f"></i></div><div className="overview-social-media-logos"><i class="fab fa-twitter"></i></div><div className="overview-social-media-logos"><i class="far fa-envelope"></i></div><div className="overview-social-media-logos"><i class="fas fa-link"></i></div>
+                                                        <div className="overview-helpful-button">Helpful</div>
+                                                    </div>
+                                                    <hr className="overview-hr" />
                                                 </div>
                                             )) : <div> No Reviews Yets</div>
                                         }
@@ -174,19 +188,19 @@ class CompanyReviews extends Component {
                                         <tr>Chennia (India)</tr> <br />
                                         <tr>Conshohocken (PA)</tr> <br />
                                     </table>
-                                    <hr className="overview-hr" />
+                                    <hr className="overview-hr" style={{ width: "300px" }} />
                                     <div className="all-locations">See All Locations </div>
                                 </div>
                                 <div className="profile-row-two-column2-row2">
                                     <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}> Jobs You May Like </div>
                                     <table className="overview-jobs-like">
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_name + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                                     </table>
                                     <br />
                                 </div>
@@ -200,7 +214,7 @@ class CompanyReviews extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(" CompanyOverview - store:", state.comStore);
+    console.log(" CompanyReviews - store:", state.comStore);
     return {
         company: state.comStore.company || "",
         reviews: state.comStore.reviews || ""

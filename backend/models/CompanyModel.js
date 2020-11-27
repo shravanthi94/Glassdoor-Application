@@ -11,25 +11,24 @@ const CompanySchema = new mongoose.Schema({
         unique: true,
     },
     profilePic: {
-        type: String
+        type: String,
+        default: 'default'
     },
     logo: {
-        type: String
+        type: String,
+        default: 'default'
     },
     ceoName: {
         type: String,
-        required: true
     },
     location: {
         type: String,
-        required: true
     },
     description: {
         type: String
     },
     website: {
         type: String,
-        required: true
     },
     size: {
         type: String
@@ -54,7 +53,6 @@ const CompanySchema = new mongoose.Schema({
     },
     mission: {
         type: String,
-        required: true
     },
     overAllRating: {
         type: Number,
