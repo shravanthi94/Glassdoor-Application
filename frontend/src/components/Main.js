@@ -16,6 +16,7 @@ import CompanyOverview from './Student/CompanyOverview';
 import Login from './Student/Login';
 import StudentLandingPage from './Student/LandingPage';
 import CompanyReviews from './Student/CompanyReviews';
+import AddCompanyReview from './Student/AddCompanyReview';
 // import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
@@ -39,6 +40,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
+            <Route exact path='/addCompanyReview' component={AddCompanyReview} />
             <Route exact path='/student/signin' component={Login} />
             <Route
               exact

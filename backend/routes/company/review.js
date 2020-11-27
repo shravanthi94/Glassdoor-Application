@@ -39,6 +39,13 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
     try {
         console.log("review details: ", req.body);
+
+        var comment = "";
+
+        if(req.body.employment_status != "Intern"){
+            comment = " employee";
+        }
+
         const review = new Review({
 
             company: req.body.company,
@@ -47,9 +54,11 @@ router.post('/', async(req, res) => {
             headline: req.body.headline,
             pros: req.body.pros,
             cons: req.body.cons,
-            overAllRating: req.body.overAllRating,
-            comment: req.body.comment
-
+            overAllRating: req.body.rating,
+            comment: req.body.comment+req.body.employment_status+comment,
+            jobTitle: req.body.job_title,
+            currentOrFormer: req.body.current_former,
+            approvalStatus: "approved"
         });
 
         await review.save((error, data) => {
