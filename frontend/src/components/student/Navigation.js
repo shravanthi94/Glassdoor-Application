@@ -5,7 +5,6 @@ import '../CSS/studentNavbar.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/student/auth';
-import { Dropdown } from 'react-bootstrap';
 
 const Navigation = ({ logout }) => {
   const [searchData, setsearchData] = useState('');
@@ -19,7 +18,7 @@ const Navigation = ({ logout }) => {
         </Link>
 
         <div className='input'>
-          <i class='fas fa-search color'></i>
+          <i class='fas fa-search color fa-2x'></i>
           <input
             type='text'
             className='search-box'
@@ -65,8 +64,9 @@ const Navigation = ({ logout }) => {
           <i class='fas fa-inbox fa-2x'></i>
           <i class='far fa-user-circle fa-2x user'></i>
         </div> */}
-        {/* <div className='icon5'>
-          <div className='dropdown'>
+        <i class='fas fa-inbox fa-2x'></i>
+        <div className='icon5'>
+          {/* <div className='dropdown'>
             <div className='material-icons' data-toggle='dropdown'>
               account_circle
             </div>
@@ -80,20 +80,29 @@ const Navigation = ({ logout }) => {
                 </a>
               </li>
             </ul>
+          </div> */}
+          <div class='dropdown'>
+            <button
+              class='btn btn-default dropdown-toggle'
+              type='button'
+              id='dropdownMenu1'
+              data-toggle='dropdown'
+            >
+              <i class='far fa-user-circle fa-2x user'></i>
+              <span class='caret'></span>
+            </button>
+            <ul class='dropdown-menu' role='menu'>
+              <li>
+                <a href='/'>Action</a>
+              </li>
+              <li>
+                <a href='/' onClick={logout}>
+                  Logout
+                </a>
+              </li>
+            </ul>
           </div>
-        </div> */}
-        <i class='fas fa-inbox fa-3x'></i>
-        <Dropdown>
-          <Dropdown.Toggle id='dropdown-basic' className='student-dropdown'>
-            <i class='far fa-user-circle fa-2x user'></i>
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item href='/' onClick={logout}>
-              Logout
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        </div>
       </div>
     </Fragment>
   );
