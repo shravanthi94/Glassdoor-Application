@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CSS/studentLandingPage.css';
 import userIcon from '../images/user_circle.png';
-import Card from 'react-bootstrap/Card';
+import { Card } from 'react-bootstrap';
 
 const LandingPage = () => {
   return (
@@ -19,8 +19,7 @@ const LandingPage = () => {
               <strong>Post Jobs</strong>
             </div>
           </div>
-          <div className='line-break'></div>
-          <div>
+          <div style={{ paddingBottom: '3%' }}>
             <div className='student-bar row-fix'>
               {' '}
               <h3 className='item-top-nav'>
@@ -54,13 +53,14 @@ const LandingPage = () => {
           <a href='/' className='student-job-link'>
             Add Job Title
           </a>
-          <br /> <br />
+          <br />
           <i class='fas fa-map-marker-alt fa-lg'></i>{' '}
           <a href='/' className='student-location'>
             San Jose, CA
           </a>
           <hr />
           <h4 className='job-text pl-25'>Find the job you'll love</h4>
+          <br />
           <p className='info-text pl-25'>Next Step: Add Your Contact Info</p>
           <br />
           <Link to='/student/profile/update' className='profile-btn'>
@@ -78,8 +78,8 @@ const LandingPage = () => {
           </span>
           <br /> <br />
           <div className='student-cards'>
-            <div className='student-card-single'>
-              <Card style={{ width: '18rem' }}>
+            <div className='card'>
+              {/* <Card style={{ width: '18rem' }}>
                 <Card.Body>
                   <Card.Title>PayPal</Card.Title>
                   <Card.Subtitle className='mb-2 text-muted'>
@@ -90,7 +90,10 @@ const LandingPage = () => {
                     up the bulk of the card's content.
                   </Card.Text>
                 </Card.Body>
-              </Card>
+              </Card> */}
+            </div>
+            <div class='card'>
+              <div class='card-body'>This is some text within a card body.</div>
             </div>
             <div className='student-card-single'>
               <Card style={{ width: '18rem' }}>

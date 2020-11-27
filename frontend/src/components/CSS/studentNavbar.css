@@ -8,7 +8,7 @@
   /* justify-content: space-between; */
   align-items: center;
   padding: var(--element-padding);
-  margin: -1%;
+  padding: 2.3%;
   background-color: white;
   height: 25px;
   box-shadow: inset 0 -1px 0 0 #dee0e3;

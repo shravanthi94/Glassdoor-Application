@@ -89,7 +89,6 @@ const Navbar = ({ isAuthenticated, signup }) => {
             </div>
             <input type='submit' value='Continue with Email' />
           </form>
-          <br />
           <p className='hiring-note'>
             Are you Hiring?{' '}
             <Link to='/company' className='text-light'>

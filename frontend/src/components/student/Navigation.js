@@ -82,10 +82,9 @@ const Navigation = ({ logout }) => {
             </ul>
           </div>
         </div> */}
-
+        <i class='fas fa-inbox fa-3x'></i>
         <Dropdown>
           <Dropdown.Toggle id='dropdown-basic' className='student-dropdown'>
-            <i class='fas fa-inbox fa-2x'></i>
             <i class='far fa-user-circle fa-2x user'></i>
           </Dropdown.Toggle>
 
