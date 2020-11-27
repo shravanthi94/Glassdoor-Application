@@ -46,11 +46,16 @@ router.post('/', async(req, res) => {
             comment = " employee";
         }
 
+        var d = new Date();
+        var mm = d.getMonth() + 1;
+        var dd = d.getDate();
+        var yy = d.getFullYear();
+        var myDateString = yy + '-' + mm + '-' + dd;
+
         const review = new Review({
 
             company: req.body.company,
             student: req.body.student,
-            approvalStatus: req.body.approvalStatus,
             headline: req.body.headline,
             pros: req.body.pros,
             cons: req.body.cons,
@@ -58,7 +63,9 @@ router.post('/', async(req, res) => {
             comment: req.body.comment + req.body.employment_status + comment,
             jobTitle: req.body.job_title,
             currentOrFormer: req.body.current_former,
-            approvalStatus: "approved"
+            approvalStatus: "new",
+            date: myDateString
+
         });
 
         await review.save((error, data) => {

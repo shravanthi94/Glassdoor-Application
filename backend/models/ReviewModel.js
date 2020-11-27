@@ -10,8 +10,7 @@ const ReviewSchema = new mongoose.Schema({
         ref: 'student',
     },
     date: {
-        type: Date,
-        default: Date.now()
+        type: String
     },
     approvalStatus: {
         type: String,
