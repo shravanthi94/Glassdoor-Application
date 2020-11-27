@@ -20,7 +20,33 @@ router.get('/:id', async (req, res) => {
 
         if (!overview) {
             return res.status(400).json({ msg: 'No company profile found!' });
-        }else{
+        } else{
+
+            var d = new Date();
+            var mm = d.getMonth() + 1;
+            var dd = d.getDate();
+            var yy = d.getFullYear();
+            var myDateString = yy + '-' + mm + '-' + dd;
+            const view = {
+                date: myDateString,
+                count: 1,
+            }
+
+            if(overview.views && overview.views.length>0) {
+                var flag = false;
+                for(var i = 0; i < overview.views.length; i++ ) {
+                    if(overview.views[i].date === myDateString) {
+                        overview.views[i].count = overview.views[i].count + 1;
+                        flag =true;
+                    }
+                }
+                if (!flag) {
+                    overview.views.push(view);
+                }
+            } else {
+                overview.views.push(view);
+            }
+            overview.save();
 
             const reviews = await Review.find({ "company": req.params.id, featured: true });
 

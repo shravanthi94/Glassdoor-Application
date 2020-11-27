@@ -161,7 +161,15 @@ const CompanySchema = new mongoose.Schema({
             type: String
         }
     }],
-    date: { type: Date, default: Date.now() }
+    date: { type: Date, default: Date.now() },
+    views: [{
+        date: {
+            type: String
+        },
+        count: {
+            type: Number
+        }
+    }],
 });
 
 const Company = mongoose.model('company', CompanySchema);
