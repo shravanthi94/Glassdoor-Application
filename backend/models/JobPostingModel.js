@@ -66,7 +66,8 @@ const JobPostingSchema = new mongoose.Schema({
             type: String
         },
         applicantStatus: {
-            type: String
+            type: String,
+            default: 'applied'
         },
         appliedDate: {
             type: Date,

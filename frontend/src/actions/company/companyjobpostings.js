@@ -32,3 +32,22 @@ export const createCompanyJob = (formData, history) => async dispatch => {
         });
     }
 };
+
+// get all current company's jobs
+
+export const getCurrentCompanyJobs = () => async dispatch => {
+    try {
+        const res = await axios.get('/company/jobposting/myjobs')
+
+        dispatch({
+            type: COMPANY_GETALLJOBS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: COMPANY_JOBERROR,
+            payload: { msg: err.repsonse.statusText, status: err.response.status }
+        })
+
+    }
+}

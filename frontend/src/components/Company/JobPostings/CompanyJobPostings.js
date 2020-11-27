@@ -1,10 +1,15 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import CmpNav2 from '../CmpNav2'
 import '../../CSS/CompanyJoblistings.css'
+import {getCurrentCompanyJobs} from '../../../actions/company/companyjobpostings'
 
-const CompanyJobPostings = props => {
+const CompanyJobPostings = ({getCurrentCompanyJobs}) => {
+    useEffect(()=>{
+        getCurrentCompanyJobs()
+    }, [])
     return (
         <Fragment>
             <CmpNav2/>
@@ -20,7 +25,7 @@ const CompanyJobPostings = props => {
 }
 
 CompanyJobPostings.propTypes = {
-
+    getCurrentCompanyJobs:PropTypes.func.isRequired,
 }
 
-export default CompanyJobPostings
+export default connect(null, {getCurrentCompanyJobs})(CompanyJobPostings)
