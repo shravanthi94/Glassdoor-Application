@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect } from 'react-redux'
 import {getCurrentCompanyReviews} from '../../actions/company/companyreviews'
-import CmpNav from './CmpNav'
+import CmpNav2 from './CmpNav2'
 
 const CompanyReviews = ({getCurrentCompanyReviews}) => {
     useEffect(()=>{
@@ -10,7 +10,7 @@ const CompanyReviews = ({getCurrentCompanyReviews}) => {
     },[])
     return (
         <Fragment>
-            <CmpNav/>
+            <CmpNav2/>
             Load Reviews here
         </Fragment>
     )
