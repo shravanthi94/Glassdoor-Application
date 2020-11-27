@@ -30,6 +30,8 @@ const jobCompany = require('./routes/company/job');
 const signupAdmin = require('./routes/admin/signup');
 const loginAdmin = require('./routes/admin/login');
 const review = require('./routes/admin/reviews');
+const company = require('./routes/admin/company');
+const analytics = require('./routes/admin/analytics');
 
 connectDB();
 
@@ -75,8 +77,12 @@ app.use('/company/job', jobCompany);
 app.use('/admin/signup', signupAdmin);
 //  Admin - LOGIN
 app.use('/admin/login', loginAdmin);
-//  Admin - LOGIN
+//  Admin - REVIEW
 app.use('/admin/review', review);
+//  Admin - COMPANY
+app.use('/admin/companies', company);
+//  Admin - ANALYTICS
+app.use('/admin/analytics', analytics);
 
 //  Connection to a port
 const PORT = process.env.PORT || 3001;

@@ -11,22 +11,24 @@ const CompanySchema = new mongoose.Schema({
         unique: true,
     },
     profilePic: {
-        type: String
+        type: String,
+        default: 'default'
+    },
+    logo: {
+        type: String,
+        default: 'default'
     },
     ceoName: {
         type: String,
-        required: true
     },
     location: {
         type: String,
-        required: true
     },
     description: {
         type: String
     },
     website: {
         type: String,
-        required: true
     },
     size: {
         type: String
@@ -51,25 +53,61 @@ const CompanySchema = new mongoose.Schema({
     },
     mission: {
         type: String,
-        required: true
     },
     overAllRating: {
         type: Number,
-        default: "80"
+        default: 80
     },
     ceoApprovalRating: {
         type: Number,
-        default: "95"
+        default: 95
     },
     recommendationRating: {
         type: Number,
-        default: "75"
+        default: 75
     },
-    logo:{
+    logo: {
         type: String
     },
-    images: [{
-        type: String
+    featuredreviews: [{
+        date: {
+            type: String
+        },
+        favorite: {
+            type: Boolean
+        },
+        featured: {
+            type: Boolean
+        },
+        company: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'company',
+        },
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'student',
+        },
+        approvalStatus: {
+            type: String
+        },
+        headline: {
+            type: String
+        },
+        pros: {
+            type: String
+        },
+        cons: {
+            type: String
+        },
+        overAllRating: {
+            type: String
+        },
+        comment: {
+            type: String
+        },
+        currentOrFormer: {
+            type: String
+        }
     }],
     interview: [{
         overallInterviewExp: {

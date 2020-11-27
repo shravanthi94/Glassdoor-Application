@@ -46,8 +46,11 @@ const Login = ({ isAuthenticated, login }) => {
             </Link>
           </div>
         </div>
-
-        <h1 className='heading'> Find The Job That Fits Your Life</h1>
+        <h1 className='heading'>
+          Sign In to get instant access to <br /> <br />
+          <br /> <br /> millions of salaries and reviews
+        </h1>
+        <br />
         <div className='container'>
           <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>

@@ -19,7 +19,7 @@ export const getCompanyProfile = (payload) => {
         axios.get(configPath.api_host + '/company/overview/' + payload)
             .then(response => {
 
-                console.log("Actions: Get Customer Profile:", response);
+                console.log("Actions: Get Company Profile:", response);
                 var company = response.data;
 
                 if (response.status === 200) {

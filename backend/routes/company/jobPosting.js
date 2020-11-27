@@ -156,7 +156,22 @@ router.post('/', [companyCheckAuth, [
 
 // get job by id by currently logged in company
 
-// get all the job postings 
+// get all the job postings by current company
+// @route  GET /company/jobposting/myjobs
+// @Desc   Get all the jobs created by current company
+// @access Private
+
+router.get('/myjobs', companyCheckAuth, async(req, res) => {
+
+    try {
+        const jobs = await Jobposting.find({ email: req.company.email });
+        if (!jobs) return res.status(400).json({ msg: 'There are no events created by this Restaurant' });
+        res.json(jobs);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 
 module.exports = router;

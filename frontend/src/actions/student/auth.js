@@ -7,6 +7,7 @@ import {
   STUDENT_AUTH_ERROR,
   STUDENT_LOGIN_SUCCESS,
   STUDENT_LOGIN_FAIL,
+  LOGOUT,
 } from '../types';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../../helpers/setAuthToken';
@@ -96,4 +97,11 @@ export const login = (email, password) => async (dispatch) => {
       type: STUDENT_LOGIN_FAIL,
     });
   }
+};
+
+// Logout
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
 };

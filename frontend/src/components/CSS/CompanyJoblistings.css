@@ -1,0 +1,27 @@
+.contentholder-Jobs-company {
+    max-width: 1400px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 2rem;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+    /* border: 1px solid #888; */
+    font-family: 'Lato', 'Sanserif'
+}
+
+.link-company {
+    padding-left: 1200px
+}
+
+.form-box-company-job {
+    background-color: white;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    /* border-top: 5px solid #0CAA4F; */
+}
+
+.btn-sign-company-job {
+    padding-left: 600px;
+}

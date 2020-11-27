@@ -10,8 +10,7 @@ const ReviewSchema = new mongoose.Schema({
         ref: 'student',
     },
     date: {
-        type: Date,
-        default: Date.now()
+        type: String
     },
     approvalStatus: {
         type: String,
@@ -29,6 +28,9 @@ const ReviewSchema = new mongoose.Schema({
     overAllRating: {
         type: String
     },
+    jobTitle: {
+        type: String
+    },
     comment: {
         type: String
     },
@@ -39,6 +41,9 @@ const ReviewSchema = new mongoose.Schema({
     featured: {
         type: Boolean,
         default: false
+    },
+    currentOrFormer:{
+        type: String
     },
     reply: [{
 
@@ -55,8 +60,6 @@ const ReviewSchema = new mongoose.Schema({
             type: Date,
             default: Date.now()
         },
-
-
     }]
 
 });

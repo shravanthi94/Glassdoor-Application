@@ -28,7 +28,6 @@ router.post(
     // See if user exists
     try {
       const student = await Student.findOne({ email: email });
-      console.log(student._id);
       mysqlConnectionPool.query(
         `SELECT * FROM student WHERE email= '${email}'`,
         async (error, result) => {

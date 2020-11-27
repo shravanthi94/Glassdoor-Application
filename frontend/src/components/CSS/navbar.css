@@ -7,11 +7,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--element-padding);
   margin: auto;
   background-color: none;
   height: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2.3%;
 }
 
 .left-nav {
@@ -80,7 +80,6 @@ a.header-nav-button {
   overflow: hidden;
   background-size: cover;
   background-position: center;
-  margin: -0.5%;
 }
 
 .heading {
@@ -99,6 +98,7 @@ a.header-nav-button {
 .legal-copy {
   font-size: 12px;
   line-height: 18px;
+  margin: 1%;
 }
 
 /*** Forms ***/
@@ -131,7 +131,7 @@ a.header-nav-button {
   padding: 0px 48px 0px 12px;
   font-family: Lato, sans-serif;
   color: rgb(80, 88, 99);
-  width: 20%;
+  width: 30%;
   line-height: normal;
 }
 
@@ -165,6 +165,7 @@ a.header-nav-button {
   line-height: 1.3125em;
   border: none;
   font-family: Lato;
+  margin-top: 1%;
 }
 
 /** Utils **/
