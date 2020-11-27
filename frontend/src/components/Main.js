@@ -11,7 +11,7 @@ import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyDashboardReviews from './Company/CompanyReviews';
-import CompanyOverview from './student/CompanyOverview';
+import CompanyOverview from './Student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 // import CompanyOverview from './Student/CompanyOverview';
 
