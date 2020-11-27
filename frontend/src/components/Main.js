@@ -11,16 +11,17 @@ import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyDashboardReviews from './Company/CompanyReviews';
-import CompanyOverview from './student/CompanyOverview';
+import CompanyOverview from './Student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 // import CompanyOverview from './Student/CompanyOverview';
 
 // Student Links
-import Login from './student/Login';
-import StudentLandingPage from './student/LandingPage';
-import CompanyReviews from './student/CompanyReviews';
+import Login from './Student/Login';
+import StudentLandingPage from './Student/LandingPage';
+import CompanyReviews from './Student/CompanyReviews';
+import AddCompanyReview from './Student/AddCompanyReview';
 // import Login from '../components/student/Login';
 
 import setAuthToken from '../helpers/setAuthToken';
@@ -44,6 +45,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
+            <Route exact path='/addCompanyReview' component={AddCompanyReview} />
             <Route exact path='/student/signin' component={Login} />
             <Route
               exact

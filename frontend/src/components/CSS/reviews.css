@@ -1,0 +1,97 @@
+.form-group {
+    margin-bottom:10px;
+    margin-left: 15px;
+}
+
+.form-control {
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 3px;
+    border: solid 1px #c4c7cc;
+    padding: 0 12px;
+    padding-right: 12px;
+    padding-left: 12px;
+    font-family: 'Lato',sans-serif;
+    color: #505863;
+    width: 500px;
+    height: 50px;
+    line-height: normal;
+    margin-bottom: 15px;
+}
+
+.company-review-star-ratings-color{
+    color: #0caa41;
+}
+
+
+#company-review-emp-status{
+    width: 300px;
+    height:100px
+}
+
+.review-emp-status-select-list{
+    width: 300px;
+    height: 50px;
+    border:none;
+    border:solid 2px #c4c7cc;
+    border-radius: 3px;
+    border-spacing: 100px;
+    padding: 10px;
+    font-size: 17px;
+    color: #505863;
+    background-color: white;
+    margin-bottom: 15px;
+  }
+
+
+.overview-profile-add-button-nonselect{
+    width: 100px;
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 0px;
+    border-spacing: 100px;
+    padding: 10px;
+    text-align: center;
+    background: white;
+    font-size: 18px;
+    color: #1861BF;    
+}
+
+.review-keep-real-style{
+    width: 270px;
+    margin-left: 20px;
+    color: #404040;
+    font-family: Lato, sans-serif;
+}
+
+.review-keep-real-style li{
+    width: 270px;
+    color: #404040;
+    font-family: Lato, sans-serif;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+
+.review-keep-real-style-heading{
+    width: 270px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-family: Lato, sans-serif; 
+}
+
+.overview-profile-add-review-submit{
+    width: 100px;
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 0px;
+    border-spacing: 100px;
+    padding: 10px;
+    text-align: center;
+    background: #1861BF;
+    font-size: 18px;
+    color: white;  
+    margin-left: 390px;
+    margin-top: 20px;
+}
