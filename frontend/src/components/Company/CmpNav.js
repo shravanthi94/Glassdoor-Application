@@ -8,26 +8,26 @@ import '../CSS/CompanyLanding.css'
 
 const CmpNav = ({auth: {isAuthenticated, loading}, companySignOut}) => {
 
-    const authLinks = (
-        <ul className="list-options-company">
-                    <li>
-                        <a onClick={companySignOut} href='/'> 
-                            <i className="fa fa-sign-out-alt"></i> {' '}Sign Out</a>
-                    </li>
-        </ul>
+    // const authLinks = (
+    //     <ul className="list-options-company">
+    //                 <li>
+    //                     <a onClick={companySignOut} href='/'> 
+    //                         <i className="fa fa-sign-out-alt"></i> {' '}Sign Out</a>
+    //                 </li>
+    //     </ul>
 
-    )
+    // )
 
-    const guestLinks = (
-        <ul className="list-options-company">
-            <li>
-                <Link to="/companysignin"> Sign In</Link>
-            </li>
-            <li>
-                <Link to="/companysignup"> Sign Up</Link>
-            </li>
-        </ul>
-    )
+    // const guestLinks = (
+    //     <ul className="list-options-company">
+    //         <li>
+    //             <Link to="/companysignin"> Sign In</Link>
+    //         </li>
+    //         <li>
+    //             <Link to="/companysignup"> Sign Up</Link>
+    //         </li>
+    //     </ul>
+    // )
     return (
         <Fragment>
             <div className="employerLandingNav">
@@ -37,19 +37,19 @@ const CmpNav = ({auth: {isAuthenticated, loading}, companySignOut}) => {
                         src="https://www.glassdoor.com/employers/app/themes/theme-gd-employers/dist/images/gd-logo-eng.svg"
                     ></img>
                </div>
-               {!loading && (
+               {/* {!loading && (
                    <Fragment>
                        {isAuthenticated ? authLinks : guestLinks}
                    </Fragment>
-               )}
-                 {/* <ul className="list-options-company">
+               )} */}
+                 <ul className="list-options-company">
                     <li>
                         <Link to="/companysignin"> Sign In</Link>
                     </li>
                     <li>
                         <Link to="/companysignup"> Sign Up</Link>
                     </li>
-                </ul> */}
+                </ul>
             </div>
         </Fragment>
     )

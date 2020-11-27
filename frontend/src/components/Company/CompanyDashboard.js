@@ -1,9 +1,9 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import PropTypes from 'prop-types' 
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Redirect, useHistory} from 'react-router-dom'
 import {connect } from 'react-redux'
 import {getCurrentCompanyProfile} from '../../actions/company/companyprofile';
-import CmpNav from './CmpNav';
+import CmpNav2 from './CmpNav2';
 import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
@@ -14,48 +14,47 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
         getCurrentCompanyProfile();
     },[])
 
-    // const onClick = (e) => {
-    //     // e.preventDefault();
-    //     if(e === "reviews"){
-    //         <Redirect to='/company/reviewspage'/>
-    //     }
-        
-    //   };
+    const history = useHistory();
 
-    function reviews(){
-        return <Redirect to='/company/reviewspage'/>
+    const reviewsRoute = () =>{ 
+        let path = `/company/reviewspage`; 
+        history.push(path);
+      }
+    const overviewRoute =() =>{
+        let path = `/companydashboard`;
+        history.push(path)
+    }
+
+    const jobsRoute =()=>{
+        let path = `/company/jobpostings`;
+        history.push(path)
+    }
+
+    const applicantsRoute = ()=>{
+        let path=`/company/applicants`;
+        history.push(path)
     }
 
     return (
         <Fragment>
-            <CmpNav/>
+            <CmpNav2/>
             <div className="contentholder-company text-company">
-            {loading ? <Spinner/> : (companyprofile.location === null ? 
-                       <Fragment>
-                           <div className="profile-row-one-company">
-                                {/* <img className="company-banner" src={require('../../components/images/'+companyprofile.profilePic+'_banner.jpg').default} alt="" /> */}
-                                {/* <img className="company-logo" src={require('../../components/images/companylogo-placeholder').default} alt="" /> */}
-                                <div className="dashboard-company-name">Welcome {companyprofile.name} {" "}
-                                    New to Glassdoor ?
-                                    <Link to="/company/updateprofile" style={{ fontSize: "18px", color: "#1861BF" }}>Update Profile</Link>
-                                </div>                   
-                            </div> 
-                       </Fragment>:
+            {loading  && companyprofile ===null ? <Spinner/> : 
             <div className="overview-all">
                 <div className="profile-row-one-company">
                     <img className="company-banner" src={require('../../components/images/' + companyprofile.name + '_banner.jpg').default} alt="" />
                     <img className="company-logo" src={require('../../components/images/' + companyprofile.name + '_logo.jpg').default} alt="" />
-                    <div className="dashboard-company-name">{companyprofile.name} {" "}
-                    <Link to="/company/updateprofile" style={{ fontSize: "18px", color: "#1861BF" }}>Update Profile</Link>
+                    <div className="dashboard-company-name">{companyprofile.name}{' '}
+                    <Link to="/company/updateprofile" style={{ fontSize: "14px", color: "#1861BF" }}>Update Profile</Link>
                     </div>
                     <table className="profile-row-one-table">
-                        <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title">Overview&emsp;</div></td>
-                        <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={reviews}> Reviews&emsp;</div></td>
-                        <td><div className="profile-counts">867</div><div className="profile-title">Jobs&emsp;</div></td>
+                        <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={overviewRoute}>Overview&emsp;</div></td>
+                        <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={reviewsRoute}> Reviews&emsp;</div></td>
+                        <td><div className="profile-counts">867</div><div className="profile-title" onClick={jobsRoute}>Jobs&emsp;</div></td>
                         <td><div className="profile-counts">8.4k</div><div className="profile-title">Salaries&emsp;</div></td>
-                        <td><div className="profile-counts">1.2k</div><div className="profile-title">Applicants&emsp;</div></td>
+                        <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={applicantsRoute}>Applicants&emsp;</div></td>
                         <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
-                        <td><div className="profile-counts">{' '}</div><div className="profile-title">Statistics&emsp;</div></td>
+                        <td><div className="profile-counts"><i class="fas fa-chart-line"></i></div><div className="profile-title">Statistics&emsp;</div></td>
                         
                     </table>
                 </div> 
@@ -154,7 +153,6 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
                     </div>
                 </div> 
             </div>
-            )
           }
         </div>
         </Fragment>

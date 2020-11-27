@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { COMPANY_GETPROFILE, COMPANY_PROFILEERROR } from '../actions/types';
+import { COMPANY_GETPROFILE, COMPANY_PROFILEERROR, COMPANY_EDITPROFILE } from '../actions/types';
 
 const initialState = {
     companyprofile: null,
@@ -13,6 +13,7 @@ export default function(state = initialState, action) {
 
     switch (type) {
         case COMPANY_GETPROFILE:
+        case COMPANY_EDITPROFILE:
             return {
                 ...state,
                 companyprofile: payload,

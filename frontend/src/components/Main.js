@@ -12,6 +12,7 @@ import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyDashboardReviews from './Company/CompanyReviews';
 import CompanyOverview from './student/CompanyOverview';
+import CompanyEditProfile from './Company/CompanyEditProfile';
 // import CompanyOverview from './Student/CompanyOverview';
 
 // Student Links
@@ -63,6 +64,7 @@ class Main extends Component {
               path='/company/reviewspage'
               component={CompanyDashboardReviews}
             />
+            <PrivateRoute exact path='/company/updateprofile' component={CompanyEditProfile}/>
           </Switch>
         </Router>
       </Fragment>
