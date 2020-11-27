@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CSS/studentLandingPage.css';
 import userIcon from '../images/user_circle.png';
 import Card from 'react-bootstrap/Card';
@@ -49,12 +50,12 @@ const LandingPage = () => {
           />
           <h3 className='name py pl-25'>Shravanthi</h3>
           <br />
-          <i class='fas fa-briefcase fa-lg pl-25'></i>{' '}
+          <i class='fas fa-briefcase fa-lg'></i>{' '}
           <a href='/' className='student-job-link'>
             Add Job Title
           </a>
           <br /> <br />
-          <i class='fas fa-map-marker-alt fa-lg pl-25'></i>{' '}
+          <i class='fas fa-map-marker-alt fa-lg'></i>{' '}
           <a href='/' className='student-location'>
             San Jose, CA
           </a>
