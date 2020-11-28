@@ -46,7 +46,6 @@ router.post('/approve/:review_id', adminCheckAuth, async(req, res) => {
         } else {
             return res.status(400).json({ msg: 'No Review found' });
         }
-
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

@@ -5,7 +5,7 @@ const { checkAuth } = require('../../middleware/studentAuth');
 
 const Student = require('../../models/StudentModel');
 const Company = require('../../models/CompanyModel');
-const Job = require('../../models/JobPostingModel');
+const Jobposting = require('../../models/JobPostingModel');
 
 router.post('/', checkAuth, async (req, res) => {
   console.log('here: ', req.user);
@@ -31,18 +31,26 @@ router.get('/', checkAuth, async (req, res) => {
   }
 });
 
-router.get('/:data', checkAuth, async (req, res) => {
+router.get('/search/:data/:query', async (req, res) => {
   const searchData = req.params.data;
-  const { query } = req.body;
+  const query = req.params.query;
   try {
     let results = [];
-    if (query === 'JOB') {
-      results = await Job.find({ title: { $regex: `.*${searchData}.*` } });
+    if (query === 'JOBS') {
+      results = await Jobposting.find({
+        title: { $regex: `.*${searchData}.*` },
+      }).populate('company');
     } else {
-      results = await Company.find({ name: { $regex: `.*${searchData}.*` } });
+      results = await Company.find({
+        name: { $regex: `.*${searchData}.*` },
+      }).populate({
+        path: 'company',
+        select: 'name',
+        model: Jobposting,
+      });
     }
 
-    if (!results) {
+    if (results.length === 0) {
       return res.status(400).json({ errors: [{ msg: 'No results found.' }] });
     }
 

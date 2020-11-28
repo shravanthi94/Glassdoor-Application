@@ -1,16 +1,14 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CSS/studentLandingPage.css';
 import userIcon from '../images/user_circle.png';
-import { Card } from 'react-bootstrap';
 
 const LandingPage = () => {
   return (
     <Fragment>
       <Navigation />
-      <div className='container'>
+      <div className='container-1'>
         <div className='student-bar'>
           <div className='item'>
             <h2>Hello, what would you like to explore today?</h2>
@@ -19,7 +17,7 @@ const LandingPage = () => {
               <strong>Post Jobs</strong>
             </div>
           </div>
-          <div style={{ paddingBottom: '3%' }}>
+          <div>
             <div className='student-bar row-fix'>
               {' '}
               <h3 className='item-top-nav'>
@@ -78,37 +76,23 @@ const LandingPage = () => {
           </span>
           <br /> <br />
           <div className='student-cards'>
-            <div className='card'>
-              {/* <Card style={{ width: '18rem' }}>
-                <Card.Body>
-                  <Card.Title>PayPal</Card.Title>
-                  <Card.Subtitle className='mb-2 text-muted'>
-                    Card Subtitle
-                  </Card.Subtitle>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
-                </Card.Body>
-              </Card> */}
-            </div>
-            <div class='card'>
-              <div class='card-body'>This is some text within a card body.</div>
+            <div className='student-card-single'>
+              <h3>Apple</h3>
+              <p className='mb-2 text-muted'>Card Subtitle</p>
+              <br />
+              <p>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
             </div>
             <div className='student-card-single'>
-              <Card style={{ width: '18rem' }}>
-                <Card.Body>
-                  <Card.Title>Apple</Card.Title>
-                  <Card.Subtitle className='mb-2 text-muted'>
-                    Card Subtitle
-                  </Card.Subtitle>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
-                  <Card.Link href='#'>Card Link</Card.Link>
-                </Card.Body>
-              </Card>
+              <h3>PayPal</h3>
+              <p className='mb-2 text-muted'>Card Subtitle</p>
+              <br />
+              <p>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
             </div>
           </div>
         </div>

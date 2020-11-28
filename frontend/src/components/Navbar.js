@@ -49,7 +49,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
         </div>
 
         <h1 className='heading'> Find The Job That Fits Your Life</h1>
-        <div className='container'>
+        <div className='container-nav'>
           <p className='legal-copy'>
             By continuing, you agree to our Terms of Use and Privacy Policy.
           </p>
@@ -82,6 +82,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
                 id='password'
                 name='password'
                 value={password}
+                minlength='4'
                 onChange={(e) => onChange(e)}
                 placeholder='Password'
                 required
