@@ -82,6 +82,28 @@ a.header-nav-button {
   background-position: center;
 }
 
+.landingAdmin {
+  position: relative;
+  background-image: url('../images/admin_glassdoor.jpg');
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.headingAdmin {
+  webkit-font-smoothing: antialiased;
+  line-height: 1.2rem;
+  font-weight: bolder;
+  text-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+  font-family: Lato, sans-serif;
+  padding: 0 2rem;
+  margin-top: 6rem;
+  color:black;
+}
+
 .heading {
   webkit-font-smoothing: antialiased;
   line-height: 1.2rem;

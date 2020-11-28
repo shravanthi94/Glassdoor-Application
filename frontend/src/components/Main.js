@@ -5,6 +5,9 @@ import Navbar from './Navbar';
 // Private Route
 import PrivateRoute from '../components/Routing/PrivateRoute';
 
+// Admin Links
+import AdminLogin from './Admin/Login';
+
 //Company Links
 import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
@@ -133,6 +136,9 @@ class Main extends Component {
               path='/company/addjob'
               component={CompanyCreateJob}
             />
+
+            {/* Admin Routes */}
+            <Route exact path='/admin/signin' component={AdminLogin} />
           </Switch>
         </Router>
       </Fragment>
