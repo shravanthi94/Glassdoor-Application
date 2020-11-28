@@ -1,13 +1,7 @@
-// No of reviews per day.
-// Top 10 company based on viewed per day.
-
 const express = require('express');
-const mongoose = require('mongoose');
-
 const router = express.Router();
 const Company = require('../../models/CompanyModel');
 const Reviews = require('../../models/ReviewModel');
-const Student = require('../../models/StudentModel');
 
 const { adminAuth, adminCheckAuth } = require('../../middleware/adminAuth');
 
@@ -128,13 +122,6 @@ router.get('/top-student-reviewer', adminCheckAuth, async(req, res) => {
     try {
         console.log(req.query.limit);
         console.log("Get a list of top students based on total accepted reviews made from the database");
-        // const query = Reviews.find({approvalStatus:{ $eq: 'approved' }});
-        // query.select('student');
-        // query.populate({ path: 'student', select: 'name' });
-        // query.count(student._id);
-        // query.sort({ceoApprovalRating:-1});
-        // query.limit(parseInt(req.query.limit));
-
         const query = Reviews.aggregate([
             { 
                 "$match": { "approvalStatus": { $eq: 'approved' } } 
@@ -185,6 +172,95 @@ router.get('/top-student-reviewer', adminCheckAuth, async(req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error: Database');
+    }
+});
+
+// @route  GET /admin/analytics/reviews-per-day
+// @Desc   Get a list of daily review count made from the database
+// @access Private
+router.get('/reviews-per-day', adminCheckAuth, async(req, res) => {
+    try {
+        console.log(req.query.limit);
+        console.log("Get a list of daily review count made from the database");
+        const query = Reviews.aggregate([
+            {  
+                "$group": {
+                    "_id": "$date",
+                    "count": { "$sum": 1 }
+                } 
+            },
+            { 
+                "$sort": { 
+                    "count": -1 
+                } 
+            },
+        ]);
+        query.exec((err, reviewsPerDay) => {
+            if (err) {
+                console.error(err.message);
+                return res.status(500).send('Server Error: Database');
+            } else if(reviewsPerDay){
+                return res.status(200).json({reviewsAnalytics:reviewsPerDay});
+            }
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+});
+
+// @route  GET /admin/analytics/top-viewed-company
+// @Desc   Get a list of top 10 company based on viewed per day from the database
+// @access Private
+router.get('/top-viewed-company', adminCheckAuth, async(req, res) => {
+    try {
+        console.log(req.query.limit);
+        console.log("Get a list of top 10 company based on viewed per day from the database");
+
+        var d = new Date();
+        var mm = d.getMonth() + 1;
+        var dd = d.getDate();
+        var yy = d.getFullYear();
+        var myDateString = yy + '-' + mm + '-' + dd;
+
+        const query = Company.aggregate([
+            { 
+                "$match": { 
+                    "views.date" : myDateString
+                }
+            },
+            { 
+                "$project": {
+                    "views": {
+                        "$map": {
+                            "input": {
+                                "$filter": {
+                                    "input": "$views",
+                                    "as": "views",
+                                    "cond": { "$eq": ["$$views.date", myDateString] }
+                                }
+                            },
+                            "as": "item",
+                            "in": "$$item"
+                        }
+                    }
+                } 
+            },
+        ]);
+        query.sort({"views.count": -1});
+        query.limit(parseInt(req.query.limit));
+        query.exec((err, viewsPerDay) => {
+            if (err) {
+                console.error(err.message);
+                return res.status(500).send('Server Error: Database');
+            } else if(viewsPerDay){
+                return res.status(200).json({viewsAnalytics:viewsPerDay});
+            }
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
 });
 
