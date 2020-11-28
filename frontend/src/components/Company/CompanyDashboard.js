@@ -4,7 +4,7 @@ import {Link, Redirect, useHistory} from 'react-router-dom'
 import {connect } from 'react-redux'
 import {getCurrentCompanyProfile} from '../../actions/company/companyprofile';
 import CmpNav2 from './CmpNav2';
-import Spinner from '../Spinner/spinner';
+// import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
 // import CompanyReviews from './CompanyReviews';
@@ -39,11 +39,11 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
         <Fragment>
             <CmpNav2/>
             <div className="contentholder-company text-company">
-            {loading  && companyprofile ===null ? <Spinner/> : 
+            {loading  && companyprofile ===null ? ' ' : 
             <div className="overview-all">
                 <div className="profile-row-one-company">
-                    <img className="company-banner" src={require('../../components/images/' + companyprofile.name + '_banner.jpg').default} alt="" />
-                    <img className="company-logo" src={require('../../components/images/' + companyprofile.name + '_logo.jpg').default} alt="" />
+                    <img className="company-banner" src={require('../../components/images/' + companyprofile.logo + '_banner.jpg').default} alt="" />
+                    <img className="company-logo" src={require('../../components/images/' + companyprofile.logo + '_logo.jpg').default} alt="" />
                     <div className="dashboard-company-name">{companyprofile.name}{' '}
                     <Link to="/company/updateprofile" style={{ fontSize: "14px", color: "#1861BF" }}>Update Profile</Link>
                     </div>
@@ -55,9 +55,11 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
                         <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={jobsRoute}>Applicants&emsp;</div></td>
                         <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
                         <td><div className="profile-counts"><i class="fas fa-chart-line"></i></div><div className="profile-title">Statistics&emsp;</div></td>
-                        
+                        <div>&emsp;&emsp;<Link className="btn-updateprofile"> Update Profile</Link></div>
                     </table>
+                    
                 </div> 
+                
                 <div className="side-by-side-overview">
                     <div className="profile-row-two">
                         <div className="profile-row-two-row1">
