@@ -7,25 +7,19 @@ const Student = require('../../models/StudentModel');
 
 router.post('/', checkAuth, async (req, res) => {
   const studentEmail = req.user.email;
-  const {
-    status,
-    title,
-    relocation,
-    salary,
-    industry,
-  } = req.body;
-
+  const { status, title, relocation, salary, industry } = req.body;
   try {
-    const student = await Student.find({ email : studentEmail });
-    student.jobPreferance.status = status;
-    student.jobPreferance.title = title;
-    student.jobPreferance.relocation = relocation;
-    student.jobPreferance.salary = salary;
-    student.jobPreferance.industry = industry;
+    const student = await Student.findOne({ email: studentEmail });
+
+    student.jobPreference.status = status;
+    student.jobPreference.title = title;
+    student.jobPreference.relocation = relocation;
+    student.jobPreference.salary = salary;
+    student.jobPreference.industry = industry;
 
     await student.save();
 
-    res.json(student);
+    res.status(200).json(student);
   } catch (err) {
     console.log(err);
     res.status(500).send('Server Error');
