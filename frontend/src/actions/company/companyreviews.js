@@ -26,3 +26,24 @@ export const getCurrentCompanyReviews = () => async dispatch => {
 
     }
 }
+
+// mark review as favorite
+
+export const markReviewFav = (id) => async dispatch => {
+    try {
+        console.log("fav action called")
+        const res = await axios.post(`/company/review/favorite/${id}`)
+
+        dispatch({
+            type: COMPANY_GETREVIEW,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err)
+        dispatch({
+            type: COMPANY_REVIEWS_ERROR,
+            payload: { msg: err, status: err.response.status }
+        })
+
+    }
+}
