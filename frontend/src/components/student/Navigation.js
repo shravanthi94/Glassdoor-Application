@@ -18,7 +18,7 @@ const Navigation = ({ logout }) => {
         </Link>
 
         <div className='input'>
-          <i class='fas fa-search color fa-2x'></i>
+          <i class='fas fa-search color fa-2x mt-1'></i>
           <input
             type='text'
             className='search-box'
@@ -64,28 +64,14 @@ const Navigation = ({ logout }) => {
           <i class='fas fa-inbox fa-2x'></i>
           <i class='far fa-user-circle fa-2x user'></i>
         </div> */}
-        <i class='fas fa-inbox fa-2x'></i>
+        <i class='fas fa-inbox fa-2x' style={{ color: '#505863' }}></i>
         <div className='icon5'>
-          {/* <div className='dropdown'>
-            <div className='material-icons' data-toggle='dropdown'>
-              account_circle
-            </div>
-            <ul className='dropdown-menu pull-right'>
-              <li>
-                <a href='/customerProfile'>About me</a>
-              </li>
-              <li>
-                <a href='/' onClick={logout}>
-                  Sign Out
-                </a>
-              </li>
-            </ul>
-          </div> */}
-          <div class='dropdown'>
+          <div className='dropdown ml-0 pl-0'>
             <button
-              class='btn btn-default dropdown-toggle'
+              className='btn btn-link dropdown-toggle pl-1'
+              style={{ color: '#505863' }}
               type='button'
-              id='dropdownMenu1'
+              id='dropdownMenuButton'
               data-toggle='dropdown'
             >
               <i class='far fa-user-circle fa-2x user'></i>
@@ -93,10 +79,25 @@ const Navigation = ({ logout }) => {
             </button>
             <ul class='dropdown-menu' role='menu'>
               <li>
-                <a href='/'>Action</a>
+                <a className='dropdown-item' href='/student/landing'>
+                  Home
+                </a>
               </li>
               <li>
-                <a href='/' onClick={logout}>
+                <a className='dropdown-item' href='/student/profile'>
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a
+                  className='dropdown-item'
+                  href='/student/update/jobPreference'
+                >
+                  Job preference
+                </a>
+              </li>
+              <li>
+                <a className='dropdown-item' href='/' onClick={logout}>
                   Logout
                 </a>
               </li>

@@ -23,7 +23,7 @@ const Login = ({ isAuthenticated, login }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/student/profile' />;
+    return <Redirect to='/student/landing' />;
   }
   return (
     <Fragment>
@@ -48,10 +48,10 @@ const Login = ({ isAuthenticated, login }) => {
         </div>
         <h1 className='heading'>
           Sign In to get instant access to <br /> <br />
-          <br /> <br /> millions of salaries and reviews
+          <br /> millions of salaries and reviews
         </h1>
         <br />
-        <div className='container'>
+        <div className='container-nav'>
           <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input

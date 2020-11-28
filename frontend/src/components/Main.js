@@ -10,7 +10,7 @@ import CompanyLanding from './Company/Landing';
 import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
-import CompanyDashboardReviews from './Company/CompanyReviews';
+import CompanyDashboardReviews from './Company/Reviews/CompanyReviews';
 import CompanyOverview from './Student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
@@ -25,6 +25,8 @@ import AddCompanyReview from './Student/AddCompanyReview';
 import CompanyInterviews from './Student/CompanyInterviews';
 import CompanySalaries from './Student/CompanySalaries';
 import SearchResults from './Student/SearchResults';
+import JobPreference from './Student/JobPreference';
+import StudentProfile from './Student/StudentProfile';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -58,8 +60,43 @@ class Main extends Component {
             <Route exact path='/student/signin' component={Login} />
             <Route
               exact
-              path='/student/profile'
+              path='/student/landing'
               component={StudentLandingPage}
+            />
+            <PrivateRoute
+              exact
+              path='/student/profile'
+              component={StudentProfile}
+            />
+            <PrivateRoute
+              exact
+              path='/student/update/jobPreference'
+              component={JobPreference}
+            />
+            <PrivateRoute
+              exact
+              path='/companydashboard'
+              component={CompanyDashboard}
+            />
+            <PrivateRoute
+              exact
+              path='/company/reviewspage'
+              component={CompanyDashboardReviews}
+            />
+            <PrivateRoute
+              exact
+              path='/company/updateprofile'
+              component={CompanyEditProfile}
+            />
+            <PrivateRoute
+              exact
+              path='/company/jobpostings'
+              component={CompanyJobPostings}
+            />
+            <PrivateRoute
+              exact
+              path='/company/addjob'
+              component={CompanyCreateJob}
             />
             <PrivateRoute
               exact

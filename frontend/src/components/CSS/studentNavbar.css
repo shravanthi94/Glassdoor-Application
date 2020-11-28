@@ -128,7 +128,13 @@
   text-decoration: none;
   margin-left: 20px;
   text-align: center;
-  margin-right: 70px;
+  margin-right: 40px;
+}
+
+.btn-student:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #0a772e;
 }
 
 .student-icon5 {

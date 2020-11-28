@@ -2,7 +2,7 @@
   --element-spacing: 1.5rem;
   --element-padding: 1.5rem;
 }
-.container {
+.container-1 {
   font-family: Lato, sans-serif;
   width: 100%;
   padding: 0;
@@ -151,6 +151,12 @@ strong {
   text-decoration: none;
 }
 
+.profile-btn:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(15, 71, 144);
+}
+
 .right-panel {
   margin-left: 2%;
 }
@@ -179,10 +185,51 @@ strong {
 }
 
 .row-fix-results {
-  padding-top: 0;
-  height: 70px;
+  height: 60px;
 }
 
 .student-grey-icon {
   color: #404040;
+}
+
+.student-bottom-panel {
+  color: #20262e;
+}
+
+.student-bottom-panel {
+  font-size: 15px;
+  color: #404040;
+  box-sizing: border-box;
+  margin: 1% 20%;
+  text-align: left;
+}
+
+.search-result-head {
+  color: #505863;
+}
+
+.student-results-heading {
+  font-size: 20px;
+}
+
+.student-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #20262e;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+.custom-btn-1 {
+  min-width: 100px;
+  margin-left: 6rem;
+}
+
+.on-hover:hover {
+  text-decoration: none;
+  color: #0a772e;
+}
+
+.student-update-links:hover {
+  background-color: #fff;
 }

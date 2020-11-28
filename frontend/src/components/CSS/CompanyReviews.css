@@ -1,0 +1,50 @@
+.company-reviews-stats {
+    padding-left: 400px
+}
+
+.company-cards-3columns {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.company-cards-column-one {
+    margin: 0px 15px 25px;
+    border: none;
+    width: 30%;
+    background-color: whitesmoke;
+    border: 1px solid #888;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.company-cards-column-one:hover {
+    box-shadow: rgb(0, 0, 0, 0.2) 0 12px 16px 0px;
+}
+
+.company-reviews-options ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.company-reviews-options li {
+    list-style: none;
+}
+
+
+/* .company-reviews-options .far .fa-heart {
+    font-size: 30px;
+} */
+
+.actions {
+    background-color: #13AA41;
+    color: whitesmoke;
+    border: none;
+    border-radius: 3px;
+}
+
+.action-icons {
+    background-color: whitesmoke;
+    border: none;
+}
