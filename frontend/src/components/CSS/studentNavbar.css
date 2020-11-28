@@ -131,6 +131,12 @@
   margin-right: 40px;
 }
 
+.btn-student:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #0a772e;
+}
+
 .student-icon5 {
   display: inline-block;
   margin-left: 10px;

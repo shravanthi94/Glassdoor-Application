@@ -23,7 +23,7 @@ router.post('/', checkAuth, async (req, res) => {
 
 router.get('/', checkAuth, async (req, res) => {
   try {
-    const student = await Student.find({ email: req.user.email });
+    const student = await Student.findOne({ email: req.user.email });
     res.status(200).json(student);
   } catch (err) {
     console.log(err);

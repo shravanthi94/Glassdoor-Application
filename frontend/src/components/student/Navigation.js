@@ -18,7 +18,7 @@ const Navigation = ({ logout }) => {
         </Link>
 
         <div className='input'>
-          <i class='fas fa-search color fa-2x'></i>
+          <i class='fas fa-search color fa-2x mt-1'></i>
           <input
             type='text'
             className='search-box'
@@ -71,7 +71,7 @@ const Navigation = ({ logout }) => {
               className='btn btn-link dropdown-toggle pl-1'
               style={{ color: '#505863' }}
               type='button'
-              id='dropdownMenu1'
+              id='dropdownMenuButton'
               data-toggle='dropdown'
             >
               <i class='far fa-user-circle fa-2x user'></i>
@@ -79,10 +79,12 @@ const Navigation = ({ logout }) => {
             </button>
             <ul class='dropdown-menu' role='menu'>
               <li>
-                <a href='/student/profile'>Home</a>
+                <a className='dropdown-item' href='/student/profile'>
+                  Home
+                </a>
               </li>
               <li>
-                <a href='/' onClick={logout}>
+                <a className='dropdown-item' href='/' onClick={logout}>
                   Logout
                 </a>
               </li>

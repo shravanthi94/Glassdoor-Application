@@ -6,6 +6,7 @@ import auth from './auth';
 import companyprofile from './companyprofile';
 import companyreviews from './companyreviews';
 import companyjobs from './companyjobs';
+import studentProfile from './studentProfile';
 import studentSearch from './studentSearch';
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   companyprofile,
   companyreviews,
   companyjobs,
+  studentProfile,
   studentSearch,
 });
 

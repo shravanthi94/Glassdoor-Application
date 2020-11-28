@@ -151,6 +151,12 @@ strong {
   text-decoration: none;
 }
 
+.profile-btn:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(15, 71, 144);
+}
+
 .right-panel {
   margin-left: 2%;
 }
