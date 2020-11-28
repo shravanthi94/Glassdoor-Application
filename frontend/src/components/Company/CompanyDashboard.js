@@ -30,10 +30,10 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
         history.push(path)
     }
 
-    const applicantsRoute = ()=>{
-        let path=`/company/applicants`;
-        history.push(path)
-    }
+    // const applicantsRoute = ()=>{
+    //     let path=`/company/applicants`;
+    //     history.push(path)
+    // }
 
     return (
         <Fragment>
@@ -52,7 +52,7 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
                         <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={reviewsRoute}> Reviews&emsp;</div></td>
                         <td><div className="profile-counts">867</div><div className="profile-title" onClick={jobsRoute}>Jobs&emsp;</div></td>
                         <td><div className="profile-counts">8.4k</div><div className="profile-title">Salaries&emsp;</div></td>
-                        <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={applicantsRoute}>Applicants&emsp;</div></td>
+                        <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={jobsRoute}>Applicants&emsp;</div></td>
                         <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
                         <td><div className="profile-counts"><i class="fas fa-chart-line"></i></div><div className="profile-title">Statistics&emsp;</div></td>
                         

@@ -5,6 +5,7 @@ const router = express.Router();
 const Review = require('../../models/ReviewModel');
 const Company = require('../../models/CompanyModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
+const { ObjectId } = require('mongodb');
 // const redisRead = require('../../config/RedisRead')
 // const redisWrite = require('../../config/RedisWrite')
 // const kafka = require('../../kafka/client');
@@ -158,10 +159,10 @@ router.get('/my/reviews/redis', async(req, res) => {
 router.post('/favorite/:id', companyCheckAuth, async(req, res) => {
 
     try {
-        console.log(req.params.id)
+        // console.log(req.params.id)
         let review = await Review.findOne({ "_id": req.params.id })
         if (review) {
-            console.log("company Id", review)
+            // console.log("company Id", review)
             review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "favorite": true } }, { new: true });
             return res.status(200).json(review);
         } else {
@@ -181,10 +182,11 @@ router.post('/favorite/:id', companyCheckAuth, async(req, res) => {
 router.post('/featured/:id', companyCheckAuth, async(req, res) => {
 
     try {
-        console.log(req.params.id)
+
+        // console.log(req.params.id)
         let review = await Review.findOne({ "_id": req.params.id })
         if (review) {
-            console.log("company Id", review)
+            // console.log("company Id", review)
             review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "featured": true } }, { new: true });
             const {
                 date,
@@ -213,6 +215,11 @@ router.post('/featured/:id', companyCheckAuth, async(req, res) => {
                 overAllRating,
                 comment,
                 currentOrFormer
+            }
+            const objid = new ObjectId(req.params.id);
+            let featuredreview = await Company.findById({ 'featuredreviews._id': objid })
+            if (featuredreview) {
+                return res.send('Review already featured')
             }
             let companyprofile = await Company.findById({ '_id': review.company })
             companyprofile.featuredreviews.unshift(newFeturedReview);
