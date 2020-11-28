@@ -14,6 +14,10 @@ import {
   STUDENT_LOGIN_SUCCESS,
   STUDENT_LOGIN_FAIL,
   LOGOUT,
+  ADMIN_LOGIN_SUCCESS,
+  ADMIN_LOGIN_FAIL,
+  ADMIN_USER_LOADED,
+  ADMIN_AUTH_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +26,7 @@ const initialState = {
   loading: true,
   companyuser: null,
   student: null,
+  admin:null,
 };
 
 export default function (state = initialState, action) {
@@ -41,10 +46,18 @@ export default function (state = initialState, action) {
         loading: false,
         companyuser: payload,
       };
+    case ADMIN_USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        admin: payload,
+      };
     case COMPANYSIGNUP_SUCCESS:
     case COMPANYSIGNIN_SUCCESS:
     case STUDENT_SIGNUP_SUCCESS:
     case STUDENT_LOGIN_SUCCESS:
+    case ADMIN_LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
         ...state,
@@ -59,6 +72,8 @@ export default function (state = initialState, action) {
     case STUDENT_AUTH_ERROR:
     case STUDENT_SIGNUP_FAIL:
     case STUDENT_LOGIN_FAIL:
+    case ADMIN_LOGIN_FAIL:
+    case ADMIN_AUTH_ERROR:
     case LOGOUT:
       localStorage.removeItem('token');
       window.localStorage.clear();
