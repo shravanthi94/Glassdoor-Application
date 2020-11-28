@@ -64,26 +64,12 @@ const Navigation = ({ logout }) => {
           <i class='fas fa-inbox fa-2x'></i>
           <i class='far fa-user-circle fa-2x user'></i>
         </div> */}
-        <i class='fas fa-inbox fa-2x'></i>
+        <i class='fas fa-inbox fa-2x' style={{ color: '#505863' }}></i>
         <div className='icon5'>
-          {/* <div className='dropdown'>
-            <div className='material-icons' data-toggle='dropdown'>
-              account_circle
-            </div>
-            <ul className='dropdown-menu pull-right'>
-              <li>
-                <a href='/customerProfile'>About me</a>
-              </li>
-              <li>
-                <a href='/' onClick={logout}>
-                  Sign Out
-                </a>
-              </li>
-            </ul>
-          </div> */}
-          <div class='dropdown'>
+          <div className='dropdown ml-0 pl-0'>
             <button
-              class='btn btn-default dropdown-toggle'
+              className='btn btn-link dropdown-toggle pl-1'
+              style={{ color: '#505863' }}
               type='button'
               id='dropdownMenu1'
               data-toggle='dropdown'
@@ -93,7 +79,7 @@ const Navigation = ({ logout }) => {
             </button>
             <ul class='dropdown-menu' role='menu'>
               <li>
-                <a href='/'>Action</a>
+                <a href='/student/profile'>Home</a>
               </li>
               <li>
                 <a href='/' onClick={logout}>

@@ -8,7 +8,7 @@ const LandingPage = () => {
   return (
     <Fragment>
       <Navigation />
-      <div className='container'>
+      <div className='container-1'>
         <div className='student-bar'>
           <div className='item'>
             <h2>Hello, what would you like to explore today?</h2>
