@@ -1,0 +1,72 @@
+.interview-green-box{
+    height: 14px;
+    width: 14px;
+    background-color: #0CAA41;
+    border-radius: 2px solid #0CAA41;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.interview-red-box{
+    height: 14px;
+    width: 14px;
+    background-color: #EB4133;
+    border-radius: 2px solid #EB4133;  
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+
+.interview-yellow-box{
+    height: 14px;
+    width: 14px;
+    background-color: #F6B500;
+    border-radius: 2px solid #F6B500;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.interview-lime1-box{
+    height: 14px;
+    width: 14px;
+    background-color: #dcee95;
+    border-radius: 2px solid #dcee95;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.interview-lime2-box{
+    height: 14px;
+    width: 14px;
+    background-color: #13aa41;
+    border-radius: 2px solid #13aa41;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.interview-lime3-box{
+    height: 14px;
+    width: 14px;
+    background-color: #194383;
+    border-radius: 2px solid #194383;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.interview-donut-lime-style{
+    font-size: 11px;
+    margin-top: 18px;
+    margin-right: 10px;
+}
+
+.interview-donut-lime-style-label{
+    margin-top: 5px;
+}
+
+.interview-charts td:nth-child(odd) {
+    width: 75px;
+}
+
+.interview-charts {
+    margin-top: 20px;
+}

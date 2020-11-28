@@ -24,7 +24,7 @@ class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        this.props.getCompanyProfile("5fb2f87d828aa81479d846a3");
+        this.props.getCompanyProfile("5fb2f87d828aa81479d846a1");
     }
 
     redirectHandler = (e) => {
@@ -33,6 +33,12 @@ class CompanyOverview extends Component {
 
         if (e == "reviews") {
             path = "/companyReviews"
+        }
+        else if(e == "interviews"){
+            path = "/companyInterviews" 
+        }
+        else if(e == "salaries"){
+            path = "/companySalaries"
         }
 
         this.setState({
@@ -70,8 +76,8 @@ class CompanyOverview extends Component {
                                 <td className="profile-titles-selected"><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title">Overview&emsp;</div></td>
                                 <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={() => this.redirectHandler("reviews")}>Reviews&emsp;</div></td>
                                 <td><div className="profile-counts">867</div><div className="profile-title">Jobs&emsp;</div></td>
-                                <td><div className="profile-counts">8.4k</div><div className="profile-title">Salaries&emsp;</div></td>
-                                <td><div className="profile-counts">1.2k</div><div className="profile-title">Interviews&emsp;</div></td>
+                                <td><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
+                                <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
                                 <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
                             </table>
@@ -109,7 +115,7 @@ class CompanyOverview extends Component {
                                                 <td><PieChart
                                                     data={[
                                                         { title: 'One', value: this.props.company.overview.overAllRating, color: '#13aa41' },
-                                                        { title: 'Two', value: (100 - this.props.company.overview.recommendationRating), color: '#dee0e3' }
+                                                        { title: 'Two', value: (100 - this.props.company.overview.overAllRating), color: '#dee0e3' }
                                                     ]}
                                                     totalValue={100}
                                                     lineWidth={25}
@@ -170,7 +176,7 @@ class CompanyOverview extends Component {
                                                             <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td>
                                                             <td>
                                                                 <table>
-                                                                    <tr className="overview-review-headline"><td>"{review.headline}"</td></tr><br />
+                                                                    <tr className="overview-review-headline"><td>"{review.headline}"</td></tr>
                                                                     <tr className="overview-review-star-ratings"> <td>{review.overAllRating}.0 <StarRatings rating={+review.overAllRating} starDimension="20px" starSpacing="1px" starRatedColor="#0caa41" numberOfStars={5} name='rating' /></td></tr>
                                                                     <tr><td>{review.comment}</td></tr>
                                                                     <tr><td><div className="overview-reviews-pros-cons-title">Pros:</div><br /><div className="overview-reviews-pros-cons"> {review.pros} </div></td></tr>
@@ -204,7 +210,7 @@ class CompanyOverview extends Component {
                                 <div className="profile-row-two-column2-row2">
                                     <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}> Jobs You May Like </div>
                                     <table className="overview-jobs-like">
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td style={{marginLeft:"20px"}}><tr>Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                                         <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                                         <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                                         <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>

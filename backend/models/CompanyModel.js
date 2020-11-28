@@ -56,15 +56,15 @@ const CompanySchema = new mongoose.Schema({
     },
     overAllRating: {
         type: Number,
-        default: 80
+        default: 0
     },
     ceoApprovalRating: {
         type: Number,
-        default: 95
+        default: 0
     },
     recommendationRating: {
         type: Number,
-        default: 75
+        default: 0
     },
     logo: {
         type: String
@@ -134,6 +134,10 @@ const CompanySchema = new mongoose.Schema({
         },
         answers: {
             type: String
+        },
+        date: {
+            type: String,
+            default: Date.now()
         }
     }],
     salary: [{

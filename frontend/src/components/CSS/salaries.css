@@ -1,0 +1,96 @@
+.search-table{
+    min-width: 200px;
+    border: 1px solid #c4c7cc;
+    margin-top: 35px;
+  }
+  
+  .search-table .search-column, .search-table input{
+    width: 100%;
+    min-width: 225px;
+    min-height: 50px;
+    margin: 0 10px;
+    padding: 0px;
+    border: none;
+    font-size: 20px;
+    border-radius: 20px;
+  }
+  
+  .search-table input:focus{
+    outline: none;
+  }
+  
+  .search-table .search-button{
+    width: 100%;
+    min-width: 50px;
+    min-height: 50px;
+    background-color: #1861bf;
+  }
+  
+  .search-table .search-button .fa-search:before {
+    content: "\f002";
+    color: white;
+    font-size: 25px;
+    margin-top: 12px;
+    display: block;
+  }
+  
+  .search-table .search-button button{
+    padding: 0px 0px;
+    border: none;
+  }
+
+  .overview-profile-search-button{
+    width: 110px;
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 4px;
+    border-spacing: 100px;
+    padding: 7px;
+    text-align: center;
+    background: #1861BF;
+    font-size: 15px;
+    color: white;  
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+
+  .company-salary-job-title{
+      font-size: 18px;
+      color: #1861BF;
+      font-weight: bold;
+  }
+
+  .company-salary-job-details, .company-salary-job-details-avg{
+        font-weight: bold;
+        font-size: 16px;
+        color: #404040;
+  }
+
+.company-salary-job-details-avg{
+    font-size: 18px;
+}
+
+  .company-salary-job-details-title{
+    font-size: 12px;
+    color: #565656;
+}
+
+  .company-salary-job-details-full{
+    font-size: 13px;
+    color: #1861BF;
+    font-weight: bold;
+  }
+
+  .company-salary-job-details-row td{
+      padding-right: 51px;
+  }
+
+  .company-salary-arrow-style{
+      margin-left: 0px;
+      margin-right: 0px;
+  }
+
+.company-salary-arrow svg{
+    font-size: 20px;
+    margin-left: 10px;
+}

@@ -242,6 +242,7 @@ body {
 
 .overview-jobs-like {
     padding-left: 10%;
+    margin-left: 20px;
 }
 
 .overview-jobs-like td {
@@ -275,13 +276,14 @@ body {
 }
 
 .overview-see-all-reviews {
-    padding-left: 225px;
+    padding-left: 180px;
     padding-top: 20px;
     color: #1861BF;
 }
 
 .overview-review-date {
     color: #858C94;
+    margin-bottom: 10px;
 }
 
 .overview-reviews-table-all td {
@@ -303,11 +305,12 @@ body {
 }
 
 .overview-social-media-logos svg{
-    padding-top: 8px;
+    margin-top: 5px;
+    font-size: 18px;
 }
 
 .overview-helpful-button{
-    width: 70px;
+    width: 80px;
     border: none;
     border: solid 2px #1861BF;
     border-radius: 5px;
@@ -318,7 +321,7 @@ body {
     font-size: 15px;
     font-weight: bold;
     color: #1861BF;
-    margin-left: 290px;
+    margin-left: 300px;
 }
 
 .profile-titles-selected{
@@ -326,7 +329,7 @@ body {
 }
 
 .overview-profile-add-button{
-    width: 100px;
+    width: 150px;
     border:none;
     border:solid 2px #1861BF;
     border-radius: 0px;
@@ -334,12 +337,12 @@ body {
     padding: 10px;
     text-align: center;
     background: #1861BF;
-    font-size: 18px;
+    font-size: 15px;
     color: white;    
 }
 
 .profile-add-button-position{
     position: absolute;
-    right: 14px;
+    right: 25px;
     top: 185px;
 }

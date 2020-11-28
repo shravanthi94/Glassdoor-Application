@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import '../CSS/overview.css';
+import '../CSS/salaries.css';
 import { getCompanyReviews } from '../../actions/company/getCompanyReviews';
-import { PieChart } from 'react-minimal-pie-chart';
-import StarRatings from 'react-star-ratings';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
 
-class CompanyReviews extends Component {
+class CompanySalaries extends Component {
 
     constructor(props) {
         super(props);
@@ -24,7 +22,7 @@ class CompanyReviews extends Component {
     }
 
     componentDidMount() {
-        this.props.getCompanyReviews(this.props.company.overview._id);
+        // this.props.getCompanyReviews(this.state.company_id);
     }
 
     redirectHandler = (e) => {
@@ -42,11 +40,14 @@ class CompanyReviews extends Component {
                 logo: this.props.company.overview.logo,
                 company_name: this.props.company.overview.name
             }
-        } else if(e === "interviews"){
+        } else if (e === "interviews") {
             path = "/companyInterviews"
             data = this.state.company_id
-        }   
-        else if (e === "salaries") {
+        }
+        else if (e == "reviews") {
+            path = "/companyReviews"
+        }
+        else if (e == "salaries") {
             path = "/companySalaries"
         }
 
@@ -81,105 +82,53 @@ class CompanyReviews extends Component {
                             <div className="overview-company-name">{company_name}</div>
                             <table className="profile-row-one-table">
                                 <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={() => this.redirectHandler("overview")}>Overview&emsp;</div></td>
-                                <td className="profile-titles-selected"><div className="profile-counts">4.0k</div><div className="profile-title">Reviews&emsp;</div></td>
+                                <td ><div className="profile-counts">4.0k</div><div className="profile-title" onClick={() => this.redirectHandler("reviews")}>Reviews&emsp;</div></td>
                                 <td><div className="profile-counts">867</div><div className="profile-title">Jobs&emsp;</div></td>
-                                <td><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
+                                <td className="profile-titles-selected"><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
                                 <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
                                 <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
                             </table>
-                            <div className="profile-add-button-position"><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-reviews")}><i class="fa fa-plus"></i> &nbsp;Add Review</div></div>
+                            <div className="profile-add-button-position"><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-reviews")}><i class="fa fa-plus"></i> &nbsp;Add Salary</div></div>
                         </div>
                         <div className="side-by-side-overview">
                             <div className="profile-row-two">
                                 <div className="profile-row-two-row1">
 
                                     <div className="profile-row-two-inside">
-                                        <div style={{ fontSize: "22px", color: "#0D0D0D" }}>{company_name} Reviews</div>
+                                        <div style={{ fontSize: "22px", color: "#0D0D0D" }}>{company_name} Salaries</div>
 
-                                        <table className="overview-charts">
-                                            <tr>
-                                                <td><PieChart
-                                                    data={[
-                                                        { title: 'One', value: this.props.company.overview.overAllRating, color: '#13aa41' },
-                                                        { title: 'Two', value: (100 - this.props.company.overview.overAllRating), color: '#dee0e3' }
-                                                    ]}
-                                                    totalValue={100}
-                                                    lineWidth={25}
-                                                    style={{ height: '70px' }}
-                                                    label={({ dataEntry }) => (dataEntry.title === "One" ? dataEntry.value + "%" : "")}
-                                                    labelStyle={{
-                                                        fontSize: '22px',
-                                                        fontFamily: 'sans-serif',
-                                                        fill: '#13aa41',
-                                                    }}
-                                                    labelPosition={0}
-                                                /> </td>
-                                                <td> Over All Rating</td>
-                                                <td><PieChart
-                                                    data={[
-                                                        { title: 'One', value: this.props.company.overview.recommendationRating, color: '#13aa41' },
-                                                        { title: 'Two', value: (100 - this.props.company.overview.recommendationRating), color: '#dee0e3' }
-                                                    ]} totalValue={100}
-                                                    lineWidth={25}
-                                                    style={{ height: '70px' }}
-                                                    label={({ dataEntry }) => (dataEntry.title === "One" ? dataEntry.value + "%" : "")}
-                                                    labelStyle={{
-                                                        fontSize: '22px',
-                                                        fontFamily: 'sans-serif',
-                                                        fill: '#13aa41',
-                                                    }}
-                                                    labelPosition={0}
-                                                /></td>
-                                                <td>Recommend to a Friend</td>
-                                                <td><PieChart
-                                                    data={[
-                                                        { title: 'One', value: this.props.company.overview.ceoApprovalRating, color: '#13aa41' },
-                                                        { title: 'Two', value: (100 - this.props.company.overview.ceoApprovalRating), color: '#dee0e3' }
-                                                    ]} totalValue={100}
-                                                    lineWidth={25}
-                                                    style={{ height: '70px' }}
-                                                    label={({ dataEntry }) => (dataEntry.title === "One" ? dataEntry.value + "%" : "")}
-                                                    labelStyle={{
-                                                        fontSize: '22px',
-                                                        fontFamily: 'sans-serif',
-                                                        fill: '#13aa41',
-                                                    }}
-                                                    labelPosition={0}
-                                                /></td>
-                                                <td>Approve of CEO</td>
-                                            </tr>
-                                        </table>
+                                        <div style={{ fontSize: "15px", color: "#505863", marginTop: "15px" }}>How much do PayPal employees make? Glassdoor has salaries, wages, tips, bonuses, and hourly pay based upon employee reports and estimates.</div>
+                                        <div style={{ fontSize: "18px", color: "#0D0D0D", marginTop: "15px" }}>Find {company_name} Salaries by Job Title</div>
+                                        <div style={{ fontSize: "15px", color: "#505863", marginTop: "15px" }}> Many PayPal employees have shared their salaries on Glassdoor. Select your job title and find out how much you could make at PayPal.</div>
 
+                               
 
                                         <hr className="overview-hr" />
-                                        {(this.props.reviews && this.props.reviews.length !== 0) ?
 
-                                            this.props.reviews.map(review => (
-                                                <div>
-                                                    <div className="overview-review-date">{(review.date + "").substring(0, 10)}</div>
-                                                    <table className="overview-reviews-table-all">
-                                                        <tr>
-                                                            <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td>
-                                                            <td>
-                                                                <table>
-                                                                    <tr className="overview-review-headline"><td>"{review.headline}"</td></tr>
-                                                                    <tr className="overview-review-star-ratings"> <td>{review.overAllRating}.0 <StarRatings rating={+review.overAllRating} starDimension="20px" starSpacing="1px" starRatedColor="#0caa41" numberOfStars={5} name='rating' /></td></tr>
-                                                                    <tr><td>{review.comment}</td></tr>
-                                                                    <tr><td><div className="overview-reviews-pros-cons-title">Pros:</div><br /><div className="overview-reviews-pros-cons"> {review.pros} </div></td></tr>
-                                                                    <tr><td><div className="overview-reviews-pros-cons-title">Cons:</div><br /><div className="overview-reviews-pros-cons"> {review.cons} </div></td></tr><br />
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <div><div className="overview-social-media-logos"><i class="fab fa-facebook-f"></i></div><div className="overview-social-media-logos"><i class="fab fa-twitter"></i></div><div className="overview-social-media-logos"><i class="far fa-envelope"></i></div><div className="overview-social-media-logos"><i class="fas fa-link"></i></div>
-                                                        <div className="overview-helpful-button">Helpful</div>
-                                                    </div>
+                                        <form></form>
+
+                                        {(this.props.company.overview.salary && this.props.company.overview.salary !== 0) ?
+
+                                            this.props.company.overview.salary.map(salary => (
+                                                <table>
+                                                       <tr><td className="company-salary-job-title">{salary.jobTitle}</td></tr>
+                                                    <tr>
+                                                        <td> 
+                                                            <tr className="company-salary-job-details-row">  
+                                                                <td><tr className="company-salary-job-details">{salary.avgTotalPay}</tr><tr className="company-salary-job-details-title">Avg. Total Pay/yr</tr></td>  
+                                                                <td><tr className="company-salary-job-details">{salary.baseSalary}</tr><tr className="company-salary-job-details-title">Base Pay/yr</tr></td> 
+                                                                <td><tr className="company-salary-job-details">{salary.bonuses}</tr><tr className="company-salary-job-details-title">Additional Pay/yr</tr></td> 
+                                                                <td><tr className="company-salary-job-details-full">Full Pay Details<div className="company-salary-arrow"><i class="fa fa-angle-right"></i></div></tr><tr className="company-salary-job-details-title">Based on more salaries</tr></td>  
+                                                            </tr>  
+                                                        </td>
+                                                    </tr>
+                                              
                                                     <hr className="overview-hr" />
-                                                </div>
+                                                </table>
                                             )) : <div> No Reviews Yets</div>
                                         }
-                                        {(this.props.company.reviews && this.props.company.reviews.length !== 0) ? <div className="overview-see-all-reviews">See All 328 Reviews </div> : ""}
+                                        {(this.props.company.reviews && this.props.company.reviews.length !== 0) ? <div className="overview-see-all-reviews">See All Salaries </div> : ""}
                                     </div>
                                 </div>
                             </div>
@@ -233,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyReviews);
+export default connect(mapStateToProps, mapDispatchToProps)(CompanySalaries);
