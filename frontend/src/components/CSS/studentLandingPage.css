@@ -229,3 +229,7 @@ strong {
   text-decoration: none;
   color: #0a772e;
 }
+
+.student-update-links:hover {
+  background-color: #fff;
+}

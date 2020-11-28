@@ -24,6 +24,7 @@ import CompanyReviews from './Student/CompanyReviews';
 import AddCompanyReview from './Student/AddCompanyReview';
 import SearchResults from './Student/SearchResults';
 import JobPreference from './Student/JobPreference';
+import StudentProfile from './Student/StudentProfile';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -56,6 +57,11 @@ class Main extends Component {
               exact
               path='/student/landing'
               component={StudentLandingPage}
+            />
+            <PrivateRoute
+              exact
+              path='/student/profile'
+              component={StudentProfile}
             />
             <PrivateRoute
               exact

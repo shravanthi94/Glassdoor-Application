@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const StudentProfile = () => {
-  return (
-    <div>
-      <Link to='/student/update/jobPreference'>Update Job Preference</Link>
-    </div>
-  );
+  return <div>Profile</div>;
 };
 
 export default StudentProfile;
