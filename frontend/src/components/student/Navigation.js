@@ -79,8 +79,21 @@ const Navigation = ({ logout }) => {
             </button>
             <ul class='dropdown-menu' role='menu'>
               <li>
-                <a className='dropdown-item' href='/student/profile'>
+                <a className='dropdown-item' href='/student/landing'>
                   Home
+                </a>
+              </li>
+              <li>
+                <a className='dropdown-item' href='/student/profile'>
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a
+                  className='dropdown-item'
+                  href='/student/update/jobPreference'
+                >
+                  Job preference
                 </a>
               </li>
               <li>

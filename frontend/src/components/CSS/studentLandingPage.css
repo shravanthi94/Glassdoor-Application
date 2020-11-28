@@ -224,3 +224,8 @@ strong {
   min-width: 100px;
   margin-left: 6rem;
 }
+
+.on-hover:hover {
+  text-decoration: none;
+  color: #0a772e;
+}

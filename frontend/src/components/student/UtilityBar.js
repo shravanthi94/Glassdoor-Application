@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../CSS/studentLandingPage.css';
 
 const UtilityBar = () => {
@@ -7,16 +8,28 @@ const UtilityBar = () => {
       <div className='student-bar row-fix'>
         {' '}
         <h3 className='item-top-nav student-grey-icon'>
-          <i class='fas fa-briefcase fa-lg'></i> Jobs
+          <i class='fas fa-briefcase fa-lg'></i>{' '}
+          <Link to='/student/allJobs' className='h5 on-hover'>
+            Jobs
+          </Link>
         </h3>
         <h3 className='item-top-nav student-grey-icon'>
-          <i class='fas fa-city fa-lg'></i> Companies
+          <i class='fas fa-city fa-lg'></i>{' '}
+          <Link to='/student/allJobs' className='h5 on-hover'>
+            Companies
+          </Link>
         </h3>
         <h3 className='item-top-nav student-grey-icon'>
-          <i class='fas fa-money-bill-wave fa-lg'></i> Salaries
+          <i class='fas fa-money-bill-wave fa-lg'></i>{' '}
+          <Link to='/student/allJobs' className='h5 on-hover'>
+            Salaries
+          </Link>
         </h3>
         <h3 className='item-top-nav student-grey-icon'>
-          <i class='fas fa-comment-dots fa-lg'></i> Interviews
+          <i class='fas fa-comment-dots fa-lg'></i>{' '}
+          <Link to='/student/allJobs' className='h5 on-hover'>
+            Interviews
+          </Link>
         </h3>
       </div>
     </div>

@@ -23,7 +23,7 @@ const Login = ({ isAuthenticated, login }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/student/profile' />;
+    return <Redirect to='/student/landing' />;
   }
   return (
     <Fragment>
