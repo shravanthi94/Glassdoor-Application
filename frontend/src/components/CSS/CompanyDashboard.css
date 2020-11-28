@@ -27,3 +27,14 @@
     top: 360px;
     font-size: 27px;
 }
+
+.btn-updateprofile {
+    color: whitesmoke;
+    background-color: #0CAA4F;
+    border: none;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
