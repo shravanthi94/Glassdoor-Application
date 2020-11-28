@@ -25,6 +25,7 @@ import AddCompanyReview from './Student/AddCompanyReview';
 import SearchResults from './Student/SearchResults';
 import JobPreference from './Student/JobPreference';
 import StudentProfile from './Student/StudentProfile';
+import Demographics from './Student/Demographics';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -67,6 +68,11 @@ class Main extends Component {
               exact
               path='/student/update/jobPreference'
               component={JobPreference}
+            />
+            <PrivateRoute
+              exact
+              path='/student/update/demographics'
+              component={Demographics}
             />
             <PrivateRoute
               exact

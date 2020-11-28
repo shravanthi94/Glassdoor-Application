@@ -230,6 +230,10 @@ strong {
   color: #0a772e;
 }
 
+.student-update-links {
+  background-color: none;
+}
+
 .student-update-links:hover {
-  background-color: #fff;
+  background-color: none;
 }
