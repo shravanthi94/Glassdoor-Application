@@ -23,7 +23,7 @@ const Login = ({ isAuthenticated, login }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/admin/profile' />;
+    return <Redirect to='/admin/reviewsPerDay' />;
   }
   return (
     <Fragment>
@@ -33,6 +33,7 @@ const Login = ({ isAuthenticated, login }) => {
             <Link to='/' className='header-nav-link'>
               <img src={glassdoor} className='logo' alt='logo-img' />
             </Link>
+            <br/>
           </div>
         </div>
         <h1 className='headingAdmin'>
@@ -40,7 +41,7 @@ const Login = ({ isAuthenticated, login }) => {
           <br /> <br /> stastics about companies and jobs
         </h1>
         <br />
-        <div className='container'>
+        <div className='container' style={{marginLeft:'40%'}}>
           <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input
@@ -64,7 +65,7 @@ const Login = ({ isAuthenticated, login }) => {
                 required
               />
             </div>
-            <input type='submit' value='Sign In' />
+            <input type='submit' value='Sign In' style={{marginLeft:'8%'}}/>
           </form>
         </div>
       </div>

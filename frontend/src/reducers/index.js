@@ -8,7 +8,8 @@ import companyreviews from './companyreviews';
 import companyjobs from './companyjobs';
 import studentProfile from './studentProfile';
 import studentSearch from './studentSearch';
-
+import adminAnalytics from './adminanalytics';
+import adminReviewsFilter from './adminReviewsFilter'
 const rootReducer = combineReducers({
   comStore,
   alert,
@@ -18,6 +19,8 @@ const rootReducer = combineReducers({
   companyjobs,
   studentProfile,
   studentSearch,
+  adminAnalytics,
+  adminReviewsFilter,
 });
 
 export default rootReducer;
