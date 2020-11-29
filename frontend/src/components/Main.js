@@ -8,6 +8,7 @@ import PrivateRoute from '../components/Routing/PrivateRoute';
 // Admin Links
 import AdminLogin from './Admin/Login';
 import AdminLanding from './Admin/Home';
+import FilterReviews from './Admin/FilterReviews';
 
 //Company Links
 import CompanyLanding from './Company/Landing';
@@ -146,6 +147,7 @@ class Main extends Component {
             {/* Admin Routes */}
             <Route exact path='/admin/signin' component={AdminLogin} />
             <Route exact path='/admin/home' component={AdminLanding} />
+            <Route exact path='/admin/reviews' component={FilterReviews} />
           </Switch>
         </Router>
       </Fragment>
