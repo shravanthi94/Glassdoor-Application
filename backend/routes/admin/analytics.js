@@ -243,8 +243,9 @@ router.get('/top-viewed-company', adminCheckAuth, async(req, res) => {
                             "as": "item",
                             "in": "$$item"
                         }
-                    }
-                } 
+                    },
+                    "name": 1,
+                },
             },
         ]);
         query.sort({"views.count": -1});

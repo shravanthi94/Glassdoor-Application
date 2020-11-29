@@ -1,0 +1,85 @@
+body {
+    background-color: #EAEAEA;
+}
+
+.overview-all {
+    font-family: Lato, sans-serif;
+}
+
+.profile {
+    height: 250px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.analytics-logo {
+    width: 100px;
+    height: 100px;
+    border: none;
+    z-index: 1;
+    position: absolute;
+    left: 30px;
+    top: 50px;
+}
+
+.analytics-banner {
+    width: 970px;
+    height: 100px;
+}
+
+.analytics-row-one-table {
+    font-size: 18px;
+    position: absolute;
+    bottom: 0px;
+}
+
+.analytics-row-one {
+    height: 250px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.analytics-row-two {
+    height: 500px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.profile-counts {
+    margin-left: 5px;
+    font-size: 20px;
+    color: #404040;
+    text-align: center;
+}
+
+.profile-title {
+    margin-top: 10px;
+    margin-left: 15px;
+    color: #1861BF;
+    margin-bottom: 10px;
+}
+
+.overview-all {
+    margin: 0px auto;
+}
+
+.page-title {
+    position: absolute;
+    left: 150px;
+    top: 100px;
+    font-size: 27px;
+}
+
+.side-by-side-overview {
+    margin: 0px auto;
+    width: 970px;
+}
+
+.profile-titles-selected{
+    border-bottom:5px solid #00A1DF;
+}

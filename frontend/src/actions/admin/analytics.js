@@ -14,7 +14,7 @@ export const getReviewsPerDay = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: REVIEW_PER_DAY_ERROR,
-            payload: err.response.data 
+            payload: err.response.data
         })
 
     }
@@ -32,7 +32,7 @@ export const getCompanyAverageRating = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: COMPANY_AVERAGE_RATING_ERROR,
-            payload: err.response.data 
+            payload: err.response.data
         })
 
     }
@@ -50,7 +50,7 @@ export const getMostReviewedCompany = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: MOST_REVIEWED_COMPANY_ERROR,
-            payload: err.response.data 
+            payload: err.response.data
         })
 
     }
@@ -68,7 +68,7 @@ export const getTopStudentReviewers = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TOP_STUDENT_REVIEWERS_ERROR,
-            payload: err.response.data 
+            payload: err.response.data
         })
 
     }
@@ -77,7 +77,7 @@ export const getTopStudentReviewers = () => async dispatch => {
 export const getTopCeo = () => async dispatch => {
     console.log("analytics -> getTopCeo -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/top-ceoy?limit=10')
+        const res = await axios.get('/admin/analytics/top-ceo?limit=10')
 
         dispatch({
             type: TOP_CEO,
@@ -86,7 +86,7 @@ export const getTopCeo = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TOP_CEO_ERROR,
-            payload: err.response.data 
+            payload: err.response.data
         })
 
     }
@@ -102,9 +102,10 @@ export const getMostViewedcompany = () => async dispatch => {
             payload: res.data
         })
     } catch (err) {
+        console.log("Error: ", err);
         dispatch({
             type: MOST_VIEWED_COMPANY_ERROR,
-            payload: err.response.data 
+            payload: err.response.data,
         })
 
     }

@@ -7,12 +7,37 @@ import PropTypes from 'prop-types';
 import { logout } from '../../actions/admin/auth';
 
 const Navigation = ({ logout }) => {
-
+  const [searchData, setsearchData] = useState('');
+  const [query, setquery] = useState('JOBS');
+  
   return (
     <Fragment>
       <div className='nav-student'>
           <img src={logo} className='logo' alt='logo-img' />
+
+        <div className='input'>
+          <i class='fas fa-search color fa-2x mt-1'></i>
+          <input
+            type='text'
+            className='search-box'
+            name='searchData'
+            value={searchData}
+            onChange={(e) => setsearchData(e.target.value)}
+            placeholder='Job Title, Keywords, or Company'
+            required
+          />
+        </div>
+
+        <Link
+          to={`/admin/companySearchResult/${searchData}/${query}`}
+          className='btn-student'
+        >
+          Search
+        </Link>
+        &emsp; &emsp;
+
         <i class='fas fa-inbox fa-2x' style={{ color: '#505863' }}></i>
+
         <div className='icon5' >
           <div className='dropdown ml-0 pl-0'>
             <button

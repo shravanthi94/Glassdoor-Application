@@ -39,36 +39,14 @@ const CompanyDashboard = ({
   //     history.push(path)
   // }
 
-  return (
+    return (
     <Fragment>
       <CmpNav2 />
       <div className='contentholder-company text-company'>
-        {loading && companyprofile === null ? (
-          ' '
-        ) : (
-          <div className='overview-all'>
-            <div className='profile-row-one-company'>
-              {companyprofile.logo ? (
-                <img
-                  className='company-banner'
-                  src={
-                    require('../../components/images/' +
-                      companyprofile.logo +
-                      '_banner.jpg').default
-                  }
-                  alt=''
-                />
-              ) : (
-                <img
-                  className='company-banner'
-                  src={
-                    require('../../components/images/' +
-                      companyprofile.profilePic +
-                      '_banner.jpg').default
-                  }
-                  alt=''
-                />
-              )}
+        {loading && companyprofile === null ? (' ') : (
+          <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.logo ? (
+                <img className='company-banner' src={require('../../components/images/' + companyprofile.logo + '_banner.jpg').default} alt=''/>) : (
+                <img className='company-banner' src={require('../../components/images/' + companyprofile.profilePic +'_banner.jpg').default} alt=''/>)}
               {companyprofile.logo ? (
                 <img
                   className='company-logo'
