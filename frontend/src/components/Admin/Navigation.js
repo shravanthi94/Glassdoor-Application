@@ -27,8 +27,8 @@ const Navigation = ({ logout }) => {
             </button>
             <ul class='dropdown-menu' role='menu'>
               <li>
-                <a className='dropdown-item' href='/admin/home'>
-                  Home
+                <a className='dropdown-item' href='/admin/reviewsPerDay'>
+                  Analytics Dashboard
                 </a>
               </li>
               <li>

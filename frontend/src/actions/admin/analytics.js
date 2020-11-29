@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { COMPANY_AVERAGE_RATING, MOST_REVIEWED_COMPANY, TOP_STUDENT_REVIEWERS, TOP_CEO, MOST_VIEWED_COMPANY, REVIEW_PER_DAY } from "../types";
-import { REVIEW_PER_DAY_ERROR } from "../types";
+import { REVIEW_PER_DAY_ERROR, COMPANY_AVERAGE_RATING_ERROR, MOST_REVIEWED_COMPANY_ERROR, TOP_STUDENT_REVIEWERS_ERROR, TOP_CEO_ERROR, MOST_VIEWED_COMPANY_ERROR } from "../types";
 
 export const getReviewsPerDay = () => async dispatch => {
     console.log("analytics -> getReviewsPerDay -> method entered");

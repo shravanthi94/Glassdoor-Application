@@ -1,11 +1,64 @@
-import React, { Fragment } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Fragment, useState, useEffect } from 'react';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import UpdateLinks from './UpdateLinks';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import spinner from '../Spinner/spinner';
 import studentDemographics from '../images/student_demographics.png';
+import { updateStudentDemographics } from '../../actions/student/demographics';
+import { getCurrentProfile } from '../../actions/student/profile';
 
-const Demographics = () => {
-  return (
+const Demographics = ({
+  updateStudentDemographics,
+  getCurrentProfile,
+  profile: { profile, loading },
+  history,
+}) => {
+  const [formData, setformData] = useState({
+    ethnicity: '',
+    gender: '',
+    disability: '',
+    vetran: false,
+  });
+
+  const { ethnicity, gender, disability, vetran } = formData;
+
+  const onChange = (e) =>
+    setformData({ ...formData, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    getCurrentProfile();
+
+    setformData({
+      ethnicity:
+        loading || !profile.demographics.ethnicity
+          ? ''
+          : profile.demographics.ethnicity,
+      gender:
+        loading || !profile.demographics.gender
+          ? ''
+          : profile.demographics.gender,
+      disability:
+        loading || !profile.demographics.disability
+          ? ''
+          : profile.demographics.disability,
+      vetran:
+        loading || !profile.demographics.vetran
+          ? false
+          : profile.demographics.vetran,
+    });
+  }, [loading]);
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    updateStudentDemographics(formData, history);
+  };
+
+  return loading || !profile ? (
+    spinner
+  ) : (
     <Fragment>
       <Navigation />
       <UtilityBar />
@@ -46,7 +99,12 @@ const Demographics = () => {
               <div className='card'>
                 <div className='card-body'>
                   <h5 className='mt-1'>Race/Ethinicity</h5>
-                  <select className='dropdown dropdown-wide' name='query'>
+                  <select
+                    className='dropdown dropdown-wide'
+                    name='ethnicity'
+                    value={ethnicity}
+                    onChange={(e) => onChange(e)}
+                  >
                     <option className='dropdownOptionLabel'>Select</option>
                     <option
                       className='dropdownOptionLabel'
@@ -75,7 +133,12 @@ const Demographics = () => {
                   </select>
 
                   <h5 className='mt-5'>Gender</h5>
-                  <select className='dropdown dropdown-wide' name='query'>
+                  <select
+                    className='dropdown dropdown-wide'
+                    name='gender'
+                    value={gender}
+                    onChange={(e) => onChange(e)}
+                  >
                     <option className='dropdownOptionLabel'>Select</option>
                     <option className='dropdownOptionLabel' value='Male'>
                       Male
@@ -86,7 +149,12 @@ const Demographics = () => {
                   </select>
 
                   <h5 className='mt-5'>Disability</h5>
-                  <select className='dropdown dropdown-wide' name='query'>
+                  <select
+                    className='dropdown dropdown-wide'
+                    name='disability'
+                    value={disability}
+                    onChange={(e) => onChange(e)}
+                  >
                     <option className='dropdownOptionLabel'>Select</option>
                     <option className='dropdownOptionLabel' value='Yes'>
                       Yes
@@ -97,7 +165,12 @@ const Demographics = () => {
                   </select>
 
                   <h5 className='mt-5'>Vetran Status</h5>
-                  <select className='dropdown dropdown-wide' name='query'>
+                  <select
+                    className='dropdown dropdown-wide'
+                    name='vetran'
+                    value={vetran}
+                    onChange={(e) => onChange(e)}
+                  >
                     <option className='dropdownOptionLabel'>Select</option>
                     <option className='dropdownOptionLabel' value='Yes'>
                       Yes
@@ -107,7 +180,12 @@ const Demographics = () => {
                     </option>
                   </select>
                   <br />
-                  <button className='btn btn-primary my-4'>Update</button>
+                  <button
+                    onClick={(e) => handleUpdate(e)}
+                    className='btn btn-primary my-4'
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             </div>
@@ -118,4 +196,16 @@ const Demographics = () => {
   );
 };
 
-export default Demographics;
+Demographics.propTypes = {
+  updateStudentDemographics: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  profile: state.studentProfile,
+});
+
+export default connect(mapStateToProps, {
+  updateStudentDemographics,
+  getCurrentProfile,
+})(Demographics);

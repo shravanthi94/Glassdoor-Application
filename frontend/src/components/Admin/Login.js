@@ -23,7 +23,7 @@ const Login = ({ isAuthenticated, login }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/admin/home' />;
+    return <Redirect to='/admin/reviewsPerDay' />;
   }
   return (
     <Fragment>
