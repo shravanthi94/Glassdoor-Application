@@ -28,7 +28,7 @@ export const createCompanyJob = (formData, history) => async dispatch => {
         }
         dispatch({
             type: COMPANY_JOBERROR,
-            payload: { msg: err.response.statusText, status: err.response.status },
+            payload: { msg: err, status: err.response.status },
         });
     }
 };
@@ -46,7 +46,24 @@ export const getCurrentCompanyJobs = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: COMPANY_JOBERROR,
-            payload: { msg: err.repsonse.statusText, status: err.response.status }
+            payload: { msg: err, status: err.response.status }
+        })
+
+    }
+}
+
+export const getJobDetailById = (jobId) => async dispatch => {
+    try {
+        const res = await axios.get(`/company/applicant/${jobId}`)
+
+        dispatch({
+            type: COMPANY_GETJOB,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: COMPANY_JOBERROR,
+            payload: { msg: err, status: err.response.status }
         })
 
     }

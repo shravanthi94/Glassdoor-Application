@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useState, useEffect } from 'react';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
@@ -36,17 +35,25 @@ const JobPreference = ({
     }
     setformData({
       status:
-        loading || !profile.jobPreference ? '' : profile.jobPreference.status,
+        loading || !profile.jobPreference.status
+          ? ''
+          : profile.jobPreference.status,
       title:
-        loading || !profile.jobPreference ? '' : profile.jobPreference.title,
+        loading || !profile.jobPreference.title
+          ? ''
+          : profile.jobPreference.title,
       salary:
-        loading || !profile.jobPreference ? '' : profile.jobPreference.salary,
+        loading || !profile.jobPreference.salary
+          ? ''
+          : profile.jobPreference.salary,
       relocation:
-        loading || !profile.jobPreference
+        loading || !profile.jobPreference.relocation
           ? false
-          : profile.jobPreference.reloaction,
+          : profile.jobPreference.relocation,
       industry:
-        loading || !profile.jobPreference ? '' : profile.jobPreference.industry,
+        loading || !profile.jobPreference.industry
+          ? ''
+          : profile.jobPreference.industry,
     });
   }, [loading]);
 

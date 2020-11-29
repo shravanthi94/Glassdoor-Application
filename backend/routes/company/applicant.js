@@ -20,7 +20,7 @@ companyAuth();
 router.get('/:id', companyCheckAuth, async(req, res) => {
     try {
         let company = await Company.findOne({ "email": req.company.email });
-        console.log("Print this", company._id)
+        // console.log("Print this", company._id)
         if (company) {
             const jobPosting = await Jobposting.find({
                 $and: [{ "_id": req.params.id },
@@ -30,7 +30,7 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
             if (jobPosting.length > 0) {
                 res.status(200).json(jobPosting[0]);
             } else {
-                console.log("No jobs found")
+                return res.status(400).json({ msg: 'No job posted yet!' });
             }
 
 

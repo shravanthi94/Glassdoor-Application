@@ -20,7 +20,7 @@ export const getCurrentCompanyProfile = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: COMPANY_PROFILEERROR,
-            payload: { msg: err.repsonse.statusText, status: err.response.status }
+            payload: { msg: err, status: err.response.status }
         })
 
     }
@@ -55,7 +55,7 @@ export const editCompanyProfile = (formData, history, edit = false) => async(
         }
         dispatch({
             type: COMPANY_PROFILEERROR,
-            payload: { msg: err.response.statusText, status: err.response.status },
+            payload: { msg: err, status: err.response.status },
         });
     }
 };

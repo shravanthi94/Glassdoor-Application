@@ -18,6 +18,10 @@ const CmpNav = ({companySignOut}) => {
                     ></img>
                </div>
                <ul className="list-options-company">
+                     <li>
+                        <a href='/companydashboard'> 
+                         {' '}Dashboard</a>
+                    </li>
                     <li>
                         <a onClick={companySignOut} href='/'> 
                             <i className="fa fa-sign-out-alt"></i> {' '}Sign Out</a>

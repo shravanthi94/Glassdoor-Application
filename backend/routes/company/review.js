@@ -84,7 +84,7 @@ router.post('/', async(req, res) => {
 });
 
 // @route  GET /company/review/my/reviews
-// @Desc   GET all current company's reviews
+// @Desc   GET all current company's reviews approved
 // @access Private
 
 router.get('/my/reviews', companyCheckAuth, async(req, res) => {
@@ -93,7 +93,7 @@ router.get('/my/reviews', companyCheckAuth, async(req, res) => {
         const company = await Company.findOne({ "email": req.company.email })
         if (company) {
             console.log("company Id", company._id)
-            const reviews = await Review.find({ "company": company._id });
+            const reviews = await Review.find({ $and: [{ "company": company._id }, { 'approvalStatus': 'approved' }] });
             console.log("after query")
             if (!reviews) {
 
@@ -162,8 +162,14 @@ router.post('/favorite/:id', companyCheckAuth, async(req, res) => {
         // console.log(req.params.id)
         let review = await Review.findOne({ "_id": req.params.id })
         if (review) {
-            // console.log("company Id", review)
-            review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "favorite": true } }, { new: true });
+            if (review.favorite === false) {
+
+
+                // console.log("company Id", review)
+                review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "favorite": true } }, { new: true });
+            } else {
+                return res.status(400).json({ msg: 'Review is already marked as favorite' });
+            }
             return res.status(200).json(review);
         } else {
             return res.status(400).json({ msg: 'No Review found' });
@@ -187,43 +193,42 @@ router.post('/featured/:id', companyCheckAuth, async(req, res) => {
         let review = await Review.findOne({ "_id": req.params.id })
         if (review) {
             // console.log("company Id", review)
-            review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "featured": true } }, { new: true });
-            const {
-                date,
-                favorite,
-                featured,
-                company,
-                student,
-                approvalStatus,
-                headline,
-                pros,
-                cons,
-                overAllRating,
-                comment,
-                currentOrFormer
-            } = review
-            const newFeturedReview = {
-                date,
-                favorite,
-                featured,
-                company,
-                student,
-                approvalStatus,
-                headline,
-                pros,
-                cons,
-                overAllRating,
-                comment,
-                currentOrFormer
+            if (review.featured === false) {
+                review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "featured": true } }, { new: true });
+                const {
+                    date,
+                    favorite,
+                    featured,
+                    company,
+                    student,
+                    approvalStatus,
+                    headline,
+                    pros,
+                    cons,
+                    overAllRating,
+                    comment,
+                    currentOrFormer
+                } = review
+                const newFeturedReview = {
+                    date,
+                    favorite,
+                    featured,
+                    company,
+                    student,
+                    approvalStatus,
+                    headline,
+                    pros,
+                    cons,
+                    overAllRating,
+                    comment,
+                    currentOrFormer
+                }
+                let companyprofile = await Company.findById({ '_id': review.company })
+                companyprofile.featuredreviews.unshift(newFeturedReview);
+                await companyprofile.save();
+            } else {
+                return res.status(400).json({ msg: 'Review is already featured' });
             }
-            const objid = new ObjectId(req.params.id);
-            let featuredreview = await Company.findById({ 'featuredreviews._id': objid })
-            if (featuredreview) {
-                return res.send('Review already featured')
-            }
-            let companyprofile = await Company.findById({ '_id': review.company })
-            companyprofile.featuredreviews.unshift(newFeturedReview);
-            await companyprofile.save();
             return res.status(200).json(review);
         } else {
             return res.status(400).json({ msg: 'No Review found' });
@@ -263,5 +268,32 @@ router.get('/featured/all', companyCheckAuth, async(req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+// @route  POST /company/review
+// @Desc   Post a reply to review
+// @access Private
+
+router.post('/reply/:id', companyCheckAuth, async(req, res) => {
+
+    try {
+        // console.log(req.params.id)
+        console.log(req.body)
+        const reply = req.body.message
+        console.log("reply inside post is ", reply)
+        let review = await Review.findOne({ "_id": req.params.id })
+        if (review) {
+
+            review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "reply.message": reply } }, { new: true });
+            return res.status(200).json(review);
+        } else {
+            return res.status(400).json({ msg: 'No Review found' });
+        }
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 module.exports = router;

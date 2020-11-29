@@ -43,7 +43,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
               Post Jobs
             </Link>
             <Link to='/admin/signin' className='header-nav-link job-link'>
-              Admin?
+              Admin Login
             </Link>
           </div>
         </div>

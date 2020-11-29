@@ -10,7 +10,7 @@ router.post('/', checkAuth, async (req, res) => {
   const { ethnicity, gender, disability, vetran } = req.body;
 
   try {
-    const student = await Student.find({ email: studentEmail });
+    const student = await Student.findOne({ email: studentEmail });
     student.demographics.ethnicity = ethnicity;
     student.demographics.gender = gender;
     student.demographics.disability = disability;
@@ -18,7 +18,7 @@ router.post('/', checkAuth, async (req, res) => {
 
     await student.save();
 
-    res.json(student);
+    res.status(200).json(student);
   } catch (err) {
     console.log(err);
     res.status(500).send('Server Error');

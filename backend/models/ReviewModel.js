@@ -42,17 +42,10 @@ const ReviewSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    currentOrFormer:{
+    currentOrFormer: {
         type: String
     },
     reply: [{
-
-        initiatedBy: {
-            type: String
-        },
-        receivedBy: {
-            type: String
-        },
         message: {
             type: String
         },

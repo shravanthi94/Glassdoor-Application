@@ -3,6 +3,7 @@ import { COMPANY_SEARCH_SUCCESS, COMPANY_SEARCH_FAIL } from '../actions/types';
 
 const initialState = {
   results: [],
+  reviewCount: [],
   loading: true,
   error: {},
 };
@@ -14,7 +15,8 @@ export default function (state = initialState, action) {
     case COMPANY_SEARCH_SUCCESS:
       return {
         ...state,
-        results: payload,
+        results: payload.results,
+        reviewCount: payload.final,
         loading: false,
       };
     case COMPANY_SEARCH_FAIL:
