@@ -94,3 +94,7 @@
 .card {
     font-size: 16px;
 }
+
+.active:active {
+    color: #1861bf;
+}

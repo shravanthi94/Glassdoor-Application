@@ -19,7 +19,7 @@ import CompanyDashboardReviews from './Company/Reviews/CompanyReviews';
 import CompanyOverview from './Student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
-import CompanyJobDetail from './Company/JobPostings/JobDetails';
+// import CompanyJobDetail from './Company/JobPostings/JobDetails';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 import CompanyReplyMessage from './Company/Reviews/CompanyReviewReply';
 
@@ -120,11 +120,11 @@ class Main extends Component {
               path='/companydashboard'
               component={CompanyDashboard}
             />
-           <PrivateRoute
+           {/* <PrivateRoute
               exact
               path='/company/jobs/jobdetail/:jobid'
               component={CompanyJobDetail}
-            />
+            /> */}
             <PrivateRoute
               exact
               path='/company/reviewspage'

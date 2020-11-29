@@ -40,56 +40,13 @@ const CompanyDashboard = ({
   // }
 
     return (
-  //       <Fragment>
-  //           <CmpNav2/>
-  //           <div className="contentholder-company text-company">
-  //           {loading  && companyprofile ===null ? ' ' : 
-  //           <div className="overview-all">
-  //               <div className="profile-row-one-company">
-  //                   {companyprofile.logo?<img className="company-banner" src={require('../../components/images/' + companyprofile.logo + '_banner.jpg').default} alt="" />:<img className="company-banner" src={require('../../components/images/' + companyprofile.profilePic + '_banner.jpg').default} alt="" />}
-  //                   {companyprofile.logo?<img className="company-logo" src={require('../../components/images/' + companyprofile.logo + '_logo.jpg').default} alt="" />:<img className="company-logo" src={require('../../components/images/' + companyprofile.profilePic + '_logo.png').default} alt="" />}
-  //                   {companyprofile.name?<div className="dashboard-company-name">{companyprofile.name}{' '}
-  //                   {/* <Link to="/company/updateprofile" style={{ fontSize: "14px", color: "#1861BF" }}>Update Profile</Link> */}
-  //                 </div>:' '}
-  //                 <table className="profile-row-one-table">
-  //                       <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={overviewRoute}>Overview&emsp;</div></td>
-  //                       <td><div className="profile-counts">4.0k</div><div className="profile-title" onClick={reviewsRoute}> Reviews&emsp;</div></td>
-  //                       <td><div className="profile-counts">867</div><div className="profile-title" onClick={jobsRoute}>Jobs&emsp;</div></td>
-  //                       <td><div className="profile-counts">8.4k</div><div className="profile-title">Salaries&emsp;</div></td>
-  //                       <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={jobsRoute}>Applicants&emsp;</div></td>
-  //                       <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
-  //                       <td><div className="profile-counts"><i class="fas fa-chart-line"></i></div><div className="profile-title">Statistics&emsp;</div></td>
-  //                       <div>&emsp;&emsp;<Link to="/company/updateprofile" className="btn-updateprofile"> Update Profile</Link></div>
-  // return (
     <Fragment>
       <CmpNav2 />
       <div className='contentholder-company text-company'>
-        {loading && companyprofile === null ? (
-          ' '
-        ) : (
-          <div className='overview-all'>
-            <div className='profile-row-one-company'>
-              {companyprofile.logo ? (
-                <img
-                  className='company-banner'
-                  src={
-                    require('../../components/images/' +
-                      companyprofile.logo +
-                      '_banner.jpg').default
-                  }
-                  alt=''
-                />
-              ) : (
-                <img
-                  className='company-banner'
-                  src={
-                    require('../../components/images/' +
-                      companyprofile.profilePic +
-                      '_banner.jpg').default
-                  }
-                  alt=''
-                />
-              )}
+        {loading && companyprofile === null ? (' ') : (
+          <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.logo ? (
+                <img className='company-banner' src={require('../../components/images/' + companyprofile.logo + '_banner.jpg').default} alt=''/>) : (
+                <img className='company-banner' src={require('../../components/images/' + companyprofile.profilePic +'_banner.jpg').default} alt=''/>)}
               {companyprofile.logo ? (
                 <img
                   className='company-logo'
