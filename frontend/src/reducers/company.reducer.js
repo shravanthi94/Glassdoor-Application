@@ -31,7 +31,23 @@ const initialState = {
           isAuthenticated: true,
           loading: false
         }   
-      
+
+      case "ADD_COMPANY_SALARIES":
+        return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false
+      }
+
+      case "ADD_COMPANY_INTERVIEW":
+        return {
+          ...state,
+          ...payload,
+          isAuthenticated: true,
+          loading: false
+        }
+        
       default:
         return state;
     }

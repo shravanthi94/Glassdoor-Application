@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/interviews.css';
+import '../CSS/overview.css';
 import { getCompanyReviews } from '../../actions/company/getCompanyReviews';
 import { PieChart } from 'react-minimal-pie-chart';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
+import UtilityBar from './UtilityBar';
+import CompanySideBar from '../Common/CompanySideBar';
 
 class CompanyInterviews extends Component {
 
@@ -104,29 +107,38 @@ class CompanyInterviews extends Component {
     }
 
     redirectHandler = (e) => {
+      
         console.log("redirect value: ", e);
         var path = "";
         var data = "";
 
         if (e === "overview") {
             path = "/companyOverview"
-            data = this.state.company_id
-        } else if (e === "add-reviews") {
-            path = "/addCompanyReview"
-            data = {
-                company_id: this.state.company_id,
-                logo: this.props.company.overview.logo,
-                company_name: this.props.company.overview.name
-            }
+            data = this.props.company.overview._id
         } else if (e === "interviews") {
             path = "/companyInterviews"
-            data = this.state.company_id
+            data = this.props.company.overview._id
         }
         else if (e === "reviews") {
             path = "/companyReviews"
         }
         else if (e === "salaries") {
             path = "/companySalaries"
+        }
+        else if (e === "add-salary") {
+            path = "/addCompanySalary"
+            data = {
+                company_id: this.props.company.overview._id,
+                logo: this.props.company.overview.logo,
+                company_name: this.props.company.overview.name
+            }
+        }else if (e === "add-interview"){
+            path = "/addCompanyInterview"
+            data = {
+                company_id: this.props.company.overview._id,
+                logo: this.props.company.overview.logo,
+                company_name: this.props.company.overview.name
+            }
         }
 
         this.setState({
@@ -157,6 +169,7 @@ class CompanyInterviews extends Component {
                     <div className="overview-all">
                         {/* <div style={{ backgroundColor: "#13aa41", height: "150px" }}> Search bar </div> */}
                         <Navigation />
+                        <UtilityBar />
                         <div className="profile-row-one">
                             <img className="company-banner-blur" src={require('../../components/images/' + this.props.company.overview.logo + '_banner.jpg').default} alt="" />
                             <img className="overview-logo" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" />
@@ -170,7 +183,7 @@ class CompanyInterviews extends Component {
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
                                 <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
                             </table>
-                            <div className="profile-add-button-position" ><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-reviews")}><i class="fa fa-plus"></i> &nbsp;Add Interview</div></div>
+                            <div className="profile-add-button-position" ><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-interview")}><i class="fa fa-plus"></i> &nbsp;Add Interview</div></div>
                         </div>
                         <div className="side-by-side-overview">
                             <div className="profile-row-two">
@@ -318,33 +331,7 @@ class CompanyInterviews extends Component {
                                 </div>
                             </div>
 
-                            <div className="profile-row-two-column2">
-                                <div className="profile-row-two-column2-row1">
-                                    <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}>{company_name} Locations</div>
-                                    <table className="overview-locations">
-                                        <tr>Bengaluru (India)</tr> <br />
-                                        <tr>Blanchardstown (Ireland)</tr> <br />
-                                        <tr>Chandler (AZ)</tr> <br />
-                                        <tr>Chennia (India)</tr> <br />
-                                        <tr>Conshohocken (PA)</tr> <br />
-                                    </table>
-                                    <hr className="overview-hr" style={{ width: "300px" }} />
-                                    <div className="all-locations">See All Locations </div>
-                                </div>
-                                <div className="profile-row-two-column2-row2">
-                                    <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}> Jobs You May Like </div>
-                                    <table className="overview-jobs-like">
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                    </table>
-                                    <br />
-                                </div>
-                            </div>
+                            <CompanySideBar />
                         </div>
                     </div> : <div> No Reviews for the Company Profile</div>
                 }
