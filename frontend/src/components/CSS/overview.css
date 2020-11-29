@@ -82,7 +82,7 @@ body {
 
 .profile-row-two-inside,
 .profile-row-three-inside {
-    padding: 40px;
+    padding: 38px;
 }
 
 .profile-row-two-inside .overview-column-one,
@@ -228,6 +228,7 @@ body {
     width: 50px;
     height: 50px;
     border: 2px solid #F1F2F2;
+    margin-right: 15px;
 }
 
 .overview-job-title {

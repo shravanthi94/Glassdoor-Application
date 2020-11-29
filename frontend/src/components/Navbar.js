@@ -42,9 +42,6 @@ const Navbar = ({ isAuthenticated, signup }) => {
             <Link to='/company' className='header-nav-link job-link'>
               Post Jobs
             </Link>
-            <Link to='/companyOverview' className='header-nav-link job-link'>
-              Company Overview
-            </Link>
             <Link to='/admin/signin' className='header-nav-link job-link'>
               Admin?
             </Link>

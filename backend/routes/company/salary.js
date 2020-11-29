@@ -16,14 +16,15 @@ router.post('/', async (req, res) => {
     try {
         console.log("salary details: ", req.body);
 
+        var totalPay = parseInt(req.body.baseSalary) + parseInt(req.body.bonuses);
         var data =  { 
-            avgTotalPay: req.body.avgTotalPay,
+            avgTotalPay: totalPay,
             baseSalary: req.body.baseSalary,
             bonuses: req.body.bonuses,
             jobTitle: req.body.jobTitle,
-            yearsOfExperience: req.body.yearsOfExperience,
+            yearsOfExperience: req.body.yearsOfExp,
             location: req.body.location,
-            salaryGender: req.body.salaryGender,
+            salaryGender: req.body.gender,
          };
 
         const company = await Company.findByIdAndUpdate({_id: req.body.company}, {$push:{ salary: data }}, {new: true});

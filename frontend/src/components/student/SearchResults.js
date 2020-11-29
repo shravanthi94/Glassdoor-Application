@@ -34,11 +34,13 @@ const SearchResults = ({
               <div class='container'>
                 <div class='row'>
                   <div class='col-sm'>
-                    <Link
+                    {/* <Link
                       class='student-card-title'
                       to={`/student/companyView/${each._id}`}
-                    >
-                      {each.name}
+                    > */}
+                    <Link to={{pathname:"/companyOverview", state:{ data: each._id}}}>
+                    <div className="student-card-title">
+                      {each.name} </div>
                     </Link>
                     {query === 'JOBS' && each.company ? (
                       <Fragment>
