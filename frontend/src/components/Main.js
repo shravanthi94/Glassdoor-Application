@@ -9,6 +9,12 @@ import PrivateRoute from '../components/Routing/PrivateRoute';
 import AdminLogin from './Admin/Login';
 import AdminLanding from './Admin/ReviewsPerDay';
 import FilterReviews from './Admin/FilterReviews';
+import CompanySearch from './Admin/CompanySearch';
+import CompanyAverageRating from './Admin/CompanyAverageRating'
+import MostReviewedCompany from './Admin/MostReviewedCompany'
+import TopStudentReviewers from './Admin/TopStudentReviewers'
+import MostViewedCompanies from './Admin/MostViewedCompanies'
+import TopCeo from './Admin/TopCeo'
 
 //Company Links
 import CompanyLanding from './Company/Landing';
@@ -151,12 +157,13 @@ class Main extends Component {
             <Route exact path='/admin/signin' component={AdminLogin} />
             <Route exact path='/admin/reviewsPerDay' component={AdminLanding} />
             <Route exact path='/admin/reviews' component={FilterReviews} />
-            <Route exact path = "/admin/companyAverageRating" component={AdminLanding} />
-            <Route exact path = "/admin/mostReviewedCompany"  component={AdminLanding} />
-            <Route exact path =  "/admin/topStudentReviewers" component={AdminLanding} />
-            <Route exact path = "/admin/topCeo" component={AdminLanding} />
-            <Route exact path = "/admin/mostViewedCompanies" component={AdminLanding} />
-
+            <Route exact path = "/admin/companyAverageRating" component={CompanyAverageRating} />
+            <Route exact path = "/admin/mostReviewedCompany"  component={MostReviewedCompany} />
+            <Route exact path =  "/admin/topStudentReviewers" component={TopStudentReviewers} />
+            <Route exact path = "/admin/topCeo" component={TopCeo} />
+            <Route exact path = "/admin/mostViewedCompanies" component={MostViewedCompanies} />
+            <Route exact path = "/admin/companySearch" component={CompanySearch} />
+            <Route exact path='/admin/companySearchResult/:data/:query' component={SearchResults}/>
           </Switch>
         </Router>
       </Fragment>

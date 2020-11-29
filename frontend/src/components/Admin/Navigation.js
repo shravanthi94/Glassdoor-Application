@@ -42,11 +42,8 @@ const Navigation = ({ logout }) => {
                 </a>
               </li>
               <li>
-                <a
-                  className='dropdown-item'
-                  href='/student/company'
-                >
-                  Company
+                <a className='dropdown-item' href='/admin/companySearch'>
+                  Company Search
                 </a>
               </li>
               <li>
