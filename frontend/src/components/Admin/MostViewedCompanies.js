@@ -111,6 +111,7 @@ class MostViewedCompanies extends Component {
                         loader={<div>Loading Chart</div>}
                         data={mostViewedCompaniesArray}
                         options={{
+                            title: 'Top 10 viewd companies on Glassdoor',
                             hAxis: {
                               title: 'Number of Views',
                             },

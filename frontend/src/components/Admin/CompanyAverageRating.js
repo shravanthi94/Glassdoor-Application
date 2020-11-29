@@ -95,8 +95,8 @@ class CompanyAverageRating extends Component {
                             <img className="analytics-logo" src={require('../../components/images/analytics_logo.png').default} alt="" />
                             <div className="page-title">Annalytics Dashboard</div>
                             <table className="analytics-row-one-table">
-                                <td className="profile-titles-selected"><div className="profile-title">Reviews per day</div></td>
-                                <td><div className="profile-title" onClick={() => this.redirectHandler("company_average_rating")}>Company Average Rating</div></td>
+                                <td><div className="profile-title" onClick={() => this.redirectHandler("reviews_per_day")}>Reviews per day</div></td>
+                                <td className="profile-titles-selected"><div className="profile-title">Company Average Rating</div></td>
                                 <td><div className="profile-title" onClick={() => this.redirectHandler("most_reviewed_company")}>Most Reviewed Company</div></td>
                                 <td><div className="profile-title" onClick={() => this.redirectHandler("top_student_reviewers")}>Top Student Reviewers</div></td>
                                 <td><div className="profile-title" onClick={() => this.redirectHandler("top_ceo")}>Top CEOs</div></td>
@@ -107,15 +107,16 @@ class CompanyAverageRating extends Component {
                         <div className="analytics-row-two">                        
                         <Chart
                         height={'600px'}
-                        chartType="BarChart"
+                        chartType="ScatterChart"
                         loader={<div>Loading Chart</div>}
                         data={companyAverageArray}
                         options={{
+                            title: 'Top 5 Company Based on Average Rating',
                             hAxis: {
-                              title: 'Average Rating',
+                              title: 'Company Name',
                             },
                             vAxis: {
-                              title: 'Company Name',
+                              title: 'Averahe Rating',
                             },
                             // colors: ["green"],
                         }}

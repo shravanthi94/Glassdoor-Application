@@ -115,8 +115,9 @@ class TopCeo extends Component {
                         loader={<div>Loading Chart</div>}
                         data={topCeoArray}
                         options={{
+                            title: 'Top 10 Company CEO',
                             hAxis: {
-                              title: 'CEO Approval Rating',
+                              title: 'Acceptance Rating',
                             },
                             vAxis: {
                               title: 'CEO Name',

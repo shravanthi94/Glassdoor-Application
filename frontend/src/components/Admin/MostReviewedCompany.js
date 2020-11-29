@@ -107,15 +107,16 @@ class MostReviewedCompany extends Component {
                         <div className="analytics-row-two">                        
                         <Chart
                         height={'600px'}
-                        chartType="BarChart"
+                        chartType="ScatterChart"
                         loader={<div>Loading Chart</div>}
                         data={mostReviewedCompanyArray}
                         options={{
+                            title: 'Top 5 Most Reviewed Companies',
                             hAxis: {
-                              title: 'Number of Reviews',
+                              title: 'Company Name',
                             },
                             vAxis: {
-                              title: 'Company Name',
+                              title: 'Number of Reviews',
                             },
                             // colors: ["green"],
                         }}

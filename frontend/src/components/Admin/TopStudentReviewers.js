@@ -107,15 +107,16 @@ class TopStudentReviewers extends Component {
                         <div className="analytics-row-two">                        
                         <Chart
                         height={'600px'}
-                        chartType="BarChart"
+                        chartType="ScatterChart"
                         loader={<div>Loading Chart</div>}
                         data={topStudentReviewersArray}
                         options={{
+                            title: 'Top 5 Student Reviewers',
                             hAxis: {
-                              title: 'Number of Reviews',
+                              title: 'Student Name',
                             },
                             vAxis: {
-                              title: 'Student Name',
+                              title: 'Number of Reviews',
                             },
                             // colors: ["green"],
                         }}
