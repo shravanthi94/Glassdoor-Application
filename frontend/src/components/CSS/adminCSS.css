@@ -1,0 +1,179 @@
+body {
+    background-color: #EAEAEA;
+}
+
+.overview-all {
+    font-family: Lato, sans-serif;
+}
+
+.profile {
+    height: 250px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.analytics-logo {
+    width: 100px;
+    height: 100px;
+    border: none;
+    z-index: 1;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+}
+
+.analytics-banner {
+    width: 970px;
+    height: 100px;
+}
+
+.analytics-row-one-table {
+    font-size: 18px;
+    position: absolute;
+    bottom: 0px;
+}
+
+.analytics-row-one {
+    height: 250px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.analytics-row-two {
+    height: 500px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.profile-counts {
+    margin-left: 5px;
+    font-size: 20px;
+    color: #404040;
+    text-align: center;
+}
+
+.profile-title {
+    margin-top: 10px;
+    margin-left: 15px;
+    color: #1861BF;
+    margin-bottom: 10px;
+}
+
+.overview-all {
+    margin: 0px auto;
+}
+
+.page-title {
+    position: absolute;
+    left: 150px;
+    top: 120px;
+    font-size: 27px;
+}
+
+.side-by-side-overview {
+    margin: 0px auto;
+    width: 970px;
+}
+
+.profile-titles-selected{
+    border-bottom:5px solid #00A1DF;
+}
+
+/* Reviews Page CSS*/
+
+.reviews-row-one {
+    height: 250px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.reviews-banner {
+    width: 970px;
+    height: 200px;
+    -webkit-filter: blur(2px);
+}
+
+.reviews-logo {
+    width: 100px;
+    height: 100px;
+    border: none;
+    z-index: 1;
+    position: absolute;
+    left: 30px;
+    top: 150px;
+}
+
+.reviews-title {
+    position: absolute;
+    left: 150px;
+    top: 200px;
+    font-size: 27px;
+}
+
+.reviews-error {
+    position: absolute;
+    left: 38%;
+    top: 35%;
+    font-size: 20px;
+    color: #1861BF;
+}
+
+.reviews-row-two {
+    height: 250px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.reviews-row-three {
+    height: 150px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
+}
+
+.review-headline {
+    font-size: 20px;
+    color: #1861BF;
+    font-weight: bold;
+}
+
+.review-star-ratings {
+    color: #0caa41
+}
+
+.reviews-table-all {
+    width: 1000px;
+    color: #505863;
+    font-family: 'Lato', sans-serif;
+    padding: 20px;
+}
+
+.reviews-approve-button {
+    width: 120px;
+    height: 35px;
+    font-size: 18px;
+    color: white;
+    background-color: #0CAA4F;
+    border: none;
+    border-radius: 5px;
+}
+
+.reviews-reject-button {
+    width: 120px;
+    height: 35px;
+    font-size: 18px;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+}

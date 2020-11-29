@@ -1,23 +1,22 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import '../CSS/adminHome.css';
+import '../CSS/adminCSS.css';
 import { getReviewsPerDay } from '../../actions/admin/analytics';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
 import { Chart } from "react-google-charts";
 
-class Home extends Component {
+class ReviewsPerDay extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            
         }
         this.redirectHandler = this.redirectHandler.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getReviewsPerDay();
     }
 
@@ -51,7 +50,7 @@ class Home extends Component {
         if (nextProps.analyticsReviewPerDay) {
             var { analyticsReviewPerDay } = nextProps;
 
-            console.log('Home -> componentWillReceiveProps -> analyticsReviewPerDay : ', analyticsReviewPerDay);
+            console.log('ReviewsPerDay -> componentWillReceiveProps -> analyticsReviewPerDay : ', analyticsReviewPerDay);
             this.setState({
                 analyticsReviewPerDay: analyticsReviewPerDay,
             });
@@ -59,7 +58,7 @@ class Home extends Component {
         if (nextProps.analyticsReviewPerDayError) {
             var { analyticsReviewPerDayError } = nextProps;
 
-            console.log('Home -> componentWillReceiveProps -> analyticsReviewPerDayError : ', analyticsReviewPerDayError);
+            console.log('ReviewsPerDay -> componentWillReceiveProps -> analyticsReviewPerDayError : ', analyticsReviewPerDayError);
             this.setState({
                 analyticsReviewPerDayError: analyticsReviewPerDayError,
                 analyticsReviewPerDay: null,
@@ -146,4 +145,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsPerDay);
