@@ -9,6 +9,7 @@ import companyjobs from './companyjobs';
 import studentProfile from './studentProfile';
 import studentSearch from './studentSearch';
 import image from './image';
+import adminAnalytics from './adminanalytics';
 
 const rootReducer = combineReducers({
     comStore,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     companyjobs,
     studentProfile,
     studentSearch,
-    image
+    image,
+    adminAnalytics,
 });
 
 export default rootReducer;

@@ -84,7 +84,7 @@ router.post('/', async(req, res) => {
 });
 
 // @route  GET /company/review/my/reviews
-// @Desc   GET all current company's reviews
+// @Desc   GET all current company's reviews approved
 // @access Private
 
 router.get('/my/reviews', companyCheckAuth, async(req, res) => {
@@ -93,7 +93,7 @@ router.get('/my/reviews', companyCheckAuth, async(req, res) => {
         const company = await Company.findOne({ "email": req.company.email })
         if (company) {
             console.log("company Id", company._id)
-            const reviews = await Review.find({ "company": company._id });
+            const reviews = await Review.find({ $and: [{ "company": company._id }, { 'approvalStatus': 'approved' }] });
             console.log("after query")
             if (!reviews) {
 
@@ -277,7 +277,9 @@ router.post('/reply/:id', companyCheckAuth, async(req, res) => {
 
     try {
         // console.log(req.params.id)
-        const reply = req.body.reply
+        console.log(req.body)
+        const reply = req.body.message
+        console.log("reply inside post is ", reply)
         let review = await Review.findOne({ "_id": req.params.id })
         if (review) {
 

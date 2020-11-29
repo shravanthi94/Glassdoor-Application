@@ -47,81 +47,63 @@ const Demographics = () => {
                 <div className='card-body'>
                   <h5 className='mt-1'>Race/Ethinicity</h5>
                   <select className='dropdown dropdown-wide' name='query'>
-                    <option className='dropdownOptionLabel' value='JOBS'>
-                      Jobs
+                    <option className='dropdownOptionLabel'>Select</option>
+                    <option
+                      className='dropdownOptionLabel'
+                      value='American Indian'
+                    >
+                      American Indian
                     </option>
-                    <option className='dropdownOptionLabel' value='Companies'>
-                      Companies
+                    <option
+                      className='dropdownOptionLabel'
+                      value='Alaska Native Asian'
+                    >
+                      Alaska Native Asian
                     </option>
-                    <option className='dropdownOptionLabel' value='Salaries'>
-                      Salaries
+                    <option
+                      className='dropdownOptionLabel'
+                      value='African American'
+                    >
+                      African American
                     </option>
-                    <option className='dropdownOptionLabel' value='Interviews'>
-                      Interviews
+                    <option
+                      className='dropdownOptionLabel'
+                      value='Native Hawaiian'
+                    >
+                      Native Hawaiian or Other Pacific Islander White
                     </option>
                   </select>
 
                   <h5 className='mt-5'>Gender</h5>
                   <select className='dropdown dropdown-wide' name='query'>
-                    <option className='dropdownOptionLabel' value='JOBS'>
-                      Jobs
+                    <option className='dropdownOptionLabel'>Select</option>
+                    <option className='dropdownOptionLabel' value='Male'>
+                      Male
                     </option>
-                    <option className='dropdownOptionLabel' value='Companies'>
-                      Companies
-                    </option>
-                    <option className='dropdownOptionLabel' value='Salaries'>
-                      Salaries
-                    </option>
-                    <option className='dropdownOptionLabel' value='Interviews'>
-                      Interviews
-                    </option>
-                  </select>
-
-                  <h5 className='mt-5'>Sexual Orientation</h5>
-                  <select className='dropdown dropdown-wide' name='query'>
-                    <option className='dropdownOptionLabel' value='JOBS'>
-                      Jobs
-                    </option>
-                    <option className='dropdownOptionLabel' value='Companies'>
-                      Companies
-                    </option>
-                    <option className='dropdownOptionLabel' value='Salaries'>
-                      Salaries
-                    </option>
-                    <option className='dropdownOptionLabel' value='Interviews'>
-                      Interviews
+                    <option className='dropdownOptionLabel' value='Female'>
+                      Female
                     </option>
                   </select>
 
                   <h5 className='mt-5'>Disability</h5>
                   <select className='dropdown dropdown-wide' name='query'>
-                    <option className='dropdownOptionLabel' value='JOBS'>
-                      Jobs
+                    <option className='dropdownOptionLabel'>Select</option>
+                    <option className='dropdownOptionLabel' value='Yes'>
+                      Yes
                     </option>
-                    <option className='dropdownOptionLabel' value='Companies'>
-                      Companies
-                    </option>
-                    <option className='dropdownOptionLabel' value='Salaries'>
-                      Salaries
-                    </option>
-                    <option className='dropdownOptionLabel' value='Interviews'>
-                      Interviews
+                    <option className='dropdownOptionLabel' value='No'>
+                      No
                     </option>
                   </select>
 
                   <h5 className='mt-5'>Vetran Status</h5>
                   <select className='dropdown dropdown-wide' name='query'>
-                    <option className='dropdownOptionLabel' value='JOBS'>
-                      Jobs
+                    <option className='dropdownOptionLabel'>Select</option>
+                    <option className='dropdownOptionLabel' value='Yes'>
+                      Yes
                     </option>
-                    <option className='dropdownOptionLabel' value='Companies'>
-                      Companies
-                    </option>
-                    <option className='dropdownOptionLabel' value='Salaries'>
-                      Salaries
-                    </option>
-                    <option className='dropdownOptionLabel' value='Interviews'>
-                      Interviews
+                    <option className='dropdownOptionLabel' value='No'>
+                      No
                     </option>
                   </select>
                   <br />

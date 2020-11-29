@@ -73,9 +73,13 @@ export const markReviewFeatured = (id) => async dispatch => {
     }
 }
 
-export const replyComment = (id) => async dispatch => {
+export const replyComment = (id, formData) => async dispatch => {
     try {
-        const res = await axios.post(`/company/review/reply/${id}`)
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+        };
+        console.log("formData is ", formData)
+        const res = await axios.post(`/company/review/reply/${id}`, formData, config)
 
         dispatch({
             type: REPLY_MESSAGE,

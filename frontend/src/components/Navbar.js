@@ -24,7 +24,7 @@ const Navbar = ({ isAuthenticated, signup }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/student/profile' />;
+    return <Redirect to='/student/landing' />;
   }
   return (
     <Fragment>

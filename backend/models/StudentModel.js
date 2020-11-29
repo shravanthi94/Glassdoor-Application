@@ -7,40 +7,49 @@ const StudentSchema = new mongoose.Schema({
   jobPreference: {
     status: {
       type: String,
+      default: '',
     },
     title: {
       type: String,
+      default: '',
     },
     salary: {
       type: String,
+      default: '',
     },
     relocation: {
       type: Boolean,
+      default: true,
     },
     industry: {
       type: String,
+      default: '',
     },
   },
   demographics: {
     ethnicity: {
       type: String,
+      default: '',
     },
     gender: {
       type: String,
+      default: '',
     },
     disability: {
       type: String,
+      default: '',
     },
     veteran: {
-      type: Boolean,
+      type: String,
+      default: '',
     },
   },
 
   primaryResume: {
     type: String,
   },
-  
-  applications:{
+
+  applications: {
     type: String,
   },
 
@@ -50,12 +59,11 @@ const StudentSchema = new mongoose.Schema({
 const Student = mongoose.model('student', StudentSchema);
 module.exports = Student;
 
-
 /*
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  */

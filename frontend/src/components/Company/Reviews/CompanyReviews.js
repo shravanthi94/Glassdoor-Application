@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect } from 'react-redux'
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {getCurrentCompanyReviews} from '../../../actions/company/companyreviews'
 import {getCurrentCompanyProfile} from '../../../actions/company/companyprofile'
 import CmpNav2 from '../CmpNav2'
@@ -44,6 +44,13 @@ const CompanyReviews = ({
         markReviewFeatured(rev_id)
         window.location.reload();
     }
+
+    const history = useHistory();
+
+    const reviewReply = (id) =>{ 
+        let path = `/company/reply/review/${id}`; 
+        history.push(path);
+      }
 
     return (
         <Fragment>
@@ -129,6 +136,11 @@ const CompanyReviews = ({
                                                     <tr><td>{review.comment}</td></tr>
                                                     <tr><td><div className="overview-reviews-pros-cons-title">Pros:</div><div className="overview-reviews-pros-cons"> {review.pros} </div></td></tr>
                                                     <tr><td><div className="overview-reviews-pros-cons-title">Cons:</div><div className="overview-reviews-pros-cons"> {review.cons} </div></td></tr>
+                                                    {/* {review.reply>0?  */}
+                                                    <tr><td><div className="overview-reviews-pros-cons-title" style={{color: '#1861bf'}}>Reply:</div> {review.reply.map(reply=>(
+                                                        <div className="overview-reviews-pros-cons"> {reply.message} </div>
+                                                    ))}
+                                                    </td></tr> 
                                                 </table>
                                             </td>
                                         </tr>
@@ -143,8 +155,7 @@ const CompanyReviews = ({
                                     </li>
                                     &emsp;
                                     <li>
-                                        <button className="action-icons"><i className="fas fa-comments" style={{ color: '#13AA41' }}></i></button>
-                                       
+                                        <button className="action-icons" onClick={(e)=> (reviewReply(review._id))}><i className="fas fa-comments" style={{ color: '#13AA41' }}></i></button>  
                                     </li>
                                     &emsp;
                                     <li>
