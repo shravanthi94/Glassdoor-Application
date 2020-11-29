@@ -79,7 +79,7 @@ class MostViewedCompanies extends Component {
         if(this.props.analyticsMostViewedCompanies) {
             mostViewedCompaniesArray.push(['x', 'Number of Views']);
             this.props.analyticsMostViewedCompanies.viewsAnalytics.map((viewsAnalytic) => {
-                mostViewedCompaniesArray.push([viewsAnalytic._id, viewsAnalytic.views[0].count]);
+                mostViewedCompaniesArray.push([viewsAnalytic.name, viewsAnalytic.views[0].count]);
             })
         }
         console.log("########", mostViewedCompaniesArray);
