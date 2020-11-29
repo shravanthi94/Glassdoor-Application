@@ -77,7 +77,7 @@ export const getTopStudentReviewers = () => async dispatch => {
 export const getTopCeo = () => async dispatch => {
     console.log("analytics -> getTopCeo -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/top-ceoy?limit=10')
+        const res = await axios.get('/admin/analytics/top-ceo?limit=10')
 
         dispatch({
             type: TOP_CEO,
@@ -102,9 +102,10 @@ export const getMostViewedcompany = () => async dispatch => {
             payload: res.data
         })
     } catch (err) {
+        console.log("Error: ", err);
         dispatch({
             type: MOST_VIEWED_COMPANY_ERROR,
-            payload: err.response.data
+            payload: err.response.data,
         })
 
     }
