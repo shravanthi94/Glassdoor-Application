@@ -4,7 +4,10 @@ import { setAlert } from '../alert';
 import {
     COMPANY_GETREVIEWS,
     COMPANY_GETREVIEW,
-    COMPANY_REVIEWS_ERROR
+    COMPANY_REVIEWS_ERROR,
+    MARK_FAVORITE_SUCCESS,
+    MARK_FEATURED_SUCCESS,
+    REPLY_MESSAGE
 
 } from '../types';
 
@@ -21,7 +24,7 @@ export const getCurrentCompanyReviews = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: COMPANY_REVIEWS_ERROR,
-            payload: { msg: err.repsonse.statusText, status: err.response.status }
+            payload: { msg: err, status: err.response.status }
         })
 
     }
@@ -35,7 +38,47 @@ export const markReviewFav = (id) => async dispatch => {
         const res = await axios.post(`/company/review/favorite/${id}`)
 
         dispatch({
-            type: COMPANY_GETREVIEW,
+            type: MARK_FAVORITE_SUCCESS,
+            payload: res.data
+        })
+    } catch (err) {
+        const errors = err.response.data.errors;
+        if (errors) {
+            errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: COMPANY_REVIEWS_ERROR,
+            payload: { msg: err, status: err.response.status }
+        })
+
+    }
+}
+
+
+export const markReviewFeatured = (id) => async dispatch => {
+    try {
+        const res = await axios.post(`/company/review/featured/${id}`)
+
+        dispatch({
+            type: MARK_FEATURED_SUCCESS,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err)
+        dispatch({
+            type: COMPANY_REVIEWS_ERROR,
+            payload: { msg: err, status: err.response.status }
+        })
+
+    }
+}
+
+export const replyComment = (id) => async dispatch => {
+    try {
+        const res = await axios.post(`/company/review/reply/${id}`)
+
+        dispatch({
+            type: REPLY_MESSAGE,
             payload: res.data
         })
     } catch (err) {

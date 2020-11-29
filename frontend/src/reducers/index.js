@@ -8,16 +8,18 @@ import companyreviews from './companyreviews';
 import companyjobs from './companyjobs';
 import studentProfile from './studentProfile';
 import studentSearch from './studentSearch';
+import image from './image';
 
 const rootReducer = combineReducers({
-  comStore,
-  alert,
-  auth,
-  companyprofile,
-  companyreviews,
-  companyjobs,
-  studentProfile,
-  studentSearch,
+    comStore,
+    alert,
+    auth,
+    companyprofile,
+    companyreviews,
+    companyjobs,
+    studentProfile,
+    studentSearch,
+    image
 });
 
 export default rootReducer;

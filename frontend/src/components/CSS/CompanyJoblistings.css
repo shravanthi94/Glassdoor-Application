@@ -13,6 +13,9 @@
     padding-left: 1200px
 }
 
+
+/***Job creation form****/
+
 .form-box-company-job {
     background-color: white;
     padding-left: 20px;
@@ -24,4 +27,70 @@
 
 .btn-sign-company-job {
     padding-left: 600px;
+}
+
+
+/***** Jobs list ****/
+
+.company-jobs-view-columns {
+    display: flex;
+    /* flex-flow: row wrap; */
+    /* justify-content: center; */
+}
+
+.company-jobs-list-column {
+    margin: 0px 15px 25px;
+    border: none;
+    width: 40%;
+    background-color: whitesmoke;
+    border: 1px solid #888;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.company-jobs-viewdetail-column {
+    margin: 0px 15px 25px;
+    border: none;
+    width: 60%;
+    background-color: whitesmoke;
+    border: 1px solid #888;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.joblisting-date-company {
+    color: #858C94;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.joblisting-title-company {
+    font-size: 18px;
+    color: #1861BF;
+    font-weight: bold;
+}
+
+.company-job-box {
+    border: 1px solid grey;
+    background-color: whitesmoke;
+    font-family: "Lato", "San Serif";
+}
+
+.compnay-view-button {
+    background-color: #1861bf;
+    border: none;
+    color: whitesmoke;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 15px;
+    font-family: 'Lato', San Serif;
+}
+
+.card {
+    font-size: 16px;
 }

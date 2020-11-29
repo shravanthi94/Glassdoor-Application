@@ -45,7 +45,7 @@ const CompanyDashboard = ({getCurrentCompanyProfile, auth, companyprofile:{compa
                     {companyprofile.logo?<img className="company-banner" src={require('../../components/images/' + companyprofile.logo + '_banner.jpg').default} alt="" />:<img className="company-banner" src={require('../../components/images/' + companyprofile.profilePic + '_banner.jpg').default} alt="" />}
                     {companyprofile.logo?<img className="company-logo" src={require('../../components/images/' + companyprofile.logo + '_logo.jpg').default} alt="" />:<img className="company-logo" src={require('../../components/images/' + companyprofile.profilePic + '_logo.png').default} alt="" />}
                     {companyprofile.name?<div className="dashboard-company-name">{companyprofile.name}{' '}
-                    <Link to="/company/updateprofile" style={{ fontSize: "14px", color: "#1861BF" }}>Update Profile</Link>
+                    {/* <Link to="/company/updateprofile" style={{ fontSize: "14px", color: "#1861BF" }}>Update Profile</Link> */}
                     </div>:' '}
                     <table className="profile-row-one-table">
                         <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={overviewRoute}>Overview&emsp;</div></td>

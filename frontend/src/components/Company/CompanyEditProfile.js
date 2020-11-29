@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import CmpNav2 from './CmpNav2';
 import {editCompanyProfile, getCurrentCompanyProfile} from '../../actions/company/companyprofile';
+import {insertProfilePic} from '../../actions/company/insertProfilePic'
 import '../CSS/CompanySign.css';
 import '../CSS/CompanyProfile.css';
 
-const CompanyEditProfile = ({companyprofile:{companyprofile, loading},editCompanyProfile, getCurrentCompanyProfile, history}) => {
+const CompanyEditProfile = ({getCurrentCompanyProfile, companyprofile:{companyprofile, loading},editCompanyProfile, history}) => {
     const [formData, setFormData] = useState({
         name:'',
         email:'',
@@ -40,7 +41,8 @@ const CompanyEditProfile = ({companyprofile:{companyprofile, loading},editCompan
             industry: loading || !companyprofile.industry ? '': companyprofile.industry,
             founded: loading || !companyprofile.founded ? '': companyprofile.founded,
             mission: loading || !companyprofile.mission ? '': companyprofile.mission,
-        }) 
+        });
+        // setImage({profilePic: loading || !companyprofile.profilePic ? '': companyprofile.profilePic})
     }, [loading])
 
     const {
@@ -56,12 +58,35 @@ const CompanyEditProfile = ({companyprofile:{companyprofile, loading},editCompan
         headquarters,
         industry,
         founded,
-        mission
+        mission,
     } = formData;
 
     const onChange = e=>{
         setFormData({...formData, [e.target.name]: e.target.value});
     }
+
+    // const [image,setImage] = useState({
+    //     file: "",
+    //     fileText: "",
+    //   })
+    
+    //   const imageChange = (e)=>{
+    //     console.log("image file name is ",e.target.files[0].name)
+    //     setImage({file:e.target.files[0],fileText: e.target.files[0].name})
+    //   }
+
+    //   const imageSave = (e) => {
+    //     e.preventDefault();
+    //     console.log("inside imageSave, file is ", image.file);
+    //     console.log("inside imageSave, fileText is ", image.fileText);
+    //     insertProfilePic(image.file, companyprofile._id,companyprofile.name);
+        // const newimg = "rest_"+string(restprofile.restuser._id)+"."
+        // if (userprofile.user.image)
+        // {
+        //   setImage({file:userprofile.user.image})
+        // }
+    //   }
+
 
     const onSubmit = e =>{
         e.preventDefault();
@@ -73,6 +98,32 @@ const CompanyEditProfile = ({companyprofile:{companyprofile, loading},editCompan
             <div className="contentholder-form-companyprofile text-company">
                 Update your Company Profile 
                 <br/>
+                <br/>
+                <div className="form-box-companyprofile">
+                <form className="form-company">
+                        <div >
+                            <div className="form-group-company">
+                                Update profile picture<br/><br/>
+                                <input type ="file" />
+                            </div>
+                        <button type="submit" className="btn-updateprofile">
+                        Save
+                        </button>
+                        </div>
+                </form>
+                <hr/>
+                <form className="form-company">
+                        <div >
+                            <div className="form-group-company">
+                                Update Company Logo<br/><br/>
+                                <input type ="file"/>
+                            </div>
+                        <button type="submit" className="btn-updateprofile">
+                        Save
+                        </button>
+                        </div>
+                </form>
+                </div>
                 <br/>
                 <div className="form-box-companyprofile">
                     <form className="form-company" onSubmit={(e) => onSubmit(e)}>
@@ -220,4 +271,4 @@ const mapStateToProps = state => ({
     companyprofile: state.companyprofile
 })
 
-export default connect(mapStateToProps, {editCompanyProfile, getCurrentCompanyProfile})(withRouter(CompanyEditProfile))
+export default connect(mapStateToProps, {getCurrentCompanyProfile, editCompanyProfile})(withRouter(CompanyEditProfile))

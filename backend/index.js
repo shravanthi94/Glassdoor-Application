@@ -87,5 +87,5 @@ app.use('/admin/analytics', analytics);
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Application started listening to port ${PORT} successfully.`);
+    console.log(`Application started listening to port ${PORT} successfully.`);
 });
