@@ -6,6 +6,7 @@ const { checkAuth } = require('../../middleware/studentAuth');
 const Student = require('../../models/StudentModel');
 const Company = require('../../models/CompanyModel');
 const Jobposting = require('../../models/JobPostingModel');
+const Review = require('../../models/ReviewModel');
 
 router.post('/', checkAuth, async (req, res) => {
   console.log('here: ', req.user);
@@ -43,13 +44,9 @@ router.get('/search/:data/:query', async (req, res) => {
     } else {
       results = await Company.find({
         name: { $regex: `.*${searchData}.*` },
-      }).populate({
-        path: 'company',
-        select: 'name',
-        model: Jobposting,
       });
     }
-
+    // reviews = await Review.find({})
     if (results.length === 0) {
       return res.status(400).json({ errors: [{ msg: 'No results found.' }] });
     }
