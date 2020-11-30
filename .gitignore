@@ -1,2 +1,9 @@
 node_modules/
 .DS_Store
+ignore/Applications.js/AddCompanyReview.js
+ignore/Applications.js/CompanyOverview.js
+ignore/Applications.js/CompanyReviews.js
+ignore/Applications.js/LandingPage.js
+ignore/Applications.js/Login.js
+ignore/Applications.js/Navigation.js
+ignore/Applications.js/SearchResults.js
