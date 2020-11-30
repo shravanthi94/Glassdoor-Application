@@ -92,3 +92,37 @@ export const getStudentDetailByEmail = (stuEmailId) => async dispatch => {
 
     }
 }
+
+// update applicant status
+
+export const updateApplicantStatus = (applicantId, applicantStatus, history) => async dispatch => {
+    // console.log("action called")
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+        };
+        console.log("applicant status in action", applicantStatus)
+        const body = JSON.stringify({ applicantStatus });
+        const res = await axios.post(
+            `/company/applicant/statusUpdate/${applicantId}`,
+            body,
+            config
+        );
+        dispatch({
+            type: COMPANY_GETJOB,
+            payload: res.data,
+        });
+        dispatch(setAlert('Applicant status updated', 'success'));
+        history.push('/company/jobpostings');
+    } catch (err) {
+        console.log(err)
+            // const errors = err.response.data.errors;
+            // if (errors) {
+            //     errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+            // }
+            // dispatch({
+            //     type: COMPANY_JOBERROR,
+            //     payload: { msg: err, status: err.response.status },
+            // });
+    }
+};

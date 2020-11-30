@@ -162,7 +162,7 @@ router.post('/', [companyCheckAuth, [
 router.get('/myjobs', companyCheckAuth, async(req, res) => {
 
     try {
-        const jobs = await Jobposting.find({ email: req.company.email });
+        const jobs = await Jobposting.find({ email: req.company.email }).populate('applicants.student');
         if (!jobs) return res.status(400).json({ msg: 'There are no Jobs created by this Restaurant' });
         res.json(jobs);
     } catch (err) {
