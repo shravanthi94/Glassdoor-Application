@@ -19,12 +19,12 @@ export const getCompanyJobs = (payload) => {
         axios.get(configPath.api_host + '/company/job/' + payload)
             .then(response => {
 
-                console.log("Actions: Get Company Reviews:", response);
-                var reviews = response.data;
+                console.log("Actions: Get Company Jobs:", response);
+                var jobs = response.data;
 
                 if (response.status === 200) {
                     dispatch(getCompanyJobsDispatcher({
-                        reviews
+                        jobs
                     })
                     );
                 }

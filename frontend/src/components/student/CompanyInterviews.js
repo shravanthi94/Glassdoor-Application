@@ -139,6 +139,9 @@ class CompanyInterviews extends Component {
                 logo: this.props.company.overview.logo,
                 company_name: this.props.company.overview.name
             }
+        }else if (e === "jobs") {
+            path = "/companyJobs"
+            data = this.props.company.overview._id
         }
 
         this.setState({
@@ -177,7 +180,7 @@ class CompanyInterviews extends Component {
                             <table className="profile-row-one-table">
                                 <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={() => this.redirectHandler("overview")}>Overview&emsp;</div></td>
                                 <td ><div className="profile-counts">4.0k</div><div className="profile-title" onClick={() => this.redirectHandler("reviews")}>Reviews&emsp;</div></td>
-                                <td><div className="profile-counts">867</div><div className="profile-title">Jobs&emsp;</div></td>
+                                <td><div className="profile-counts">867</div><div className="profile-title" onClick={() => this.redirectHandler("jobs")}>Jobs&emsp;</div></td>
                                 <td><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
                                 <td className="profile-titles-selected"><div className="profile-counts">1.2k</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>

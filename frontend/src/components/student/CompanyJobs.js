@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import '../CSS/salaries.css';
+import '../CSS/job.css';
 import { getCompanyJobs } from '../../actions/company/getCompanyJobs';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
@@ -12,20 +12,92 @@ class CompanyJobs extends Component {
     constructor(props) {
         super(props);
 
+        console.log("jobs: ", this.props.location.state);
+
         this.state = {
             submitted: false,
             isRedirect: false,
             redirectPath: "",
-            company_id: this.props.location.state,
-            data: ""
+            company_id: this.props.location.state.company_id,
+            data: "",
+            jobs: this.props.jobs,
+            filteredJobs: this.props.jobs,
+            searchName: "",
+            searchLocation: "",
+            redirectToJob: false,
+            jobDetail: ""
         }
 
         this.redirectHandler = this.redirectHandler.bind(this);
+        this.searchHandler = this.searchHandler.bind(this);
+        this.searchNameHandler = this.searchNameHandler.bind(this);
+        this.searchLocationHandler = this.searchLocationHandler.bind(this);
+        this.redirectJobHandler = this.redirectJobHandler.bind(this);
     }
 
     componentDidMount() {
         this.props.getCompanyJobs(this.state.company_id);
     }
+
+    componentDidUpdate(prevProps) {
+
+        if (this.state.jobs !== this.props.jobs) {
+            this.setState({
+                jobs: this.props.jobs,
+                filteredJobs: this.props.jobs
+            })
+        }
+    }
+
+    searchNameHandler = (e) => {
+        this.setState({
+            searchName: e.target.value
+        })
+    }
+    searchLocationHandler = (e) => {
+        this.setState({
+            searchLocation: e.target.value
+        })
+    }
+
+    redirectJobHandler = (e) => {
+        this.setState({
+            redirectToJob: true,
+            jobDetail: e
+        })
+    }
+
+    searchHandler = (e) => {
+        e.preventDefault();
+
+        console.log("search handler:", this.state.searchName, this.state.searchLocation);
+        var filtered = [];
+
+        if ((!this.state.searchName || this.state.searchName.length === 0) && (!this.state.searchLocation || this.state.searchLocation.length === 0)) {
+            filtered = this.state.jobs;
+        } else {
+            this.state.jobs.map(job => {
+
+
+                if (this.state.searchName && !this.state.searchLocation) {
+                    if ((job.title.toLowerCase().search(this.state.searchName.toLowerCase()) !== -1)) {
+                        filtered.push(job);
+                    }
+                } else if (this.state.searchLocation && !this.state.searchName) {
+                    if ((job.city.toLowerCase().search(this.state.searchLocation.toLowerCase()) !== -1) || (job.state.toLowerCase().search(this.state.searchLocation.toLowerCase()) !== -1)) {
+                        filtered.push(job);
+                    }
+                } else {
+                    if ((job.title.toLowerCase().search(this.state.searchName.toLowerCase()) !== -1) && ((job.city.toLowerCase().search(this.state.searchLocation.toLowerCase()) !== -1) || (job.state.toLowerCase().search(this.state.searchLocation.toLowerCase()) !== -1))) {
+                        filtered.push(job);
+                    }
+                }
+
+            })
+        }
+        this.setState({ filteredJobs: filtered });
+    }
+
 
     redirectHandler = (e) => {
         console.log("redirect value: ", e);
@@ -79,6 +151,11 @@ class CompanyJobs extends Component {
         if (this.state.isRedirect) {
             redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { data: this.state.data } }} />
         }
+
+        if(this.state.redirectToJob){
+            redirectVar = <Redirect to={{ pathname: "/companyJobDetails", state: { data: this.state.jobDetail } }} />
+        }
+
         return (
             <div>
                 {redirectVar}
@@ -106,39 +183,48 @@ class CompanyJobs extends Component {
                             <div className="profile-row-two">
                                 <div className="profile-row-two-row1">
 
-                                <div className="profile-row-two-inside">
+                                    <div className="profile-row-two-inside" style={{ width: "650px" }}>
                                         <div style={{ fontSize: "22px", color: "#0D0D0D" }}>{company_name} Jobs</div>
 
-                                        <div style={{ fontSize: "15px", color: "#505863", marginTop: "15px" }}>How much do PayPal employees make? Glassdoor has salaries, wages, tips, bonuses, and hourly pay based upon employee reports and estimates.</div>
-                                        <div style={{ fontSize: "18px", color: "#0D0D0D", marginTop: "15px" }}>Find {company_name} Salaries by Job Title</div>
-                                        <div style={{ fontSize: "15px", color: "#505863", marginTop: "15px" }}> Many PayPal employees have shared their salaries on Glassdoor. Select your job title and find out how much you could make at PayPal.</div>
 
 
-
+                                        <form>
+                                            <table className="search-table">
+                                                <tbody >
+                                                    <tr className="search-row">
+                                                        <td className="search-column"><input type="text" onChange={this.searchNameHandler} class="search-bar" name="searchName" placeholder="Search job titles" /></td>
+                                                        <td className="search-column"><input type="text" onChange={this.searchLocationHandler} class="search-bar" name="searchLocation" placeholder="City, State or Zip" /></td>
+                                                        <td className="search-column">  <button style={{ marginLeft: '15%' }} className="company-find-job-button" onClick={this.searchHandler}>Find Jobs</button> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                        <br /><br />
                                         <hr className="overview-hr" />
 
                                         <form></form>
 
-                                        {(this.props.company.overview.salary && this.props.company.overview.salary !== 0) ?
-
-                                            this.props.company.overview.salary.map(salary => (
-                                                <table>
-                                                    <tr><td className="company-salary-job-title">{salary.jobTitle}</td></tr>
-                                                    <tr>
-                                                        <td>
-                                                            <tr className="company-salary-job-details-row">
-                                                                <td><tr className="company-salary-job-details">{salary.avgTotalPay}</tr><tr className="company-salary-job-details-title">Avg. Total Pay/yr</tr></td>
-                                                                <td><tr className="company-salary-job-details">{salary.baseSalary}</tr><tr className="company-salary-job-details-title">Base Pay/yr</tr></td>
-                                                                <td><tr className="company-salary-job-details">{salary.bonuses}</tr><tr className="company-salary-job-details-title">Additional Pay/yr</tr></td>
-                                                                <td><tr className="company-salary-job-details-full">Full Pay Details<div className="company-salary-arrow"><i class="fa fa-angle-right"></i></div></tr><tr className="company-salary-job-details-title">Based on more salaries</tr></td>
-                                                            </tr>
-                                                        </td>
-                                                    </tr>
-
-                                                    <hr className="overview-hr" />
-                                                </table>
-                                            )) : <div> No Reviews Yets</div>
-                                        }
+                                        <table className="job-postings-table">
+                                            {(this.state.filteredJobs && this.state.filteredJobs !== 0) ?
+                                                this.state.filteredJobs.map(job => (
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <img className="job-postings-logo" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" />
+                                                                </div>
+                                                            </td>
+                                                            <td className="company-salary-job-title">
+                                                                <div onClick={() => this.redirectJobHandler(job)}>{job.title}</div>
+                                                                <div><span style={{color:"black", fontWeight:"normal"}}>{company_name}</span><span className="job-city-state"> - {job.city}, {job.state}</span></div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="joblisting-date-company-date company-job-heart-icon"><i class="far fa-heart"></i></div>
+                                                                <div className="joblisting-date-company-date ">{(job.date + "").substring(0, 10)}</div>
+                                                            </td>
+                                                        </tr>
+                                                )) : <tr><td><div> No Job Postings Yets</div></td></tr>
+                                            }
+                                        </table>
                                         {(this.props.company.reviews && this.props.company.reviews.length !== 0) ? <div className="overview-see-all-reviews">See All Salaries </div> : ""}
                                     </div>
                                 </div>
@@ -154,10 +240,10 @@ class CompanyJobs extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(" CompanyReviews - store:", state.comStore);
+    console.log(" CompanyJobs - store:", state.comStore);
     return {
         company: state.comStore.company || "",
-        reviews: state.comStore.reviews || ""
+        jobs: state.comStore.jobs || ""
     };
 };
 

@@ -49,6 +49,7 @@ import AddInterviewExp from './Student/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Student/AddCompanyInterview';
 import CompanyJobs from './Student/CompanyJobs';
+import CompanyJobDetails from './Student/CompanyJobDetails';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -71,6 +72,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
+            <Route exact path='/companyJobDetails' component={CompanyJobDetails} />
             <Route
               exact
               path='/companyInterviews'
