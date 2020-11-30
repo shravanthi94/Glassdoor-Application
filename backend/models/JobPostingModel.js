@@ -59,6 +59,9 @@ const JobPostingSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'student'
         },
+        email: {
+            type: String
+        },
         resume: {
             type: String
         },

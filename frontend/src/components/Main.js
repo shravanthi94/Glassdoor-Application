@@ -25,9 +25,10 @@ import CompanyDashboardReviews from './Company/Reviews/CompanyReviews';
 import CompanyOverview from './Student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
-// import CompanyJobDetail from './Company/JobPostings/JobDetails';
+import ViewApplicants from './Company/JobPostings/ViewApplicants';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 import CompanyReplyMessage from './Company/Reviews/CompanyReviewReply';
+import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
 
 // Student Links
 import Login from './Student/Login';
@@ -126,11 +127,11 @@ class Main extends Component {
               path='/companydashboard'
               component={CompanyDashboard}
             />
-           {/* <PrivateRoute
+           <PrivateRoute
               exact
-              path='/company/jobs/jobdetail/:jobid'
-              component={CompanyJobDetail}
-            /> */}
+              path='/company/viewapplicants/:id'
+              component={ViewApplicants}
+            />
             <PrivateRoute
               exact
               path='/company/reviewspage'
@@ -152,6 +153,7 @@ class Main extends Component {
               component={CompanyCreateJob}
             />
             <PrivateRoute exact path='/company/reply/review/:id' component={CompanyReplyMessage}/>
+            <PrivateRoute exact path='/company/viewapplicantdetails/:id' component={ViewApplicantDetails}/>
 
             {/* Admin Routes */}
             <Route exact path='/admin/signin' component={AdminLogin} />
