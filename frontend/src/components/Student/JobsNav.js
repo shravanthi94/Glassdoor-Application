@@ -34,6 +34,8 @@ const JobsNav = () => {
 
                 </ToggleButtonGroup>
             </div>
+            <div>Job cards</div>
+            <div>Job details </div>
         </Fragment>
     );
 };

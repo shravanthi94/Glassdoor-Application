@@ -48,6 +48,7 @@ import AddCompanySalary from './Student/AddCompanySalary';
 import AddInterviewExp from './Student/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Student/AddCompanyInterview';
+import JobsNav  from './Student/JobsNav';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -115,6 +116,11 @@ class Main extends Component {
               exact
               path='/student/update/demographics'
               component={Demographics}
+            />
+             <PrivateRoute
+              exact
+              path='/student/jobs'
+              component={JobsNav}
             />
             <PrivateRoute
               exact
