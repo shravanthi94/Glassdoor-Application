@@ -51,6 +51,9 @@ class CompanyOverview extends Component {
         }else if (e === "jobs") {
             path = "/companyJobs"
             data = this.props.company.overview._id
+        }else if(e === "photos"){
+            path = "/companyPhotos"
+            data = this.props.company.overview._id
         }
 
         this.setState({
@@ -92,7 +95,7 @@ class CompanyOverview extends Component {
                                 <td><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
                                 <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
-                                <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
+                                <td><div className="profile-counts">92</div><div className="profile-title" onClick={() => this.redirectHandler("photos")}>Photos&emsp;</div></td>
                             </table>
                         </div>
                         <div className="side-by-side-overview">
@@ -216,9 +219,10 @@ class CompanyOverview extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(" CompanyOverview - store:", state.comStore);
+    console.log(" CompanyOverview - store:", state);
     return {
-        company: state.comStore.company || ""
+        company: state.comStore.company || "",
+        student: state.studentProfile.profile._id
     };
 };
 

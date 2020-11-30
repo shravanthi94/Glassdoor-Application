@@ -131,6 +131,9 @@ class CompanyJobs extends Component {
                 logo: this.props.company.overview.logo,
                 company_name: this.props.company.overview.name
             }
+        }else if(e === "photos"){
+            path = "/companyPhotos"
+            data = this.props.company.overview._id
         }
 
         this.setState({
@@ -175,7 +178,7 @@ class CompanyJobs extends Component {
                                 <td><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
                                 <td><div className="profile-counts">1.2k</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
                                 <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
-                                <td><div className="profile-counts">92</div><div className="profile-title">Photos&emsp;</div></td>
+                                <td><div className="profile-counts">92</div><div className="profile-title" onClick={() => this.redirectHandler("photos")}>Photos&emsp;</div></td>
                             </table>
                             <div className="profile-add-button-position"><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-salary")}><i class="fa fa-plus"></i> &nbsp;Add Salary</div></div>
                         </div>

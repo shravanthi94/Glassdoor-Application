@@ -228,7 +228,8 @@ const mapStateToProps = (state) => {
     return {
         company: state.comStore.company || "",
         addMsg: state.comStore.addMsg,
-        addFlag: state.comStore.addFlag
+        addFlag: state.comStore.addFlag,
+        student: state.studentProfile.profile._id | ""
     };
 };
 
