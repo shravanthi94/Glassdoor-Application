@@ -6,7 +6,7 @@ import { addReviews } from '../../actions/company/addCompanyReview';
 import { Redirect } from 'react-router';
 import StarRatings from 'react-star-ratings';
 
-class AddCompanyReview extends Component {
+class AddInterviewExp extends Component {
 
     constructor(props) {
         super(props);
@@ -172,8 +172,8 @@ class AddCompanyReview extends Component {
 
                                                         <tr> <div class="form-group"> Are you a current or former employee? </div> </tr>
                                                         <tr>
-                                                            {this.state.reviewDetails.current_former === "current" ? <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button-select" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("former")}>Former</div></div>
-                                                                : <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button-select" onClick={() => this.currentEmpHandler("former")}>Former</div></div>}
+                                                            {this.state.reviewDetails.current_former === "current" ? <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("former")}>Former</div></div>
+                                                                : <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button" onClick={() => this.currentEmpHandler("former")}>Former</div></div>}
                                                         </tr>
 
 
@@ -264,4 +264,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCompanyReview);
+export default connect(mapStateToProps, mapDispatchToProps)(AddInterviewExp);

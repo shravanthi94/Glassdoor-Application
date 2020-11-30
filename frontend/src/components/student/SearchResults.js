@@ -12,7 +12,7 @@ import '../CSS/studentLandingPage.css';
 const SearchResults = ({
   match,
   companySearchResults,
-  search: { results, loading },
+  search: { results, reviewCount, loading },
 }) => {
   const searchData = match.params.data;
   const query = match.params.query;
@@ -34,11 +34,13 @@ const SearchResults = ({
               <div class='container'>
                 <div class='row'>
                   <div class='col-sm'>
-                    <Link
+                    {/* <Link
                       class='student-card-title'
                       to={`/student/companyView/${each._id}`}
-                    >
-                      {each.name}
+                    > */}
+                    <Link to={{pathname:"/companyOverview", state:{ data: each._id}}}>
+                    <div className="student-card-title">
+                      {each.name} </div>
                     </Link>
                     {query === 'JOBS' && each.company ? (
                       <Fragment>
@@ -80,12 +82,20 @@ const SearchResults = ({
                   </div>
                   <div class='col-sm'>
                     <br />
-                    <pre>
+                    <p>
                       <strong className='h6'>
-                        &emsp; 19K &emsp; &emsp; 20K &emsp; &emsp; 30K
+                        &emsp;&emsp; 11 &emsp; &emsp; &emsp;{' '}
+                        {query === 'JOBS'
+                          ? each.company.interview.length
+                          : each.interview.length}{' '}
+                        &emsp;&emsp; &emsp;{' '}
+                        {query === 'JOBS'
+                          ? each.company.salary.length
+                          : each.salary.length}
                       </strong>
-                    </pre>
-                    <pre>&emsp;Reviews Interviews Salaries</pre>
+                    </p>
+                    {/* <br /> */}
+                    <p>&emsp;Reviews &emsp;Interviews &emsp;Salaries</p>
                     <br />
                     <Link
                       className='profile-btn btn custom-btn-1'

@@ -70,3 +70,35 @@
 .interview-charts {
     margin-top: 20px;
 }
+
+.interview-thumbs-up-down {
+    background-color: #f5f6f7;
+    border-radius: 50px;
+    color: black;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin-left: 10px;
+  }
+  
+.interview-thumbs-up-down svg{
+    margin-top: 14px;
+    font-size: 23px;
+    
+
+}
+
+.interview-thumbs-up-down-red{
+    background-color: #d93e2f;
+    color:#f5f6f7;
+}
+
+.interview-thumbs-up-down-yellow{
+    background-color: #f5c130;
+    color:#f5f6f7;
+}
+
+.interview-thumbs-up-down-green{
+    background-color: #13aa41;
+    color:#f5f6f7; 
+}

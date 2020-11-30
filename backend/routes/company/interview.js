@@ -16,13 +16,14 @@ router.post('/', async (req, res) => {
     try {
         console.log("interview details: ", req.body);
         var data = {
-            overallInterviewExp: req.body.overallInterviewExp,
-            title: req.body.title,
+            overallInterviewExp: req.body.overAllExperience,
+            title: req.body.jobTitle,
             description: req.body.description,
             difficulty: req.body.difficulty,
             offerStatus: req.body.offerStatus,
-            questions: req.body.questions,
-            answers: req.body.answers
+            questions: req.body.question,
+            answers: req.body.answer,
+            jobTitle: req.body.jobTitle
         };
 
         const company = await Company.findByIdAndUpdate({ _id: req.body.company }, { $push: { interview: data } }, { new: true });
