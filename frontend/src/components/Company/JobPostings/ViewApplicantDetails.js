@@ -8,14 +8,18 @@ import '../../CSS/CompanyLanding.css'
 import {getJobDetailById} from '../../../actions/company/companyjobpostings'
 
 
-const ViewApplicantDetails = ({getJobDetailById, companyjobs:{companyjob, loading}, match}) => {
+const ViewApplicantDetails = ({
+    getJobDetailById, 
+    companyjobs:{companyjob, loading}, 
+    getStudentDetailById,
+    match}) => {
 
     useEffect(()=>{
         getJobDetailById(match.params.id)
     }, [])
 
-    const applicantDetail = (applicant_id) =>{ 
-        getJobDetailById(applicant_id)
+    const studentDetail = (studentId) =>{ 
+        getStudentDetailById(studentId)
       }
 
     return (
@@ -42,7 +46,7 @@ const ViewApplicantDetails = ({getJobDetailById, companyjobs:{companyjob, loadin
                                                 </td> */}
                                                 <td>
                                                     <table>
-                                                        <tr><td> <h6 className="joblisting-title-company"><Link className='active' onClick={(e)=> applicantDetail(companyjob._id)}>{applicant.student.name}</Link></h6></td></tr>
+                                                        <tr><td> <h6 className="joblisting-title-company"><Link className='active' onClick={(e)=> studentDetail(applicant.student)}>{applicant.student.name}</Link></h6></td></tr>
                                                         <tr className="card-title"><td>"{applicant.student.email}"</td></tr>
                                                         <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td></tr>
                                                     </table>

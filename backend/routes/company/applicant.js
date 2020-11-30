@@ -47,28 +47,50 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
 // @Desc   Employer can see the resume and cover letter attached by applicant in front of their name.
 // @access Private
 
-// @route  GET /company/applicant/detail/id
-// @Desc   Get all the applicants of a job
-// @access Private
-
-router.get('/detail/:id', companyCheckAuth, async(req, res) => {
-    try {
-        const job = await Jobposting.findOne({ "email": req.company.email });
-        if (job) {
-            const applicant = await Jobposting.findOne({ "job.applicants._id": req.params.id })
-        }
-        const applicants = await job.applicants;
-        if (applicants.length === 0) return res.status(400).json({ msg: 'There is no applicants for this post' });
-        res.json(applicants);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
 
 // @route  GET /company/applicant/aplicantdetail/:id
 // @Desc   Get applicant detail by ID
 // @access Private
+
+router.get('/aplicantdetail/:id', companyCheckAuth, async(req, res) => {
+    try {
+        const job = await Jobposting.findOne({
+            $and: [{ email: req.company.email },
+                { 'applicants._id': req.params.id }
+            ]
+        });
+
+        const applicantIndex = job.applicants.map((item) => item.id).indexOf(req.params.id);
+        const applicant = await job.applicants[applicantIndex];
+        if (!job) return res.status(400).json({ msg: 'There is no Job' });
+        res.json(applicant);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+});
+
+// @route  GET /company/applicant/student/:id
+// @Desc   Get student detail by ID
+// @access Private
+
+router.get('/student/:id', async(req, res) => {
+    try {
+        const student = await Student.findOne({ '_id': req.params.id });
+        if (!student) return res.status(400).json({ msg: 'No student Found' });
+        res.status(200).json(student);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+});
+
+// @route  POST /company/applicant/statusUpdate
+// @Desc   Update the applicant status Submitted, reviewed, initial screening, Interviewing, Hired
+// @access Private
+
 
 // router.put('aplicantdetail/:jobId/:appId', auth, async(req, res) => {
 //     // build profile object
@@ -87,12 +109,6 @@ router.get('/detail/:id', companyCheckAuth, async(req, res) => {
 //         res.status(500).send('Server Error');
 //     }
 // });
-
-
-// @route  POST /company/applicant/statusUpdate
-// @Desc   Update the applicant status Submitted, reviewed, initial screening, Interviewing, Hired
-// @access Private
-
 
 
 module.exports = router;
