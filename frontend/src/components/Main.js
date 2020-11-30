@@ -47,6 +47,7 @@ import AddCompanySalary from './Student/AddCompanySalary';
 import AddInterviewExp from './Student/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Student/AddCompanyInterview';
+import AddPhotos from './Student/AddPhotos';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -76,6 +77,11 @@ class Main extends Component {
             />
             <Route exact path='/companySalaries' component={CompanySalaries} />
             <Route exact path='/companyPhotos' component={CompanyPhotos} />
+            <Route
+              exact
+              path='/company/upload/photos/:id'
+              component={AddPhotos}
+            />
             <Route
               exact
               path='/addCompanySalary'

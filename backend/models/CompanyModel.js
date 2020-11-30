@@ -180,6 +180,10 @@ const CompanySchema = new mongoose.Schema({
         type: String,
         default: 'new',
       },
+      student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'student',
+      },
     },
   ],
   date: { type: Date, default: Date.now() },

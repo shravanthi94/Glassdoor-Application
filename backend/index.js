@@ -25,6 +25,7 @@ const overviewCompany = require('./routes/company/overview');
 const salaryCompany = require('./routes/company/salary');
 const interviewCompany = require('./routes/company/interview');
 const jobCompany = require('./routes/company/job');
+const companyPhotos = require('./routes/company/photos');
 
 // Admin
 const signupAdmin = require('./routes/admin/signup');
@@ -66,6 +67,8 @@ app.use('/company/review', reviewCompany);
 app.use('/company/overview', overviewCompany);
 //  Company - SALARY
 app.use('/company/salary', salaryCompany);
+// Company - Photos
+app.use('/company/images', companyPhotos);
 
 //  Company - SALARY
 app.use('/company/interview', interviewCompany);
@@ -87,5 +90,5 @@ app.use('/admin/analytics', analytics);
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`Application started listening to port ${PORT} successfully.`);
+  console.log(`Application started listening to port ${PORT} successfully.`);
 });
