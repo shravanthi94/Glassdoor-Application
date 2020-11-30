@@ -170,6 +170,7 @@ router.post('/favorite/:id', companyCheckAuth, async(req, res) => {
             } else {
                 return res.status(400).json({ msg: 'Review is already marked as favorite' });
             }
+            // const updatedreviews = await ReviewfindById(req.company.id);
             return res.status(200).json(review);
         } else {
             return res.status(400).json({ msg: 'No Review found' });

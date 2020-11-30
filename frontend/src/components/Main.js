@@ -27,9 +27,10 @@ import CompanyDashboardReviews from './Company/Reviews/CompanyReviews';
 import CompanyOverview from './Student/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
-// import CompanyJobDetail from './Company/JobPostings/JobDetails';
+import ViewApplicants from './Company/JobPostings/ViewApplicants';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 import CompanyReplyMessage from './Company/Reviews/CompanyReviewReply';
+// import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
 
 // Student Links
 import Login from './Student/Login';
@@ -48,6 +49,7 @@ import AddInterviewExp from './Student/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Student/AddCompanyInterview';
 import AddPhotos from './Student/AddPhotos';
+// import JobsNav from './Student/JobsNav';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -121,6 +123,7 @@ class Main extends Component {
               path='/student/update/demographics'
               component={Demographics}
             />
+            {/* <PrivateRoute exact path='/student/jobs' component={JobsNav} /> */}
             <PrivateRoute
               exact
               path='/companydashboard'
@@ -156,11 +159,12 @@ class Main extends Component {
               path='/companydashboard'
               component={CompanyDashboard}
             />
-            {/* <PrivateRoute
+            {/* <PrivateRoute */}
+            <PrivateRoute
               exact
-              path='/company/jobs/jobdetail/:jobid'
-              component={CompanyJobDetail}
-            /> */}
+              path='/company/viewapplicants/:id'
+              component={ViewApplicants}
+            />
             <PrivateRoute
               exact
               path='/company/reviewspage'
@@ -181,6 +185,12 @@ class Main extends Component {
               path='/company/addjob'
               component={CompanyCreateJob}
             />
+            <PrivateRoute
+              exact
+              path='/company/reply/review/:id'
+              component={CompanyReplyMessage}
+            />
+            {/* <PrivateRoute exact path='/company/viewapplicantdetails/:id' component={ViewApplicantDetails}/> */}
             <PrivateRoute
               exact
               path='/company/reply/review/:id'
