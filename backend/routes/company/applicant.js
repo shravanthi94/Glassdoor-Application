@@ -75,9 +75,25 @@ router.get('/aplicantdetail/:id', companyCheckAuth, async(req, res) => {
 // @Desc   Get student detail by ID
 // @access Private
 
-router.get('/student/:id', async(req, res) => {
+// router.get('/student/:id', async(req, res) => {
+//     try {
+//         const student = await Student.findOne({ '_id': req.params.id });
+//         if (!student) return res.status(400).json({ msg: 'No student Found' });
+//         res.status(200).json(student);
+
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error: Database');
+//     }
+// });
+
+// @route  GET /company/applicant/student/:email
+// @Desc   Get student detail by emailID
+// @access Private
+
+router.get('/student/:email', async(req, res) => {
     try {
-        const student = await Student.findOne({ '_id': req.params.id });
+        const student = await Student.findOne({ 'email': req.params.email });
         if (!student) return res.status(400).json({ msg: 'No student Found' });
         res.status(200).json(student);
 

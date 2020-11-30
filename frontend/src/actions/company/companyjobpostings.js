@@ -64,7 +64,7 @@ export const getJobDetailById = (jobId) => async dispatch => {
         const res = await axios.get(`/company/applicant/${jobId}`)
 
         dispatch({
-            type: STUDENT_PROFILE_SUCCESS,
+            type: COMPANY_GETJOB,
             payload: res.data
         })
     } catch (err) {
@@ -76,12 +76,12 @@ export const getJobDetailById = (jobId) => async dispatch => {
     }
 }
 
-export const getStudentDetailById = (stuId) => async dispatch => {
+export const getStudentDetailByEmail = (stuEmailId) => async dispatch => {
     try {
-        const res = await axios.get(`/company/applicant/student/${stuId}`)
+        const res = await axios.get(`/company/applicant/student/${stuEmailId}`)
 
         dispatch({
-            type: COMPANY_GETJOB,
+            type: STUDENT_PROFILE_SUCCESS,
             payload: res.data
         })
     } catch (err) {
