@@ -47,6 +47,14 @@ const initialState = {
           isAuthenticated: true,
           loading: false
         }
+
+      case "GET_COMPANY_JOBS":
+        return {
+          ...state,
+          ...payload,
+          isAuthenticated: true,
+          loading: false
+        }
         
       default:
         return state;
