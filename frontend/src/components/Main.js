@@ -15,6 +15,8 @@ import MostReviewedCompany from './Admin/MostReviewedCompany';
 import TopStudentReviewers from './Admin/TopStudentReviewers';
 import MostViewedCompanies from './Admin/MostViewedCompanies';
 import TopCeo from './Admin/TopCeo';
+import CompanyDetailsReviews from './Admin/CompanyDetailsReviews';
+import CompanyDetailsStastics from './Admin/CompanyDetailsStastics';
 
 //Company Links
 import CompanyLanding from './Company/Landing';
@@ -41,6 +43,10 @@ import SearchResults from './Student/SearchResults';
 import JobPreference from './Student/JobPreference';
 import StudentProfile from './Student/StudentProfile';
 import Demographics from './Student/Demographics';
+import AddCompanySalary from './Student/AddCompanySalary';
+import AddInterviewExp from './Student/AddInterviewExp';
+import CompanySideBar from './Common/CompanySideBar';
+import AddCompanyInterview from './Student/AddCompanyInterview';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -70,6 +76,19 @@ class Main extends Component {
             />
             <Route exact path='/companySalaries' component={CompanySalaries} />
             <Route exact path='/companyPhotos' component={CompanyPhotos} />
+            <Route
+              exact
+              path='/addCompanySalary'
+              component={AddCompanySalary}
+            />
+            <Route exact path='/addInterviewExp' component={AddInterviewExp} />
+            <Route exact path='/companySideBar' component={CompanySideBar} />
+            <Route
+              exact
+              path='/addCompanyInterview'
+              component={AddCompanyInterview}
+            />
+
             <Route
               exact
               path='/addCompanyReview'
@@ -196,6 +215,16 @@ class Main extends Component {
               exact
               path='/admin/companySearchResult/:data/:query'
               component={SearchResults}
+            />
+            <Route
+              exact
+              path='/admin/companyDetails/*'
+              component={CompanyDetailsReviews}
+            />
+            <Route
+              exact
+              path='/admin/companyStastics/*'
+              component={CompanyDetailsStastics}
             />
           </Switch>
         </Router>

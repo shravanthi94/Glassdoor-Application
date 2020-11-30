@@ -48,11 +48,11 @@ router.get('/:id', async (req, res) => {
             }
             overview.save();
 
-            const reviews = await Review.find({ "company": req.params.id, featured: true });
+            // const reviews = await Review.find({ "company": req.params.id, featured: true });
 
             const company= {
                 overview: overview,
-                reviews: reviews
+                // reviews: reviews
             }
 
             console.log("company overview-review: ", company);

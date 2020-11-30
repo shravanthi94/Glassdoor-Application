@@ -6,6 +6,9 @@ import { PieChart } from 'react-minimal-pie-chart';
 import StarRatings from 'react-star-ratings';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
+import UtilityBar from './UtilityBar';
+import CompanySideBar from '../Common/CompanySideBar';
+
 
 class CompanyReviews extends Component {
 
@@ -34,20 +37,31 @@ class CompanyReviews extends Component {
 
         if (e === "overview") {
             path = "/companyOverview"
-            data = this.state.company_id
+            data = this.props.company.overview._id
         } else if (e === "add-reviews") {
             path = "/addCompanyReview"
             data = {
-                company_id: this.state.company_id,
+                company_id: this.props.company.overview._id,
                 logo: this.props.company.overview.logo,
                 company_name: this.props.company.overview.name
             }
-        } else if(e === "interviews"){
+        } else if (e === "interviews") {
             path = "/companyInterviews"
-            data = this.state.company_id
-        }   
+            data = this.props.company.overview._id
+        }
+        else if (e === "reviews") {
+            path = "/companyReviews"
+        }
         else if (e === "salaries") {
             path = "/companySalaries"
+        }
+        else if (e === "add-salary") {
+            path = "/addCompanySalary"
+            data = {
+                company_id: this.props.company.overview._id,
+                logo: this.props.company.overview.logo,
+                company_name: this.props.company.overview.name
+            }
         }
 
         this.setState({
@@ -75,6 +89,7 @@ class CompanyReviews extends Component {
                     <div className="overview-all">
                         {/* <div style={{ backgroundColor: "#13aa41", height: "150px" }}> Search bar </div> */}
                         <Navigation />
+                        <UtilityBar />
                         <div className="profile-row-one">
                             <img className="company-banner-blur" src={require('../../components/images/' + this.props.company.overview.logo + '_banner.jpg').default} alt="" />
                             <img className="overview-logo" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" />
@@ -183,34 +198,7 @@ class CompanyReviews extends Component {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="profile-row-two-column2">
-                                <div className="profile-row-two-column2-row1">
-                                    <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}>{company_name} Locations</div>
-                                    <table className="overview-locations">
-                                        <tr>Bengaluru (India)</tr> <br />
-                                        <tr>Blanchardstown (Ireland)</tr> <br />
-                                        <tr>Chandler (AZ)</tr> <br />
-                                        <tr>Chennia (India)</tr> <br />
-                                        <tr>Conshohocken (PA)</tr> <br />
-                                    </table>
-                                    <hr className="overview-hr" style={{ width: "300px" }} />
-                                    <div className="all-locations">See All Locations </div>
-                                </div>
-                                <div className="profile-row-two-column2-row2">
-                                    <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}> Jobs You May Like </div>
-                                    <table className="overview-jobs-like">
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                        <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                                    </table>
-                                    <br />
-                                </div>
-                            </div>
+                            <CompanySideBar />
                         </div>
                     </div> : <div> No Reviews for the Company Profile</div>
                 }

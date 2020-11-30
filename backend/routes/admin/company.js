@@ -24,7 +24,7 @@ adminAuth();
 router.get('/', adminCheckAuth, async(req, res) => {
     try {
         console.log("Get a list of all companies from the database");
-        const companies = await Company.find().select("overAllRating name _id email location ceoName website type industry");
+        const companies = await Company.find().select("overAllRating name _id email location ceoName website type industry headquarters size founded revenue logo");
 
         console.log("companies list fetched");
         if (!companies || companies.length === 0 ) {

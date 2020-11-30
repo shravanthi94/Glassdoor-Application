@@ -11,13 +11,13 @@ const Navigation = ({ logout }) => {
   return (
     <Fragment>
       <div className='nav-student'>
-          <img src={logo} className='logo' alt='logo-img' />
-        <i class='fas fa-inbox fa-2x' style={{ color: '#505863' }}></i>
+         <div className="admin-logo"> <img src={logo} className='logo' alt='logo-img' /> </div>
+        {/*<i class='fas fa-inbox fa-2x' style={{ color: '#505863' }}></i>    - margin:"0px auto",*/}
         <div className='icon5' >
           <div className='dropdown ml-0 pl-0'>
             <button
               className='btn btn-link dropdown-toggle pl-1'
-              style={{ color: '#505863' }}
+              style={{ color: '#505863'}}
               type='button'
               id='dropdownMenuButton'
               data-toggle='dropdown'

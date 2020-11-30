@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/adminCSS.css';
-import { getNewReviews, postApproveReview } from '../../actions/admin/reviews';
+import { getCompaniesList } from '../../actions/admin/company';
 import Navigation from './NavigationCompany';
-import StarRatings from 'react-star-ratings'
-
+import {Link} from 'react-router-dom'
 
 class CompanySearch extends Component {
 
@@ -17,77 +16,51 @@ class CompanySearch extends Component {
     }
 
     componentWillMount() {
-        this.props.getNewReviews();
+        this.props.getCompaniesList();
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.adminReviewsToApprove) {
-            var { adminReviewsToApprove } = nextProps;
+        if (nextProps.companyList) {
+            var { companyList } = nextProps;
 
-            console.log('FilterReviews -> componentWillReceiveProps -> adminReviewsToApprove : ', adminReviewsToApprove);
+            console.log('FilterReviews -> componentWillReceiveProps -> companyList : ', companyList);
             this.setState({
-                adminReviewsToApprove: adminReviewsToApprove,
-                postReviewFilterSuccess:false
+                companyList: companyList,
             });
         } 
-        if (nextProps.adminReviewsToApproveError) {
-            var { adminReviewsToApproveError } = nextProps;
+        if (nextProps.companyListError) {
+            var { companyListError } = nextProps;
 
-            console.log('FilterReviews -> componentWillReceiveProps -> adminReviewsToApproveError : ', adminReviewsToApproveError);
+            console.log('FilterReviews -> componentWillReceiveProps -> companyListError : ', companyListError);
             this.setState({
-                adminReviewsToApproveError: adminReviewsToApproveError,
-                adminReviewsToApprove: null,
-                postReviewFilterSuccess:false
+                companyListError: companyListError,
             });
-        } 
-
-        if (nextProps.postReview) {
-            var { postReview } = nextProps;
-
-            console.log('FilterReviews -> componentWillReceiveProps -> postReview : ', postReview);
-            this.setState({
-                postReviewFilterSuccess: true,
-            });
-            this.props.getNewReviews();
         }
-        
     }
 
-    rejectReview = (e) => {
-        console.log("Reject");
-        var data= { approvalStatus : "rejected" }
-        this.props.postApproveReview (e.target.name, data);
-    };
-
-    approveReview = (e) => {
-        console.log("Approval");
-        var data= { approvalStatus : "approved" }
-        this.props.postApproveReview (e.target.name, data);
-    };
-
-    displayReviewResults = (adminReviewsToApprove) => {
-        return adminReviewsToApprove.map((review) => {
+    displayCompanyResults = (companyList) => {
+        return companyList.map((company) => {
           return (
-            <div className="reviews-row-two">
-                <table className="reviews-table-all">
+            <div className="company-row-two">
+                <table className="company-table-all">
                     <tr>
                         <td>
                             <table style={{marginLeft:'15%'}}>
-                            <br/>
-                                <tr className="review-headline"><td>"{review.headline}"</td></tr>
-                                <tr className="review-star-ratings"> <td>{review.overAllRating}.0 <StarRatings rating={+review.overAllRating} starDimension="18px" starSpacing="1px" starRatedColor="#0caa41" numberOfStars={5} name='rating' /></td></tr>
-                                <tr><td>{review.comment}</td></tr>
-                                <tr><td><b>Pros: </b> &emsp; {review.pros}</td></tr>
-                                <tr><td><b>Cons: </b> &emsp; {review.cons}</td></tr>
+                                <br/>
+
+                                <table>
+                                    <tr className="company-headline"><td>{company.name}</td></tr><br/>
+                                    <tr><td><b>Website:</b></td><td>{company.website}</td>&emsp;&emsp;&emsp;&emsp;&emsp;<td><b>Headquarters:</b></td><td>{company.headquarters}</td></tr>
+                                    <tr><td><b>Size:</b></td><td>{company.size}</td>&emsp;&emsp;&emsp;&emsp;&emsp;<td><b>Founded:</b></td><td>{company.founded}</td></tr>
+                                    <tr><td><b>Type:</b></td><td>{company.type}</td>&emsp;&emsp;&emsp;&emsp;&emsp;<td><b>Industry:</b></td><td>{company.industry}</td></tr>
+                                    <tr><td><b>Revenue:</b></td><td>{company.revenue}</td>&emsp;&emsp;&emsp;&emsp;&emsp;<td><b>Email:</b></td><td>{company.email}</td></tr>
+                                </table>
                             </table>
                             <br/>
-                            <button style={{marginLeft:'15%'}} className="reviews-approve-button" onClick={this.approveReview} name={review._id}>
-                                Approve
-                            </button>
-                            &emsp; &emsp;
-                            <button style={{marginLeft:'15%'}} className="reviews-reject-button" onClick={this.rejectReview} name={review._id}>
-                                Reject
-                            </button>
+                            <Link style={{marginLeft:'15%'}} className="text-info" 
+                                to={{pathname: `/admin/companyDetails/${company._id}`, state: company}}>
+                                View More Details
+                            </Link>
                         </td>
                     </tr>
                 </table>
@@ -103,14 +76,14 @@ class CompanySearch extends Component {
 
         var redirectVar = "", showReviews = null;
 
-        if(this.props.adminReviewsToApprove) {
-            showReviews = this.displayReviewResults(this.props.adminReviewsToApprove);
+        if(this.props.companyList) {
+            showReviews = this.displayCompanyResults(this.props.companyList);
         }
         
-        if(this.props.adminReviewsToApproveError) {
+        if(this.props.companyListError) {
             showReviews = (
                 <div className="reviews-row-three">
-                    <div className="reviews-error"> No Reviews to approve! </div>
+                    <div className="reviews-error"> No Companies On Glassdoor! </div>
                 </div>
             );
         }
@@ -118,7 +91,7 @@ class CompanySearch extends Component {
         return (
             <div>
             {redirectVar}
-                { (this.props.adminReviewsToApprove) ?
+                { (this.props.companyList) ?
                     <div className="overview-all">
                         <Navigation />
                         <div className="reviews-row-one">
@@ -148,18 +121,16 @@ class CompanySearch extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(" FilterReviews - store:", state.comStore);
+    console.log(" Admin - CompanyDetails - store:", state.comStore);
     return {
-        adminReviewsToApprove: state.adminReviewsFilter.newReviews || "",
-        adminReviewsToApproveError: state.adminReviewsFilter.newReviewsError || "",
-        postReview: state.adminReviewsFilter.postReviewApproval || "",
+        companyList: state.adminCompanyDetails.companyList || "",
+        companyListError: state.adminCompanyDetails.companyListError || "",
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getNewReviews: () => dispatch(getNewReviews()),
-        postApproveReview: (review_id, data) => dispatch(postApproveReview(review_id, data))
+        getCompaniesList: () => dispatch(getCompaniesList()),
     }
 }
 

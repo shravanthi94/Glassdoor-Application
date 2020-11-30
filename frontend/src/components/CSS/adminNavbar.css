@@ -156,3 +156,8 @@
   text-decoration: none;
   overflow: scroll;
 }
+
+.nav-student .icon5, .nav-student .admin-logo{
+  justify-content: space-between;
+  display: flex;
+}
