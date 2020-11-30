@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const Company = require('../../models/CompanyModel');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 
@@ -52,6 +53,7 @@ router.post(
         const { email, password } = req.body;
         // See if user exists
         try {
+            const company = await Company.findOne({ email: email });
             mysqlConnectionPool.query(
                 `SELECT * FROM company WHERE email= '${email}'`,
                 async(error, result) => {
@@ -77,7 +79,8 @@ router.post(
                     }
                     const payload = {
                         company: {
-                            id: result[0].id,
+                            // id: result[0].id,
+                            id: company._id,
                             name: result[0].name,
                             email: email,
                             usertype: 'company'
@@ -91,7 +94,8 @@ router.post(
                             if (error) throw error;
                             res.json({
                                 token,
-                                id: result[0].id,
+                                // id: result[0].id,
+                                id: company._id,
                                 name: result[0].name,
                                 email: email
                             });

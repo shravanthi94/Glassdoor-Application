@@ -78,7 +78,8 @@ router.post(
                                     // console.log(token)
                                     res.json({
                                         token,
-                                        id: result.insertId,
+                                        // id: result.insertId,
+                                        id: company._id,
                                         name: name,
                                         email: email
                                     });

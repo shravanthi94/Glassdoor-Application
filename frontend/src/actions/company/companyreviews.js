@@ -36,7 +36,7 @@ export const markReviewFav = (id) => async dispatch => {
     try {
         console.log("fav action called")
         const res = await axios.post(`/company/review/favorite/${id}`)
-
+        dispatch(setAlert('Review marked as favorite', 'alert-success'));
         dispatch({
             type: MARK_FAVORITE_SUCCESS,
             payload: res.data

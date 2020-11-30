@@ -30,7 +30,7 @@ import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
 import ViewApplicants from './Company/JobPostings/ViewApplicants';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 import CompanyReplyMessage from './Company/Reviews/CompanyReviewReply';
-import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
+// import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
 
 // Student Links
 import Login from './Student/Login';
@@ -178,7 +178,7 @@ class Main extends Component {
               component={CompanyCreateJob}
             />
             <PrivateRoute exact path='/company/reply/review/:id' component={CompanyReplyMessage}/>
-            <PrivateRoute exact path='/company/viewapplicantdetails/:id' component={ViewApplicantDetails}/>
+            {/* <PrivateRoute exact path='/company/viewapplicantdetails/:id' component={ViewApplicantDetails}/> */}
             <PrivateRoute
               exact
               path='/company/reply/review/:id'
