@@ -152,7 +152,7 @@ class Main extends Component {
               component={CompanyDashboard}
             />
            {/* <PrivateRoute */}
-            {/* <PrivateRoute
+            <PrivateRoute
               exact
               path='/company/viewapplicants/:id'
               component={ViewApplicants}

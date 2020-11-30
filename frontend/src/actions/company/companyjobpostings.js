@@ -1,7 +1,14 @@
 import axios from 'axios';
 import { setAlert } from '../alert';
 
-import { COMPANY_CREATE_JOB, COMPANY_GETALLJOBS, COMPANY_GETJOB, COMPANY_JOBERROR } from '../../actions/types'
+import {
+    COMPANY_CREATE_JOB,
+    COMPANY_GETALLJOBS,
+    COMPANY_GETJOB,
+    COMPANY_JOBERROR,
+    STUDENT_PROFILE_SUCCESS,
+    STUDENT_PROFILE_FAIL,
+} from '../../actions/types'
 
 //create Job
 export const createCompanyJob = (formData, history) => async dispatch => {
@@ -57,12 +64,29 @@ export const getJobDetailById = (jobId) => async dispatch => {
         const res = await axios.get(`/company/applicant/${jobId}`)
 
         dispatch({
-            type: COMPANY_GETJOB,
+            type: STUDENT_PROFILE_SUCCESS,
             payload: res.data
         })
     } catch (err) {
         dispatch({
             type: COMPANY_JOBERROR,
+            payload: { msg: err, status: err.response.status }
+        })
+
+    }
+}
+
+export const getStudentDetailById = (stuId) => async dispatch => {
+    try {
+        const res = await axios.get(`/company/applicant/student/${stuId}`)
+
+        dispatch({
+            type: COMPANY_GETJOB,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: STUDENT_PROFILE_FAIL,
             payload: { msg: err, status: err.response.status }
         })
 

@@ -43,7 +43,7 @@ const ViewApplicants = ({getJobDetailById, companyjobs:{companyjob, loading}, ma
                                     </table>
                                 </div>
                             </div>
-                            </Fragment>)):<p>No applicants yet</p>}
+                            </Fragment>)):<div className="card"> <div className='card-body joblisting-title-company'><p>No applicants yet</p></div></div>}
                         </div>
                     
                     <div class="col-7">
@@ -53,7 +53,7 @@ const ViewApplicants = ({getJobDetailById, companyjobs:{companyjob, loading}, ma
                                 <Link to='#' className='compnay-view-button ml-7'> Update Status</Link> </h6>
                                 <hr/>
                                 <div className='font-weight-bold'>Job Preference: </div>
-                                {companyjob && !loading && companyjob.applicants[0].student.jobPreference? 
+                                {companyjob && !loading && companyjob.applicants[0] && companyjob.applicants[0].student && companyjob.applicants[0].student.jobPreference? 
                                 <Fragment>
                                 <table className="overview-table">
                                     <tr><td>Status:</td><td><div>{companyjob.applicants[0].student.jobPreference.status}</div></td></tr>
@@ -65,7 +65,7 @@ const ViewApplicants = ({getJobDetailById, companyjobs:{companyjob, loading}, ma
                                 </Fragment> : <p> No Job Preference Mentioned </p>}
                                 <hr/>
                                 <div className='font-weight-bold'>Demographics: </div>
-                                {companyjob && !loading && companyjob.applicants[0].student.demographics? 
+                                {companyjob && !loading && companyjob.applicants[0] && companyjob.applicants[0].student && companyjob.applicants[0].student.demographics? 
                                 <Fragment>
                                 <table className="overview-table">
                                     <tr><td>Ethinicity:</td><td><div>{companyjob.applicants[0].student.demographics.ethnicity}</div></td></tr>
