@@ -18,7 +18,7 @@ const JobsNav = () => {
         <Fragment>
             <Navigation />
             <UtilityBar />
-            <div className='student-bar'>
+            <div className='student-bar-jobsnav'>
                 <ToggleButtonGroup
                     value={currentTab}
                     exclusive
