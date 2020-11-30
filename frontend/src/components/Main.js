@@ -10,11 +10,13 @@ import AdminLogin from './Admin/Login';
 import AdminLanding from './Admin/ReviewsPerDay';
 import FilterReviews from './Admin/FilterReviews';
 import CompanySearch from './Admin/CompanySearch';
-import CompanyAverageRating from './Admin/CompanyAverageRating'
-import MostReviewedCompany from './Admin/MostReviewedCompany'
-import TopStudentReviewers from './Admin/TopStudentReviewers'
-import MostViewedCompanies from './Admin/MostViewedCompanies'
-import TopCeo from './Admin/TopCeo'
+import CompanyAverageRating from './Admin/CompanyAverageRating';
+import MostReviewedCompany from './Admin/MostReviewedCompany';
+import TopStudentReviewers from './Admin/TopStudentReviewers';
+import MostViewedCompanies from './Admin/MostViewedCompanies';
+import TopCeo from './Admin/TopCeo';
+import CompanyDetailsReviews from './Admin/CompanyDetailsReviews';
+import CompanyDetailsStastics from './Admin/CompanyDetailsStastics';
 
 //Company Links
 import CompanyLanding from './Company/Landing';
@@ -172,6 +174,9 @@ class Main extends Component {
             <Route exact path = "/admin/mostViewedCompanies" component={MostViewedCompanies} />
             <Route exact path = "/admin/companySearch" component={CompanySearch} />
             <Route exact path='/admin/companySearchResult/:data/:query' component={SearchResults}/>
+            <Route exact path='/admin/companyDetails/*' component={CompanyDetailsReviews}/>
+            <Route exact path='/admin/companyStastics/*' component={CompanyDetailsStastics}/>
+
           </Switch>
         </Router>
       </Fragment>

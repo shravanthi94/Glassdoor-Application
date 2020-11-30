@@ -36,8 +36,6 @@ const Navigation = ({ logout }) => {
         </Link>
         &emsp; &emsp;
 
-        <i class='fas fa-inbox fa-2x' style={{ color: '#505863' }}></i>
-
         <div className='icon5' >
           <div className='dropdown ml-0 pl-0'>
             <button

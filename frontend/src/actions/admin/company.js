@@ -2,7 +2,7 @@ import axios from 'axios';
 import { COMPANY_LIST_GET, ADMIN_COMPANY_REVIEWS_GET, COMPANY_HIRED_APPLICANTS_GET, COMPANY_APPLICANT_DEMOGRAPHICS_GET } from "../types";
 import { COMPANY_LIST_GET_ERROR, ADMIN_COMPANY_REVIEWS_GET_ERROR, COMPANY_HIRED_APPLICANTS_GET_ERROR, COMPANY_APPLICANT_DEMOGRAPHICS_GET_ERROR } from "../types";
 
-export const getNewReviews = () => async dispatch => {
+export const getCompaniesList = () => async dispatch => {
     console.log("analytics -> getNewReviews -> method entered");
     try {
         const res = await axios.get('/admin/companies')
@@ -32,7 +32,7 @@ export const getCompanyReviews = (company_id) => async dispatch => {
     } catch (err) {
         dispatch({
             type: ADMIN_COMPANY_REVIEWS_GET_ERROR,
-            payload: err.response.data 
+            payload: err.response 
         })
 
     }
