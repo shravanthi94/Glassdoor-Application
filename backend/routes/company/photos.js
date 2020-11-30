@@ -64,3 +64,4 @@ router.get('/photos/:filename', (req, res) => {
     );
   }
 });
+module.exports = router;
