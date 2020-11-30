@@ -71,7 +71,7 @@ const CompanyJobPostings = ({
                     <div class="card" style={{ width: '50rem', height: '100%' }}>
                         <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">Number of applicants: {companyjob.applicants.length}
-                        <Link to='/company/viewapplicants' className='compnay-view-button ml-5'> View Applicants</Link> </h6>
+                        <Link to={`/company/viewapplicants/${companyjob._id}`} className='compnay-view-button ml-5'> View Applicants</Link> </h6>
                         <hr/>
                         <table className="overview-table">
                             <tr><td>Job Title:</td><td><div>{companyjob.title}</div></td><td>Street:</td><td><div>{companyjob.street}</div></td></tr>
