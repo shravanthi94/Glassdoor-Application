@@ -24,7 +24,7 @@ import CompanySignUP from './Company/CompanySignUP';
 import CompanyLogin from './Company/CompanyLogin';
 import CompanyDashboard from './Company/CompanyDashboard';
 import CompanyDashboardReviews from './Company/Reviews/CompanyReviews';
-import CompanyOverview from './Student/CompanyOverview';
+import CompanyOverview from './Students/CompanyOverview';
 import CompanyEditProfile from './Company/CompanyEditProfile';
 import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
 import ViewApplicants from './Company/JobPostings/ViewApplicants';
@@ -34,25 +34,29 @@ import UpdateApplicantStatus from './Company/JobPostings/UpdateApplicantStatus';
 // import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
 
 // Student Links
-import Login from './Student/Login';
-import StudentLandingPage from './Student/LandingPage';
-import CompanyReviews from './Student/CompanyReviews';
-import AddCompanyReview from './Student/AddCompanyReview';
-import CompanyInterviews from './Student/CompanyInterviews';
-import CompanySalaries from './Student/CompanySalaries';
-import CompanyPhotos from './Student/CompanyPhotos';
-import SearchResults from './Student/SearchResults';
-import JobPreference from './Student/JobPreference';
-import StudentProfile from './Student/StudentProfile';
-import Demographics from './Student/Demographics';
-import AddCompanySalary from './Student/AddCompanySalary';
-import AddInterviewExp from './Student/AddInterviewExp';
+import Login from './Students/Login';
+import StudentLandingPage from './Students/LandingPage';
+import CompanyReviews from './Students/CompanyReviews';
+import AddCompanyReview from './Students/AddCompanyReview';
+import CompanyInterviews from './Students/CompanyInterviews';
+import CompanySalaries from './Students/CompanySalaries';
+import CompanyPhotos from './Students/CompanyPhotos';
+import SearchResults from './Students/SearchResults';
+import JobPreference from './Students/JobPreference';
+import StudentProfile from './Students/StudentProfile';
+import Demographics from './Students/Demographics';
+import AddCompanySalary from './Students/AddCompanySalary';
+import AddInterviewExp from './Students/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
-import AddCompanyInterview from './Student/AddCompanyInterview';
-import CompanyJobs from './Student/CompanyJobs';
-import CompanyJobDetails from './Student/CompanyJobDetails';
-import AddPhotos from './Student/AddPhotos';
+import AddCompanyInterview from './Students/AddCompanyInterview';
+import CompanyJobs from './Students/CompanyJobs';
+import CompanyJobDetails from './Students/CompanyJobDetails';
+import AddPhotos from './Students/AddPhotos';
 // import JobsNav from './Student/JobsNav';
+
+// Student - Contributions
+import StudentReviews from './Students/contributions/StudentReviews';
+import StudentSalaries from './Students/contributions/StudentSalaries';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -75,7 +79,11 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
-            <Route exact path='/companyJobDetails' component={CompanyJobDetails} />
+            <Route
+              exact
+              path='/companyJobDetails'
+              component={CompanyJobDetails}
+            />
             <Route
               exact
               path='/companyInterviews'
@@ -95,7 +103,11 @@ class Main extends Component {
             />
             <Route exact path='/addInterviewExp' component={AddInterviewExp} />
             <Route exact path='/companySideBar' component={CompanySideBar} />
-            <Route exact path='/addCompanyInterview' component={AddCompanyInterview} />
+            <Route
+              exact
+              path='/addCompanyInterview'
+              component={AddCompanyInterview}
+            />
             <Route exact path='/companyJobs' component={CompanyJobs} />
             <Route
               exact
@@ -122,6 +134,16 @@ class Main extends Component {
               exact
               path='/student/update/demographics'
               component={Demographics}
+            />
+            <PrivateRoute
+              exact
+              path='/student/contributions/reviews'
+              component={StudentReviews}
+            />
+            <PrivateRoute
+              exact
+              path='/student/contributions/salaries'
+              component={StudentSalaries}
             />
             {/* <PrivateRoute exact path='/student/jobs' component={JobsNav} /> */}
             <PrivateRoute
@@ -196,7 +218,10 @@ class Main extends Component {
               path='/company/reply/review/:id'
               component={CompanyReplyMessage}
             />
-            <PrivateRoute exact path='/updateStatus/:id' component={UpdateApplicantStatus}
+            <PrivateRoute
+              exact
+              path='/updateStatus/:id'
+              component={UpdateApplicantStatus}
             />
 
             {/* Admin Routes */}

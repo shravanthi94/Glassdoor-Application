@@ -141,8 +141,16 @@ const StudentProfile = ({
                     <i class='fas fa-envelope'></i> {profile.email}
                   </p>
                   <br />
-                  <p className='h5'>Review count: {counts.reviewCount}</p>
-                  <p className='h5'>Rating count: {counts.ratingCount}</p>
+                  <p className='h5'>
+                    <i class='far fa-smile gd-color'></i>{' '}
+                    <i class='far fa-frown gd-color'></i> You have given{' '}
+                    {counts.reviewCount} reviews.
+                  </p>
+                  <p className='h5'>
+                    <i class='fas fa-star gd-color'></i>{' '}
+                    <i class='fas fa-star gd-color'></i> You have given{' '}
+                    {counts.ratingCount} ratings.
+                  </p>
                 </div>
               </div>
             </div>

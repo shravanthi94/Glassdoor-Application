@@ -3,6 +3,8 @@ import {
   STUDENT_PROFILE_FAIL,
   STUDENT_COUNT_SUCCESS,
   STUDENT_COUNT_FAIL,
+  STUDENT_CONTRIBUTION_SUCCESS,
+  STUDENT_CONTRIBUTION_FAIL,
 } from '../types';
 import { setAlert } from '../alert';
 import axios from 'axios';
@@ -94,6 +96,26 @@ export const getStudentCounts = () => async (dispatch) => {
     dispatch({
       type: STUDENT_COUNT_FAIL,
       payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get Student contributions
+export const getStudentContributions = (query) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/student/profile/contributions/${query}`);
+    dispatch({
+      type: STUDENT_CONTRIBUTION_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log('Error', err.response.data.errors[0].msg);
+    dispatch({
+      type: STUDENT_CONTRIBUTION_FAIL,
+      payload: {
+        msg: err.response.data.errors[0].msg,
+        status: err.response.status,
+      },
     });
   }
 };
