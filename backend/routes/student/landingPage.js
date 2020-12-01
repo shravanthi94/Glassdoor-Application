@@ -9,19 +9,19 @@ const Jobposting = require('../../models/JobPostingModel');
 const Review = require('../../models/ReviewModel');
 const e = require('express');
 
-router.post('/', checkAuth, async (req, res) => {
-  console.log('here: ', req.user);
+// router.post('/', checkAuth, async (req, res) => {
+//   console.log('here: ', req.user);
 
-  const { name, email } = req.user;
-  student = new Student({
-    name,
-    email,
-  });
+//   const { name, email } = req.user;
+//   student = new Student({
+//     name,
+//     email,
+//   });
 
-  await student.save();
+//   await student.save();
 
-  res.status(200).json(student);
-});
+//   res.status(200).json(student);
+// });
 
 router.get('/', checkAuth, async (req, res) => {
   try {

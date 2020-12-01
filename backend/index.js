@@ -12,6 +12,7 @@ const demographics = require('./routes/student/demographics');
 const jobPreferences = require('./routes/student/jobPreferences');
 const resume = require('./routes/student/resume');
 const jobPostings = require('./routes/student/jobPostings');
+const studentProfile = require('./routes/student/profile');
 
 // Company
 const signupCompany = require('./routes/company/signup');
@@ -48,6 +49,8 @@ app.use('/student/landing', landingPageStudent);
 app.use('/student/demographics', demographics);
 //  Student - JOB PREFERENCES
 app.use('/student/jobPreferences', jobPreferences);
+//  Student - JOB PROFILE
+app.use('/student/profile', studentProfile);
 app.use('/student/resume', resume);
 app.use('/student/jobs', jobPostings);
 
