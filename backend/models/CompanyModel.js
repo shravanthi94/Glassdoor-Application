@@ -71,6 +71,18 @@ const CompanySchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    numberOfReviews: {
+        type: Number,
+        default: 0,
+    },
+    numberOfInterviews: {
+        type: Number,
+        default: 0,
+    },
+    numberOfSalaries: {
+        type: Number,
+        default: 0,
+    },
     logo: {
         type: String,
     },
@@ -141,9 +153,13 @@ const CompanySchema = new mongoose.Schema({
             type: String,
         },
         date: {
-            type: String,
+            type: Date,
             default: Date.now(),
-        },
+        }, 
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'student',
+        }
     }, ],
     salary: [{
         baseSalary: {
@@ -169,6 +185,10 @@ const CompanySchema = new mongoose.Schema({
         salaryGender: {
             type: String,
         },
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'student',
+        }
     }, ],
     photos: [{
         file: {

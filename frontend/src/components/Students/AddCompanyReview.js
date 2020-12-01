@@ -30,6 +30,7 @@ class AddCompanyReview extends Component {
                 cons: "",
                 current_former: "current",
                 comment: "",
+                student: this.props.studentId
             }
         }
 
@@ -254,7 +255,7 @@ const mapStateToProps = (state) => {
         company: state.comStore.company || "",
         addMsg: state.comStore.addMsg,
         addFlag: state.comStore.addFlag,
-        student: state.studentProfile.profile._id || ""
+        studentId: state.studentProfile.profile._id
     };
 };
 

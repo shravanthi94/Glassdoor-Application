@@ -4,7 +4,9 @@ import {
   STUDENT_COUNT_SUCCESS,
   STUDENT_COUNT_FAIL,
   STUDENT_CONTRIBUTION_SUCCESS,
+  STUDENT_CONTRIBUTION_REVIEW_SUCCESS,
   STUDENT_CONTRIBUTION_FAIL,
+  CLEAR_CONTRIBUTIONS,
 } from '../types';
 import { setAlert } from '../alert';
 import axios from 'axios';
@@ -104,10 +106,17 @@ export const getStudentCounts = () => async (dispatch) => {
 export const getStudentContributions = (query) => async (dispatch) => {
   try {
     const res = await axios.get(`/student/profile/contributions/${query}`);
-    dispatch({
-      type: STUDENT_CONTRIBUTION_SUCCESS,
-      payload: res.data,
-    });
+    if (query === 'reviews') {
+      dispatch({
+        type: STUDENT_CONTRIBUTION_REVIEW_SUCCESS,
+        payload: res.data,
+      });
+    } else {
+      dispatch({
+        type: STUDENT_CONTRIBUTION_SUCCESS,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     console.log('Error', err.response.data.errors[0].msg);
     dispatch({
@@ -118,4 +127,11 @@ export const getStudentContributions = (query) => async (dispatch) => {
       },
     });
   }
+};
+
+// Logout
+export const clearResults = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_CONTRIBUTIONS,
+  });
 };

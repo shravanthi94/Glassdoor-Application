@@ -182,12 +182,12 @@ class CompanyInterviews extends Component {
                             <div className="overview-company-name">{company_name}</div>
                             <table className="profile-row-one-table">
                                 <td><div className="profile-counts"><i class="fas fa-bullseye"></i></div><div className="profile-title" onClick={() => this.redirectHandler("overview")}>Overview&emsp;</div></td>
-                                <td ><div className="profile-counts">4.0k</div><div className="profile-title" onClick={() => this.redirectHandler("reviews")}>Reviews&emsp;</div></td>
-                                <td><div className="profile-counts">867</div><div className="profile-title" onClick={() => this.redirectHandler("jobs")}>Jobs&emsp;</div></td>
-                                <td><div className="profile-counts">8.4k</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
-                                <td className="profile-titles-selected"><div className="profile-counts">1.2k</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
-                                <td><div className="profile-counts">1.8k</div><div className="profile-title">Benefits&emsp;</div></td>
-                                <td><div className="profile-counts">92</div><div className="profile-title" onClick={() => this.redirectHandler("photos")}>Photos&emsp;</div></td>
+                                <td ><div className="profile-counts">{this.props.company.overview.numberOfReviews}</div><div className="profile-title" onClick={() => this.redirectHandler("reviews")}>Reviews&emsp;</div></td>
+                                <td><div className="profile-counts">10</div><div className="profile-title" onClick={() => this.redirectHandler("jobs")}>Jobs&emsp;</div></td>
+                                <td><div className="profile-counts">{this.props.company.overview.numberOfSalaries}</div><div className="profile-title" onClick={() => this.redirectHandler("salaries")}>Salaries&emsp;</div></td>
+                                <td className="profile-titles-selected"><div className="profile-counts">{this.props.company.overview.numberOfInterviews}</div><div className="profile-title" onClick={() => this.redirectHandler("interviews")}>Interviews&emsp;</div></td>
+                                <td><div className="profile-counts">12</div><div className="profile-title">Benefits&emsp;</div></td>
+                                <td><div className="profile-counts">6</div><div className="profile-title" onClick={() => this.redirectHandler("photos")}>Photos&emsp;</div></td>
                             </table>
                             <div className="profile-add-button-position" ><div className="overview-profile-add-button" onClick={() => this.redirectHandler("add-interview")}><i class="fa fa-plus"></i> &nbsp;Add Interview</div></div>
                         </div>

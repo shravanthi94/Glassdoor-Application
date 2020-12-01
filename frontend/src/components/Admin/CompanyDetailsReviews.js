@@ -104,7 +104,7 @@ class CompanyDetailsReviews extends Component {
         if(this.props.companyReviewsError) {
             showReviews = (
                 <div className="reviews-row-three">
-                    <div className="reviews-error"> No Reviews to approve! </div>
+                    <div className="reviews-error"> No Reviews to show! </div>
                 </div>
             );
         }
@@ -116,8 +116,8 @@ class CompanyDetailsReviews extends Component {
                     <div className="overview-all">
                         <Navigation />
                         <div className="analytics-row-one">
-                            <img className="company-review-banner" src={require('../../components/images/' + this.props.location.state.logo + '_banner.jpg').default} alt="" />
-                            <img className="admin-company-logo" src={require('../../components/images/' + this.props.location.state.logo + '_logo.jpg').default} alt="" />
+                            <img className="company-review-banner" src={require('../../components/images/default_banner.jpg').default} alt="" />
+                            <img className="admin-company-logo" src={require('../../components/images/default_logo.png').default} alt="" />
 
                             <div className="admin-company-name">{this.props.location.state.name}</div>
                             <table className="analytics-row-one-table">
@@ -131,8 +131,8 @@ class CompanyDetailsReviews extends Component {
                     </div> : <div className="overview-all">
                     <Navigation />
                     <div className="analytics-row-one">
-                        <img className="company-review-banner" src={require('../../components/images/' + this.props.location.state.logo + '_banner.jpg').default} alt="" />
-                        <img className="admin-company-logo" src={require('../../components/images/' + this.props.location.state.logo + '_logo.jpg').default} alt="" />
+                        <img className="company-review-banner" src={require('../../components/images/default_banner.jpg').default} alt="" />
+                        <img className="admin-company-logo" src={require('../../components/images/default_logo.png').default} alt="" />
 
                         <div className="admin-company-name">{this.props.location.state.name}</div>
                         <table className="analytics-row-one-table">

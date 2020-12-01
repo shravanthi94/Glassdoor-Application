@@ -10,8 +10,9 @@ import studentProfile from './studentProfile';
 import studentSearch from './studentSearch';
 import image from './image';
 import adminAnalytics from './adminanalytics';
-import adminReviewsFilter from './adminReviewsFilter'
-import adminCompanyDetails from './adminCompanyDetails'
+import adminReviewsFilter from './adminReviewsFilter';
+import adminCompanyDetails from './adminCompanyDetails';
+import adminImagesFilter from './adminImagesFilter';
 
 const rootReducer = combineReducers({
     comStore,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     adminAnalytics,
     adminReviewsFilter,
     adminCompanyDetails,
+    adminImagesFilter,
 });
 
 export default rootReducer;

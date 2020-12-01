@@ -37,7 +37,7 @@ const Navigation = ({ logout }) => {
                 </a>
               </li>
               <li>
-                <a className='dropdown-item' href='/admin/photos'>
+                <a className='dropdown-item' href='/admin/images/company'>
                   Approve Photos
                 </a>
               </li>

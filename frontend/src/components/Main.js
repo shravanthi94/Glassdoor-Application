@@ -17,6 +17,8 @@ import MostViewedCompanies from './Admin/MostViewedCompanies';
 import TopCeo from './Admin/TopCeo';
 import CompanyDetailsReviews from './Admin/CompanyDetailsReviews';
 import CompanyDetailsStastics from './Admin/CompanyDetailsStastics';
+import FilterCompanyImages from './Admin/FilterCompanyImages';
+import FilterStudentImages from './Admin/FilterStudentImages';
 
 //Company Links
 import CompanyLanding from './Company/Landing';
@@ -31,6 +33,7 @@ import ViewApplicants from './Company/JobPostings/ViewApplicants';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 import CompanyReplyMessage from './Company/Reviews/CompanyReviewReply';
 import UpdateApplicantStatus from './Company/JobPostings/UpdateApplicantStatus';
+import CompanyStatistics from './Company/Statistics/CompanyStatistics';
 // import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
 
 // Student Links
@@ -52,11 +55,13 @@ import AddCompanyInterview from './Students/AddCompanyInterview';
 import CompanyJobs from './Students/CompanyJobs';
 import CompanyJobDetails from './Students/CompanyJobDetails';
 import AddPhotos from './Students/AddPhotos';
-// import JobsNav from './Student/JobsNav';
+// import JobsNav from './Students/JobsNav';
 
 // Student - Contributions
 import StudentReviews from './Students/contributions/StudentReviews';
 import StudentSalaries from './Students/contributions/StudentSalaries';
+import StudentInterviews from './Students/contributions/StudentInterviews';
+import StudentPhotos from './Students/contributions/StudentPhotos';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -145,6 +150,16 @@ class Main extends Component {
               path='/student/contributions/salaries'
               component={StudentSalaries}
             />
+            <PrivateRoute
+              exact
+              path='/student/contributions/interviews'
+              component={StudentInterviews}
+            />
+            <PrivateRoute
+              exact
+              path='/student/contributions/photos'
+              component={StudentPhotos}
+            />
             {/* <PrivateRoute exact path='/student/jobs' component={JobsNav} /> */}
             <PrivateRoute
               exact
@@ -223,6 +238,11 @@ class Main extends Component {
               path='/updateStatus/:id'
               component={UpdateApplicantStatus}
             />
+            <PrivateRoute
+              exact
+              path='/company/statistics'
+              component={CompanyStatistics}
+            />
 
             {/* Admin Routes */}
             <Route exact path='/admin/signin' component={AdminLogin} />
@@ -268,6 +288,16 @@ class Main extends Component {
               exact
               path='/admin/companyStastics/*'
               component={CompanyDetailsStastics}
+            />
+            <Route
+              exact
+              path='/admin/images/company'
+              component={FilterCompanyImages}
+            />
+            <Route
+              exact
+              path='/admin/images/student'
+              component={FilterStudentImages}
             />
           </Switch>
         </Router>

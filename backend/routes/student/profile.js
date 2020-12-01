@@ -105,7 +105,6 @@ router.get('/counts', checkAuth, async (req, res) => {
   try {
     const reviewCount = await Review.find({
       student: req.user.id,
-      comment: { $ne: null },
     }).countDocuments();
 
     const ratingCount = await Review.find({
@@ -138,7 +137,9 @@ router.get('/contributions/:query', checkAuth, async (req, res) => {
     } else if (query === 'interviews') {
       results = await Company.find({ 'interview.student': req.user.id });
     } else if (query === 'salaries') {
-      results = await Company.find({ 'salary.student': req.user.id });
+      const results = await Company.find({
+        'salary.student': req.user.id,
+      });
     } else if (query === 'photos') {
       results = await Company.find({ 'photos.student': req.user.id });
     }

@@ -4,16 +4,37 @@ import Navigation from '../Navigation';
 import UtilityBar from '../UtilityBar';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getStudentContributions } from '../../../actions/student/profile';
+import {
+  getStudentContributions,
+  clearResults,
+} from '../../../actions/student/profile';
 import spinner from '../../Spinner/spinner';
 
 const StudentSalaries = ({
   student: { contributions, loading },
   getStudentContributions,
+  clearResults,
 }) => {
   useEffect(() => {
+    clearResults();
     getStudentContributions('salaries');
-  }, [getStudentContributions]);
+  }, [clearResults, getStudentContributions]);
+
+  const displayEachCompanySalary = (salaries) => {
+    // if (interviews.student.toString() === localStorage.id.toString()) {
+    return salaries.map((each) => {
+      return (
+        <Fragment>
+          <div class='card-body pb-0 mb-1'>
+            <h5 class='card-title'>{each.title}</h5>
+            <p class='card-text'>{each.description}</p>
+            <p>{each.difficulty}</p>
+          </div>
+        </Fragment>
+      );
+    });
+    // }
+  };
 
   const displaySalaries = () => {
     if (contributions.length === 0) {
@@ -24,28 +45,9 @@ const StudentSalaries = ({
         <Fragment>
           <div class='card mb-3  bg-light'>
             <h5 class='card-header gd-blue' style={{ color: 'white' }}>
-              {/* {each.salary.jobTitle} */}
+              {each.name}
             </h5>
-            {/* <div class='card-body pb-0 mb-1'>
-              <h5 class='card-title'>{each.headline}</h5>
-              <p class='card-text'>{each.comment}</p>
-              <p>{each.approvalStatus}</p>
-            </div>
-
-            <ul class='list-group list-group-flush'>
-              <li class='list-group-item text-success pl-1 pb-0 ml-1 mb-0'>
-                <h6 className='text-dark'>
-                  <i class='fas fa-list-ul'></i> PROS
-                </h6>
-                <p>{each.pros}</p>
-              </li>
-              <li class='list-group-item text-danger pl-1 pb-0 ml-1 mb-0'>
-                <h6 className='text-dark'>
-                  <i class='fas fa-list-ul'></i> CONS
-                </h6>
-                <p>{each.cons}</p>
-              </li>
-            </ul> */}
+            {displayEachCompanySalary(each.salary)}
           </div>
         </Fragment>
       );
@@ -120,6 +122,7 @@ const StudentSalaries = ({
 
 StudentSalaries.propTypes = {
   getStudentContributions: PropTypes.func.isRequired,
+  clearResults: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
@@ -128,4 +131,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getStudentContributions,
+  clearResults,
 })(StudentSalaries);

@@ -4,53 +4,45 @@ import Navigation from '../Navigation';
 import UtilityBar from '../UtilityBar';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  getStudentContributions,
-  clearResults,
-} from '../../../actions/student/profile';
+import { getStudentContributions } from '../../../actions/student/profile';
 import spinner from '../../Spinner/spinner';
 
-const StudentReviews = ({
-  student: { reviews, loading },
+const StudentInterviews = ({
+  student: { contributions, loading },
   getStudentContributions,
-  clearResults,
 }) => {
   useEffect(() => {
-    clearResults();
-    getStudentContributions('reviews');
-  }, [clearResults, getStudentContributions]);
+    getStudentContributions('interviews');
+  }, [getStudentContributions]);
 
-  const displayReviews = () => {
-    if (reviews.length === 0) {
-      return <p>No reviews added by you.</p>;
+  const displayEachCompanyInterview = (interviews) => {
+    // if (interviews.student.toString() === localStorage.id.toString()) {
+    return interviews.map((each) => {
+      return (
+        <Fragment>
+          <div class='card-body pb-0 mb-1'>
+            <h5 class='card-title'>{each.title}</h5>
+            <p class='card-text'>{each.description}</p>
+            <p>{each.difficulty}</p>
+          </div>
+        </Fragment>
+      );
+    });
+    // }
+  };
+
+  const displayInterviews = () => {
+    if (contributions.length === 0) {
+      return <p>No interview reviews added by you.</p>;
     }
-    return reviews.map((review) => {
+    return contributions.map((each) => {
       return (
         <Fragment>
           <div class='card mb-3  bg-light'>
             <h5 class='card-header gd-blue' style={{ color: 'white' }}>
-              {review.company.name}
+              {each.name}
             </h5>
-            <div class='card-body pb-0 mb-1'>
-              <h5 class='card-title'>{review.headline}</h5>
-              <p class='card-text'>{review.comment}</p>
-              <p>{review.approvalStatus}</p>
-            </div>
-
-            <ul class='list-group list-group-flush'>
-              <li class='list-group-item text-success pl-1 pb-0 ml-1 mb-0'>
-                <h6 className='text-dark'>
-                  <i class='fas fa-list-ul'></i> PROS
-                </h6>
-                <p>{review.pros}</p>
-              </li>
-              <li class='list-group-item text-danger pl-1 pb-0 ml-1 mb-0'>
-                <h6 className='text-dark'>
-                  <i class='fas fa-list-ul'></i> CONS
-                </h6>
-                <p>{review.cons}</p>
-              </li>
-            </ul>
+            {displayEachCompanyInterview(each.interview)}
           </div>
         </Fragment>
       );
@@ -68,7 +60,7 @@ const StudentReviews = ({
           <div class='col-4'>
             <ul class='list-group list-group-flush'>
               <li
-                class='list-group-item profile-titles-selected'
+                class='list-group-item'
                 style={{ backgroundColor: '#EAEAEA' }}
               >
                 <Link
@@ -79,7 +71,7 @@ const StudentReviews = ({
                 </Link>
               </li>
               <li
-                class='list-group-item'
+                class='list-group-item profile-titles-selected'
                 style={{ backgroundColor: '#EAEAEA' }}
               >
                 <Link
@@ -114,8 +106,8 @@ const StudentReviews = ({
             </ul>
           </div>
           <div class='col-8' style={{ backgroundColor: 'white' }}>
-            <h3 className='p-2'>Reviews given by you</h3>
-            <div className='container p-5'>{displayReviews()}</div>
+            <h3 className='p-2'>Interview experiences shared by you</h3>
+            <div className='container p-5'>{displayInterviews()}</div>
           </div>
         </div>
       </div>
@@ -123,9 +115,8 @@ const StudentReviews = ({
   );
 };
 
-StudentReviews.propTypes = {
+StudentInterviews.propTypes = {
   getStudentContributions: PropTypes.func.isRequired,
-  clearResults: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
@@ -134,5 +125,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getStudentContributions,
-  clearResults,
-})(StudentReviews);
+})(StudentInterviews);

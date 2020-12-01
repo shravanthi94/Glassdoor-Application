@@ -30,6 +30,7 @@ class AddInterviewExp extends Component {
                 cons: "",
                 current_former: "current",
                 comment: "",
+                student: this.props.studentId
             }
         }
 

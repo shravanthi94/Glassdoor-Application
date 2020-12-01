@@ -28,7 +28,8 @@ class AddCompanyInterview extends Component {
                 difficulty: "",
                 offerStatus: "",
                 question: "",
-                answer: ""
+                answer: "",
+                student: this.props.studentId
             }
         }
 
@@ -190,7 +191,7 @@ class AddCompanyInterview extends Component {
                                                             <div class="form-group"><textarea onChange={this.formChangeHandler} class="form-control" style={{ width: "400px", height:"70px" }} name="answer" placeholder="How did you answer this question?" /> </div>
                                                         </tr>
 
-                                                        <tr><div className="overview-profile-add-review-submit" onClick={this.addInterviewHandler}>Add Salary</div></tr>
+                                                        <tr><div className="overview-profile-add-review-submit" onClick={this.addInterviewHandler} style={{marginLeft:"300px"}}>Add Interview</div></tr>
                                                         {final_msg}
                                                     </table>
                                                 </td>
@@ -229,7 +230,7 @@ const mapStateToProps = (state) => {
         company: state.comStore.company || "",
         addMsg: state.comStore.addMsg,
         addFlag: state.comStore.addFlag,
-        student: state.studentProfile.profile._id | ""
+        studentId: state.studentProfile.profile._id || ""
     };
 };
 

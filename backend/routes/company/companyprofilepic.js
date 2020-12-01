@@ -13,7 +13,7 @@ const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth'
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 
 const companyProfilePicstorage = multer.diskStorage({
-    destination: `${path.join(__dirname, '../../../')}/frontend/src/components/images`,
+    destination: `${path.join(__dirname, '../..')}/public/uploads/company`,
     filename: (req, file, cb) => {
         cb(
             // null, `${req.params.id}-company-${Date.now()}${path.extname(file.originalname)}`,
@@ -53,6 +53,22 @@ router.post('/upload', companyCheckAuth, async(req, res) => {
             res.status(500).send('Server Error');
         }
     });
+});
+
+// @route  GET /company/profilepic/:filename
+// @desc   View the company photos
+// @access Public
+router.get('/:filename', (req, res) => {
+    const image = `${path.join(__dirname, '../..')}/public/uploads/company/${
+      req.params.filename
+    }`;
+    if (fs.existsSync(image)) {
+        res.sendFile(image);
+    } else {
+        res.sendFile(
+            `${path.join(__dirname, '../..')}/public/uploads/company/default.png`,
+        );
+    }
 });
 
 module.exports = router;
