@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { companyCheckAuth } = require('../../middleware/companyAuth');
+const { checkAuth } = require('../../middleware/studentAuth');
 
 const Company = require('../../models/CompanyModel');
 
@@ -28,15 +28,26 @@ const photouploads = multer({
 // @route  POST /company/images/photos/:id
 // @desc   Upload pictures of the company
 // @access Private
-router.post('/photos/:id', companyCheckAuth, async (req, res) => {
+router.post('/photos/:id', checkAuth, async (req, res) => {
+  console.log('In photos: ', req.params.id);
+  console.log('req.user: ', req.user);
+  console.log('req.file', req.file);
   photouploads(req, res, async (err) => {
     if (!err) {
       try {
-        const company = await Company.findById(req.params.id);
+        const overview = await Company.findById(req.params.id);
 
-        company.photos.push({ file: req.file.filename, status: 'new' });
+        overview.photos.push({
+          file: req.file.filename,
+          status: 'new',
+          student: req.user.id,
+        });
 
-        await company.save();
+        await overview.save();
+
+        const company = {
+          overview: overview,
+        };
 
         res.status(200).json(company);
       } catch (error) {
@@ -64,3 +75,5 @@ router.get('/photos/:filename', (req, res) => {
     );
   }
 });
+
+module.exports = router;

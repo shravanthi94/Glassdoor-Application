@@ -49,7 +49,8 @@ import AddCompanySalary from './Student/AddCompanySalary';
 import AddInterviewExp from './Student/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Student/AddCompanyInterview';
-import JobsNav  from './Student/JobsNav';
+import AddPhotos from './Student/AddPhotos';
+// import JobsNav from './Student/JobsNav';
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -79,6 +80,11 @@ class Main extends Component {
             />
             <Route exact path='/companySalaries' component={CompanySalaries} />
             <Route exact path='/companyPhotos' component={CompanyPhotos} />
+            <Route
+              exact
+              path='/company/upload/photos/:id'
+              component={AddPhotos}
+            />
             <Route
               exact
               path='/addCompanySalary'
@@ -118,11 +124,7 @@ class Main extends Component {
               path='/student/update/demographics'
               component={Demographics}
             />
-             <PrivateRoute
-              exact
-              path='/student/jobs'
-              component={JobsNav}
-            />
+            {/* <PrivateRoute exact path='/student/jobs' component={JobsNav} /> */}
             <PrivateRoute
               exact
               path='/companydashboard'
@@ -158,7 +160,7 @@ class Main extends Component {
               path='/companydashboard'
               component={CompanyDashboard}
             />
-           {/* <PrivateRoute */}
+            {/* <PrivateRoute */}
             <PrivateRoute
               exact
               path='/company/viewapplicants/:id'
@@ -184,7 +186,11 @@ class Main extends Component {
               path='/company/addjob'
               component={CompanyCreateJob}
             />
-            <PrivateRoute exact path='/company/reply/review/:id' component={CompanyReplyMessage}/>
+            <PrivateRoute
+              exact
+              path='/company/reply/review/:id'
+              component={CompanyReplyMessage}
+            />
             {/* <PrivateRoute exact path='/company/viewapplicantdetails/:id' component={ViewApplicantDetails}/> */}
             <PrivateRoute
               exact

@@ -47,6 +47,7 @@ class CompanyOverview extends Component {
       path = '/companySalaries';
     } else if (e === 'photos') {
       path = '/companyPhotos';
+      data = this.props.company.overview._id;
     }
 
     this.setState({

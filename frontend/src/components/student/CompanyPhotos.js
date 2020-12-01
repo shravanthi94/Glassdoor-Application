@@ -1,45 +1,50 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import '../CSS/overview.css';
+import spinner from '../Spinner/spinner';
 import { getCompanyProfile } from '../../actions/company/getCompanyProfile';
-// import StarRatings from 'react-star-ratings';
+import { uploadCompanyPhotos } from '../../actions/student/photos';
+import { BACKEND_URL } from '../../helpers/constants';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
+import jwt_decode from 'jwt-decode';
 
 const CompanyPhotos = ({ getCompanyProfile, company }) => {
   useEffect(() => {
-    getCompanyProfile('5fb2f87d828aa81479d846a1');
-  }, []);
-
-  const [image, setimage] = useState({
-    file: '',
-    fileText: '',
-  });
-
-  const onImageChange = (e) => {
-    setimage({
-      file: e.target.files[0],
-      fileText: e.target.files[0].name,
-    });
-  };
-
-  const onUpload = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', image.file);
-    // uploadDishImage(formData, location.state.itemId);
-  };
+    getCompanyProfile(company.overview._id);
+  }, [company.overview._id, getCompanyProfile]);
 
   const displayPhotos = () => {
+    const decoded = jwt_decode(localStorage.token);
+    const currentUserId = decoded.user.id.toString();
+    if (company.overview.photos.length === 0) {
+      return <p>No company photos to display</p>;
+    }
     return company.overview.photos.map((each) => {
-      return <Fragment>Hello</Fragment>;
+      if (
+        each.status === 'Approved' ||
+        each.student.toString() === currentUserId
+      ) {
+        return (
+          <Fragment>
+            <img
+              className='rounded float-left p-2'
+              src={`${BACKEND_URL}/company/images/photos/${each.file}`}
+              alt=''
+              height='200px'
+              width='200px'
+            />
+          </Fragment>
+        );
+      }
     });
   };
 
-  return (
+  return !company ? (
+    spinner
+  ) : (
     <Fragment>
       <div className='overview-all'>
         <Navigation />
@@ -63,13 +68,21 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
             }
             alt=''
           />
-          <div className='overview-company-name'>Hello</div>
+          <div className='overview-company-name'>{company.overview.name}</div>
           <table className='profile-row-one-table'>
-            <td className='profile-titles-selected'>
+            <td>
               <div className='profile-counts'>
                 <i class='fas fa-bullseye'></i>
               </div>
-              <div className='profile-title'>Overview&emsp;</div>
+              <Link
+                to={{
+                  pathname: '/companyOverview',
+                  state: { data: company.overview._id },
+                }}
+                style={{ textDecoration: 'none' }}
+              >
+                <div className='profile-title'>Overview&emsp;</div>
+              </Link>
             </td>
             <td>
               <div className='profile-counts'>4.0k</div>
@@ -78,6 +91,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   pathname: '/companyReviews',
                   state: { data: company.overview._id },
                 }}
+                style={{ textDecoration: 'none' }}
               >
                 <div className='profile-title'>Reviews&emsp;</div>
               </Link>
@@ -93,6 +107,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   pathname: '/companySalaries',
                   state: { data: company.overview._id },
                 }}
+                style={{ textDecoration: 'none' }}
               >
                 <div className='profile-title'>Salaries&emsp;</div>
               </Link>
@@ -104,6 +119,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   pathname: '/companyInterviews',
                   state: { data: company.overview._id },
                 }}
+                style={{ textDecoration: 'none' }}
               >
                 <div className='profile-title'>Interviews&emsp;</div>
               </Link>
@@ -112,13 +128,14 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
               <div className='profile-counts'>1.8k</div>
               <div className='profile-title'>Benefits&emsp;</div>
             </td>
-            <td>
+            <td className='profile-titles-selected'>
               <div className='profile-counts'>92</div>
               <Link
                 to={{
                   pathname: '/companyPhotos',
                   state: { data: company.overview._id },
                 }}
+                style={{ textDecoration: 'none' }}
               >
                 <div className='profile-title'>Photos&emsp;</div>
               </Link>
@@ -128,25 +145,28 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
         <div className='side-by-side-overview'>
           <div className='profile-row-two'>
             <div className='profile-row-two-row1'>
-              <div>
-                <form onSubmit={(e) => onUpload(e)}>
-                  <div>
-                    <input
-                      type='file'
-                      name='image'
-                      accept='image/*'
-                      onChange={(e) => onImageChange(e)}
-                    />{' '}
-                    <br />
-                    <label htmlFor='image'>{image.fileText}</label>
+              <div
+                className='profile-row-two-inside'
+                style={{ paddingLeft: '12px', width: '650px' }}
+              >
+                <div className='container'>
+                  <div className='row'>
+                    <div className='col-8'>
+                      <h4>{company.overview.name} Office Photos</h4>
+                    </div>
+                    <div className='col-4'>
+                      <Link
+                        to={`/company/upload/photos/${company.overview._id}`}
+                        className='btn btn-outline-primary'
+                        style={{ marginLeft: '250%', color: '#1861BF' }}
+                      >
+                        Add Photos
+                      </Link>
+                    </div>
                   </div>
-                  <br />
-                  <button type='submit' className='btn btn-primary'>
-                    Add Photos
-                  </button>
-                </form>
+                </div>
+                <div className='mt-5'>{displayPhotos()}</div>
               </div>
-              <div className='profile-row-two-inside'>{displayPhotos()}</div>
             </div>
           </div>
           <div className='profile-row-two-column2'>
@@ -158,7 +178,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   marginTop: '20px',
                 }}
               >
-                apple Locations
+                {company.overview.name} Locations
               </div>
               <table className='overview-locations'>
                 <tr>Bengaluru (India)</tr> <br />
@@ -197,7 +217,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   <td style={{ marginLeft: '20px' }}>
                     <tr>Software Engineer Intern</tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -216,7 +236,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   <td>
                     <tr className='overview-job-title'>Software Engineer I</tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -235,7 +255,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   <td>
                     <tr className='overview-job-title'>Software Engineer II</tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -256,7 +276,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                       Software Engineer III
                     </tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -277,7 +297,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                       Machine Learning Engineer{' '}
                     </tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -298,7 +318,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                       Back End Software Engineer
                     </tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -317,7 +337,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                   <td>
                     <tr className='overview-job-title'>Product Manager</tr>
                     <tr className='overview-job-location'>
-                      Apple - San Jose, CA
+                      {company.overview.name} - San Jose, CA
                     </tr>
                   </td>
                 </tr>
@@ -333,6 +353,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
 
 CompanyPhotos.propTypes = {
   getCompanyProfile: PropTypes.func.isRequired,
+  uploadCompanyPhotos: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
@@ -341,4 +362,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getCompanyProfile,
+  uploadCompanyPhotos,
 })(CompanyPhotos);
