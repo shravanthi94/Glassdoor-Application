@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/adminCSS.css';
 import { getCompaniesList } from '../../actions/admin/company';
-import Navigation from './NavigationCompany';
+import Navigation from './Navigation';
 import {Link} from 'react-router-dom'
 
 class CompanySearch extends Component {
@@ -11,13 +11,19 @@ class CompanySearch extends Component {
         super(props);
 
         this.state = {
-            
+            searchData:"",
+            filteredCompanyList:"",
         }
     }
 
     componentWillMount() {
         this.props.getCompaniesList();
     }
+
+    onChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+        this.filterCompanies();
+      };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.companyList) {
@@ -26,6 +32,7 @@ class CompanySearch extends Component {
             console.log('FilterReviews -> componentWillReceiveProps -> companyList : ', companyList);
             this.setState({
                 companyList: companyList,
+                filteredCompanyList: companyList,
             });
         } 
         if (nextProps.companyListError) {
@@ -36,6 +43,14 @@ class CompanySearch extends Component {
                 companyListError: companyListError,
             });
         }
+    }
+
+    filterCompanies = () => {
+        var filteredCompanyList = this.state.companyList
+            .filter(company => company.name.toLowerCase().includes(this.state.searchData.toLowerCase()));
+        this.setState({
+            filteredCompanyList: filteredCompanyList,
+        });
     }
 
     displayCompanyResults = (companyList) => {
@@ -68,16 +83,13 @@ class CompanySearch extends Component {
           );
         });
       };
-    
-       
-
 
     render() {
 
         var redirectVar = "", showReviews = null;
 
-        if(this.props.companyList) {
-            showReviews = this.displayCompanyResults(this.props.companyList);
+        if(this.state.filteredCompanyList) {
+            showReviews = this.displayCompanyResults(this.state.filteredCompanyList);
         }
         
         if(this.props.companyListError) {
@@ -91,9 +103,29 @@ class CompanySearch extends Component {
         return (
             <div>
             {redirectVar}
+                
                 { (this.props.companyList) ?
                     <div className="overview-all">
                         <Navigation />
+
+                        <br/>
+                        <div className='input' style={{marginLeft:'30%'}}>
+                            <i class='fas fa-search color fa-2x mt-1'></i>
+                            <input
+                                type='text'
+                                className='search-box'
+                                name='searchData'
+                                value={this.state.searchData}
+                                onChange={this.onChange}
+                                placeholder='Job Title, Keywords, or Company'
+                                required
+                            />
+                            <button className="reviews-approve-button" onClick={this.filterCompanies}>
+                            Search
+                        </button>
+                        </div>
+                        <br/>
+
                         <div className="reviews-row-one">
                             <img className="reviews-banner" src={require('../../components/images/company_banner.jpg').default} alt="" />
                             <div className="reviews-title"> Companies On Glassdoor</div>
