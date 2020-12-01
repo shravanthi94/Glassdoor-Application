@@ -4,11 +4,17 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import CmpNav2 from './CmpNav2';
 import {editCompanyProfile, getCurrentCompanyProfile} from '../../actions/company/companyprofile';
-import {insertProfilePic} from '../../actions/company/insertProfilePic'
+import {uploadCompanyProfilePic} from '../../actions/company/insertProfilePic'
 import '../CSS/CompanySign.css';
 import '../CSS/CompanyProfile.css';
 
-const CompanyEditProfile = ({getCurrentCompanyProfile, companyprofile:{companyprofile, loading},editCompanyProfile, history}) => {
+const CompanyEditProfile = ({
+    getCurrentCompanyProfile, 
+    companyprofile:{companyprofile, loading},
+    uploadCompanyProfilePic,
+    editCompanyProfile, 
+    history, 
+    match}) => {
     const [formData, setFormData] = useState({
         name:'',
         email:'',
@@ -65,27 +71,38 @@ const CompanyEditProfile = ({getCurrentCompanyProfile, companyprofile:{companypr
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
-    // const [image,setImage] = useState({
-    //     file: "",
-    //     fileText: "",
-    //   })
+    const [image,setImage] = useState({
+        file: "",
+        fileText: "",
+      })
+
     
-    //   const imageChange = (e)=>{
-    //     console.log("image file name is ",e.target.files[0].name)
-    //     setImage({file:e.target.files[0],fileText: e.target.files[0].name})
-    //   }
+      const imageChange = (e)=>{
+        console.log("image file name is ",e.target.files[0].name)
+        setImage({file:e.target.files[0],fileText: e.target.files[0].name})
+      }
 
     //   const imageSave = (e) => {
     //     e.preventDefault();
     //     console.log("inside imageSave, file is ", image.file);
     //     console.log("inside imageSave, fileText is ", image.fileText);
     //     insertProfilePic(image.file, companyprofile._id,companyprofile.name);
-        // const newimg = "rest_"+string(restprofile.restuser._id)+"."
-        // if (userprofile.user.image)
-        // {
-        //   setImage({file:userprofile.user.image})
-        // }
+    //     const newimg = "rest_"+string(restprofile.restuser._id)+"."
+    //     if (userprofile.user.image)
+    //     {
+    //       setImage({file:userprofile.user.image})
+    //     }
     //   }
+    
+    const imageSave = (e) =>{
+        e.preventDefault();
+        console.log('inside onUpload: ', image.file);
+        const formData = new FormData();
+        formData.append('image', image.file);
+        console.log('inside onUpload formData: ', formData);
+        console.log('formDatae', match.params)
+        uploadCompanyProfilePic(formData, history);
+    }
 
 
     const onSubmit = e =>{
@@ -100,11 +117,16 @@ const CompanyEditProfile = ({getCurrentCompanyProfile, companyprofile:{companypr
                 <br/>
                 <br/>
                 <div className="form-box-companyprofile">
-                <form className="form-company">
+                <form className="form-company" onSubmit={(e) => imageSave(e)}>
                         <div >
                             <div className="form-group-company">
                                 Update profile picture<br/><br/>
-                                <input type ="file" />
+                                <input 
+                                    type ="file"
+                                    name='image'
+                                    accept='image/*'
+                                    onChange={(e) => imageChange(e)}
+                                />
                             </div>
                         <button type="submit" className="btn-updateprofile">
                         Save
@@ -112,7 +134,7 @@ const CompanyEditProfile = ({getCurrentCompanyProfile, companyprofile:{companypr
                         </div>
                 </form>
                 <hr/>
-                <form className="form-company">
+                {/* <form className="form-company">
                         <div >
                             <div className="form-group-company">
                                 Update Company Logo<br/><br/>
@@ -122,7 +144,7 @@ const CompanyEditProfile = ({getCurrentCompanyProfile, companyprofile:{companypr
                         Save
                         </button>
                         </div>
-                </form>
+                </form> */}
                 </div>
                 <br/>
                 <div className="form-box-companyprofile">
@@ -265,10 +287,11 @@ CompanyEditProfile.propTypes = {
     editCompanyProfile: PropTypes.func.isRequired,
     getCurrentCompanyProfile: PropTypes.func.isRequired,
     companyprofile: PropTypes.object.isRequired,
+    uploadCompanyProfilePic: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     companyprofile: state.companyprofile
 })
 
-export default connect(mapStateToProps, {getCurrentCompanyProfile, editCompanyProfile})(withRouter(CompanyEditProfile))
+export default connect(mapStateToProps, {getCurrentCompanyProfile, editCompanyProfile, uploadCompanyProfilePic})(withRouter(CompanyEditProfile))

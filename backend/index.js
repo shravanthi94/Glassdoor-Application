@@ -20,7 +20,7 @@ const profileCompany = require('./routes/company/profile');
 const reviewCompany = require('./routes/company/review');
 const jobPosting = require('./routes/company/jobPosting');
 const jobApplicant = require('./routes/company/applicant');
-
+const companyProfilePic = require('./routes/company/companyprofilepic');
 const overviewCompany = require('./routes/company/overview');
 const salaryCompany = require('./routes/company/salary');
 const interviewCompany = require('./routes/company/interview');
@@ -75,6 +75,9 @@ app.use('/company/interview', interviewCompany);
 //  Company - JOB
 app.use('/company/job', jobCompany);
 
+//Company - Profile Pic
+app.use('/company/profilepic', companyProfilePic);
+
 /*  Routes for Admin */
 // Admin - SIGNUP
 app.use('/admin/signup', signupAdmin);
@@ -90,5 +93,5 @@ app.use('/admin/analytics', analytics);
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Application started listening to port ${PORT} successfully.`);
+    console.log(`Application started listening to port ${PORT} successfully.`);
 });
