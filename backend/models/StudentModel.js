@@ -3,7 +3,15 @@ const mongoose = require('mongoose');
 const StudentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  image: { type: String },
+  profilePic: {
+    image: {
+      type: String,
+    },
+    status: {
+      type: String,
+      default: 'new',
+    },
+  },
   jobPreference: {
     status: {
       type: String,

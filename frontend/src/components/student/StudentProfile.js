@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import UpdateLinks from './UpdateLinks';
@@ -9,12 +8,14 @@ import spinner from '../Spinner/spinner';
 import {
   getCurrentProfile,
   updateBasicDetails,
+  getStudentCounts,
 } from '../../actions/student/profile';
 
 const StudentProfile = ({
   updateBasicDetails,
   getCurrentProfile,
-  profile: { profile, loading },
+  getStudentCounts,
+  profile: { profile, counts, loading },
   history,
 }) => {
   const [formData, setformData] = useState({
@@ -29,13 +30,18 @@ const StudentProfile = ({
 
   useEffect(() => {
     getCurrentProfile();
+    getStudentCounts();
     setformData({
       name: loading || !profile.name ? '' : profile.name,
       email: loading || !profile.email ? '' : profile.email,
     });
-  }, [getCurrentProfile, loading, profile.email, profile.name]);
-
-  const usehistory = useHistory();
+  }, [
+    getCurrentProfile,
+    getStudentCounts,
+    loading,
+    profile.email,
+    profile.name,
+  ]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -71,7 +77,6 @@ const StudentProfile = ({
                       Update profile
                     </button>
                   </span>
-
                   {/* <!-- Modal --> */}
                   <div
                     class='modal fade'
@@ -131,6 +136,13 @@ const StudentProfile = ({
                       </div>
                     </div>
                   </div>
+                  <br /> <br />
+                  <p className='h6'>
+                    <i class='fas fa-envelope'></i> {profile.email}
+                  </p>
+                  <br />
+                  <p className='h5'>Review count: {counts.reviewCount}</p>
+                  <p className='h5'>Rating count: {counts.ratingCount}</p>
                 </div>
               </div>
             </div>
@@ -144,6 +156,7 @@ const StudentProfile = ({
 StudentProfile.propTypes = {
   updateBasicDetails: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
+  getStudentCounts: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
@@ -153,4 +166,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   updateBasicDetails,
   getCurrentProfile,
+  getStudentCounts,
 })(StudentProfile);

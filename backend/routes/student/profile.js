@@ -2,9 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 const { validationResult, check } = require('express-validator');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const { checkAuth } = require('../../middleware/studentAuth');
 
 const Student = require('../../models/StudentModel');
+const Review = require('../../models/ReviewModel');
 
 // @route  POST /student/profile/basic
 // @desc   Update current student basic details
@@ -34,5 +38,90 @@ router.post(
     }
   },
 );
+
+const studentstorage = multer.diskStorage({
+  destination: `${path.join(__dirname, '../..')}/public/uploads/student`,
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      `student${req.user.id}-${Date.now()}${path.extname(file.originalname)}`,
+    );
+  },
+});
+
+const studentuploads = multer({
+  storage: studentstorage,
+  limits: { fileSize: 100000000 },
+}).single('image');
+
+// @route  POST student/profile/image
+// @desc   Upload profile picture of the student
+// @access Private
+router.post('/image', checkAuth, async (req, res) => {
+  studentuploads(req, res, async (err) => {
+    if (!err) {
+      try {
+        const student = await Student.findById(req.user.id);
+        student.profilePic.image = req.file.filename;
+        student.profilePic.status = 'new';
+
+        await student.save();
+
+        res.status(200).json(student);
+      } catch (error) {
+        console.log(error);
+        res.status(500).send('Server Error');
+      }
+    } else {
+      console.log('Error!', err);
+    }
+  });
+});
+
+// @route  GET /student/profile/view/:img
+// @desc   View the student profile picture
+// @access Public
+router.get('/view/:img', (req, res) => {
+  const image = `${path.join(__dirname, '../..')}/public/uploads/student/${
+    req.params.img
+  }`;
+  if (fs.existsSync(image)) {
+    res.sendFile(image);
+  } else {
+    res.sendFile(
+      `${path.join(
+        __dirname,
+        '../..',
+      )}/public/uploads/students/placeholderimg.jpg`,
+    );
+  }
+});
+
+// @route  GET /student/profile/counts
+// @desc   View the student profile picture
+// @access Public
+router.get('/counts', checkAuth, async (req, res) => {
+  try {
+    const reviewCount = await Review.find({
+      student: req.user.id,
+      comment: { $ne: null },
+    }).countDocuments();
+
+    const ratingCount = await Review.find({
+      student: req.user.id,
+      overAllRating: { $ne: null },
+    }).countDocuments();
+
+    const results = {
+      reviewCount,
+      ratingCount,
+    };
+
+    res.status(200).json(results);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
