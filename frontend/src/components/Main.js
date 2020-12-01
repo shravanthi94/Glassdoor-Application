@@ -52,7 +52,7 @@ import AddCompanySalary from './Students/AddCompanySalary';
 import AddInterviewExp from './Students/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Students/AddCompanyInterview';
-import CompanyJobs from './Studenst/CompanyJobs';
+import CompanyJobs from './Students/CompanyJobs';
 import CompanyJobDetails from './Students/CompanyJobDetails';
 import AddPhotos from './Students/AddPhotos';
 // import JobsNav from './Students/JobsNav';
