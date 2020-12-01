@@ -7,6 +7,7 @@ import { getCurrentProfile } from '../../actions/student/profile';
 import Navigation from './Navigation';
 import '../CSS/studentLandingPage.css';
 import userIcon from '../images/user_circle.png';
+import { BACKEND_URL } from '../../helpers/constants';
 
 const LandingPage = ({ getCurrentProfile, student: { profile, loading } }) => {
   useEffect(() => {
@@ -60,13 +61,23 @@ const LandingPage = ({ getCurrentProfile, student: { profile, loading } }) => {
       </div>
       <div className='section'>
         <div className='profile-student-box'>
-          <img
-            src={userIcon}
-            alt='user-icon'
-            height='60px'
-            width='60px'
-            className='user-img pl-25'
-          />
+          {!profile.profilePic ? (
+            <img
+              src={userIcon}
+              alt='user-icon'
+              height='60px'
+              width='60px'
+              className='user-img pl-25'
+            />
+          ) : (
+            <img
+              className='user-img pl-25'
+              src={`${BACKEND_URL}/student/profile/view/${profile.profilePic.image}`}
+              alt=''
+              height='100px'
+              width='120px'
+            />
+          )}
           <h3 className='name py pl-25'>{profile.name}</h3>
           <i class='fas fa-briefcase fa-lg mt-3'></i>{' '}
           <a href='/' className='student-job-link'>
