@@ -8,7 +8,7 @@ import CmpNav2 from './CmpNav2';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
 import {BACKEND_URL} from '../../helpers/constants';
-// import CompanyReviews from './CompanyReviews';
+
 
 const CompanyDashboard = ({
   getCurrentCompanyProfile,
@@ -49,7 +49,7 @@ const CompanyDashboard = ({
       <CmpNav2 />
       <div className='contentholder-company text-company'>
         {loading && companyprofile === null ? (' ') : (
-          <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.logo ? (
+          <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.profilePic.image ? (
                 <img className='company-banner' src={`${BACKEND_URL}/company/profilepic/${companyprofile.profilePic.image}`} alt=''/>) : (
                 <img className='company-banner' src={require('../../components/images/' + companyprofile.profilePic +'_banner.jpg').default} alt=''/>)}
               {companyprofile.logo ? (

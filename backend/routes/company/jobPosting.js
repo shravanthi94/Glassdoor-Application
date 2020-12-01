@@ -114,6 +114,7 @@ router.post('/', [companyCheckAuth, [
             street,
             city,
             state,
+            salary,
             zip
         } = req.body;
 
@@ -125,6 +126,7 @@ router.post('/', [companyCheckAuth, [
             jobPostingFields.name = req.company.name;
             jobPostingFields.email = req.company.email;
             if (title) jobPostingFields.title = title;
+            if (salary) jobPostingFields.salary = salary;
             if (description) jobPostingFields.description = description;
             if (responsibilities) {
                 jobPostingFields.responsibilities = responsibilities.split(',').map(responsibility => responsibility.trim());
@@ -162,7 +164,7 @@ router.post('/', [companyCheckAuth, [
 router.get('/myjobs', companyCheckAuth, async(req, res) => {
 
     try {
-        const jobs = await Jobposting.find({ email: req.company.email }).populate('applicants.student');
+        const jobs = await Jobposting.find({ email: req.company.email }).populate('applicants.student').sort({ date: -1 });
         if (!jobs) return res.status(400).json({ msg: 'There are no Jobs created by this Restaurant' });
         res.json(jobs);
     } catch (err) {

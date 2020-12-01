@@ -83,10 +83,4 @@ router.post('/company/:company_id/approve/photo/:photo_id', adminCheckAuth, asyn
     }
 });
 
-
-// Student profile pic approve
-// Student profile pic get
-// Company profile pic approve
-// Company profile pic get
-
 module.exports = router;
