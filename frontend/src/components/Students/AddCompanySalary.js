@@ -26,7 +26,8 @@ class AddCompanySalary extends Component {
                 jobTitle: "",
                 yearsOfExp: "",
                 location: "",
-                gender: "female"
+                gender: "female",
+                student: this.props.student
             }
         }
 

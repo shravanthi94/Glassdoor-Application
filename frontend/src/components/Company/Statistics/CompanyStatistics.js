@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Chart } from "react-google-charts";
 import { connect } from 'react-redux';
 import { getCurrentCompanyJobs } from '../../../actions/company/companyjobpostings';
 import CmpNav2 from '../CmpNav2';
@@ -12,6 +13,11 @@ const CompanyStatistics = ({getCurrentCompanyJobs, companyjobs:{companyjobs, loa
     return (
         <Fragment>
             <CmpNav2/>
+            <div className="contentholder-Jobs-company mt-3">
+                 <div className="contentholder-Jobs-company-sub">
+                    
+               </div> 
+            </div>
         </Fragment>
     )
 }

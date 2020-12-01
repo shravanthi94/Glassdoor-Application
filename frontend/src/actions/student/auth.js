@@ -19,6 +19,7 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
     const decoded = jwt_decode(localStorage.token);
     localStorage.setItem('usertype', decoded.user.usertype);
+    localStorage.setItem('id', decoded.user.id);
     localStorage.setItem('name', decoded.user.name);
     localStorage.setItem('email', decoded.user.email);
   }

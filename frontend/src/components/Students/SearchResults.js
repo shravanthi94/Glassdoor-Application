@@ -96,14 +96,18 @@ const SearchResults = ({
                     <br />
                     <p>
                       <strong className='h6'>
-                        &emsp;&emsp; 11 &emsp; &emsp; &emsp;{' '}
+                        &emsp;&emsp;{' '}
                         {query === 'JOBS'
-                          ? each.company.interview.length
-                          : each.interview.length}{' '}
+                          ? each.company.numberOfReviews
+                          : each.numberOfReviews}{' '}
+                        &emsp; &emsp; &emsp; &emsp;{' '}
+                        {query === 'JOBS'
+                          ? each.company.numberOfInterviews
+                          : each.numberOfInterviews}{' '}
                         &emsp;&emsp; &emsp;{' '}
                         {query === 'JOBS'
-                          ? each.company.salary.length
-                          : each.salary.length}
+                          ? each.company.numberOfSalaries
+                          : each.numberOfSalaries}
                       </strong>
                     </p>
                     {/* <br /> */}

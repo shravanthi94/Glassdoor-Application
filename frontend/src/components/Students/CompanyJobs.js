@@ -18,7 +18,7 @@ class CompanyJobs extends Component {
             submitted: false,
             isRedirect: false,
             redirectPath: "",
-            company_id: this.props.location.state.company_id,
+            company_id: this.props.company.overview._id,
             data: "",
             jobs: this.props.jobs,
             filteredJobs: this.props.jobs,

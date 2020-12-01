@@ -18,6 +18,7 @@ const CreatingJob = ({
         name:'',
         email:'',
         title:'',
+        salary:'',
         description:'',
         responsibilities:'',
         qualifications:'',
@@ -44,6 +45,7 @@ const CreatingJob = ({
         email,
         title,
         description,
+        salary,
         responsibilities,
         qualifications,
         industry,
@@ -84,6 +86,9 @@ const CreatingJob = ({
                     </div>
                     <div className="form-group-company"><p>Job Tile</p>
                         <input type="text" name="title" value={title} onChange={(e) => onChange(e)}/>
+                    </div>
+                    <div className="form-group-company"><p>Salary Range</p>
+                        <input type="text" name="salary" value={salary} onChange={(e) => onChange(e)}/>
                     </div>
                     <div className="form-group-company"><p>Job description</p>
                         <textarea rows="6" cols="100" type="text" name="description" value={description} onChange={(e) => onChange(e)}/>

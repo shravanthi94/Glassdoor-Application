@@ -42,6 +42,10 @@
   color: #0caa41;
 }
 
+.gd-blue {
+  background-color: #1861bf;
+}
+
 /* Padding */
 .p {
   padding: 0.5rem;
