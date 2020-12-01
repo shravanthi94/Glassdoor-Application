@@ -7,6 +7,7 @@ import CmpNav2 from './CmpNav2';
 // import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
+import {BACKEND_URL} from '../../helpers/constants';
 // import CompanyReviews from './CompanyReviews';
 
 const CompanyDashboard = ({
@@ -38,6 +39,10 @@ const CompanyDashboard = ({
   //     let path=`/company/applicants`;
   //     history.push(path)
   // }
+  const statisticsRoute = ()=>{
+    let path =`/company/statistics`;
+    history.push(path)
+  }
 
     return (
     <Fragment>
@@ -45,7 +50,7 @@ const CompanyDashboard = ({
       <div className='contentholder-company text-company'>
         {loading && companyprofile === null ? (' ') : (
           <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.logo ? (
-                <img className='company-banner' src={require('../../components/images/' + companyprofile.logo + '_banner.jpg').default} alt=''/>) : (
+                <img className='company-banner' src={`${BACKEND_URL}/company/profilepic/${companyprofile.profilePic.image}`} alt=''/>) : (
                 <img className='company-banner' src={require('../../components/images/' + companyprofile.profilePic +'_banner.jpg').default} alt=''/>)}
               {companyprofile.logo ? (
                 <img
@@ -71,12 +76,12 @@ const CompanyDashboard = ({
               {companyprofile.name ? (
                 <div className='dashboard-company-name'>
                   {companyprofile.name}{' '}
-                  <Link
+                  {/* <Link
                     to='/company/updateprofile'
                     style={{ fontSize: '14px', color: '#1861BF' }}
                   >
                     Update Profile
-                  </Link>
+                  </Link> */}
                 </div>
               ) : (
                 ' '
@@ -121,7 +126,7 @@ const CompanyDashboard = ({
                   <div className='profile-counts'>
                     <i class='fas fa-chart-line'></i>
                   </div>
-                  <div className='profile-title'>Statistics&emsp;</div>
+                  <div className='profile-title' onClick={statisticsRoute}>Statistics&emsp;</div>
                 </td>
                 <div>
                   &emsp;&emsp;
