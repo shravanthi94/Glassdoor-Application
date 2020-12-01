@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import ReactModal from 'react-modal';
+import Files from 'react-files'
 
 class CompanyJobDetails extends Component {
 
@@ -25,14 +26,19 @@ class CompanyJobDetails extends Component {
             searchName: "",
             searchLocation: "",
             jobDetail: this.props.location.state.data,
+            resume: "",
             coverLetter: "",
-            resume: ""
+            files: null,
         }
 
         this.redirectHandler = this.redirectHandler.bind(this);
         this.changeJobHandler = this.changeJobHandler.bind(this);
         this.closeModalHandler = this.closeModalHandler.bind(this);
         this.openModalHandler = this.openModalHandler.bind(this);
+        this.resumeHandler = this.resumeHandler.bind(this);
+        this.coverLetterHandler = this.coverLetterHandler.bind(this);
+        this.applyJobsHandler = this.applyJobsHandler.bind(this);
+        this.filesUploadHandler = this.filesUploadHandler.bind(this);
     }
 
     componentDidMount() {
@@ -49,10 +55,74 @@ class CompanyJobDetails extends Component {
         }
     }
 
+    filesUploadHandler = (e) => {
+        console.log("e: ", e);
+
+        this.setState({
+            resume: e
+        })
+        // if(e && e.length !== 0){
+
+        //     e.map(file => {
+        //         console.log("file name: ", (file.name).search("res"));
+        //         if(file.name.search("resume") !== -1){
+        //             console.log("inside resume");
+        //             this.setState({
+        //                 resume: file.name
+        //             })
+        //         }
+
+        //         if(file.name.search("cover") !== -1){
+        //             console.log("inside cover");
+        //             this.setState({
+        //                 coverLetter: file.name
+        //             })
+        //         }
+        //     })
+        // }
+    }
+
     changeJobHandler = (e) => {
         this.setState({
             jobDetail: e
         })
+    }
+
+    applyJobsHandler = (e) => {
+        e.preventDefault();
+
+        console.log("apply job handler res: ", this.state.resume);
+        console.log("student id: ", this.props.studentId);
+
+        const formData = new FormData();
+        formData.append("resume", this.state.resume);
+        formData.append("jobId", this.state.jobDetail._id);
+        formData.append("studentId", this.props.studentId);
+
+        console.log(" this.props: ",  this.props);
+
+        console.log("resume: ", this.state.resume.name);
+        console.log("coverLetter: ", this.state.coverLetter.name);
+
+        // this.setState({
+        //     successfulUpload: "true"
+        // })
+
+        // this.props.updateResProfilePic(picData);
+    }
+
+    resumeHandler(e) {
+        console.log("resumeHandler:", e.target.files[0]);
+        this.setState({
+            resume: e.target.files[0]
+        });
+    }
+
+    coverLetterHandler(e) {
+        console.log("coverLetterHandler:", e.target.files[0]);
+        this.setState({
+            coverLetter: e.target.files[0]
+        });
     }
 
     openModalHandler = (e) => {
@@ -251,33 +321,25 @@ class CompanyJobDetails extends Component {
                     </div>
 
                     <div>
-                        <form>
-                            <div className="file-upload">
-                                <div className="file-upload-modal">
-                            <label className="company-salary-job-title" htmlFor="CustPic">Upload Resume  </label>
-                                <div className="form-group">
-                                    <label for="file-upload-label" class="file-upload-label">
-                                        <i class="file-upload-icon"></i> Choose File
-                                    </label>
-                                    <input id="file-upload-label" className="file-upload-input" onChange={this.uploadResumeHandler} type="file" name="resume" />
-                                </div>
-                                <br /><br />
-                                <label className="company-salary-job-title" htmlFor="CustPic">Upload Cover Letter  </label>
-                                <div className="form-group">
-                                    <label for="file-upload-label" class="file-upload-label">
-                                        <i class="file-upload-icon"></i> Choose File
-                                    </label>
-                                    <input id="file-upload-label" className="file-upload-input" onChange={this.uploadCoverHandler} type="file" name="coverLetter" />
-                                </div>
-                                <br /><br /><br />
-                                <div>
-                                    <button onClick={this.submitProfilePic} className="pic-upload-button" type="submit">Apply to Job</button>
-                                </div>
-
-                            </div>
-                            </div>
-                            <br />
-                        </form>
+                        <Files
+                            className='files-dropzone'
+                            onChange={this.filesUploadHandler}
+                            // onError={this.onFilesError}
+                            accepts={['image/png', '.pdf', 'audio/*']}
+                            multiple
+                            maxFiles={10}
+                            maxFileSize={10000000}
+                            minFileSize={0}
+                            clickable
+                        >
+                            <br /><br /><br /><br /><br/>
+                        Drop files here or click to upload
+                        <div style={{ fontSize: "50px", color: "gray"}}><i class="fas fa-upload"></i></div>
+                        </Files>
+                    </div> <div className="file-upload-button">
+                        <div>
+                            <button onClick={this.applyJobsHandler} className="pic-upload-button" type="submit">Apply to Job</button>
+                        </div>
                     </div>
                 </ReactModal>
             </div>
@@ -286,10 +348,11 @@ class CompanyJobDetails extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(" CompanyJobs - store:", state.comStore);
+    console.log(" CompanyJobs - store:", state);
     return {
         company: state.comStore.company || "",
-        jobs: state.comStore.jobs || ""
+        jobs: state.comStore.jobs || "",
+        studentId: state.studentProfile.profile._id
     };
 };
 

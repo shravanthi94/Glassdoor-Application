@@ -6,7 +6,7 @@ import { addReviews } from '../../actions/company/addCompanyReview';
 import { Redirect } from 'react-router';
 import StarRatings from 'react-star-ratings';
 
-class AddInterviewExp extends Component {
+class AddCompanyReview extends Component {
 
     constructor(props) {
         super(props);
@@ -30,6 +30,7 @@ class AddInterviewExp extends Component {
                 cons: "",
                 current_former: "current",
                 comment: "",
+                student: this.props.studentId
             }
         }
 
@@ -172,8 +173,8 @@ class AddInterviewExp extends Component {
 
                                                         <tr> <div class="form-group"> Are you a current or former employee? </div> </tr>
                                                         <tr>
-                                                            {this.state.reviewDetails.current_former === "current" ? <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("former")}>Former</div></div>
-                                                                : <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button" onClick={() => this.currentEmpHandler("former")}>Former</div></div>}
+                                                            {this.state.reviewDetails.current_former === "current" ? <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button-select" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("former")}>Former</div></div>
+                                                                : <div class="form-group" style={{ marginBottom: "15px" }}> <div className="overview-profile-add-button-nonselect" onClick={() => this.currentEmpHandler("current")}>Current</div><div className="overview-profile-add-button-select" onClick={() => this.currentEmpHandler("former")}>Former</div></div>}
                                                         </tr>
 
 
@@ -254,7 +255,7 @@ const mapStateToProps = (state) => {
         company: state.comStore.company || "",
         addMsg: state.comStore.addMsg,
         addFlag: state.comStore.addFlag,
-        student: state.studentProfile.profile._id || ""
+        studentId: state.studentProfile.profile._id
     };
 };
 
@@ -265,4 +266,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddInterviewExp);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCompanyReview);

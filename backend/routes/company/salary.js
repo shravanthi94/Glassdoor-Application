@@ -25,9 +25,10 @@ router.post('/', async (req, res) => {
             yearsOfExperience: req.body.yearsOfExp,
             location: req.body.location,
             salaryGender: req.body.gender,
+            student: req.body.student
          };
 
-        const company = await Company.findByIdAndUpdate({_id: req.body.company}, {$push:{ salary: data }}, {new: true});
+        const company = await Company.findByIdAndUpdate({_id: req.body.company}, {$push:{ salary: data }, $inc:{numberOfSalaries : 1}}, {new: true});
         
         if(!company){
             res.status(400).send("Couldn't add salary details. Try after sometime");  
