@@ -1,0 +1,161 @@
+.job-city-state{
+    color: #7F7F7F;
+    font-weight: normal;
+}
+
+.profile-search-job-button{
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 4px;
+    border-spacing: 100px;
+    padding: 7px;
+    text-align: center;
+    background: #1861BF;
+    font-size: 15px;
+    color: white;  
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.search-table{
+    width: 350px;
+}
+
+.company-find-job-button{
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 0px;
+    margin-top: 0px;
+    color: white;
+    background-color: #1861BF;
+    border: none;
+    border-radius: 1px;
+}
+
+.joblisting-date-company-date {
+    text-align: right;
+}
+
+.company-job-heart-icon{
+    font-size: 22px;
+    color: #13aa41;
+}
+
+.job-postings-table {
+    width: 100%;
+}
+
+.job-postings-table td {
+    border-bottom: 1px solid lightgrey;
+    padding: 15px 0;
+}
+
+.job-postings-logo{
+    width: 50px;
+    height: 50px;
+    border: 1px solid lightgray;
+}
+
+.job-postings-table div{
+    display: block;
+}
+
+.job-profile-row-two-inside{
+    padding: 8px;
+}
+
+.job-profile-row-two-column2{
+    height: 300px;
+    width: 300px;
+    background-color: white;
+    margin: 20px 0;
+}
+
+.company-apply-job-nonselect{
+    width: 115px;
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 0px;
+    border-spacing: 100px;
+    padding: 8px;
+    text-align: center;
+    background: white;
+    font-size: 15px;
+    color: #1861BF;   
+}
+
+.company-apply-job-nonselect:hover{
+    background: #1861BF;
+    font-size: 15px;
+    color: white;  
+}
+
+.file-upload div {
+    display: inline-block;
+    
+  }
+  
+  .file-upload-input {
+    position: relative;
+    margin: -32px 0 0 39px;
+    z-index: -1;
+  }
+  
+  .file-upload-input:focus {
+    outline: none;
+  }
+  
+  
+  .file-upload-icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .file-upload-icon:before {
+    content: "\f0ee";
+  }
+  
+  .file-upload-label {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    min-width: 130px;
+    background: white;
+  }
+
+  .pic-upload-button{
+    width: 195px;
+    border:none;
+    border:solid 2px #1861BF;
+    border-radius: 2px;
+    border-spacing: 100px;
+    padding: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1861BF;
+    margin-left: 80px;
+    background-color: white;
+  }
+
+  .pic-upload-button{
+    padding: 0px;
+    height: 40px;
+    width: 160px;
+  }
+  
+  .status-button:hover, .pic-upload-button:hover, .event-ppl-button:hover{
+    background-color: #1861BF;
+    color: white;
+  }
+
+  .file-upload-modal{
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+  

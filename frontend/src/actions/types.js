@@ -44,12 +44,13 @@ export const STUDENT_UPDATE_FAIL = 'STUDENT_UPDATE_FAIL';
 // Student - Company Search
 export const COMPANY_SEARCH_SUCCESS = 'COMPANY_SEARCH_SUCCESS';
 export const COMPANY_SEARCH_FAIL = 'COMPANY_SEARCH_FAIL';
-//Student- Jobs 
+export const SEARCH_CLEAR = 'SEARCH_CLEAR';
+
+//Student- Jobs
 export const STUDENT_APPLY_JOB = 'STUDENT_APPLY_JOB';
 export const STUDENT_GETALLJOBS = 'STUDENT_GETALLJOBS';
 export const STUDENT_JOB_DETAILS = 'STUDENT_JOB_DETAILS';
 export const STUDENT_JOBERROR = 'STUDENT_JOBERROR';
-
 
 //Student applications
 

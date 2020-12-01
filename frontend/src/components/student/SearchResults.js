@@ -28,9 +28,6 @@ const SearchResults = ({
           {' '}
           <div class='card' style={{ width: '700px' }}>
             <div class='card-body'>
-              {/* <h5 class='card-title'>{company.name}</h5>
-              <h6 class='card-subtitle mb-2 text-muted'>{company.location}</h6>
-              <p class='card-text'>{company.description}</p> */}
               <div class='container'>
                 <div class='row'>
                   <div class='col-sm'>
@@ -38,10 +35,25 @@ const SearchResults = ({
                       class='student-card-title'
                       to={`/student/companyView/${each._id}`}
                     > */}
-                    <Link to={{pathname:"/companyOverview", state:{ data: each._id}}}>
-                    <div className="student-card-title">
-                      {each.name} </div>
-                    </Link>
+                    {query === 'JOBS' ? (
+                      <Link
+                        to={{
+                          pathname: '/companyOverview',
+                          state: { data: each.company._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    ) : (
+                      <Link
+                        to={{
+                          pathname: '/companyOverview',
+                          state: { data: each._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    )}
                     {query === 'JOBS' && each.company ? (
                       <Fragment>
                         <h6 className='mt-2'>

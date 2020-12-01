@@ -57,7 +57,7 @@ body {
     text-align: center;
 }
 
-.profile-title {
+.admin-profile-title {
     margin-top: 10px;
     margin-left: 15px;
     color: #1861BF;
@@ -121,14 +121,6 @@ body {
 .reviews-error {
     position: absolute;
     left: 38%;
-    top: 35%;
-    font-size: 20px;
-    color: #1861BF;
-}
-
-.reviews-error-two {
-    position: absolute;
-    left: 68%;
     top: 35%;
     font-size: 20px;
     color: #1861BF;
@@ -255,4 +247,40 @@ body {
     color: #505863;
     font-family: 'Lato', sans-serif;
     padding: 20px;
+}
+
+.input {
+    text-align: justify;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Lato, sans-serif;
+    height: 40px;
+    color: #898d94;
+    width: 22%;
+    line-height: normal;
+    border-radius: 3px;
+    border: 1px solid #c4c7cc;
+    margin-left: 20px;
+}
+
+.search-box {
+    display: flex;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: Lato, sans-serif;
+    height: 37px;
+    color: #c5cdd8;
+    width: 100%;
+    line-height: normal;
+    border-radius: 3px;
+    border: none;
+}
+
+.company-stastics-row-two {
+    height: 1300px;
+    width: 970px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto 0px;
 }

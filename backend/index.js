@@ -12,6 +12,7 @@ const demographics = require('./routes/student/demographics');
 const jobPreferences = require('./routes/student/jobPreferences');
 const resume = require('./routes/student/resume');
 const jobPostings = require('./routes/student/jobPostings');
+const studentProfile = require('./routes/student/profile');
 
 // Company
 const signupCompany = require('./routes/company/signup');
@@ -33,6 +34,7 @@ const loginAdmin = require('./routes/admin/login');
 const review = require('./routes/admin/reviews');
 const company = require('./routes/admin/company');
 const analytics = require('./routes/admin/analytics');
+const photos = require('./routes/admin/photos');
 
 connectDB();
 
@@ -47,6 +49,8 @@ app.use('/student/landing', landingPageStudent);
 app.use('/student/demographics', demographics);
 //  Student - JOB PREFERENCES
 app.use('/student/jobPreferences', jobPreferences);
+//  Student - JOB PROFILE
+app.use('/student/profile', studentProfile);
 app.use('/student/resume', resume);
 app.use('/student/jobs', jobPostings);
 
@@ -85,6 +89,7 @@ app.use('/admin/signup', signupAdmin);
 app.use('/admin/login', loginAdmin);
 //  Admin - REVIEW
 app.use('/admin/review', review);
+app.use('/admin/photos', photos);
 //  Admin - COMPANY
 app.use('/admin/companies', company);
 //  Admin - ANALYTICS

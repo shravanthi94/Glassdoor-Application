@@ -1,4 +1,5 @@
 import { STUDENT_PROFILE_SUCCESS, STUDENT_PROFILE_FAIL } from '../types';
+import { setAlert } from '../alert';
 import axios from 'axios';
 
 //Get current users profile
@@ -10,6 +11,43 @@ export const getCurrentProfile = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    dispatch({
+      type: STUDENT_PROFILE_FAIL,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Update basic details
+export const updateBasicDetails = (formData, history, edit) => async (
+  dispatch,
+) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.post('/student/profile/basic', formData, config);
+
+    dispatch({
+      type: STUDENT_PROFILE_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(setAlert('Profile Updated', 'success'));
+
+    if (!edit) {
+      history.push('/student/profile');
+    }
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
     dispatch({
       type: STUDENT_PROFILE_FAIL,
       payload: { msg: err.response.statusText, status: err.response.status },

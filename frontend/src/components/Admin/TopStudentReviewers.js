@@ -68,7 +68,6 @@ class TopStudentReviewers extends Component {
 
     render() {
 
-
         var redirectVar = "";
         var topStudentReviewersArray = [];
 
@@ -107,7 +106,7 @@ class TopStudentReviewers extends Component {
                         <div className="analytics-row-two">                        
                         <Chart
                         height={'600px'}
-                        chartType="ScatterChart"
+                        chartType="PieChart"
                         loader={<div>Loading Chart</div>}
                         data={topStudentReviewersArray}
                         options={{
@@ -119,6 +118,7 @@ class TopStudentReviewers extends Component {
                               title: 'Number of Reviews',
                             },
                             // colors: ["green"],
+                            is3D: true,
                         }}
                         rootProps={{ 'data-testid': '1' }}
                       />

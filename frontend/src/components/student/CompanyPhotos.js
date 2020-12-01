@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
     }
     return company.overview.photos.map((each) => {
       if (
-        each.status === 'Approved' ||
+        each.status === 'approved' ||
         each.student.toString() === currentUserId
       ) {
         return (

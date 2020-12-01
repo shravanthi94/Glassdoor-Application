@@ -1,20 +1,25 @@
 .search-table{
-    min-width: 200px;
+    /* min-width: 200px; */
     border: 1px solid #c4c7cc;
     margin-top: 35px;
   }
   
-  .search-table .search-column, .search-table input{
+.search-table input{
     width: 100%;
-    min-width: 225px;
-    min-height: 50px;
+    width: 180px;
+    min-height: 40px;
     margin: 0 10px;
     padding: 0px;
-    border: none;
-    font-size: 20px;
-    border-radius: 20px;
+    font-size: 16px;
+    border:none;
+    /* border-right: 1px solid #c4c7cc; */
   }
-  
+
+  .search-table td {
+    border-spacing: 5px;
+    border-collapse: separate;
+  }
+
   .search-table input:focus{
     outline: none;
   }
@@ -34,6 +39,10 @@
     display: block;
   }
   
+  .search-row{
+    width: 200px;
+  }
+
   .search-table .search-button button{
     padding: 0px 0px;
     border: none;
