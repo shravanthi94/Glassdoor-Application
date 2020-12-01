@@ -22,18 +22,10 @@ const AddPhotos = ({ match, uploadCompanyPhotos, history }) => {
 
   const onUpload = (e) => {
     e.preventDefault();
-
-    console.log('inside onUpload: ', image.file);
-
     const formData = new FormData();
-
     formData.append('image', image.file);
-
-    console.log('inside onUpload formData: ', formData);
-
     uploadCompanyPhotos(formData, match.params.id, history);
-    // window.location.reload();
-    // setimage({ file: '', fileText: '' });
+    setimage({ file: '', fileText: '' });
   };
 
   return (
@@ -46,7 +38,10 @@ const AddPhotos = ({ match, uploadCompanyPhotos, history }) => {
             className='profile-row-two-row1 mt-4 ml-5'
             style={{ width: '95%' }}
           >
-            <div className='profile-row-two-inside'>
+            <div
+              className='profile-row-two-inside'
+              style={{ padding: '10% 40%' }}
+            >
               <form onSubmit={(e) => onUpload(e)}>
                 <div>
                   <input
