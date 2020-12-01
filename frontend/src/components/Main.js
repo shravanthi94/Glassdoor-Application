@@ -48,6 +48,8 @@ import AddCompanySalary from './Student/AddCompanySalary';
 import AddInterviewExp from './Student/AddInterviewExp';
 import CompanySideBar from './Common/CompanySideBar';
 import AddCompanyInterview from './Student/AddCompanyInterview';
+import CompanyJobs from './Student/CompanyJobs';
+import CompanyJobDetails from './Student/CompanyJobDetails';
 import AddPhotos from './Student/AddPhotos';
 // import JobsNav from './Student/JobsNav';
 
@@ -72,6 +74,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
+            <Route exact path='/companyJobDetails' component={CompanyJobDetails} />
             <Route
               exact
               path='/companyInterviews'
@@ -91,12 +94,8 @@ class Main extends Component {
             />
             <Route exact path='/addInterviewExp' component={AddInterviewExp} />
             <Route exact path='/companySideBar' component={CompanySideBar} />
-            <Route
-              exact
-              path='/addCompanyInterview'
-              component={AddCompanyInterview}
-            />
-
+            <Route exact path='/addCompanyInterview' component={AddCompanyInterview} />
+            <Route exact path='/companyJobs' component={CompanyJobs} />
             <Route
               exact
               path='/addCompanyReview'
