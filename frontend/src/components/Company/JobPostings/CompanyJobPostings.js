@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import {Link, useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import CmpNav2 from '../CmpNav2'
 import StarRatings from 'react-star-ratings';
@@ -18,16 +18,13 @@ const CompanyJobPostings = ({
     companyprofile:{companyprofile},
     getJobDetailById}) => {
     useEffect(()=>{
+        console.log("inside useEffect")
         getCurrentCompanyJobs()
         getCurrentCompanyProfile()
     }, [])
 
-    // const history = useHistory();
-
-
     const jobDetail = (rev_id) =>{ 
         getJobDetailById(rev_id)
-        //history.push(path);
       }
     return (
         <Fragment>
@@ -66,7 +63,46 @@ const CompanyJobPostings = ({
             
                             </div>
                     <div class="col-7">
-                    {companyprofile && companyjob?
+                    {!companyjob && companyjobs?
+                    <Fragment>
+                    {/* <div class="card" style={{ width: '50rem', height: '100%' }}>
+                    <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Number of applicants: {companyjobs[0].applicants.length}
+                    <Link to={`/company/viewapplicants/${companyjobs[0]._id}`} className='compnay-view-button ml-5'> View Applicants</Link> </h6>
+                    <hr/>
+                    <table className="overview-table">
+                        <tr><td>Job Title:</td><td><div>{companyjobs[0].title}</div></td><td>Street:</td><td><div>{companyjobs[0].street}</div></td></tr>
+                        <tr><td>Company:</td><td><div>{companyjobs[0].name}</div></td><td>City:</td><td><div>{companyjobs[0].city}</div></td></tr>
+                        <tr><td>Industry:</td><td><div>{companyjobs[0].industry}</div></td><td>State:</td><td><div>{companyjobs[0].state}</div></td></tr>
+                        <tr><td>Remote:</td><td><div>{companyjobs[0].Remote}</div></td><td>In-Person:</td><td><div>{companyjobs[0].inPerson}</div></td></tr>
+                    </table>
+                    <br/>
+                    <div className='font-weight-bold'>Description: </div> {companyjobs[0].description}
+                    <br/>
+                    <br/>
+                    <div className='font-weight-bold'>Qualifications: </div>
+                    
+                        {companyjobs[0].qualifications.length >0? companyjobs[0].qualifications.map(qualification=>(
+                            <ul>
+                            <li>
+                                {qualification}
+                            </li>
+                            </ul>
+                        )): <p>No Qualifications mentioned</p>}
+                    
+                    <div className='font-weight-bold'>Responsibilities: </div>
+                    {companyjobs[0].responsibilities.length >0? companyjobs[0].responsibilities.map(responsibility=>(
+                            <ul>
+                            <li>
+                                {responsibility}
+                            </li>
+                            </ul>
+                        )): <p>No responsibilities mentioned</p>}
+
+                    </div>
+                    </div>
+                    <br /> */}
+                </Fragment>:
                     <Fragment>
                     <div class="card" style={{ width: '50rem', height: '100%' }}>
                         <div class="card-body">
@@ -105,7 +141,8 @@ const CompanyJobPostings = ({
                         </div>
                         </div>
                         <br />
-                    </Fragment>:''}
+                    </Fragment>
+                    }
                     </div>
                 </div>
             </div>

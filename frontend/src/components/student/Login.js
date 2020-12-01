@@ -35,14 +35,11 @@ const Login = ({ isAuthenticated, login }) => {
             </Link>
           </div>
           <div className='right-nav'>
-            <Link to='/' className='header-nav-button'>
+            <Link to='/' className='header-nav-button ml-5'>
               Signup
             </Link>
             <Link to='/company' className='header-nav-link job-link'>
               Post Jobs
-            </Link>
-            <Link to='/companyOverview' className='header-nav-link job-link'>
-              Company Overview
             </Link>
             <Link to='/admin/signin' className='header-nav-link job-link'>
               Admin Login

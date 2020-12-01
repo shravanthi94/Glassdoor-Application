@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { COMPANY_SEARCH_SUCCESS, COMPANY_SEARCH_FAIL } from '../types';
+import {
+  COMPANY_SEARCH_SUCCESS,
+  COMPANY_SEARCH_FAIL,
+  SEARCH_CLEAR,
+} from '../types';
 
 export const companySearchResults = (searchData, query) => async (dispatch) => {
   try {
@@ -21,4 +25,11 @@ export const companySearchResults = (searchData, query) => async (dispatch) => {
       },
     });
   }
+};
+
+// Logout
+export const clearResults = () => (dispatch) => {
+  dispatch({
+    type: SEARCH_CLEAR,
+  });
 };

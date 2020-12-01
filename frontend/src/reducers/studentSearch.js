@@ -1,5 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { COMPANY_SEARCH_SUCCESS, COMPANY_SEARCH_FAIL } from '../actions/types';
+import {
+  COMPANY_SEARCH_SUCCESS,
+  COMPANY_SEARCH_FAIL,
+  SEARCH_CLEAR,
+} from '../actions/types';
 
 const initialState = {
   results: [],
@@ -23,6 +27,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case SEARCH_CLEAR:
+      return {
+        ...state,
+        results: [],
+        reviewCount: [],
         loading: false,
       };
     default:
