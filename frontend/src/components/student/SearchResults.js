@@ -35,14 +35,25 @@ const SearchResults = ({
                       class='student-card-title'
                       to={`/student/companyView/${each._id}`}
                     > */}
-                    <Link
-                      to={{
-                        pathname: '/companyOverview',
-                        state: { data: each._id },
-                      }}
-                    >
-                      <div className='student-card-title'>{each.name} </div>
-                    </Link>
+                    {query === 'JOBS' ? (
+                      <Link
+                        to={{
+                          pathname: '/companyOverview',
+                          state: { data: each.company._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    ) : (
+                      <Link
+                        to={{
+                          pathname: '/companyOverview',
+                          state: { data: each._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    )}
                     {query === 'JOBS' && each.company ? (
                       <Fragment>
                         <h6 className='mt-2'>
