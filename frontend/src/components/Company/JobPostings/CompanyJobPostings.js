@@ -50,7 +50,7 @@ const CompanyJobPostings = ({
                                                 </td>
                                                 <td>
                                                     <table>
-                                                        <tr><td> <h6 className="card-title">{job.name}</h6></td></tr>
+                                                        <tr><td> <h6 className="card-title">{job.name}</h6></td><td><h6 className='card-title'>{job.salary}</h6></td></tr>
                                                         <tr className="joblisting-title-company"><td><Link className='active' onClick={(e)=> jobDetail(job._id)}>"{job.title}"</Link></td></tr>
                                                         <tr><td><h6 className="card-title">{job.city}, {job.state}</h6></td></tr>
                                                     </table>
