@@ -44,7 +44,9 @@ const ViewApplicants = ({
                                                 <table>
                                                     <tr><td> <h6><Link onClick={(e)=> studentDetail(applicant.email)} className="joblisting-title-company">{applicant.student.name}</Link></h6></td></tr>
                                                     <tr className="card-title"><td>"{applicant.student.email}"</td></tr>
-                                                    <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td></tr>
+                                                    <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td>
+                                                        <td><Link to={`/updateStatus/${applicant._id}`} className='compnay-view-button ml-7'>Update Status</Link></td>
+                                                    </tr>
                                                 </table>
                                             </td>
                                         </tr>
@@ -59,7 +61,8 @@ const ViewApplicants = ({
                             <div class="card-body">
                                 {!profile && companyjob? <Fragment>
                                     <h6 className='joblisting-title-company'>{companyjob? companyjob.title:''} &emsp;
-                                <Link to='#' className='compnay-view-button ml-7'> Update Status</Link> </h6>
+                                {/* <Link to='#' className='compnay-view-button ml-7'> Update Status</Link>  */}
+                                </h6>
                                 <hr/>
                                 <div className='font-weight-bold'>Job Preference: </div>
                                 {companyjob && !loading && companyjob.applicants[0] && companyjob.applicants[0].student && companyjob.applicants[0].student.jobPreference? 
@@ -86,7 +89,7 @@ const ViewApplicants = ({
                                 </Fragment>: 
                                 <Fragment> 
                                 <h6 className='joblisting-title-company'>{companyjob? companyjob.title:''} &emsp;
-                                <Link to='#' className='compnay-view-button ml-7'> Update Status</Link> </h6>
+                                <Link className='compnay-view-button ml-7'> Update Status</Link> </h6>
                                 <hr/>
                                 <div className='font-weight-bold'>Job Preference: </div>
                                 {profile? 

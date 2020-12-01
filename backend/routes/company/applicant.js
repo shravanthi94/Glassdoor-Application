@@ -103,10 +103,26 @@ router.get('/student/:email', async(req, res) => {
     }
 });
 
-// @route  POST /company/applicant/statusUpdate
+// @route  POST /company/applicant/statusUpdate/:applicantId
 // @Desc   Update the applicant status Submitted, reviewed, initial screening, Interviewing, Hired
 // @access Private
 
+router.post('/statusUpdate/:applicantId', companyCheckAuth, async(req, res) => {
+    console.log("backend1")
+    const data = {
+        'applicants.$.applicantStatus': req.body.applicantStatus,
+    };
+    try {
+        console.log('backend', req.body.applicantStatus);
+        const job = await Jobposting.findOneAndUpdate({ "email": req.company.email, 'applicants._id': req.params.applicantId }, { $set: data }, { new: true });
+        // console.log(job);
+
+        res.json(job);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 // router.put('aplicantdetail/:jobId/:appId', auth, async(req, res) => {
 //     // build profile object

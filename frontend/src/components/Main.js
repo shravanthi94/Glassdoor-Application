@@ -30,6 +30,7 @@ import CompanyJobPostings from './Company/JobPostings/CompanyJobPostings';
 import ViewApplicants from './Company/JobPostings/ViewApplicants';
 import CompanyCreateJob from './Company/JobPostings/CreatingJob';
 import CompanyReplyMessage from './Company/Reviews/CompanyReviewReply';
+import UpdateApplicantStatus from './Company/JobPostings/UpdateApplicantStatus';
 // import ViewApplicantDetails from './Company/JobPostings/ViewApplicantDetails';
 
 // Student Links
@@ -194,6 +195,8 @@ class Main extends Component {
               exact
               path='/company/reply/review/:id'
               component={CompanyReplyMessage}
+            />
+            <PrivateRoute exact path='/updateStatus/:id' component={UpdateApplicantStatus}
             />
 
             {/* Admin Routes */}

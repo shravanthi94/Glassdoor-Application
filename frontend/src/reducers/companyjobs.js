@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { COMPANY_CREATE_JOB, COMPANY_GETALLJOBS, COMPANY_GETJOB, COMPANY_JOBERROR } from '../actions/types'
+import { COMPANY_CREATE_JOB, COMPANY_GETALLJOBS, COMPANY_GETJOB, COMPANY_JOBERROR, UPDATE_APPLICANTSTATUS } from '../actions/types'
 
 const initialState = {
     companyjob: null,
@@ -14,6 +14,7 @@ export default function(state = initialState, action) {
     switch (type) {
         case COMPANY_CREATE_JOB:
         case COMPANY_GETJOB:
+        case UPDATE_APPLICANTSTATUS:
             return {
                 ...state,
                 companyjob: payload,
