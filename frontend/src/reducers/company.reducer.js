@@ -29,18 +29,26 @@ const comStore = (state = initialState, action) => {
         ...state,
         ...payload,
         isAuthenticated: true,
-        loading: false,
-      };
+        loading: false
+      }
+
+      case "ADD_COMPANY_INTERVIEW":
+        return {
+          ...state,
+          ...payload,
+          isAuthenticated: true,
+          loading: false
+        }
+
+      case "GET_COMPANY_JOBS":
+        return {
+          ...state,
+          ...payload,
+          isAuthenticated: true,
+          loading: false
+        }
 
     case 'ADD_COMPANY_SALARIES':
-      return {
-        ...state,
-        ...payload,
-        isAuthenticated: true,
-        loading: false,
-      };
-
-    case 'ADD_COMPANY_INTERVIEW':
       return {
         ...state,
         ...payload,
