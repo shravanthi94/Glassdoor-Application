@@ -12,6 +12,26 @@ const { ObjectId } = require('mongodb');
 
 companyAuth();
 
+router.post('/student', async(req, res) => {
+    try {
+
+        console.log("company id: ", req.body.companyId);
+        console.log("student id: ", req.body.studentId);
+
+        const reviews = await Review.find({ "company": req.body.companyId,  $or: [ { "approvalStatus": "approved" },  {"student": req.body.studentId}] })
+
+        console.log("reviews list: ", reviews);
+        if (!reviews) {
+            return res.status(400).json({ msg: 'No reviews yet!' });
+        }
+        res.status(200).json(reviews);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error: Database');
+    }
+});
+
+
 // @route  GET /company/review
 // @Desc   Get all reviews of the company by id
 // @access Private
@@ -65,14 +85,16 @@ router.post('/', async(req, res) => {
             jobTitle: req.body.job_title,
             currentOrFormer: req.body.current_former,
             approvalStatus: "new",
-            date: myDateString
+            date: myDateString,
 
         });
+        await Company.update({_id : req.body.company}, { $inc:{numberOfReviews : 1}});
 
         await review.save((error, data) => {
             if (error) {
                 return res.status(400).json({ msg: "Couldn't add review, try after sometime!" });
             } else {
+
                 return res.status(200).json({ msg: "Review successfully added" });
             }
         });

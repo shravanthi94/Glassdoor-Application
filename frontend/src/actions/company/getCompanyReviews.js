@@ -16,7 +16,7 @@ export const getCompanyReviews = (payload) => {
 
         console.log("payload: ", payload);
         // axios.defaults.headers.common['authorization'] = localStorage.getItem('cToken');
-        axios.get(configPath.api_host + '/company/review/' + payload)
+        axios.post(configPath.api_host + '/company/review/student',payload)
             .then(response => {
 
                 console.log("Actions: Get Company Reviews:", response);
