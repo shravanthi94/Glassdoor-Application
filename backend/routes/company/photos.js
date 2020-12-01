@@ -75,9 +75,5 @@ router.get('/photos/:filename', (req, res) => {
     );
   }
 });
-<<<<<<< HEAD
-module.exports = router;
-=======
 
 module.exports = router;
->>>>>>> db1b3eb19ee199bf145db7a2c8351768646a86e7
