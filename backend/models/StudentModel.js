@@ -57,9 +57,16 @@ const StudentSchema = new mongoose.Schema({
     type: String,
   },
 
+  resumes:[{
+    
+    file: { type: String, required: true },
+    format: { type: String, required: true }
+}],
+
   applications: {
     type: String,
   },
+
 
   date: { type: Date, default: Date.now() },
 });
