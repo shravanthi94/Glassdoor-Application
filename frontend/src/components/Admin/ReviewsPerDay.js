@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/adminCSS.css';
 import { getReviewsPerDay } from '../../actions/admin/analytics';
+import { loadUser } from '../../actions/admin/auth';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
 import { Chart } from "react-google-charts";
@@ -17,6 +18,7 @@ class ReviewsPerDay extends Component {
     }
 
     componentWillMount() {
+        this.props.loadUser();
         this.props.getReviewsPerDay();
     }
 
@@ -141,7 +143,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getReviewsPerDay: () => dispatch(getReviewsPerDay())
+        getReviewsPerDay: () => dispatch(getReviewsPerDay()),
+        loadUser:() => dispatch(loadUser())
     }
 }
 

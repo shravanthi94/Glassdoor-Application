@@ -71,7 +71,7 @@ class CompanyDetailsReviews extends Component {
                         <td>
                             <table style={{marginLeft:'15%'}}>
                             <br/>
-                                <tr className="review-headline"><td>"{review.headline}"</td></tr>
+                                <tr className="review-headline"><td>{review.headline}</td></tr>
                                 <tr className="review-star-ratings"> <td>{review.overAllRating}.0 <StarRatings rating={+review.overAllRating} starDimension="18px" starSpacing="1px" starRatedColor="#0caa41" numberOfStars={5} name='rating' /></td></tr>
                                 <tr><td>{review.comment}</td></tr>
                                 <tr><td><b>Pros: </b> &emsp; {review.pros}</td></tr>

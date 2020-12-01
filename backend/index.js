@@ -33,6 +33,7 @@ const loginAdmin = require('./routes/admin/login');
 const review = require('./routes/admin/reviews');
 const company = require('./routes/admin/company');
 const analytics = require('./routes/admin/analytics');
+const photos = require('./routes/admin/photos');
 
 connectDB();
 
@@ -82,6 +83,7 @@ app.use('/admin/signup', signupAdmin);
 app.use('/admin/login', loginAdmin);
 //  Admin - REVIEW
 app.use('/admin/review', review);
+app.use('/admin/photos', photos);
 //  Admin - COMPANY
 app.use('/admin/companies', company);
 //  Admin - ANALYTICS
