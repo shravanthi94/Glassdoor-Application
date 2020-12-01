@@ -21,6 +21,12 @@ export default function(state = initialState, action) {
                 ...state,
                 companyList: payload,
                 loading: false,
+                companyReviews: null,
+                companyReviewsError:null,
+                hiredApplicantsError:null,
+                hiredApplicants: null,
+                demographics: null,
+                demographicsError: null,
             }
         case COMPANY_LIST_GET_ERROR:
             return {
