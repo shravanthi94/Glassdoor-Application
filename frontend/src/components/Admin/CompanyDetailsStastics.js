@@ -4,7 +4,7 @@ import '../CSS/adminCSS.css';
 import { getCompanyHiredApplicants, getCompanyApplicantDemographics } from '../../actions/admin/company';
 import { Redirect } from 'react-router';
 import Navigation from './Navigation';
-import StarRatings from 'react-star-ratings'
+import { Chart } from "react-google-charts";
 
 class CompanyDetailsStastics extends Component {
 
@@ -75,21 +75,127 @@ class CompanyDetailsStastics extends Component {
         }
     }
 
-    displayHiredApplicants = (hiredApplicants) => {
-        return (
-            <div className="reviews-row-three">
-            <div className="reviews-error" style={{marginLeft:'-10%'}}> Number of Applicants Hired So Far : {hiredApplicants.hiredApplicants}</div> 
-            </div>
-        );
-    };
+    // displayHiredApplicants = (hiredApplicants) => {
+    //     return (
+    //         <div className="reviews-row-three">
+    //         <div className="reviews-error" style={{marginLeft:'-10%'}}> Number of Applicants Hired So Far : {hiredApplicants.hiredApplicants}</div> 
+    //         </div>
+    //     );
+    // };
 
-    displayDemographics = (demographics) => {
+    // displayDemographics = (demographics) => {
+    //     return (
+    //         <div className="reviews-row-four">
+    //         No Applicants Hired So Far! 
+    //         </div>
+    //       );
+    // };
+
+    displayData = (demographics) => {
+
+        var numberOfHiredApplicants = 0;
+        if (this.props.hiredApplicants && this.props.hiredApplicants.jobPostings) {
+            var index = this.props.hiredApplicants.jobPostings.map(job => job._id).indexOf(demographics.jobId);
+            if (index >= 0) {
+                numberOfHiredApplicants = this.props.hiredApplicants.jobPostings[index].count;
+            }
+        }
+
         return (
-            <div className="reviews-row-four">
-            No Applicants Hired So Far! 
+        <div className="company-stastics-row-two">
+            <div className="review-headline" style={{marginLeft:'10%'}}><br/>{demographics.name} - {demographics.title} </div>
+            <br/>
+            <div style={{marginLeft:'10%', fontSize:'20px'}}> Hired Applicants: {numberOfHiredApplicants}</div>
+            <br/>
+            <div style={{marginLeft:'10%', fontSize:'20px'}}> Applicant Stastics : </div>
+            <table>
+                <br/>
+                <tr>
+                    <div style={{marginLeft:'10%', fontSize:'20px'}}> 1. Ethnicity Stastics :</div>
+                </tr>
+                <tr>
+                    <td>
+                        <Chart
+                            height={'300px'}
+                            width={'400px'}
+                            chartType="PieChart"
+                            style={{marginLeft:'20%'}}
+                            loader={<div>Loading Chart</div>}
+                            data={[
+                                ['Ethnicity', 'Count'],
+                                ['White', demographics.whiteCount],
+                                ['Native Hawaiian or Other Pacific Islander', demographics.islanderCount],
+                                ['Black or African American', demographics.blackCount],
+                                ['Asian', demographics.asianCount],
+                                ['White', demographics.nativeCount],
+                            ]}
+                            rootProps={{ 'data-testid': '1' }}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <div style={{marginLeft:'10%', fontSize:'20px'}}> 2. Veteran Stastics :</div>
+                </tr>
+                <tr>
+                    <Chart
+                            height={'300px'}
+                            width={'400px'}
+                            style={{marginLeft:'20%'}}
+                            chartType="PieChart"
+                            loader={<div>Loading Chart</div>}
+                            data={[
+                                ['Veteran Status', 'Count'],
+                                ['Yes', demographics.veteranYes],
+                                ['No', demographics.veteranNo],
+                            ]}
+                            rootProps={{ 'data-testid': '1' }}
+                        />
+                </tr>
+                <tr>
+                    <div style={{marginLeft:'10%', fontSize:'20px'}}> 3. Gender Stastics :</div>
+                </tr>
+                <br/>
+                <tr>
+                    <td>
+                        <div style={{marginLeft:'25%'}}>
+                            <div><i class="fas fa-female" style={{height:'100px', width:'100px'}}></i></div> <br/> <div> Female: {demographics.femaleCount} </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style={{marginLeft:'25%'}}>
+                            <div><i class="fas fa-male" style={{height:'100px', width:'100px'}}></i> </div> <br/> <div> Male: {demographics.maleCount} </div>
+                        </div>
+                    </td>
+                </tr>
+                <br/>
+                <br/>
+                <tr>
+                    <div style={{marginLeft:'10%', fontSize:'20px'}}> 4. Physical Ability Stastics :</div>
+                </tr>
+                <br/>
+                <tr>
+                    <td>
+                        <div style={{marginLeft:'25%'}}>
+                            <div><i class="fas fa-walking" style={{height:'100px', width:'100px'}}></i> </div>Not Disabled: {demographics.disabilityNo}
+                        </div>
+                    </td>
+                    <td>
+                        <div style={{marginLeft:'25%'}}>
+                            <div><i class="fas fa-wheelchair" style={{height:'100px', width:'100px'}}></i> </div>Disbled: {demographics.disabilityYes}
+                        </div>
+                    </td>
+                </tr>
+                <br/>
+                
+            </table>
+            <div>
+            
+            
+            
             </div>
-          );
-    };
+        </div>
+        );
+    }
 
     render() {
 
@@ -100,28 +206,26 @@ class CompanyDetailsStastics extends Component {
             redirectVar = <Redirect to={{ pathname: `${this.state.redirectPath}/${this.props.location.state._id}`, state: this.props.location.state}} />
         }
 
-        var showHiredApplicants = null, showDemographics = null;
-
-        if(this.props.hiredApplicants) {
-            showHiredApplicants = this.displayHiredApplicants(this.props.hiredApplicants);
-        }
+        var showDemographicsError = null, showData = [];
 
         if(this.props.demographics) {
-            showDemographics = this.displayDemographics(this.props.demographics);
+            this.props.demographics.jobDemographics.map((demographic) => {
+                showData.push(this.displayData(demographic));
+            })
         }
         
-        if(this.props.hiredApplicantsError) {
-            showHiredApplicants = (
-                <div className="reviews-row-three">
-                    <div className="reviews-error"> No Applicants Hired So Far! </div>
-                </div>
-            );
-        }
+        // if(this.props.hiredApplicantsError) {
+        //     showHiredApplicants = (
+        //         <div className="reviews-row-three">
+        //             <div className="reviews-error"> No Applicants Hired So Far! </div>
+        //         </div>
+        //     );
+        // }
 
         if(this.props.demographicsError) {
-            showDemographics = (
-                <div className="reviews-row-four">
-                    <div className="reviews-error-two"> No Applicants So Far, hence cant show Demographics! </div>
+            showDemographicsError = (
+                <div className="reviews-row-three">
+                    <div className="reviews-error"> No Applicants So Far </div>
                 </div>
             );
         }
@@ -143,8 +247,9 @@ class CompanyDetailsStastics extends Component {
                             </table>
                         </div>
 
-                        {showHiredApplicants}
-                        {showDemographics}
+                        <div>
+                        {showData}
+                        </div>
                         
                     </div> : <div className="overview-all">
                     <Navigation />
@@ -154,11 +259,11 @@ class CompanyDetailsStastics extends Component {
 
                         <div className="admin-company-name">{this.props.location.state.name}</div>
                         <table className="analytics-row-one-table">
-                            <td className="profile-titles-selected"><div className="profile-title">Reviews per day</div></td>
-                            <td><div className="profile-title" onClick={() => this.redirectHandler("company_stastics")}>Company Stastics</div></td>
+                        <td> <div className="profile-title" onClick={() => this.redirectHandler("company_reviews")}>Reviews per day</div></td>
+                           <td className="profile-titles-selected"><div className="profile-title">Company Stastics</div></td>
                         </table>
                     </div>                    
-                    
+                    {showDemographicsError}
                 </div> 
                 }
             </div>

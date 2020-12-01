@@ -107,7 +107,7 @@ class CompanyAverageRating extends Component {
                         <div className="analytics-row-two">                        
                         <Chart
                         height={'600px'}
-                        chartType="ScatterChart"
+                        chartType="PieChart"
                         loader={<div>Loading Chart</div>}
                         data={companyAverageArray}
                         options={{
@@ -119,6 +119,7 @@ class CompanyAverageRating extends Component {
                               title: 'Averahe Rating',
                             },
                             // colors: ["green"],
+                            is3D: true,
                         }}
                         rootProps={{ 'data-testid': '1' }}
                       />

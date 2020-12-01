@@ -73,6 +73,8 @@ router.get('/:company_id/hired-applicants', adminCheckAuth, async(req, res) => {
                 ]} 
             },
             { "$project": {
+                    "name": 1,
+                    "title": 1,
                     "applicants": {
                         "$map": {
                             "input": {
@@ -94,11 +96,11 @@ router.get('/:company_id/hired-applicants', adminCheckAuth, async(req, res) => {
                 console.error(err.message);
                 return res.status(500).send('Server Error: Database');
             } else if (jobPostings && jobPostings.length>0 ){
-                var counter = 0;
-                for(var i = 0; i < jobPostings.length; i++) {
-                    counter = counter + jobPostings[i].applicants.length;
-                }
-                return res.status(200).json({ hiredApplicants : counter, company : req.params.company_id});
+                jobPostings.map(jobPosting =>  {
+                    jobPosting.count = jobPosting.applicants.length;
+                    delete jobPosting.applicants;
+                });
+                return res.status(200).json({jobPostings});
             } else {
                 return res.status(404).json({msg:'No hires for the company!'});
             }
@@ -116,7 +118,7 @@ router.get('/:company_id/hired-applicants', adminCheckAuth, async(req, res) => {
 router.get('/:company_id/applicant-demographics', adminCheckAuth, async(req, res) => {
     try {
         console.log("Get a list of all reviews for a company from the database");
-        var query = JobPostings.find({company: req.params.company_id}).select('applicants');
+        var query = JobPostings.find({company: req.params.company_id}).select('applicants name title');
         query.populate({ path: 'applicants.student', select: 'demographics' });
         query.exec((err, jobPostings) => {
             console.log("jobPostings list fetched");
@@ -124,12 +126,13 @@ router.get('/:company_id/applicant-demographics', adminCheckAuth, async(req, res
                 console.error(err.message);
                 return res.status(500).send('Server Error: Database');
             } else if (jobPostings && jobPostings.length>0 ){
-                var asianCount = 0, nativeCount = 0, blackCount = 0, whiteCount = 0, islanderCount =0;
-                var maleCount = 0, femaleCount = 0;
-                var disabilityYes = 0, disabilityNo = 0;
-                var veteranYes = 0, veteranNo = 0;
+                jobDemographics = [];
                 for ( var i = 0; i < jobPostings.length; i++ ) {
                     if ( jobPostings[i].applicants && jobPostings[i].applicants.length > 0 ) {
+                        var asianCount = 0, nativeCount = 0, blackCount = 0, whiteCount = 0, islanderCount =0;
+                        var maleCount = 0, femaleCount = 0;
+                        var disabilityYes = 0, disabilityNo = 0;
+                        var veteranYes = 0, veteranNo = 0;
                         for ( var j=0; j < jobPostings[i].applicants.length; j++ ) {
                             if ( jobPostings[i].applicants[j].student && jobPostings[i].applicants[j].student.demographics ) {
 
@@ -167,24 +170,29 @@ router.get('/:company_id/applicant-demographics', adminCheckAuth, async(req, res
                                 }
                             }
                         }
+                        jobDemographics.push(
+                            {
+                                jobId: jobPostings[i]._id,
+                                name: jobPostings[i].name,
+                                title: jobPostings[i].title,
+                                whiteCount : whiteCount, 
+                                islanderCount : islanderCount, 
+                                blackCount : blackCount, 
+                                asianCount : asianCount,
+                                nativeCount : nativeCount,
+                                femaleCount : femaleCount,
+                                maleCount : maleCount,
+                                disabilityNo : disabilityNo,
+                                disabilityYes : disabilityYes,
+                                veteranNo : veteranNo,
+                                veteranYes : veteranYes
+                            }
+                        )
                     } 
                 }
                 return res.status(200).json(
                     { 
-                        demographics : 
-                        { 
-                            whiteCount : whiteCount, 
-                            islanderCount : islanderCount, 
-                            blackCount : blackCount, 
-                            asianCount : asianCount,
-                            nativeCount : nativeCount,
-                            femaleCount : femaleCount,
-                            maleCount : maleCount,
-                            disabilityNo : disabilityNo,
-                            disabilityYes : disabilityYes,
-                            veteranNo : veteranNo,
-                            veteranYes : veteranYes
-                        },
+                        jobDemographics: jobDemographics,
                         company : req.params.company_id
                         // jobPostings
                     }
