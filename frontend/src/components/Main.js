@@ -17,6 +17,8 @@ import MostViewedCompanies from './Admin/MostViewedCompanies';
 import TopCeo from './Admin/TopCeo';
 import CompanyDetailsReviews from './Admin/CompanyDetailsReviews';
 import CompanyDetailsStastics from './Admin/CompanyDetailsStastics';
+import FilterCompanyImages from './Admin/FilterCompanyImages';
+import FilterStudentImages from './Admin/FilterStudentImages';
 
 //Company Links
 import CompanyLanding from './Company/Landing';
@@ -246,6 +248,16 @@ class Main extends Component {
               path='/admin/companyStastics/*'
               component={CompanyDetailsStastics}
             />
+            <Route
+              exact
+              path='/admin/images/company'
+              component={FilterCompanyImages}
+            />
+            <Route
+            exact
+            path='/admin/images/student'
+            component={FilterStudentImages}
+          />
           </Switch>
         </Router>
       </Fragment>
