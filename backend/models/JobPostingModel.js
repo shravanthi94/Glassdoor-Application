@@ -28,7 +28,7 @@ const JobPostingSchema = new mongoose.Schema({
         type: String,
     },
     country: {
-        type: String
+        type: String,
     },
     Remote: {
         type: String,
@@ -37,48 +37,47 @@ const JobPostingSchema = new mongoose.Schema({
         type: String,
     },
     street: {
-        type: String
+        type: String,
     },
     city: {
-        type: String
+        type: String,
     },
     state: {
-        type: String
+        type: String,
     },
     zip: {
-        type: String
+        type: String,
     },
     salary: {
-        type: String
+        type: String,
     },
     jobType: {
-        type: String
+        type: String,
     },
     date: { type: Date, default: Date.now() },
     applicants: [{
         student: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'student'
+            ref: 'student',
         },
         email: {
-            type: String
+            type: String,
         },
         resume: {
-            type: String
+            type: String,
         },
         coverLetter: {
-            type: String
+            type: String,
         },
         applicantStatus: {
             type: String,
-            default: 'applied'
+            default: 'applied',
         },
         appliedDate: {
             type: Date,
-            default: Date.now()
+            default: Date.now(),
         },
-    }]
-
+    }, ],
 });
 
 const Jobposting = mongoose.model('jobposting', JobPostingSchema);
