@@ -36,11 +36,40 @@ router.post("/apply/:jobId", checkAuth, async(req, res) => {
 router.get("/", async(req, res) => {
 
     try {
-        let jobs = await Jobposting.find();
+        let jobs = await Jobposting.find().sort({ date: -1 });
         if (!jobs) {
             return res.status(400).json({ msg: 'No jobs posted yet' });
         }
-        res.status(200).json(jobs);
+        let jobs_out=[]
+        for(let job in jobs){
+        let out ={ title:'', company:'', city:'', state:'',  date};
+        out.title = job.title;
+        out.city = job.city;
+        out.state = job.state;
+        out.company=job.name;
+        out.date=  job.date;
+        jobs_out.push(out);
+    }
+        res.status(200).json(jobs_out);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ msg: 'Server Error: Database' });
+    }
+
+
+});
+
+router.get("/details/:id", async(req, res) => {
+
+    try {
+        let job = await Jobposting.findById(req.params.id);
+        if (!job) {
+            return res.status(400).json({ msg: 'No jobs posted yet' });
+        }
+        
+        
+
+        res.status(200).json(job);
     } catch (err) {
         console.error(err.message);
         res.status(500).send({ msg: 'Server Error: Database' });
