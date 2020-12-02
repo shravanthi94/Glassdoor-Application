@@ -71,6 +71,10 @@
     padding-left: 90px;
 }
 
+.company-width {
+    max-width: 20%;
+}
+
 
 /* 
 .form-company label {
