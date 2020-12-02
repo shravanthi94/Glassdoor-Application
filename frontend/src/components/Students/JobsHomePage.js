@@ -35,24 +35,37 @@ const JobsHomePage = ({
     }
   }, [getJobDetails, jobs]);
 
-  console.log('display jobs: ', displayJobs);
+  // console.log('display jobs: ', displayJobs);
 
   const onSortChange = (e) => {
     setsort(e.target.value);
-    setdisplayJobs(displayJobs.reverse());
+    const selectedSort = e.target.value;
+    if (selectedSort === 'Oldest') {
+      setdisplayJobs(
+        jobs.sort(function (a, b) {
+          return new Date(a.date) - new Date(b.date);
+        }),
+      );
+    } else {
+      setdisplayJobs(
+        jobs.sort(function (a, b) {
+          return new Date(b.date) - new Date(a.date);
+        }),
+      );
+    }
   };
 
   const onRatingChange = (e) => {
     setrating(e.target.value);
     if (rating === 'Most Rated') {
       setdisplayJobs(
-        displayJobs.sort((a, b) =>
+        jobs.sort((a, b) =>
           a.company.overAllRating > b.company.overAllRating ? 1 : -1,
         ),
       );
     } else {
       setdisplayJobs(
-        displayJobs.sort((a, b) =>
+        jobs.sort((a, b) =>
           a.company.overAllRating > b.company.overAllRating ? -1 : 1,
         ),
       );
@@ -60,24 +73,29 @@ const JobsHomePage = ({
   };
 
   const onTypeChange = (e) => {
+    const selectedType = e.target.value;
     setjobType(e.target.value);
-    if (jobType === 'Full-time') {
-      setdisplayJobs(jobs.filter((each) => each.jobType === 'Full-time'));
-    } else if (jobType === 'Part-time') {
-      setdisplayJobs(jobs.filter((each) => each.jobType === 'Part-time'));
-    } else if (jobType === 'Internship') {
-      setdisplayJobs(jobs.filter((each) => each.jobType === 'Internship'));
+
+    if (selectedType === '') {
+      setdisplayJobs(jobs);
+    }
+    if (selectedType === 'Full-time') {
+      setdisplayJobs(jobs.filter((each) => each.jobType === selectedType));
+    } else if (selectedType === 'Part-time') {
+      setdisplayJobs(jobs.filter((each) => each.jobType === selectedType));
+    } else if (selectedType === 'Internship') {
+      setdisplayJobs(jobs.filter((each) => each.jobType === selectedType));
     }
   };
 
   const onLocationChange = (e) => {
     setlocation(e.target.value);
-    setdisplayJobs(displayJobs.filter((each) => each.city.includes(location)));
+    setdisplayJobs(jobs.filter((each) => each.city.includes(location)));
   };
 
   const onSalaryChange = (e) => {
     setsalaryRange(e.target.value);
-    setdisplayJobs(displayJobs.filter((each) => each.salary === salaryRange));
+    setdisplayJobs(jobs.filter((each) => each.salary === salaryRange));
   };
 
   const allJobsDisplay = (e) => {
@@ -105,7 +123,9 @@ const JobsHomePage = ({
                 value={sort}
                 onChange={(e) => onSortChange(e)}
               >
-                <option className='dropdownOptionLabel'>Sort Date</option>
+                <option className='dropdownOptionLabel' value=''>
+                  Sort Date
+                </option>
                 <option className='dropdownOptionLabel' value='Newest'>
                   Newest
                 </option>
@@ -159,7 +179,9 @@ const JobsHomePage = ({
                 value={jobType}
                 onChange={(e) => onTypeChange(e)}
               >
-                <option className='dropdownOptionLabel'>Job Type</option>
+                <option className='dropdownOptionLabel' value=''>
+                  Job Type
+                </option>
                 <option className='dropdownOptionLabel' value='Full-time'>
                   Full-time
                 </option>
