@@ -56,8 +56,7 @@ import CompanyJobs from './Students/CompanyJobs';
 import CompanyJobDetails from './Students/CompanyJobDetails';
 import AddPhotos from './Students/AddPhotos';
 import JobHomePage from './Students/JobsHomePage';
-// import JobsNav from './Students/JobsNav';
-import StudentJobs from './Students/StudentJobs'
+
 // Student - Contributions
 import StudentReviews from './Students/contributions/StudentReviews';
 import StudentSalaries from './Students/contributions/StudentSalaries';
@@ -170,7 +169,6 @@ class Main extends Component {
               path='/student/contributions/photos'
               component={StudentPhotos}
             />
-             <PrivateRoute exact path='/student/StudentJobs' component={StudentJobs} />
             <PrivateRoute
               exact
               path='/companydashboard'
