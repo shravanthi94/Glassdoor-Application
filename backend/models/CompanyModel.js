@@ -132,7 +132,6 @@ const CompanySchema = new mongoose.Schema({
     {
       overallInterviewExp: {
         type: String,
-        required: true,
       },
       title: {
         type: String,
@@ -169,7 +168,6 @@ const CompanySchema = new mongoose.Schema({
     {
       baseSalary: {
         type: String,
-        required: true,
       },
       avgTotalPay: {
         type: String,
@@ -185,7 +183,6 @@ const CompanySchema = new mongoose.Schema({
       },
       location: {
         type: String,
-        required: true,
       },
       salaryGender: {
         type: String,
