@@ -9,7 +9,7 @@ const UtilityBar = () => {
         {' '}
         <h3 className='item-top-nav student-grey-icon'>
           <i class='fas fa-briefcase fa-lg'></i>{' '}
-          <Link to='/student/allJobs' className='h5 on-hover'>
+          <Link to='/student/StudentJobs' className='h5 on-hover'>
             Jobs
           </Link>
         </h3>

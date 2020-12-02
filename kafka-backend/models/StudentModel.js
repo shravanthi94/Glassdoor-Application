@@ -3,44 +3,82 @@ const mongoose = require('mongoose');
 const StudentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  image: { type: String },
-  jobPreferance: {
+  profilePic: {
+    image: {
+      type: String,
+    },
     status: {
       type: String,
-      required: true,
+      default: 'new',
+    },
+  },
+  jobPreference: {
+    status: {
+      type: String,
+      default: '',
     },
     title: {
       type: String,
-      required: true,
+      default: '',
     },
     salary: {
       type: String,
-      required: true,
+      default: '',
     },
     relocation: {
       type: Boolean,
+      default: true,
     },
     industry: {
       type: String,
+      default: '',
     },
   },
   demographics: {
     ethnicity: {
       type: String,
+      default: '',
     },
     gender: {
       type: String,
+      default: '',
     },
     disability: {
       type: String,
+      default: '',
     },
-    vetran: {
-      type: Boolean,
+    veteran: {
+      type: String,
+      default: '',
     },
   },
+
+  primaryResume: {
+    type: String,
+  },
+
+  resumes: [
+    {
+      file: { type: String },
+      format: { type: String },
+    },
+  ],
+
+  applications: {
+    type: String,
+  },
+
   date: { type: Date, default: Date.now() },
 });
 
 const Student = mongoose.model('student', StudentSchema);
 module.exports = Student;
+
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ */
