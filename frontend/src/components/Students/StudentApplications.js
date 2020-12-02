@@ -1,4 +1,4 @@
-/*import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import React, { Component , Fragment} from 'react';
 import '../CSS/studentApplications.css';
 import { getApplications, withdrawApplications } from '../../actions/student/applications';
@@ -20,7 +20,7 @@ class StudentApplications extends Component {
     }
 
     componentWillMount() {
-        this.props.getApplications();
+        this.props.getApplications(localStorage.getItem('id'));
     }
 
 
@@ -76,7 +76,9 @@ class StudentApplications extends Component {
 
     displayApplications  = (applications) => {
         var cards = [];
-
+        let myapplications= applications.jobPostings.applicants;
+        let company =  applications.jobPostings.name;
+        let title= applications.jobPostings.title;
         for( var i = 0; i < applications.length; i++ ) {
                 var singleCard = (
                     <div className="reviews-row-two">
@@ -170,5 +172,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(StudentApplications)
     //         redirectPath: path,
     //     })
     // }
-
-    */
