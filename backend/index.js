@@ -10,7 +10,7 @@ const loginStudent = require('./routes/student/login');
 const landingPageStudent = require('./routes/student/landingPage');
 const demographics = require('./routes/student/demographics');
 const jobPreferences = require('./routes/student/jobPreferences');
-const resume = require('./routes/student/resume');
+// const resume = require('./routes/student/resume');
 const jobPostings = require('./routes/student/jobPostings');
 const studentProfile = require('./routes/student/profile');
 
@@ -51,7 +51,7 @@ app.use('/student/demographics', demographics);
 app.use('/student/jobPreferences', jobPreferences);
 //  Student - JOB PROFILE
 app.use('/student/profile', studentProfile);
-app.use('/student/resume', resume);
+// app.use('/student/resume', resume);
 app.use('/student/jobs', jobPostings);
 
 /*  Routes for Company */
