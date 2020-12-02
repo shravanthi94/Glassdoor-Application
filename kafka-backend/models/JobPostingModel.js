@@ -3,38 +3,38 @@ const mongoose = require('mongoose');
 const JobPostingSchema = new mongoose.Schema({
     company: {
         type: mongoose.Schema.Types.ObjectId,
+        // type: String,
         ref: 'company',
+    },
+    name: {
+        type: String,
+    },
+    email: {
+        type: String,
     },
     title: {
         type: String,
-        required: true
     },
     description: {
         type: String,
-        required: true
     },
-    responsibilities: [{
-        type: String,
-        required: true
-    }],
-    qualifications: [{
-        type: String,
-        required: true
-    }],
+    responsibilities: {
+        type: [String],
+    },
+    qualifications: {
+        type: [String],
+    },
     industry: {
         type: String,
-        required: true
     },
     country: {
         type: String
     },
     Remote: {
-        type: Boolean,
-        required: true
+        type: String,
     },
     inPerson: {
-        type: Boolean,
-        required: true
+        type: String,
     },
     street: {
         type: String
@@ -48,11 +48,17 @@ const JobPostingSchema = new mongoose.Schema({
     zip: {
         type: String
     },
+    salary: {
+        type: String
+    },
     date: { type: Date, default: Date.now() },
     applicants: [{
         student: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'student'
+        },
+        email: {
+            type: String
         },
         resume: {
             type: String
@@ -61,7 +67,8 @@ const JobPostingSchema = new mongoose.Schema({
             type: String
         },
         applicantStatus: {
-            type: String
+            type: String,
+            default: 'applied'
         },
         appliedDate: {
             type: Date,

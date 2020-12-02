@@ -35,6 +35,19 @@ const SearchResults = ({
     setactivePage(pageNumber);
   };
 
+  // const displayInterviews = () => {
+  //   if (results.length === 0) {
+  //     return '';
+  //   }
+  //   const currentResults = results[0].interview.slice(
+  //     indexOfFirst,
+  //     indexOfLast,
+  //   );
+  //   return currentResults.map((each) => {
+  //     return <Fragment>{each.title}</Fragment>;
+  //   });
+  // };
+
   const displayResults = () => {
     const currentResults = results.slice(indexOfFirst, indexOfLast);
     return currentResults.map((each) => {
@@ -47,23 +60,41 @@ const SearchResults = ({
               <div class='container'>
                 <div class='row'>
                   <div class='col-sm'>
-                    {/* <Link
-                      class='student-card-title'
-                      to={`/student/companyView/${each._id}`}
-                    > */}
-                    {query === 'JOBS' ? (
+                    {query === 'JOBS' && (
                       <Link
                         to={{
                           pathname: '/companyOverview',
                           state: { data: each.company._id },
                         }}
                       >
+                        <div className='student-card-title'>{each.title} </div>
                         <div className='student-card-title'>{each.name} </div>
                       </Link>
-                    ) : (
+                    )}
+                    {query === 'Companies' && (
                       <Link
                         to={{
                           pathname: '/companyOverview',
+                          state: { data: each._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    )}
+                    {query === 'Interviews' && (
+                      <Link
+                        to={{
+                          pathname: '/companyInterviews',
+                          state: { data: each._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    )}
+                    {query === 'Salaries' && (
+                      <Link
+                        to={{
+                          pathname: '/companySalaries',
                           state: { data: each._id },
                         }}
                       >
@@ -199,7 +230,7 @@ const SearchResults = ({
               itemClass='page-item'
               linkClass='page-link'
               activeClass='gd-blue'
-              activeLinkClass='gd-blue text-white'
+              activeLinkClass='paginate'
               activePage={activePage}
               itemsCountPerPage={1}
               totalItemsCount={results.length}

@@ -94,6 +94,7 @@ router.post('/', [companyCheckAuth, [
     check('qualifications', 'Mention qualifications').not().isEmpty(),
     check('country', 'Please mention country').not().isEmpty(),
     check('Remote', 'Please mention if the work type is Remote').not().isEmpty(),
+    check('jobType', 'Please enter job type').not().isEmpty(),
 
 ]], async(req, res) => {
     const errors = validationResult(req);
@@ -115,7 +116,8 @@ router.post('/', [companyCheckAuth, [
             city,
             state,
             salary,
-            zip
+            zip,
+            jobType
         } = req.body;
 
         let company = await Company.findOne({ "email": req.company.email });
@@ -142,10 +144,12 @@ router.post('/', [companyCheckAuth, [
             if (city) jobPostingFields.city = city;
             if (state) jobPostingFields.state = state;
             if (zip) jobPostingFields.zip = zip;
-            // company = await Jobposting.findOneAndUpdate({ "email": req.company.email }, { $set: jobPostingFields }, { new: true });
-            company = new Jobposting(jobPostingFields);
-            await company.save();
-            res.status(200).json(company);
+            if (jobType) jobPostingFields.jobType = jobType;
+            console.log("job Type", jobType)
+                // company = await Jobposting.findOneAndUpdate({ "email": req.company.email }, { $set: jobPostingFields }, { new: true });
+            let job = new Jobposting(jobPostingFields);
+            await job.save();
+            res.status(200).json(job);
 
         }
 

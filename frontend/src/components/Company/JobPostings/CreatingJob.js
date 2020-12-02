@@ -29,7 +29,8 @@ const CreatingJob = ({
         street:'',
         city:'',
         state:'',
-        zip:''
+        zip:'',
+        jobType:''
     })
 
     useEffect(()=>{
@@ -55,7 +56,8 @@ const CreatingJob = ({
         street,
         city,
         state,
-        zip
+        zip,
+        jobType,
     } = formData;
 
     const onChange = e=>{
@@ -87,9 +89,22 @@ const CreatingJob = ({
                     <div className="form-group-company"><p>Job Tile</p>
                         <input type="text" name="title" value={title} onChange={(e) => onChange(e)}/>
                     </div>
-                    <div className="form-group-company"><p>Salary Range</p>
-                        <input type="text" name="salary" value={salary} onChange={(e) => onChange(e)}/>
-                    </div>
+                    <label className="form-group-company"> Job Type</label>
+                    <select className='dropdown company-width' value={jobType} name='jobType' onChange={(e) => onChange(e)}>
+                        <option className='dropdownOptionLabel'>Job Type</option>
+                        <option className='dropdownOptionLabel' value='Full-time'>Full-time</option>
+                        <option className='dropdownOptionLabel' value='Part-time'>Part-time</option>
+                        <option className='dropdownOptionLabel' value='Internship'>Internship</option>
+                    </select>
+                    <br/>
+                    <label className="form-group-company"> Salary Range</label>
+                    <select className='dropdown company-width' value={salary} name='salary' onChange={(e) => onChange(e)}>
+                        <option className='dropdownOptionLabel'>select salary range</option>
+                        <option className='dropdownOptionLabel' value='$50k-$100k'>$50k-$100k</option>
+                        <option className='dropdownOptionLabel' value='$101k-$150k'>$101k-$150k</option>
+                        <option className='dropdownOptionLabel' value='$151k-$200k'>$151k-$200k</option>
+                        <option className='dropdownOptionLabel' value='$201k and more...'>$201k and more...</option>
+                    </select>
                     <div className="form-group-company"><p>Job description</p>
                         <textarea rows="6" cols="100" type="text" name="description" value={description} onChange={(e) => onChange(e)}/>
                     </div>
@@ -104,14 +119,14 @@ const CreatingJob = ({
                     </div>
                     <div className="form-group-company">
                         <label><p>Remote</p></label>
-                        <select name="Remote" value={Remote} onChange={(e) => onChange(e)}>
+                        <select name="Remote" value={Remote} className='dropdown company-width' onChange={(e) => onChange(e)}>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
                     <div className="form-group-company">
                         <label><p>In Person</p></label>
-                        <select name="inPerson" value={inPerson} onChange={(e) => onChange(e)}>
+                        <select className='dropdown company-width' name="inPerson" value={inPerson} onChange={(e) => onChange(e)}>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>

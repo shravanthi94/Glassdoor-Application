@@ -91,10 +91,7 @@ router.get('/view/:img', (req, res) => {
     res.sendFile(image);
   } else {
     res.sendFile(
-      `${path.join(
-        __dirname,
-        '../..',
-      )}/public/uploads/students/placeholderimg.jpg`,
+      `${path.join(__dirname, '../..')}/public/uploads/student/placeholder.png`,
     );
   }
 });

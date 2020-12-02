@@ -6,6 +6,8 @@ import CmpNav2 from '../CmpNav2'
 import '../../CSS/CompanyJoblistings.css'
 import '../../CSS/CompanyLanding.css'
 import {getJobDetailById,getStudentDetailByEmail} from '../../../actions/company/companyjobpostings'
+import  {BACKEND_URL}  from '../../../helpers/constants';
+import pdf from '../../files/resume-1606883439279.pdf'
 
 const ViewApplicants = ({
     getJobDetailById, 
@@ -23,6 +25,7 @@ const ViewApplicants = ({
         getStudentDetailByEmail(stuId)
         //history.push(path);
       }
+
     return (
         <Fragment>
             <CmpNav2/>
@@ -37,15 +40,19 @@ const ViewApplicants = ({
                                     <div className="joblisting-date-company ">{(applicant.appliedDate + "").substring(0, 10)}</div>
                                     <table className="overview-reviews-table-all">
                                         <tr>
-                                            {/* <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../../components/images/' + companyprofile.logo + '_logo.jpg').default} alt="" /><br/>
-                                                    <h6>{(companyprofile.overAllRating * 5) / 100}{' '}<StarRatings rating={+(companyprofile.overAllRating * 5) / 100} starDimension='20px' starSpacing='1px' starRatedColor='#0caa41' numberOfStars={1} name='rating' /></h6>
-                                            </td> to={`/company/viewapplicantdetails/${applicant.email}`}*/}
                                             <td>
+                                            {/* file:///Users/harika_pradeep/Downloads/CMPE273_Fall2020/GlassDoor_App/Glassdoor-Application/frontend/src/components/files/"+applicant.student.resume} */}
+                                            {/* '/Users/harika_pradeep/Downloads/CMPE273LabResume3.pdf' */}
                                                 <table>
                                                     <tr><td> <h6><Link onClick={(e)=> studentDetail(applicant.email)} className="joblisting-title-company">{applicant.student.name}</Link></h6></td></tr>
                                                     <tr className="card-title"><td>"{applicant.student.email}"</td></tr>
+                                                    <a href={pdf} download>Sample</a>
+                                                    <tr className="card-title"><td><a href={`../../files/${applicant.resume}`} download>{applicant.resume}</a></td></tr>
+                                                    <Link to={`../../files/${applicant.resume}`} target="_blank" download>Download</Link>
+                                    
                                                     <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td>
                                                         <td><Link to={`/updateStatus/${applicant._id}`} className='compnay-view-button ml-7'>Update Status</Link></td>
+                                            
                                                     </tr>
                                                 </table>
                                             </td>
