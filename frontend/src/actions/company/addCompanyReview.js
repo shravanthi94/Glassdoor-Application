@@ -15,7 +15,7 @@ export const addReviews = (payload) => {
     return dispatch => {
 
         console.log("addReview payload: ", payload);
-        // axios.defaults.headers.common['authorization'] = localStorage.getItem('cToken');
+        axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
         axios.post(configPath.api_host + '/company/review' , payload)
             .then(response => {
 

@@ -5,14 +5,14 @@ const router = express.Router();
 const Company = require('../../models/CompanyModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 
-// companyAuth();
+companyAuth();
 // companyCheckAuth
 
 // @route  POST /company/salary
 // @Desc   Add new salary detail for a position at the company
 // @access Private
 
-router.post('/', async (req, res) => {
+router.post('/', companyCheckAuth, async (req, res) => {
     try {
         console.log("salary details: ", req.body);
 

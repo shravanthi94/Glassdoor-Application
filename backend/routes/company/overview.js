@@ -6,14 +6,14 @@ const Company = require('../../models/CompanyModel');
 const Review = require('../../models/ReviewModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 
-// companyAuth();
+companyAuth();
 // companyCheckAuth
 
 // @route  GET /company/overview
 // @Desc   Get the overview of company
 // @access Private
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', companyCheckAuth, async (req, res) => {
     try {
         console.log("company id: ", req.params.id);
         const overview = await Company.findById(req.params.id);
