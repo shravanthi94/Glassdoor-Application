@@ -8,6 +8,8 @@ const Student = require('../../models/StudentModel');
 router.post('/', checkAuth, async (req, res) => {
   const studentEmail = req.user.email;
   const { status, title, relocation, salary, industry } = req.body;
+
+  console.log('Backend relocation:', relocation);
   try {
     const student = await Student.findOne({ email: studentEmail });
 

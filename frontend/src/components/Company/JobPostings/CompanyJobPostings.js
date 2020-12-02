@@ -52,7 +52,7 @@ const CompanyJobPostings = ({
                                                     <table>
                                                         <tr><td> <h6 className="card-title">{job.name}</h6></td><td><h6 className='card-title'>{job.salary}</h6></td></tr>
                                                         <tr className="joblisting-title-company"><td><Link className='active' onClick={(e)=> jobDetail(job._id)}>"{job.title}"</Link></td></tr>
-                                                        <tr><td><h6 className="card-title">{job.city}, {job.state}</h6></td></tr>
+                                                        <tr><td><h6 className="card-title">{job.jobType}</h6></td><td><h6 className="card-title">{job.city}, {job.state}</h6></td></tr>
                                                     </table>
                                                 </td>
                                             </tr>
@@ -110,10 +110,11 @@ const CompanyJobPostings = ({
                         <Link to={`/company/viewapplicants/${companyjob._id}`} className='compnay-view-button ml-5'> View Applicants</Link> </h6>
                         <hr/>
                         <table className="overview-table">
-                            <tr><td>Job Title:</td><td><div>{companyjob.title}</div></td><td>Street:</td><td><div>{companyjob.street}</div></td></tr>
+                            <tr><td>Job Title:</td><td><div className='font-weight-bold'>{companyjob.title}</div></td><td>Street:</td><td><div>{companyjob.street}</div></td></tr>
                             <tr><td>Company:</td><td><div>{companyjob.name}</div></td><td>City:</td><td><div>{companyjob.city}</div></td></tr>
                             <tr><td>Industry:</td><td><div>{companyjob.industry}</div></td><td>State:</td><td><div>{companyjob.state}</div></td></tr>
                             <tr><td>Remote:</td><td><div>{companyjob.Remote}</div></td><td>In-Person:</td><td><div>{companyjob.inPerson}</div></td></tr>
+                            <tr><td>Salary Range:</td><td><div>{companyjob.salary}</div></td><td>Job-Type:</td><td><div>{companyjob.jobType}</div></td></tr>
                         </table>
                         <br/>
                         <div className='font-weight-bold'>Description: </div> {companyjob.description}

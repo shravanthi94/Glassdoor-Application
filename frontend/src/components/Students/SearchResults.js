@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import PropTypes from 'prop-types';
@@ -8,6 +8,9 @@ import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import { companySearchResults } from '../../actions/student/search';
 import '../CSS/studentLandingPage.css';
+import Alert from '../Alert';
+import Pagination from 'react-js-pagination';
+// import 'bootstrap/less/bootstrap.less';
 
 const SearchResults = ({
   match,
@@ -21,8 +24,34 @@ const SearchResults = ({
     companySearchResults(searchData, query);
   }, [companySearchResults, query, searchData]);
 
+  const [activePage, setactivePage] = useState(1);
+
+  // Logic for displaying current menu items
+  const indexOfLast = activePage * 1;
+  const indexOfFirst = indexOfLast - 1;
+  // const currentResults = results.slice(indexOfFirst, indexOfLast);
+
+  const handlePageChange = (pageNumber) => {
+    setactivePage(pageNumber);
+  };
+
+  // const displayInterviews = () => {
+  //   if (results.length === 0) {
+  //     return '';
+  //   }
+  //   const currentResults = results[0].interview.slice(
+  //     indexOfFirst,
+  //     indexOfLast,
+  //   );
+  //   return currentResults.map((each) => {
+  //     return <Fragment>{each.title}</Fragment>;
+  //   });
+  // };
+
   const displayResults = () => {
-    return results.map((each) => {
+    const currentResults = results.slice(indexOfFirst, indexOfLast);
+    return currentResults.map((each) => {
+      console.log(each._id, each.logo, each.name);
       return (
         <Fragment>
           {' '}
@@ -31,10 +60,6 @@ const SearchResults = ({
               <div class='container'>
                 <div class='row'>
                   <div class='col-sm'>
-                    {/* <Link
-                      class='student-card-title'
-                      to={`/student/companyView/${each._id}`}
-                    > */}
                     {query === 'JOBS' ? (
                       <Link
                         to={{
@@ -42,6 +67,7 @@ const SearchResults = ({
                           state: { data: each.company._id },
                         }}
                       >
+                        <div className='student-card-title'>{each.title} </div>
                         <div className='student-card-title'>{each.name} </div>
                       </Link>
                     ) : (
@@ -113,12 +139,39 @@ const SearchResults = ({
                     {/* <br /> */}
                     <p>&emsp;Reviews &emsp;Interviews &emsp;Salaries</p>
                     <br />
-                    <Link
-                      className='profile-btn btn custom-btn-1'
-                      to='/student/company/review'
-                    >
-                      Add a Review
-                    </Link>
+                    {query === 'JOBS' ? (
+                      <Link
+                        className='profile-btn btn custom-btn-1'
+                        to={{
+                          pathname: '/addCompanyReview',
+                          state: {
+                            data: {
+                              company_id: each.company._id,
+                              logo: each.company.logo,
+                              company_name: each.company.name,
+                            },
+                          },
+                        }}
+                      >
+                        Add a Review
+                      </Link>
+                    ) : (
+                      <Link
+                        className='profile-btn btn custom-btn-1'
+                        to={{
+                          pathname: '/addCompanyReview',
+                          state: {
+                            data: {
+                              company_id: each._id,
+                              logo: each.logo,
+                              company_name: each.name,
+                            },
+                          },
+                        }}
+                      >
+                        Add a Review
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -137,6 +190,9 @@ const SearchResults = ({
       <Navigation />
       <div className='container-1'>
         <UtilityBar />
+        <div style={{ width: '300px', marginLeft: '40%' }}>
+          <Alert />
+        </div>
         <div className='student-bottom-panel'>
           <div className='search-result-head'>
             <h1 className='pt-4 student-results-heading'>
@@ -147,6 +203,20 @@ const SearchResults = ({
             <p>Showing 1–10 of 550 Companies</p>
           </div>
           <div>{displayResults()}</div>
+          <hr />
+          <div>
+            <Pagination
+              itemClass='page-item'
+              linkClass='page-link'
+              activeClass='gd-blue'
+              activeLinkClass='paginate'
+              activePage={activePage}
+              itemsCountPerPage={1}
+              totalItemsCount={results.length}
+              pageRangeDisplayed={10}
+              onChange={handlePageChange}
+            />
+          </div>
         </div>
       </div>
     </Fragment>

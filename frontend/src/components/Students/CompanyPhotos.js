@@ -86,7 +86,9 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
               </Link>
             </td>
             <td>
-              <div className='profile-counts'>4.0k</div>
+              <div className='profile-counts'>
+                {company.overview.numberOfReviews}
+              </div>
               <Link
                 to={{
                   pathname: '/companyReviews',
@@ -98,11 +100,13 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
               </Link>
             </td>
             <td>
-              <div className='profile-counts'>867</div>
+              <div className='profile-counts'>10</div>
               <div className='profile-title'>Jobs&emsp;</div>
             </td>
             <td>
-              <div className='profile-counts'>8.4k</div>
+              <div className='profile-counts'>
+                {company.overview.numberOfSalaries}
+              </div>
               <Link
                 to={{
                   pathname: '/companySalaries',
@@ -114,7 +118,9 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
               </Link>
             </td>
             <td>
-              <div className='profile-counts'>1.2k</div>
+              <div className='profile-counts'>
+                {company.overview.numberOfInterviews}
+              </div>
               <Link
                 to={{
                   pathname: '/companyInterviews',
@@ -126,11 +132,11 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
               </Link>
             </td>
             <td>
-              <div className='profile-counts'>1.8k</div>
+              <div className='profile-counts'>12</div>
               <div className='profile-title'>Benefits&emsp;</div>
             </td>
             <td className='profile-titles-selected'>
-              <div className='profile-counts'>92</div>
+              <div className='profile-counts'>6</div>
               <Link
                 to={{
                   pathname: '/companyPhotos',
