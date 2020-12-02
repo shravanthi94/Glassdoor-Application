@@ -38,75 +38,54 @@ router.get('/search/:data/:query', async (req, res) => {
   const query = req.params.query;
   try {
     let results = [];
-    let interviewCount, salaryCount;
+    // let interviewCount, salaryCount;
     if (query === 'JOBS') {
       results = await Jobposting.find({
-        title: { $regex: `.*${searchData}.*` },
+        title: { $regex: new RegExp('^' + searchData.toLowerCase(), 'i') },
       }).populate('company');
     } else {
       results = await Company.find({
-        name: { $regex: `.*${searchData}.*` },
+        name: { $regex: new RegExp('^' + searchData.toLowerCase(), 'i') },
       });
     }
 
-    // reviews = await Review.find({})
     if (results.length === 0) {
       return res.status(400).json({ errors: [{ msg: 'No results found.' }] });
     }
 
-    // let reviewCount;
-    // const counts = results.map(async (each) => {
+    // const ids = results.map((each) => {
     //   if (query === 'JOBS') {
-    //     reviewCount = await Review.find({
-    //       company: each.company._id,
-    //     }).count();
-    //     return reviewCount;
+    //     return each.company._id.toString();
     //   } else {
-    //     reviewCount = await Review.find({ company: each._id }).count();
-    //     return reviewCount;
+    //     return each._id.toString();
     //   }
     // });
 
+    // console.log('id: ', ids);
+
+    // const ans = await Review.aggregate([
+    //   {
+    //     $group: {
+    //       _id: '$company',
+    //       company_id: {
+    //         $first: '$company',
+    //       },
+    //       count: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
+
+    // const final = ans.filter((each) =>
+    //   ids.includes(each.company_id.toString()),
+    // );
+
     // const data = {
     //   results,
-    //   counts,
+    //   final,
     // };
+    // // console.log(data);
 
-    // console.log(data);
-
-    const ids = results.map((each) => {
-      if (query === 'JOBS') {
-        return each.company._id.toString();
-      } else {
-        return each._id.toString();
-      }
-    });
-
-    console.log('id: ', ids);
-
-    const ans = await Review.aggregate([
-      {
-        $group: {
-          _id: '$company',
-          company_id: {
-            $first: '$company',
-          },
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-
-    const final = ans.filter((each) =>
-      ids.includes(each.company_id.toString()),
-    );
-
-    const data = {
-      results,
-      final,
-    };
-    // console.log(data);
-
-    res.status(200).json(data);
+    res.status(200).json(results);
   } catch (err) {
     console.log(err);
     res.status(500).send('Server Error');

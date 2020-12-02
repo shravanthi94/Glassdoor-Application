@@ -9,6 +9,7 @@ const { checkAuth } = require('../../middleware/studentAuth');
 
 const Student = require('../../models/StudentModel');
 const Review = require('../../models/ReviewModel');
+const Company = require('../../models/CompanyModel');
 
 // @route  POST /student/profile/basic
 // @desc   Update current student basic details
@@ -98,13 +99,12 @@ router.get('/view/:img', (req, res) => {
 });
 
 // @route  GET /student/profile/counts
-// @desc   View the student profile picture
+// @desc   Count of student review and rating
 // @access Public
 router.get('/counts', checkAuth, async (req, res) => {
   try {
     const reviewCount = await Review.find({
       student: req.user.id,
-      comment: { $ne: null },
     }).countDocuments();
 
     const ratingCount = await Review.find({
@@ -116,6 +116,38 @@ router.get('/counts', checkAuth, async (req, res) => {
       reviewCount,
       ratingCount,
     };
+
+    res.status(200).json(results);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route  GET /student/profile/contributions/:query
+// @desc   View the student contributions
+// @access Private
+router.get('/contributions/:query', checkAuth, async (req, res) => {
+  const query = req.params.query;
+  console.log('Query: ', query);
+  try {
+    let results = [];
+    if (query === 'reviews') {
+      results = await Review.find({ student: req.user.id }).populate('company');
+    } else if (query === 'interviews') {
+      results = await Company.find({ 'interview.student': req.user.id });
+    } else if (query === 'salaries') {
+      const results = await Company.find({
+        'salary.student': req.user.id,
+      });
+    } else if (query === 'photos') {
+      results = await Company.find({ 'photos.student': req.user.id });
+    }
+
+    if (!results || results.length === 0) {
+      console.log('here');
+      return res.status(400).json({ errors: [{ msg: 'No results found.' }] });
+    }
 
     res.status(200).json(results);
   } catch (err) {

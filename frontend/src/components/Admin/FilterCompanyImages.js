@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/adminCSS.css';
-import { getNewCompanyPhotos, approveCompanyPhotos, getNewCompanyProfilePhotos } from '../../actions/admin/images';
+import { getNewCompanyPhotos, approveCompanyPhotos } from '../../actions/admin/images';
 import Navigation from './Navigation';
 import { BACKEND_URL } from '../../helpers/constants';
 
@@ -14,12 +14,28 @@ class FilterImages extends Component {
         this.state = {
             
         }
+        // this.redirectHandler = this.redirectHandler.bind(this);
     }
 
     componentWillMount() {
         this.props.getNewCompanyPhotos();
         // this.props.getNewCompanyProfilePhotos();
     }
+
+    // redirectHandler = (e) => {
+    //     console.log("redirect value: ", e);
+    //     var path = "";
+
+    //     if (e == "company_stastics") {
+    //         path = "/admin/company/profile"
+    //     }
+        
+
+    //     this.setState({
+    //         isRedirect: true,
+    //         redirectPath: path,
+    //     })
+    // }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.companyImagesNew) {
@@ -70,9 +86,9 @@ class FilterImages extends Component {
     };
 
     approveImage = (company_id, photo_id, e) => {
-        // console.log(company_id,photo_id);
-        // var data= { status : "approved" }
-        // this.props.approveCompanyPhotos (company_id, photo_id, data);
+        console.log(company_id,photo_id);
+        var data= { status : "approved" }
+        this.props.approveCompanyPhotos (company_id, photo_id, data);
     };
 
     displayImageResults = (adminImagesToApprove) => {

@@ -127,7 +127,7 @@ class CompanyDetailsStastics extends Component {
                                 ['Native Hawaiian or Other Pacific Islander', demographics.islanderCount],
                                 ['Black or African American', demographics.blackCount],
                                 ['Asian', demographics.asianCount],
-                                ['White', demographics.nativeCount],
+                                ['American Indian or Alaska Native', demographics.nativeCount],
                             ]}
                             rootProps={{ 'data-testid': '1' }}
                         />

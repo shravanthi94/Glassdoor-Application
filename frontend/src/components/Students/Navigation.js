@@ -101,9 +101,9 @@ const Navigation = ({ logout, clearResults }) => {
               <li>
                 <a
                   className='dropdown-item'
-                  href='/student/update/jobPreference'
+                  href='/student/contributions/reviews'
                 >
-                  Job preference
+                  Contributions
                 </a>
               </li>
               <li>

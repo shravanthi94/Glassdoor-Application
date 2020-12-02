@@ -108,27 +108,27 @@ const Demographics = ({
                     <option className='dropdownOptionLabel'>Select</option>
                     <option
                       className='dropdownOptionLabel'
-                      value='American Indian'
+                      value='American Indian or Alaska Native'
                     >
-                      American Indian
+                      American Indian or Alaska Native
+                    </option>
+                    <option className='dropdownOptionLabel' value='Asian'>
+                      Asian
                     </option>
                     <option
                       className='dropdownOptionLabel'
-                      value='Alaska Native Asian'
+                      value='Black or African American'
                     >
-                      Alaska Native Asian
+                      Black or African American
                     </option>
                     <option
                       className='dropdownOptionLabel'
-                      value='African American'
-                    >
-                      African American
-                    </option>
-                    <option
-                      className='dropdownOptionLabel'
-                      value='Native Hawaiian'
+                      value='Native Hawaiian or Other Pacific Islander'
                     >
                       Native Hawaiian or Other Pacific Islander White
+                    </option>
+                    <option className='dropdownOptionLabel' value='White'>
+                      White
                     </option>
                   </select>
 

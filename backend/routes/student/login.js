@@ -65,7 +65,7 @@ router.post(
               if (error) throw error;
               res.json({
                 token,
-                id: result[0].id,
+                id: student._id,
                 name: result[0].name,
                 email: email,
               });
