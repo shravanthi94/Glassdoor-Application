@@ -15,7 +15,7 @@ export const appyJob = (payload) => {
     return dispatch => {
 
         console.log("appyJob payload: ", payload);
-        // axios.defaults.headers.common['authorization'] = localStorage.getItem('cToken');
+        axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
         axios.post(configPath.api_host + '/student/jobs/company' , payload)
             .then(response => {
 

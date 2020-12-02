@@ -80,7 +80,7 @@ class CompanyJobs extends Component {
 
 
                 if (this.state.searchName && !this.state.searchLocation) {
-                    if ((job.title.toLowerCase().search(this.state.searchName.toLowerCase()) !== -1)) {
+                    if ((job.title.toLowerCase().search(this.state.searchName.toLowerCase()) !== -1) || (job.salary.toLowerCase().search(this.state.searchName.toLowerCase()) !== -1)) {
                         filtered.push(job);
                     }
                 } else if (this.state.searchLocation && !this.state.searchName) {
@@ -219,6 +219,7 @@ class CompanyJobs extends Component {
                                                             <td className="company-salary-job-title">
                                                                 <div onClick={() => this.redirectJobHandler(job)}>{job.title}</div>
                                                                 <div><span style={{color:"black", fontWeight:"normal"}}>{company_name}</span><span className="job-city-state"> - {job.city}, {job.state}</span></div>
+                                                                <div style={{fontWeight:"normal", fontSize:"15px", color:"black"}}>{job.salary}</div>
                                                             </td>
                                                             <td>
                                                                 <div className="joblisting-date-company-date company-job-heart-icon"><i class="far fa-heart"></i></div>

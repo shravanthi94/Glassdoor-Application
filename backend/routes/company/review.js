@@ -12,7 +12,7 @@ const { ObjectId } = require('mongodb');
 
 companyAuth();
 
-router.post('/student', async(req, res) => {
+router.post('/student', companyCheckAuth, async(req, res) => {
     try {
 
         console.log("company id: ", req.body.companyId);
@@ -36,7 +36,7 @@ router.post('/student', async(req, res) => {
 // @Desc   Get all reviews of the company by id
 // @access Private
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', companyCheckAuth, async(req, res) => {
     try {
         console.log("company id: ", req.params.id);
         const reviews = await Review.find({ "company": req.params.id });
@@ -57,7 +57,7 @@ router.get('/:id', async(req, res) => {
 // @Desc   Post a new review for the company
 // @access Private
 
-router.post('/', async(req, res) => {
+router.post('/', companyCheckAuth, async(req, res) => {
     try {
         console.log("review details: ", req.body);
 
