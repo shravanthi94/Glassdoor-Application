@@ -60,7 +60,7 @@ const SearchResults = ({
               <div class='container'>
                 <div class='row'>
                   <div class='col-sm'>
-                    {query === 'JOBS' ? (
+                    {query === 'JOBS' && (
                       <Link
                         to={{
                           pathname: '/companyOverview',
@@ -70,10 +70,31 @@ const SearchResults = ({
                         <div className='student-card-title'>{each.title} </div>
                         <div className='student-card-title'>{each.name} </div>
                       </Link>
-                    ) : (
+                    )}
+                    {query === 'Companies' && (
                       <Link
                         to={{
                           pathname: '/companyOverview',
+                          state: { data: each._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    )}
+                    {query === 'Interviews' && (
+                      <Link
+                        to={{
+                          pathname: '/companyInterviews',
+                          state: { data: each._id },
+                        }}
+                      >
+                        <div className='student-card-title'>{each.name} </div>
+                      </Link>
+                    )}
+                    {query === 'Salaries' && (
+                      <Link
+                        to={{
+                          pathname: '/companySalaries',
                           state: { data: each._id },
                         }}
                       >
