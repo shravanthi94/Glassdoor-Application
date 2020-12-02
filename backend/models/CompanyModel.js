@@ -128,8 +128,7 @@ const CompanySchema = new mongoose.Schema({
     }, ],
     interview: [{
         overallInterviewExp: {
-            type: String,
-            required: true,
+            type: String
         },
         title: {
             type: String,
