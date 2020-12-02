@@ -11,7 +11,7 @@ const multer = require("multer");
 // @Desc   Apply for a particular job
 // @access Private
 
-router.post("/apply/:jobId", checkAuth, async (req, res) => {
+router.post("/apply/:jobId", checkAuth, async(req, res) => {
     try {
         let student = await Student.findOne({ "email": req.user.email });
         if (student) {
@@ -31,28 +31,28 @@ router.post("/apply/:jobId", checkAuth, async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-    
+
 
 });
 
-router.get("/", async (req, res) => {
+router.get("/", checkAuth, async(req, res) => {
 
     try {
-        let jobs = await Jobposting.find().sort({ date: -1 });
+        let jobs = await Jobposting.find().sort({ date: -1 }).populate('company');
         if (!jobs) {
             return res.status(400).json({ msg: 'No jobs posted yet' });
         }
-        let jobs_out=[]
-        for(let job in jobs){
-        let out ={ title:'', company:'', city:'', state:'',  date};
-        out.title = job.title;
-        out.city = job.city;
-        out.state = job.state;
-        out.company=job.name;
-        out.date=  job.date;
-        jobs_out.push(out);
-    }
-        res.status(200).json(jobs_out);
+        //     let jobs_out=[]
+        //     for(let job in jobs){
+        //     let out ={ title:'', company:'', city:'', state:'',  date};
+        //     out.title = job.title;
+        //     out.city = job.city;
+        //     out.state = job.state;
+        //     out.company=job.name;
+        //     out.date=  job.date;
+        //     jobs_out.push(out);
+        // }
+        res.status(200).json(jobs);
     } catch (err) {
         console.error(err.message);
         res.status(500).send({ msg: 'Server Error: Database' });
@@ -68,9 +68,6 @@ router.get("/details/:id", async(req, res) => {
         if (!job) {
             return res.status(400).json({ msg: 'No jobs posted yet' });
         }
-        
-        
-
         res.status(200).json(job);
     } catch (err) {
         console.error(err.message);
@@ -80,7 +77,7 @@ router.get("/details/:id", async(req, res) => {
 
 });
 
-router.get("/applied", checkAuth, async (req, res) => {
+router.get("/applied", checkAuth, async(req, res) => {
 
     try {
         let jobs = await Jobposting.find({ "applicants.student": req.body.student });
@@ -94,7 +91,7 @@ router.get("/applied", checkAuth, async (req, res) => {
     }
 });
 
-router.post("/withdraw/:id", async (req, res) => {
+router.post("/withdraw/:id", async(req, res) => {
 
     try {
         console.log("job_id to withdraw: ", req.params.id);
@@ -114,11 +111,11 @@ router.post("/withdraw/:id", async (req, res) => {
 
 
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function(req, file, cb) {
         console.log("call back");
         cb(null, "../frontend/src/components/files")
     },
-    filename: function (req, file, cb) {
+    filename: function(req, file, cb) {
         console.log("cb file name: ", file);
         cb(null, file.fieldname + "-" + Date.now() + ".pdf")
     }
@@ -130,7 +127,7 @@ var upload = multer({
 
     storage: storage,
     limits: { fileSize: maxSize },
-    fileFilter: function (req, file, cb) {
+    fileFilter: function(req, file, cb) {
 
         console.log("file filter");
         var filetypes = /pdf/;
@@ -147,17 +144,19 @@ var upload = multer({
         cb("Error: File upload only supports the following filetypes - " + filetypes);
     }
 }).fields([{
-    name: 'resume', maxCount: 1
+    name: 'resume',
+    maxCount: 1
 }, {
-    name: 'coverLetter', maxCount: 1
+    name: 'coverLetter',
+    maxCount: 1
 }]);
 
-router.post("/company", async (req, res) => {
+router.post("/company", async(req, res) => {
 
     try {
         console.log("all data: ", req.body);
 
-        upload(req, res, async (err) => {
+        upload(req, res, async(err) => {
             if (err) {
                 console.log("Uploading Files Error:", err);
                 res.status(400).send("Couldnt upload resume");
@@ -191,19 +190,19 @@ module.exports = router;
 
 
 // let applicant ={...req.body}
-    // console.log("to apply:",applicant)
-    // try {
-    //     console.log("job_id to apply: ", req.params.id);
-    //     let appliedJob = await Jobposting.findOneAndUpdate({ _id: req.params.id }, { $push: { applicants: applicant } }, { new: true });
-    //     if (appliedJob){
-    //         console.log("after apply:",appliedJob.applicants)
-    //         return res.status(200).json({ msg: 'application posted successfully' });
-    //     }
-    //     else {
-    //         return res.status(400).json({ msg: 'No job found' });
-    //     }
+// console.log("to apply:",applicant)
+// try {
+//     console.log("job_id to apply: ", req.params.id);
+//     let appliedJob = await Jobposting.findOneAndUpdate({ _id: req.params.id }, { $push: { applicants: applicant } }, { new: true });
+//     if (appliedJob){
+//         console.log("after apply:",appliedJob.applicants)
+//         return res.status(200).json({ msg: 'application posted successfully' });
+//     }
+//     else {
+//         return res.status(400).json({ msg: 'No job found' });
+//     }
 
-    // } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send('Server Error: Database');
-    // }
+// } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error: Database');
+// }

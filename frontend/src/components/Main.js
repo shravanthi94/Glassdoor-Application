@@ -55,6 +55,7 @@ import AddCompanyInterview from './Students/AddCompanyInterview';
 import CompanyJobs from './Students/CompanyJobs';
 import CompanyJobDetails from './Students/CompanyJobDetails';
 import AddPhotos from './Students/AddPhotos';
+import JobHomePage from './Students/JobsHomePage';
 // import JobsNav from './Students/JobsNav';
 
 // Student - Contributions
@@ -299,6 +300,7 @@ class Main extends Component {
               path='/admin/images/student'
               component={FilterStudentImages}
             />
+            <Route exact path='/student/allJobs' component={JobHomePage}/>
           </Switch>
         </Router>
       </Fragment>
