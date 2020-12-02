@@ -14,6 +14,7 @@ import adminAnalytics from './adminanalytics';
 import adminReviewsFilter from './adminReviewsFilter';
 import adminCompanyDetails from './adminCompanyDetails';
 import adminImagesFilter from './adminImagesFilter';
+import studentApplications from './studentApplications';
 
 const rootReducer = combineReducers({
     comStore,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     companyjobs,
     studentProfile,
     studentSearch,
+    studentApplications,
     studentJobs,
     image,
     adminAnalytics,

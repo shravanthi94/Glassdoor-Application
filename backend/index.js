@@ -14,6 +14,8 @@ const jobPreferences = require('./routes/student/jobPreferences');
 const jobPostings = require('./routes/student/jobPostings');
 const studentProfile = require('./routes/student/profile');
 
+const applications = require('./routes/student/applications');
+
 // Company
 const signupCompany = require('./routes/company/signup');
 const loginCompany = require('./routes/company/login');
@@ -53,6 +55,9 @@ app.use('/student/jobPreferences', jobPreferences);
 app.use('/student/profile', studentProfile);
 // app.use('/student/resume', resume);
 app.use('/student/jobs', jobPostings);
+//
+app.use('/student/applications', applications);
+
 
 /*  Routes for Company */
 // Company - SIGNUP
