@@ -98,3 +98,10 @@
 .active:active {
     color: #1861bf;
 }
+
+
+/*** Modal Statistics Jobs ***/
+
+.modal-lg {
+    max-width: 70%;
+}

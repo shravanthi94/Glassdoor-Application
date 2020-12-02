@@ -8,6 +8,7 @@ import companyreviews from './companyreviews';
 import companyjobs from './companyjobs';
 import studentProfile from './studentProfile';
 import studentSearch from './studentSearch';
+import studentJobs from './studentJobs';
 import image from './image';
 import adminAnalytics from './adminanalytics';
 import adminReviewsFilter from './adminReviewsFilter';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     companyjobs,
     studentProfile,
     studentSearch,
+    studentJobs,
     image,
     adminAnalytics,
     adminReviewsFilter,

@@ -5,14 +5,14 @@ const router = express.Router();
 const JobPosting = require('../../models/JobPostingModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 
-// companyAuth();
+companyAuth();
 // companyCheckAuth
 
 // @route  GET /company/jobs
 // @Desc   Get all the salary details of company
 // @access Private
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', companyCheckAuth, async (req, res) => {
     try {
         console.log("company id: ", req.params.id);
         const jobPosting = await JobPosting.find({ "company": req.params.id });

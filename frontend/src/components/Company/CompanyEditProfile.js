@@ -82,18 +82,6 @@ const CompanyEditProfile = ({
         setImage({file:e.target.files[0],fileText: e.target.files[0].name})
       }
 
-    //   const imageSave = (e) => {
-    //     e.preventDefault();
-    //     console.log("inside imageSave, file is ", image.file);
-    //     console.log("inside imageSave, fileText is ", image.fileText);
-    //     insertProfilePic(image.file, companyprofile._id,companyprofile.name);
-    //     const newimg = "rest_"+string(restprofile.restuser._id)+"."
-    //     if (userprofile.user.image)
-    //     {
-    //       setImage({file:userprofile.user.image})
-    //     }
-    //   }
-    
     const imageSave = (e) =>{
         e.preventDefault();
         console.log('inside onUpload: ', image.file);
