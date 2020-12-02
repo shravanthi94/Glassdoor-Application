@@ -219,7 +219,7 @@ class CompanyOverview extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(" CompanyOverview - store:", state);
+    console.log(" CompanyOverview - store:", state.comStore);
     return {
         company: state.comStore.company || "",
         student: state.studentProfile.profile._id

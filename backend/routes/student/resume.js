@@ -26,33 +26,33 @@ router.post("/resume/:id", checkAuth, async (req, res) => {
 /*
 router.get("/", checkAuth, async (req, res) => {
 
-    try {
-        console.log("student_id: ", req.params.student);
-        let resumes = await resume.find({ "student_id": req.params.student});
-        if (!resumes) {
-            return res.status(400).json({ msg: 'No resumes added yet!'});
-        }
-        res.status(200).json(resumes);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
+    // try {
+    //     console.log("student_id: ", req.params.student);
+    //     let resumes = await resume.find({ "student_id": req.params.student});
+    //     if (!resumes) {
+    //         return res.status(400).json({ msg: 'No resumes added yet!'});
+    //     }
+    //     res.status(200).json(resumes);
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error: Database');
+    // }
 
 });
 
 router.get("/:resume", checkAuth, async (req, res) => {
 
-    try {
-        console.log("resume_id: ", req.params.resume);
-        var Resume = await resume.findOne({ "_id": req.params.resume });
-        if (!Resume) {
-            return res.status(400).json({ msg: 'No resume with given id ' });
-        }
-        res.status(200).json(Resume);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
+    // try {
+    //     console.log("resume_id: ", req.params.resume);
+    //     var Resume = await resume.findOne({ "_id": req.params.resume });
+    //     if (!Resume) {
+    //         return res.status(400).json({ msg: 'No resume with given id ' });
+    //     }
+    //     res.status(200).json(Resume);
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error: Database');
+    // }
 
 }); */
 

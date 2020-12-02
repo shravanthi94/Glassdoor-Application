@@ -56,6 +56,14 @@ const comStore = (state = initialState, action) => {
         loading: false,
       };
 
+    case 'APPLY_JOB':
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+
     default:
       return state;
   }

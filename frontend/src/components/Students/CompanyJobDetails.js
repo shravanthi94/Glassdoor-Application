@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import ReactModal from 'react-modal';
 import Files from 'react-files'
+import { appyJob } from '../../actions/company/applyJob';
 
 class CompanyJobDetails extends Component {
 
@@ -29,6 +30,7 @@ class CompanyJobDetails extends Component {
             resume: "",
             coverLetter: "",
             files: null,
+            applyJobFlag: false,
         }
 
         this.redirectHandler = this.redirectHandler.bind(this);
@@ -58,28 +60,28 @@ class CompanyJobDetails extends Component {
     filesUploadHandler = (e) => {
         console.log("e: ", e);
 
-        this.setState({
-            resume: e
-        })
-        // if(e && e.length !== 0){
+        // this.setState({
+        //     resume: e
+        // })
+        if (e && e.length !== 0) {
 
-        //     e.map(file => {
-        //         console.log("file name: ", (file.name).search("res"));
-        //         if(file.name.search("resume") !== -1){
-        //             console.log("inside resume");
-        //             this.setState({
-        //                 resume: file.name
-        //             })
-        //         }
+            e.map(file => {
+                console.log("file name: ", file.name);
+                if (file.name.toLowerCase().search("resume") !== -1) {
+                    console.log("inside resume");
+                    this.setState({
+                        resume: file
+                    })
+                }
 
-        //         if(file.name.search("cover") !== -1){
-        //             console.log("inside cover");
-        //             this.setState({
-        //                 coverLetter: file.name
-        //             })
-        //         }
-        //     })
-        // }
+                if (file.name.toLowerCase().search("cover") !== -1) {
+                    console.log("inside cover");
+                    this.setState({
+                        coverLetter: file
+                    })
+                }
+            })
+        }
     }
 
     changeJobHandler = (e) => {
@@ -91,24 +93,21 @@ class CompanyJobDetails extends Component {
     applyJobsHandler = (e) => {
         e.preventDefault();
 
-        console.log("apply job handler res: ", this.state.resume);
-        console.log("student id: ", this.props.studentId);
+        console.log("resume: ", this.state.resume);
+        console.log("coverLetter: ", this.state.coverLetter);
 
         const formData = new FormData();
-        formData.append("resume", this.state.resume);
-        formData.append("jobId", this.state.jobDetail._id);
+        formData.append("resume", this.state.resume, this.state.resume.name);
+        formData.append("coverLetter", this.state.coverLetter, this.state.coverLetter.name);
         formData.append("studentId", this.props.studentId);
+        formData.append("studentEmail", this.props.studentEmail);
+        formData.append("jobId", this.state.jobDetail._id);
 
-        console.log(" this.props: ",  this.props);
+        this.setState({
+            applyJobFlag: "true"
+        })
 
-        console.log("resume: ", this.state.resume.name);
-        console.log("coverLetter: ", this.state.coverLetter.name);
-
-        // this.setState({
-        //     successfulUpload: "true"
-        // })
-
-        // this.props.updateResProfilePic(picData);
+        this.props.appyJob(formData);
     }
 
     resumeHandler(e) {
@@ -192,6 +191,12 @@ class CompanyJobDetails extends Component {
         if (this.state.isRedirect) {
             redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { data: this.state.data } }} />
         }
+
+        if(this.state.applyJobFlag && this.props.applyJobFlag){
+            redirectVar = <Redirect to={{ pathname: "/companyJobs", state: { data: this.props.company.overview._id } }} />  
+            // redirectVar = <Redirect to={{ pathname: "/companyJobDetails", state: { data: this.state.jobDetail } }} />
+        }
+
         return (
             <div>
                 {redirectVar}
@@ -332,15 +337,16 @@ class CompanyJobDetails extends Component {
                             minFileSize={0}
                             clickable
                         >
-                            <br /><br /><br /><br /><br/>
+                            <br /><br /><br /><br /><br />
                         Drop files here or click to upload
-                        <div style={{ fontSize: "50px", color: "gray"}}><i class="fas fa-upload"></i></div>
+                        <div style={{ fontSize: "50px", color: "gray" }}><i class="fas fa-upload"></i></div>
                         </Files>
                     </div> <div className="file-upload-button">
                         <div>
                             <button onClick={this.applyJobsHandler} className="pic-upload-button" type="submit">Apply to Job</button>
                         </div>
                     </div>
+
                 </ReactModal>
             </div>
         )
@@ -352,12 +358,16 @@ const mapStateToProps = (state) => {
     return {
         company: state.comStore.company || "",
         jobs: state.comStore.jobs || "",
-        studentId: state.studentProfile.profile._id
+        studentId: state.studentProfile.profile._id,
+        studentEmail: state.studentProfile.profile.email,
+        applyJobMsg: state.comStore.applyJobMsg || "",
+        applyJobFlag: state.comStore.applyJobFlag || ""
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        appyJob: (payload) => dispatch(appyJob(payload)),
         getCompanyJobs: (payload) => dispatch(getCompanyJobs(payload))
     }
 }

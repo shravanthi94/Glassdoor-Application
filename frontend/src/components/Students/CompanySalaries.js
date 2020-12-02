@@ -24,9 +24,9 @@ class CompanySalaries extends Component {
         this.redirectHandler = this.redirectHandler.bind(this);
     }
 
-    componentDidMount() {
-        this.props.getCompanyReviews(this.state.company_id);
-    }
+    // componentDidMount() {
+    //     this.props.getCompanyReviews(this.state.company_id);
+    // }
 
     redirectHandler = (e) => {
         console.log("redirect value: ", e);
