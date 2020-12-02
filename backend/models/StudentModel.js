@@ -1,74 +1,74 @@
 const mongoose = require('mongoose');
 
 const StudentSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  profilePic: {
-    image: {
-      type: String,
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    profilePic: {
+        image: {
+            type: String,
+        },
+        status: {
+            type: String,
+            default: 'new',
+        },
     },
-    status: {
-      type: String,
-      default: 'new',
+    jobPreference: {
+        status: {
+            type: String,
+            default: '',
+        },
+        title: {
+            type: String,
+            default: '',
+        },
+        salary: {
+            type: String,
+            default: '',
+        },
+        relocation: {
+            type: Boolean,
+            default: true,
+        },
+        industry: {
+            type: String,
+            default: '',
+        },
     },
-  },
-  jobPreference: {
-    status: {
-      type: String,
-      default: '',
+    demographics: {
+        ethnicity: {
+            type: String,
+            default: '',
+        },
+        gender: {
+            type: String,
+            default: '',
+        },
+        disability: {
+            type: String,
+            default: '',
+        },
+        veteran: {
+            type: String,
+            default: '',
+        },
     },
-    title: {
-      type: String,
-      default: '',
-    },
-    salary: {
-      type: String,
-      default: '',
-    },
-    relocation: {
-      type: Boolean,
-      default: true,
-    },
-    industry: {
-      type: String,
-      default: '',
-    },
-  },
-  demographics: {
-    ethnicity: {
-      type: String,
-      default: '',
-    },
-    gender: {
-      type: String,
-      default: '',
-    },
-    disability: {
-      type: String,
-      default: '',
-    },
-    veteran: {
-      type: String,
-      default: '',
-    },
-  },
 
-  primaryResume: {
-    type: String,
-  },
+    primaryResume: {
+        type: String,
+    },
 
-  resumes:[{
-    
-    file: { type: String, required: true },
-    format: { type: String, required: true }
-}],
+    resumes: [{
 
-  applications: {
-    type: String,
-  },
+        file: { type: String },
+        format: { type: String }
+    }],
+
+    applications: {
+        type: String,
+    },
 
 
-  date: { type: Date, default: Date.now() },
+    date: { type: Date, default: Date.now() },
 });
 
 const Student = mongoose.model('student', StudentSchema);

@@ -14,7 +14,6 @@ const ReviewSchema = new mongoose.Schema({
     },
     approvalStatus: {
         type: String,
-        required: true
     },
     headline: {
         type: String

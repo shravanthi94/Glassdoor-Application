@@ -4,6 +4,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCurrentCompanyProfile } from '../../actions/company/companyprofile';
 import CmpNav2 from './CmpNav2';
+import defaultImage from '../images/default_banner.jpg'
 // import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
@@ -51,7 +52,7 @@ const CompanyDashboard = ({
         {loading && companyprofile === null ? (' ') : (
           <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.profilePic.image ? (
                 <img className='company-banner' src={`${BACKEND_URL}/company/profilepic/${companyprofile.profilePic.image}`} alt=''/>) : (
-                <img className='company-banner' src={require('../../components/images/' + companyprofile.profilePic +'_banner.jpg').default} alt=''/>)}
+                <img className='company-banner' src={defaultImage} alt='company banner'/>)}
               {companyprofile.logo ? (
                 <img
                   className='company-logo'
