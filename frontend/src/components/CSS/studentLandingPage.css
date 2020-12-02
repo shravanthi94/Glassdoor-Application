@@ -237,3 +237,11 @@ strong {
 .student-update-links:hover {
   background-color: none;
 }
+
+.student-jobs-bar {
+  background-color: white;
+  padding: 1%;
+  margin-left: 1%;
+  margin-right: 0%;
+  max-width: 1470px;
+}
