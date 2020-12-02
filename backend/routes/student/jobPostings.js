@@ -16,8 +16,8 @@ router.post("/apply/:jobId", checkAuth, async(req, res) => {
             const newJobApplicant = {
                 student: student._id,
                 email: req.user.email,
-                resume: req.body.resume,
-                coverletter: req.body.coverletter
+                // resume: req.body.resume,
+                // coverletter: req.body.coverletter
             };
             console.log(req.params.jobId)
             let job = await Jobposting.findOne({ "_id": req.params.jobId })
