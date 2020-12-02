@@ -51,6 +51,9 @@ const JobPostingSchema = new mongoose.Schema({
     salary: {
         type: String
     },
+    jobType: {
+        type: String
+    },
     date: { type: Date, default: Date.now() },
     applicants: [{
         student: {
