@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/student/auth';
 import glassdoor from '../images/glassdoor.png';
+import Alert from '../Alert';
 import '../CSS/navbar.css';
 
 const Login = ({ isAuthenticated, login }) => {
@@ -50,6 +51,9 @@ const Login = ({ isAuthenticated, login }) => {
           Sign In to get instant access to <br /> <br />
           <br /> millions of salaries and reviews
         </h1>
+        <div style={{ width: '300px', marginLeft: '40%' }}>
+          <Alert />
+        </div>
         <br />
         <div className='container-nav'>
           <form className='form' onSubmit={(e) => onSubmit(e)}>

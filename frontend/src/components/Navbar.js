@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signup } from '../actions/student/auth';
 import glassdoor from './images/glassdoor.png';
+import Alert from './Alert';
 import './CSS/navbar.css';
 
 const Navbar = ({ isAuthenticated, signup }) => {
@@ -53,6 +54,10 @@ const Navbar = ({ isAuthenticated, signup }) => {
           <p className='legal-copy'>
             By continuing, you agree to our Terms of Use and Privacy Policy.
           </p>
+          <div style={{ width: '300px', marginLeft: '40%' }}>
+            <Alert />
+          </div>
+          <br />
           <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input
