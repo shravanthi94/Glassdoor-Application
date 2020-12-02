@@ -50,6 +50,12 @@
   color: white;
 }
 
+.paginate {
+  font-weight: bold;
+  color: #fff;
+  background: #00a1df;
+}
+
 /* Padding */
 .p {
   padding: 0.5rem;

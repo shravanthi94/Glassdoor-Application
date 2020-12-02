@@ -16,19 +16,19 @@ const StudentInterviews = ({
   }, [getStudentContributions]);
 
   const displayEachCompanyInterview = (interviews) => {
-    // if (interviews.student.toString() === localStorage.id.toString()) {
     return interviews.map((each) => {
-      return (
-        <Fragment>
-          <div class='card-body pb-0 mb-1'>
-            <h5 class='card-title'>{each.title}</h5>
-            <p class='card-text'>{each.description}</p>
-            <p>{each.difficulty}</p>
-          </div>
-        </Fragment>
-      );
+      if (each.student === localStorage.id) {
+        return (
+          <Fragment>
+            <div class='card-body pb-0 mb-1'>
+              <h5 class='card-title'>{each.title}</h5>
+              <p class='card-text'>{each.description}</p>
+              <p>{each.difficulty}</p>
+            </div>
+          </Fragment>
+        );
+      }
     });
-    // }
   };
 
   const displayInterviews = () => {
