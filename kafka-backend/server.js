@@ -1,11 +1,8 @@
 var connection = new require('./kafka/connection');
 
-// var Passport = require('./services/passport');
 var Reviews = require('./services/reviews');
 var AdminAnalytics = require('./services/admin/analytics');
 var AdminCompany = require('./services/admin/company');
-var AdminLogin = require('./services/admin/login');
-var AdminSignup = require('./services/admin/signup');
 var AdminPhotos = require('./services/admin/photos');
 var AdminReviews = require('./services/admin/reviews');
 
@@ -59,7 +56,6 @@ function handleTopicRequest(topic_name, fname) {
     });
 }
 
-// handleTopicRequest("authentication", Passport);
 handleTopicRequest("reviews", Reviews);
 
 //Admin topics Start
