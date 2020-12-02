@@ -19,7 +19,7 @@ const JobPreference = ({
     status: '',
     title: '',
     salary: '',
-    relocation: false,
+    relocation: 'false',
     industry: '',
   });
 

@@ -26,6 +26,7 @@ const UpdateLinks = ({ uploadStudentImage, history, student: { profile } }) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', image.file);
+    console.log('onUpload: ', formData);
     uploadStudentImage(formData, history);
     setimage({ file: '', fileText: '' });
     window.location.reload();
