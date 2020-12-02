@@ -18,8 +18,8 @@ router.post("/apply/:jobId", checkAuth, async (req, res) => {
             const newJobApplicant = {
                 student: student._id,
                 email: req.user.email,
-                resume: req.body.resume,
-                coverletter: req.body.coverletter
+                // resume: req.body.resume,
+                // coverletter: req.body.coverletter
             };
             console.log(req.params.jobId)
             let job = await Jobposting.findOne({ "_id": req.params.jobId })
@@ -31,34 +31,47 @@ router.post("/apply/:jobId", checkAuth, async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-    // let applicant ={...req.body}
-    // console.log("to apply:",applicant)
-    // try {
-    //     console.log("job_id to apply: ", req.params.id);
-    //     let appliedJob = await Jobposting.findOneAndUpdate({ _id: req.params.id }, { $push: { applicants: applicant } }, { new: true });
-    //     if (appliedJob){
-    //         console.log("after apply:",appliedJob.applicants)
-    //         return res.status(200).json({ msg: 'application posted successfully' });
-    //     }
-    //     else {
-    //         return res.status(400).json({ msg: 'No job found' });
-    //     }
-
-    // } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send('Server Error: Database');
-    // }
+    
 
 });
 
 router.get("/", async (req, res) => {
 
     try {
-        let jobs = await Jobposting.find();
+        let jobs = await Jobposting.find().sort({ date: -1 });
         if (!jobs) {
             return res.status(400).json({ msg: 'No jobs posted yet' });
         }
-        res.status(200).json(jobs);
+        let jobs_out=[]
+        for(let job in jobs){
+        let out ={ title:'', company:'', city:'', state:'',  date};
+        out.title = job.title;
+        out.city = job.city;
+        out.state = job.state;
+        out.company=job.name;
+        out.date=  job.date;
+        jobs_out.push(out);
+    }
+        res.status(200).json(jobs_out);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ msg: 'Server Error: Database' });
+    }
+
+
+});
+
+router.get("/details/:id", async(req, res) => {
+
+    try {
+        let job = await Jobposting.findById(req.params.id);
+        if (!job) {
+            return res.status(400).json({ msg: 'No jobs posted yet' });
+        }
+        
+        
+
+        res.status(200).json(job);
     } catch (err) {
         console.error(err.message);
         res.status(500).send({ msg: 'Server Error: Database' });
@@ -175,3 +188,22 @@ router.post("/company", async (req, res) => {
 });
 
 module.exports = router;
+
+
+// let applicant ={...req.body}
+    // console.log("to apply:",applicant)
+    // try {
+    //     console.log("job_id to apply: ", req.params.id);
+    //     let appliedJob = await Jobposting.findOneAndUpdate({ _id: req.params.id }, { $push: { applicants: applicant } }, { new: true });
+    //     if (appliedJob){
+    //         console.log("after apply:",appliedJob.applicants)
+    //         return res.status(200).json({ msg: 'application posted successfully' });
+    //     }
+    //     else {
+    //         return res.status(400).json({ msg: 'No job found' });
+    //     }
+
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error: Database');
+    // }

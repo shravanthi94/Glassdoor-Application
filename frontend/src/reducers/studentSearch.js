@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   results: [],
-  reviewCount: [],
   loading: true,
   error: {},
 };
@@ -19,8 +18,7 @@ export default function (state = initialState, action) {
     case COMPANY_SEARCH_SUCCESS:
       return {
         ...state,
-        results: payload.results,
-        reviewCount: payload.final,
+        results: payload,
         loading: false,
       };
     case COMPANY_SEARCH_FAIL:
@@ -33,7 +31,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         results: [],
-        reviewCount: [],
         loading: false,
       };
     default:

@@ -12,7 +12,7 @@ import '../CSS/studentLandingPage.css';
 const SearchResults = ({
   match,
   companySearchResults,
-  search: { results, reviewCount, loading },
+  search: { results, loading },
 }) => {
   const searchData = match.params.data;
   const query = match.params.query;

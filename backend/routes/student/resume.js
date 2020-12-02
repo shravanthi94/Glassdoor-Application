@@ -2,27 +2,29 @@
 const express = require("express");
 const router = express.Router();
 const { checkAuth } = require('../../middleware/studentAuth');
-
-const resume = require('../../models/ResumeModel');
-router.post("/:id/resume", checkAuth, async (req, res) => {
-    // try {
-    //     var newResume = new resume();
-    //     newResume.student = req.params.id;
-    //     newResume.file= req.body.file;
-    //     newResume.format= req.body.format;
-    //     newResume.preview= req.body.preview;
-
-    //     await newResume.save();
+const Student = require('../../models/StudentModel');
+router.post("/resume/:id", checkAuth, async (req, res) => {
+        try {
+            let student = await Student.findOne({ "email": req.user.email });
+            
+            if (student) {
+                let newResume={file,format};
+                newResume.file= req.body.file;
+                newResume.format= req.body.format;
+                student.resumes.unshift(newResume);
+                await job.save();
+                res.json("resume added");
+            }
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+        
     
-    //     res.json("resume added");
-    //   } catch (err) {
-    //     console.log(err);
-    //     res.status(500).send('Server Error');
-    // }
-
-});
-
-router.get("/:student", checkAuth, async (req, res) => {
+    });
+    
+/*
+router.get("/", checkAuth, async (req, res) => {
 
     // try {
     //     console.log("student_id: ", req.params.student);
@@ -52,7 +54,7 @@ router.get("/:resume", checkAuth, async (req, res) => {
     //     res.status(500).send('Server Error: Database');
     // }
 
-});
+}); */
 
 
 module.exports = router;
