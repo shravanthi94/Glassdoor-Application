@@ -29,9 +29,13 @@ const AddPhotos = ({ match, uploadCompanyPhotos, history }) => {
 
   const onUpload = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', image.file);
-    uploadCompanyPhotos(formData, match.params.id, history);
+    console.log('Image.file: ', image.file);
+
+    const fd = new FormData();
+    fd.append('image', image.file);
+
+    console.log('Form Data: ', fd);
+    uploadCompanyPhotos(fd, match.params.id, history);
     setimage({ file: '', fileText: '' });
   };
 

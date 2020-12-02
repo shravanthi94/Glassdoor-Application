@@ -59,6 +59,7 @@ const studentuploads = multer({
 // @desc   Upload profile picture of the student
 // @access Private
 router.post('/image', checkAuth, async (req, res) => {
+  console.log('Image upload backend', req.file);
   studentuploads(req, res, async (err) => {
     if (!err) {
       try {

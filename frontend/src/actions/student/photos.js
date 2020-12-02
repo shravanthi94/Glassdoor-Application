@@ -6,7 +6,8 @@ export const uploadCompanyPhotos = (formData, id, history) => async (
   dispatch,
 ) => {
   try {
-    console.log('inside action formData: ', formData);
+    console.log('inside action: ', formData);
+
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
