@@ -15,7 +15,7 @@ export const getCompanyProfile = (payload) => {
     return dispatch => {
 
         console.log("payload: ", payload);
-        // axios.defaults.headers.common['authorization'] = localStorage.getItem('cToken');
+        axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
         axios.get(configPath.api_host + '/company/overview/' + payload)
             .then(response => {
 

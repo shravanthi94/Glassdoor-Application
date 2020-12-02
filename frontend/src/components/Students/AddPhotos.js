@@ -20,6 +20,13 @@ const AddPhotos = ({ match, uploadCompanyPhotos, history }) => {
     });
   };
 
+  // const onImageChange = (e) => {
+  //   setimage({
+  //     file: e.target.files,
+  //     fileText: '',
+  //   });
+  // };
+
   const onUpload = (e) => {
     e.preventDefault();
     const formData = new FormData();

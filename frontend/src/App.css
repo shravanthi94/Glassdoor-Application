@@ -46,6 +46,10 @@
   background-color: #1861bf;
 }
 
+.text-white {
+  color: white;
+}
+
 /* Padding */
 .p {
   padding: 0.5rem;

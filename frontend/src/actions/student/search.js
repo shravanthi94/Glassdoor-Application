@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setAlert } from '../alert';
 import {
   COMPANY_SEARCH_SUCCESS,
   COMPANY_SEARCH_FAIL,
@@ -17,6 +18,9 @@ export const companySearchResults = (searchData, query) => async (dispatch) => {
     });
   } catch (err) {
     console.log('Error', err.response.data.errors[0].msg);
+
+    dispatch(setAlert(err.response.data.errors[0].msg, 'danger'));
+
     dispatch({
       type: COMPANY_SEARCH_FAIL,
       payload: {

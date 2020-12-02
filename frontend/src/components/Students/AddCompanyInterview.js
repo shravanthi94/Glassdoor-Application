@@ -87,6 +87,7 @@ class AddCompanyInterview extends Component {
         this.setState({
             submitted: true
         })
+        console.log("here1");
         this.props.addInterview(this.state.interviewDetails);
     }
 
@@ -97,9 +98,11 @@ class AddCompanyInterview extends Component {
 
         if (this.state.submitted && this.props.addFlag) {
             redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.state.company_id } }} />
-        } else if (this.state.submitted && !this.props.addFlag) {
-            final_msg = <div class="alert alert-danger" role="alert">{this.props.addMsg}</div>
-        }
+        } 
+        
+        // else if (this.state.submitted && !this.props.addFlag) {
+        //     final_msg = <div class="alert alert-danger" role="alert">{this.props.addMsg}</div>
+        // }
 
         return (
             <div>
@@ -123,7 +126,7 @@ class AddCompanyInterview extends Component {
                                                         <tr>
                                                             <div class="form-group"><input onChange={this.formChangeHandler} class="form-control" style={{ width: "400px" }} name="CompanyName" value={this.state.company_name} required="required" /> </div>
                                                         </tr>
-
+                                                        <tr> <div class="form-group"> Rate Overall Experience</div> </tr>
                                                         <tr>
                                                             {this.state.interviewDetails.overAllExperience === "positive" ? 
                                                             
