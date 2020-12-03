@@ -93,7 +93,7 @@ const LandingPage = ({ getCurrentProfile, student: { profile, loading } }) => {
           <br />
           <p className='info-text pl-25'>Next Step: Add Your Contact Info</p>
           <br />
-          <Link to='/student/profile/update' className='profile-btn'>
+          <Link to='/student/profile' className='profile-btn'>
             Finish Your Profile
           </Link>
           <br />
