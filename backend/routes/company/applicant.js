@@ -23,10 +23,12 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
         // console.log("Print this", company._id)
         if (company) {
             const jobPosting = await Jobposting.find({
-                $and: [{ "_id": req.params.id },
-                    { "company": company._id }
-                ]
-            }).populate('applicants.student');
+                    "_id": req.params.id,
+                    "company": company._id,
+                    // "applicants.applicantStatus": { $ne: "withdraw" }
+                }
+
+            ).populate('applicants.student');
             if (jobPosting.length > 0) {
                 res.status(200).json(jobPosting[0]);
             } else {

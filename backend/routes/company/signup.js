@@ -7,6 +7,8 @@ const config = require('config');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 const Company = require('../../models/CompanyModel');
 
+const kafka = require('../../kafka/client');
+
 //@route POST /company/signup
 //@desc  company registration
 //@access Public
@@ -96,6 +98,28 @@ router.post(
         }
 
         //return jsonwebtoken
+
+        // const payload = {
+        //     topic: 'companySignup',
+        //     body: req.body,
+        // };
+        // kafka.make_request('authorization', payload, (err, results) => {
+        //     console.log('in result');
+        //     console.log('Results: ', results);
+        //     if (err) {
+        //         console.log('Inside err');
+        //         res.status(500).send('System Error, Try Again.');
+        //     } else {
+        //         if (results.status === 400) {
+        //             return res.status(400).json({ errors: [{ msg: results.message }] });
+        //         }
+        //         if (results.status === 500) {
+        //             return res.status(500).send('Server Error');
+        //         }
+        //         res.status(200).json(results.message);
+        //     }
+        // });
+
     }
 );
 
