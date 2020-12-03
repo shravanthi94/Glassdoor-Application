@@ -56,14 +56,15 @@ import CompanyJobs from './Students/CompanyJobs';
 import CompanyJobDetails from './Students/CompanyJobDetails';
 import AddPhotos from './Students/AddPhotos';
 import JobHomePage from './Students/JobsHomePage';
-import CompanyResume from './Students/CompanyResume';
-// import JobsNav from './Students/JobsNav';
 
 // Student - Contributions
 import StudentReviews from './Students/contributions/StudentReviews';
 import StudentSalaries from './Students/contributions/StudentSalaries';
 import StudentInterviews from './Students/contributions/StudentInterviews';
 import StudentPhotos from './Students/contributions/StudentPhotos';
+
+import StudentApplications from './Students/StudentApplications';
+
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -138,6 +139,7 @@ class Main extends Component {
               path='/student/update/jobPreference'
               component={JobPreference}
             />
+
             <PrivateRoute
               exact
               path='/student/update/demographics'
@@ -155,6 +157,11 @@ class Main extends Component {
             />
             <PrivateRoute
               exact
+              path='/student/applications'
+              component={StudentApplications}
+            />
+            <PrivateRoute
+              exact
               path='/student/contributions/interviews'
               component={StudentInterviews}
             />
@@ -163,7 +170,6 @@ class Main extends Component {
               path='/student/contributions/photos'
               component={StudentPhotos}
             />
-            {/* <PrivateRoute exact path='/student/jobs' component={JobsNav} /> */}
             <PrivateRoute
               exact
               path='/companydashboard'

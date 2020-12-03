@@ -15,9 +15,19 @@ router.get("/:student_id", async (req, res) => {
             { "$project": {
                     "name": 1,
                     "title": 1,
-                    "applicants.applicantStatus": 1,
-                    "applicants.appliedDate": 1,
-                    "applicants._id": 1
+                    "applications": {
+                        "$map": {
+                            "input": {
+                                "$filter": {
+                                    "input": "$applicants",
+                                    "as": "applicant",
+                                    "cond": { "$eq": ["$$applicant.student", mongoose.Types.ObjectId(req.params.student_id)] }
+                                }
+                            },
+                            "as": "item",
+                            "in": "$$item"
+                        }
+                    }
                 } 
             },
         ]).exec((err, jobPostings) => {

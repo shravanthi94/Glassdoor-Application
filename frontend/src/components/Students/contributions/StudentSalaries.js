@@ -21,6 +21,9 @@ const StudentSalaries = ({
   }, [clearResults, getStudentContributions]);
 
   const displayEachCompanySalary = (salaries) => {
+    if (salaries.length === 0) {
+      return <p>No salary reviews added by you.</p>;
+    }
     return salaries.map((each) => {
       if (each.student === localStorage.id) {
         return (
@@ -40,6 +43,7 @@ const StudentSalaries = ({
     if (contributions.length === 0) {
       return <p>No salary reviews added by you.</p>;
     }
+    console.log('Comp: ', contributions);
     return contributions.map((each) => {
       return (
         <Fragment>

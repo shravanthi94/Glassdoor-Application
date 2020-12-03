@@ -8,8 +8,9 @@ import {
 
 export const getApplications = (student_id) => async (dispatch) => {
   console.log('inside getApplications ');
+  
   try {
-    const res = await axios.get(`/student/applications/job/${student_id}`);
+    const res = await axios.get(`/student/applications/${student_id}`);
 
     dispatch({
       type: STUDENT_GET_APPLICATIONS,
@@ -29,7 +30,7 @@ export const withdrawApplications = (application_id, job_id, data) => async (
   console.log('inside withdrawApplications ');
   try {
     const res = await axios.post(
-      `/student/applications/job/${job_id}/withdraw${application_id}`,
+      `/student/applications/job/${job_id}/withdraw/${application_id}`,
       data,
     );
 
