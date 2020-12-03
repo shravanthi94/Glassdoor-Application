@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -8,7 +8,8 @@ import '../../CSS/CompanyJoblistings.css'
 import '../../CSS/CompanyLanding.css'
 import {getCurrentCompanyJobs, getJobDetailById} from '../../../actions/company/companyjobpostings'
 import {getCurrentCompanyProfile} from '../../../actions/company/companyprofile'
-
+import defaultLogo from '../../images/default_logo.png'
+import Pagination from 'react-js-pagination';
 // to={`/company/jobs/jobdetail/${job._id}
 
 const CompanyJobPostings = ({
@@ -22,6 +23,17 @@ const CompanyJobPostings = ({
         getCurrentCompanyJobs()
         getCurrentCompanyProfile()
     }, [])
+
+    const [activePage, setactivePage] = useState(1);
+
+  // Logic for displaying current menu items
+  const indexOfLast = activePage * 3;
+  const indexOfFirst = indexOfLast - 3;
+  // const currentResults = results.slice(indexOfFirst, indexOfLast);
+
+  const handlePageChange = (pageNumber) => {
+    setactivePage(pageNumber);
+  };
 
     const jobDetail = (rev_id) =>{ 
         getJobDetailById(rev_id)
@@ -38,14 +50,15 @@ const CompanyJobPostings = ({
              <div className="container text-company mt-1">
                 <div className="row">
                     <div className="col-5">
-                        {companyprofile && companyjobs && companyjobs.length>0 ? companyjobs.map(job=>(
+                        {companyprofile && companyjobs && companyjobs.length>0 ? companyjobs.slice(indexOfFirst, indexOfLast).map(job=>(
                             <Fragment>
+            
                             <div className="card" style={{ width: '29rem', border:'1px solid #888' }}>
                                 <div className="card-body">
                                     <div className="joblisting-date-company ">{(job.date + "").substring(0, 10)}</div>
                                         <table className="overview-reviews-table-all">
                                             <tr>
-                                                <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../../components/images/' + companyprofile.logo + '_logo.jpg').default} alt="" /><br/>
+                                                <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={companyprofile.logo? require('../../../components/images/' + companyprofile.logo + '_logo.jpg').default : companyprofile.logo} alt="" /><br/>
                                                     <h6>{(companyprofile.overAllRating * 5) / 100}{' '}<StarRatings rating={+(companyprofile.overAllRating * 5) / 100} starDimension='20px' starSpacing='1px' starRatedColor='#0caa41' numberOfStars={1} name='rating' /></h6>
                                                 </td>
                                                 <td>
@@ -59,7 +72,21 @@ const CompanyJobPostings = ({
                                         </table>
                                     </div>
                                 </div>
-                                </Fragment>)): <p>No Jobs posted yet</p>}
+                                
+                                </Fragment>)): <p>No Jobs posted yet</p>
+                                }
+                                <br/>
+                                <Pagination
+                                    itemClass='page-item'
+                                    linkClass='page-link'
+                                    activeClass='gd-blue'
+                                    activeLinkClass='paginate'
+                                    activePage={activePage}
+                                    itemsCountPerPage={3}
+                                    totalItemsCount={companyjobs.length}
+                                    pageRangeDisplayed={10}
+                                    onChange={handlePageChange}
+                                />
             
                             </div>
                     <div class="col-7">

@@ -161,12 +161,12 @@ router.post("/company", async(req, res) => {
                 console.log("Uploading Files Error:", err);
                 res.status(400).send("Couldnt upload resume");
             } else {
-                console.log("resume name: ", res.req.files["resume"][0].filename);
-                console.log("cover name: ", res.req.files["coverLetter"][0].filename);
+                console.log("resume name: ", res.req.files["resume"]);
+                console.log("cover name: ", res.req.files["coverLetter"]);
 
                 var data = {
-                    resume: res.req.files["resume"][0].filename,
-                    coverLetter: res.req.files["coverLetter"][0].filename,
+                    resume: res.req.files["resume"] ? res.req.files["resume"][0].filename : "",
+                    coverLetter: res.req.files["coverLetter"] ? res.req.files["coverLetter"][0].filename : "",
                     student: req.body.studentId,
                     email: req.body.studentEmail
                 };
@@ -187,22 +187,3 @@ router.post("/company", async(req, res) => {
 });
 
 module.exports = router;
-
-
-// let applicant ={...req.body}
-// console.log("to apply:",applicant)
-// try {
-//     console.log("job_id to apply: ", req.params.id);
-//     let appliedJob = await Jobposting.findOneAndUpdate({ _id: req.params.id }, { $push: { applicants: applicant } }, { new: true });
-//     if (appliedJob){
-//         console.log("after apply:",appliedJob.applicants)
-//         return res.status(200).json({ msg: 'application posted successfully' });
-//     }
-//     else {
-//         return res.status(400).json({ msg: 'No job found' });
-//     }
-
-// } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send('Server Error: Database');
-// }

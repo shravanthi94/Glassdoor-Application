@@ -14,7 +14,9 @@ var AdminReviews = require('./services/admin/reviews');
 // Student files import
 const studentProfile = require('./services/student/profile');
 
-// Company
+// Company files import
+
+const jobApplicant = require('./services/company/applicant');
 
 const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
@@ -78,9 +80,37 @@ handleTopicRequest('adminPhotos', AdminPhotos);
 handleTopicRequest('adminReviews', AdminReviews);
 //Admin topics end
 
+//Company topics Start
+handleTopicRequest('jobapplicant', jobApplicant);
+//Company topics End
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
 //Student topics end
 
 //Company topics start
 // handleTopicRequest('companyJobPosting',)
+
+/*
+Kafka Commands: Please dont delete
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+bin/kafka-server-start.sh config/server.properties
+
+// to see topics
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+// To add topics
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic authorization
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminAnalytics
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminCompany
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminPhotos
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminReviews
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic studentProfile
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic response_topic
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic jobapplicant
+
+// To delete topics
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic reviews
+
+*/

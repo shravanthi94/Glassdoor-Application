@@ -36,10 +36,10 @@ async function approveReview(msg, callback) {
     var res = {};
     try {
         console.log('Entered approve_review. Message', msg);
-        let review = await Review.findOne({ "_id": req.params.review_id })
+        let review = await Review.findOne({ "_id": msg.review_id })
         if (review) {
             console.log("Found the review. Updating the approvalStatus", review)
-            review = await Review.findOneAndUpdate({ "_id": req.params.review_id }, { $set: { "approvalStatus": req.body.approvalStatus } }, { new: true });
+            review = await Review.findOneAndUpdate({ "_id": msg.review_id }, { $set: { "approvalStatus": msg.approvalStatus } }, { new: true });
             res.status = 200;
             res.message = JSON.stringify({ msg: 'Review approval status changed successfully.' });
             callback(null, res);

@@ -8,6 +8,8 @@ const Company = require('../../models/CompanyModel');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 
+const kafka = require('../../kafka/client');
+
 companyAuth();
 
 //@route GET /company/login
@@ -111,9 +113,31 @@ router.post(
         }
 
         //return jsonwebtoken
+
+        // const payload = {
+        //     topic: 'companyLogin',
+        //     body: req.body,
+        // };
+
+        // console.log('payload:', payload);
+
+        // kafka.make_request('authorization', payload, (err, results) => {
+        //     console.log('in result');
+        //     console.log('Results: ', results);
+        //     if (err) {
+        //         console.log('Inside err');
+        //         res.status(500).send('System Error, Try Again.');
+        //     } else {
+        //         if (results.status === 400) {
+        //             return res.status(400).json({ errors: [{ msg: results.message }] });
+        //         }
+        //         if (results.status === 500) {
+        //             return res.status(500).send('Server Error');
+        //         }
+        //         res.status(200).json(results);
+        //     }
+        // });
     }
 );
 
 module.exports = router;
-
-//Cust_Name:

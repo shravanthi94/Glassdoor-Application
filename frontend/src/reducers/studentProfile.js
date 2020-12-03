@@ -8,6 +8,9 @@ import {
   STUDENT_CONTRIBUTION_REVIEW_SUCCESS,
   STUDENT_CONTRIBUTION_FAIL,
   CLEAR_CONTRIBUTIONS,
+  UPLOAD_STUDENT_RESUME,
+  UPDATE_PRIMARY_RESUME,
+  DELETE_RESUME
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +32,31 @@ export default function (state = initialState, action) {
         profile: payload,
         loading: false,
       };
+
+    case UPLOAD_STUDENT_RESUME:
+      return {
+        ...state,
+        profile: payload.student,
+        uploadResumeFlag: payload.uploadResumeFlag,
+        loading: false,
+      };
+
+    case UPDATE_PRIMARY_RESUME:
+      return {
+        ...state,
+        profile: payload.student,
+        primaryResumeFlag: payload.primaryResumeFlag,
+        loading: false,
+      };
+
+    case DELETE_RESUME:
+      return {
+        ...state,
+        profile: payload.student,
+        deleteResumeFlag: payload.deleteResumeFlag,
+        loading: false,
+      };
+
     case STUDENT_COUNT_SUCCESS:
       return {
         ...state,
