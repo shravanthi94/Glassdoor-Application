@@ -15,6 +15,8 @@ const handle_request = async (payload, callback) => {
   switch (topic) {
     case 'studentSignup':
       return studentSignup(payload, callback);
+    case 'studentLogin':
+      return studentLogin(payload, callback);
   }
 };
 
@@ -33,7 +35,9 @@ async function studentSignup(msg, callback) {
       async (error, result) => {
         if (error) {
           console.log(error);
-          return res.status(500).send('Server Error');
+          response.status = 500;
+          response.message = 'Server Error';
+          return callback(null, response);
         }
         if (result.length > 0) {
           response.status = 400;
@@ -85,7 +89,70 @@ async function studentSignup(msg, callback) {
       },
     );
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
+    response.status = 500;
+    response.message = 'Server Error';
+    return callback(null, response);
+  }
+}
+
+async function studentLogin(msg, callback) {
+  const { email, password } = msg.body;
+  // See if user exists
+  try {
+    const student = await Student.findOne({ email: email });
+    mysqlConnectionPool.query(
+      `SELECT * FROM student WHERE email= '${email}'`,
+      async (error, result) => {
+        if (error) {
+          response.status = 500;
+          response.message = 'Server Error';
+          return callback(null, response);
+        }
+        if (result.length === 0) {
+          response.status = 400;
+          response.message = 'Invalid Credentials';
+          return callback(null, response);
+        }
+
+        const isMatch = await bcrypt.compare(password, result[0].password);
+
+        if (!isMatch) {
+          response.status = 400;
+          response.message = 'Invalid Credentials';
+          return callback(null, response);
+        }
+        const payload = {
+          user: {
+            id: student._id,
+            name: result[0].name,
+            email: email,
+            usertype: 'student',
+          },
+        };
+
+        jwt.sign(
+          payload,
+          config.get('jwtSecret'),
+          { expiresIn: 6000000 },
+          (error, token) => {
+            if (error) {
+              console.log(error);
+            }
+            response.status = 200;
+            response.message = {
+              token,
+              id: student._id,
+              name: result[0].name,
+              email: email,
+            };
+            return callback(null, response);
+          },
+        );
+      },
+    );
+  } catch (error) {
+    console.error(error.message);
     response.status = 500;
     response.message = 'Server Error';
     return callback(null, response);

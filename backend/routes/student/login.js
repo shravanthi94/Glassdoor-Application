@@ -10,6 +10,9 @@ const { auth } = require('../../middleware/studentAuth');
 const Student = require('../../models/StudentModel');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 
+// Connect to kafka
+const kafka = require('../../kafka/client');
+
 auth();
 
 router.post(
@@ -77,6 +80,30 @@ router.post(
       console.error(error.message);
       res.status(500).send('Server Error');
     }
+
+    // const payload = {
+    //   topic: 'studentLogin',
+    //   body: req.body,
+    // };
+
+    // console.log('payload:', payload);
+
+    // kafka.make_request('authorization', payload, (err, results) => {
+    //   console.log('in result');
+    //   console.log('Results: ', results);
+    //   if (err) {
+    //     console.log('Inside err');
+    //     res.status(500).send('System Error, Try Again.');
+    //   } else {
+    //     if (results.status === 400) {
+    //       return res.status(400).json({ errors: [{ msg: results.message }] });
+    //     }
+    //     if (results.status === 500) {
+    //       return res.status(500).send('Server Error');
+    //     }
+    //     res.status(200).json(results.message);
+    //   }
+    // });
   },
 );
 
