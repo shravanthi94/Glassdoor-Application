@@ -56,16 +56,16 @@ router.get('/:id', companyCheckAuth, async (req, res) => {
       console.log('Inside err', err);
       res.status(500).send('System Error, Try Again.');
     } else {
-      if (results.status === 400) {
-        console.log('Inside err2', results);
-        return res.status(400).json({ errors: [{ msg: results.message }] });
-      }
-      if (results.status === 500) {
-        console.log('Inside err3', results);
-        return res.status(500).send('Server Error');
-      }
+      // if (results.status === 400) {
+      //     console.log('Inside err2', results);
+      //     return res.status(400).json({ errors: [{ msg: results.message }] });
+      // }
+      // if (results.status === 500) {
+      //     console.log('Inside err3', results);
+      //     return res.status(500).send('Server Error');
+      // }
       console.log('in result1234', results);
-      res.status(200).json(results.message);
+      res.status(200).json(results);
     }
   });
 });
