@@ -195,7 +195,7 @@ router.get('/myjobs', companyCheckAuth, async (req, res) => {
   //   }
 
   const payload = {
-    topic: 'allJobs',
+    topic: 'getAllJobs',
     company: req.company,
   };
   kafka.make_request('companyJobPosting', payload, (err, results) => {

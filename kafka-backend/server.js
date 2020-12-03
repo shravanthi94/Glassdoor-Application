@@ -15,8 +15,8 @@ var AdminReviews = require('./services/admin/reviews');
 const studentProfile = require('./services/student/profile');
 
 // Company files import
-
 const jobApplicant = require('./services/company/applicant');
+const jobs = require('./services/company/jobPosting');
 
 const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
@@ -82,13 +82,12 @@ handleTopicRequest('adminReviews', AdminReviews);
 
 //Company topics Start
 handleTopicRequest('jobapplicant', jobApplicant);
+handleTopicRequest('companyJobPosting', jobs);
 //Company topics End
+
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
 //Student topics end
-
-//Company topics start
-// handleTopicRequest('companyJobPosting',)
 
 /*
 Kafka Commands: Please dont delete
