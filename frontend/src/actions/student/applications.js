@@ -30,7 +30,7 @@ export const withdrawApplications = (application_id, job_id, data) => async (
   console.log('inside withdrawApplications ');
   try {
     const res = await axios.post(
-      `/student/applications/job/${job_id}/withdraw${application_id}`,
+      `/student/applications/job/${job_id}/withdraw/${application_id}`,
       data,
     );
 

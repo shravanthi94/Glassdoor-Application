@@ -1,11 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component , Fragment} from 'react';
-import '../CSS/studentApplications.css';
 import { getApplications, withdrawApplications } from '../../actions/student/applications';
-//import Navigation from './Navigation'; 
-//import { BACKEND_URL } from '../../helpers/constants';
-//import studentApplications from '../../reducers/studentApplications';
-import JobsNav from './JobsNav'
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 class StudentApplications extends Component {
@@ -20,7 +15,7 @@ class StudentApplications extends Component {
     }
 
     componentWillMount() {
-        this.props.getApplications(localStorage.getItem('id'));
+        this.props.getApplications(localStorage.getItem("id"));
     }
 
 
@@ -52,7 +47,7 @@ class StudentApplications extends Component {
             this.setState({
                 withdraw: withdraw,
             });
-            this.props.getApplications();
+            this.props.getApplications(localStorage.getItem("id"));
         }
 
         if (nextProps.withdrawError) {
@@ -61,50 +56,45 @@ class StudentApplications extends Component {
             this.setState({
                 withdrawError: true,
             });
-            this.props.getApplications();
+            this.props.getApplications(localStorage.getItem("id"));
         }
         
     }
 
     withdrawApplication = (application_id, job_id, e) => {
-        console.log("Reject");
-        var data= { status : "rejected" }
-        this.props.withdrawApplication (application_id, job_id, data);
+        console.log("withdraw");
+        var data= { applicantStatus : "withdraw" }
+        this.props.withdrawApplications(application_id, job_id, data);
     };
-
-  
 
     displayApplications  = (applications) => {
         var cards = [];
-        let myapplications= applications.jobPostings.applicants;
-        let company =  applications.jobPostings.name;
-        let title= applications.jobPostings.title;
-        for( var i = 0; i < applications.length; i++ ) {
+        for( var i = 0; i < applications.jobPostings.length; i++ ) {
+            for (var j = 0; j < applications.jobPostings[i].applications.length; j++) {
+                var button = null;
+                if (applications.jobPostings[i].applications[j].applicantStatus !== 'withdraw' ) {
+                    var button = (<button style={{marginLeft:'15%'}} className="reviews-approve-button" onClick={this.withdrawApplication.bind(this, applications.jobPostings[i].applications[j]._id, applications.jobPostings[i]._id)}>
+                    Withdraw </button>)
+                } else {
+                    var button = <div style={{fontSize:'20px', marginLeft:'10%', color:'red'}}> Application Withdrawn </div>
+                }
                 var singleCard = (
-                    <div className="reviews-row-two">
-                        <table>
-                            <tr>
-                                <td>
-                                    <div className='mt-1 ml-4'>
-                                        
-                                    </div>
-                                </td>
-                                <td>
-                                    
-                                </td>
-                                &emsp;
-                                <td>
-                                    <button style={{marginLeft:'15%'}} className="reviews-approve-button" onClick={this.withdrawApplication.bind(this) }>
-                                    withdraw </button>
-                                </td>
-                                &emsp;&emsp;&emsp;
-                            
-                            </tr>
-                        </table>
+                    <div className="reviews-row-two" style={{height:'300px'}}>
+                        <br/>
+                        <div style={{fontSize:'20px', marginLeft:'10%'}}> Company Name : {applications.jobPostings[i].name}</div>
+                        <br/>
+                        <div style={{fontSize:'20px', marginLeft:'10%'}}> Job Title : {applications.jobPostings[i].title}</div>
+                        <br/>
+                        <div style={{fontSize:'20px', marginLeft:'10%'}}> ApplicationStatus: {applications.jobPostings[i].applications[j].applicantStatus}</div>
+                        <br/>
+                        <div style={{fontSize:'20px', marginLeft:'10%'}}> Application Date : {applications.jobPostings[i].applications[j].appliedDate.substring(0,10)}</div>
+                        &emsp;
+                        <br/>
+                        {button}                     
                     </div>
                     );
                 cards.push(singleCard);   
-            
+            }
         };
         return cards;
       };
@@ -155,20 +145,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentApplications);
-
-
-
-    // redirectHandler = (e) => {
-    //     console.log("redirect value: ", e);
-    //     var path = "";
-
-    //     if (e == "company_stastics") {
-    //         path = "/admin/company/profile"
-    //     }
-        
-
-    //     this.setState({
-    //         isRedirect: true,
-    //         redirectPath: path,
-    //     })
-    // }
