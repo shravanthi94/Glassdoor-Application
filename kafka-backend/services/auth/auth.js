@@ -22,24 +22,11 @@ const handle_request = async(payload, callback) => {
                 return companySignup(payload, callback);
             case 'companyLogin':
                 return companyLogin(payload, callback);
-        } ===
-        ===
-        =
-        const handle_request = async(payload, callback) => {
-            const { topic } = payload;
-            console.log('In topic: ', topic);
-            switch (topic) {
-                case 'studentSignup':
-                    return studentSignup(payload, callback);
-                case 'studentLogin':
-                    return studentLogin(payload, callback);
-                case 'adminSignup':
-                    return adminSignup(payload, callback);
-                case 'adminLogin':
+            case 'adminSignup':
+                return adminSignup(payload, callback);
+            case 'adminLogin':
                     return adminLogin(payload, callback);
-            } >>>
-            >>>
-            > 6 fa6853e64d775378b23d3e796995c0a75663a3e
+            }
         };
 
         async function studentSignup(msg, callback) {
@@ -440,7 +427,11 @@ const handle_request = async(payload, callback) => {
                                     },
                                 };
                                 jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 6000000 }, (error, token) => {
-                                    if (error) throw error;
+                                    if (error) {
+                                        response.status = 400;
+                                        response.message = 'JWT generation error Error';;
+                                        return callback(null, response);
+                                    }
                                     const result = {
                                         token,
                                         id: result.insertId,

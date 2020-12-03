@@ -181,7 +181,7 @@ class CompanyDetailsStastics extends Component {
                     </td>
                     <td>
                         <div style={{marginLeft:'25%'}}>
-                            <div><i class="fas fa-wheelchair" style={{height:'100px', width:'100px'}}></i> </div>Disbled: {demographics.disabilityYes}
+                            <div><i class="fas fa-wheelchair" style={{height:'100px', width:'100px'}}></i> </div>Disabled: {demographics.disabilityYes}
                         </div>
                     </td>
                 </tr>
