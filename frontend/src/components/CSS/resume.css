@@ -1,0 +1,36 @@
+.student-profile-resume-upload-button{
+    color: #1861BF;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.file-upload1 .form-group1, .file-upload1 .student-profile-resume-upload-button, .file-upload1 .resume-upload-text-msg{
+    display: inline-block;
+    vertical-align: top;
+} 
+
+.resume-upload-text-msg{
+    margin-top: 5px;
+}
+
+.form-check{
+    font-size: 17px;
+    margin: 10px;
+}
+
+.form-check-input{
+    font-size: 20px;
+}
+
+.student-resumes-table {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.student-resumes-table td {
+    padding: 5px;
+}
+
+.student-resumes-table label {
+    margin: 0;
+}

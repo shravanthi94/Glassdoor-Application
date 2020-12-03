@@ -56,6 +56,7 @@ import CompanyJobs from './Students/CompanyJobs';
 import CompanyJobDetails from './Students/CompanyJobDetails';
 import AddPhotos from './Students/AddPhotos';
 import JobHomePage from './Students/JobsHomePage';
+import CompanyResume from './Students/CompanyResume';
 // import JobsNav from './Students/JobsNav';
 
 // Student - Contributions
@@ -85,6 +86,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
+            <Route exact path='/student/update/resume' component={CompanyResume} />
             <Route
               exact
               path='/companyJobDetails'

@@ -115,5 +115,3 @@ router.post(
 );
 
 module.exports = router;
-
-//Cust_Name:

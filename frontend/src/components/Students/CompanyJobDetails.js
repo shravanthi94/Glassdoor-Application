@@ -29,8 +29,9 @@ class CompanyJobDetails extends Component {
             jobDetail: this.props.location.state.data,
             resume: "",
             coverLetter: "",
-            files: null,
+            files: [],
             applyJobFlag: false,
+            error: ""
         }
 
         this.redirectHandler = this.redirectHandler.bind(this);
@@ -60,9 +61,11 @@ class CompanyJobDetails extends Component {
     filesUploadHandler = (e) => {
         console.log("e: ", e);
 
-        // this.setState({
-        //     resume: e
-        // })
+        this.setState({
+            files: e,
+            error: ""
+        })
+
         if (e && e.length !== 0) {
 
             e.map(file => {
@@ -84,6 +87,22 @@ class CompanyJobDetails extends Component {
         }
     }
 
+    filesRemoveOne = (file) => {
+        
+        this.refs.files.removeFile(file);
+
+        if (file.name.toLowerCase().search("resume") !== -1) {
+            this.setState({
+                resume: ""
+            })
+        } else if (file.name.toLowerCase().search("cover") !== -1) {
+            console.log("inside cover");
+            this.setState({
+                coverLetter: ""
+            })
+        }
+      }
+
     changeJobHandler = (e) => {
         this.setState({
             jobDetail: e
@@ -96,18 +115,29 @@ class CompanyJobDetails extends Component {
         console.log("resume: ", this.state.resume);
         console.log("coverLetter: ", this.state.coverLetter);
 
-        const formData = new FormData();
-        formData.append("resume", this.state.resume, this.state.resume.name);
-        formData.append("coverLetter", this.state.coverLetter, this.state.coverLetter.name);
-        formData.append("studentId", this.props.studentId);
-        formData.append("studentEmail", this.props.studentEmail);
-        formData.append("jobId", this.state.jobDetail._id);
+        if(this.state.resume !== "" || this.state.coverLetter !== "") {
+            const formData = new FormData();
+            if(this.state.resume !== "") {
+                formData.append("resume", this.state.resume, this.state.resume.name);
+            }
 
-        this.setState({
-            applyJobFlag: "true"
-        })
+            if(this.state.coverLetter !== "") {
+                formData.append("coverLetter", this.state.coverLetter, this.state.coverLetter.name);
+            }
+            formData.append("studentId", this.props.studentId);
+            formData.append("studentEmail", this.props.studentEmail);
+            formData.append("jobId", this.state.jobDetail._id);
 
-        this.props.appyJob(formData);
+            this.setState({
+                applyJobFlag: "true"
+            })
+
+            this.props.appyJob(formData);
+        } else {
+            this.setState({
+                error: "Please add at least one file with name 'resume' or 'cover'"
+            })
+        }
     }
 
     resumeHandler(e) {
@@ -126,13 +156,15 @@ class CompanyJobDetails extends Component {
 
     openModalHandler = (e) => {
         this.setState({
-            showModal: true
+            showModal: true,
+            error: ""
         })
     }
 
     closeModalHandler = (e) => {
         this.setState({
-            showModal: false
+            showModal: false,
+            error: ""
         })
     }
 
@@ -315,36 +347,56 @@ class CompanyJobDetails extends Component {
                             top: "22%",
                             left: "32%",
                             width: '600px',
-                            height: '500px',
+                            height: 'fit-content',
                             verticalAlign: "center",
                             zIndex: "2"
-
                         }
                     }}>
                     <div style={{ width: "20px", height: "20px", fontWeight: "bolder" }}>
-                        <button onClick={this.closeModalHandler}>X</button>
+                        <div onClick={this.closeModalHandler}><i class="fas fa-times" style={{fontSize:"20px"}}></i></div>
                     </div>
 
                     <div>
                         <Files
+                            ref='files'
                             className='files-dropzone'
                             onChange={this.filesUploadHandler}
                             // onError={this.onFilesError}
-                            accepts={['image/png', '.pdf', 'audio/*']}
+                            accepts={['.pdf']}
                             multiple
-                            maxFiles={10}
+                            maxFiles={2}
                             maxFileSize={10000000}
                             minFileSize={0}
                             clickable
+                            style={{ height: '150px', padding: '30px' }}
                         >
-                            <br /><br /><br /><br /><br />
-                        Drop files here or click to upload
-                        <div style={{ fontSize: "50px", color: "gray" }}><i class="fas fa-upload"></i></div>
+                            Drop PDF files here or click to upload
+                            <div style={{ fontSize: "50px", color: "gray" }}><i class="fas fa-upload"></i></div>
                         </Files>
-                    </div> <div className="file-upload-button">
-                        <div>
-                            <button onClick={this.applyJobsHandler} className="pic-upload-button" type="submit">Apply to Job</button>
-                        </div>
+                        {
+                            this.state.files.length > 0
+                            ? <div className='files-list'>
+                                <ul>{this.state.files.map((file) =>
+                                <li className='files-list-item' key={file.id}>
+                                    <div className='files-list-item-preview'>
+                                    {file.preview.type === 'image'
+                                    ? <img className='files-list-item-preview-image' src={file.preview.url} />
+                                    : <div className='files-list-item-preview-extension'>{file.extension}</div>}
+                                    </div>
+                                    <div className='files-list-item-content'>
+                                    <div className='files-list-item-content-item files-list-item-content-item-1'>{file.name}</div>
+                                    <div className='files-list-item-content-item files-list-item-content-item-2'>{file.sizeReadable}</div>
+                                    </div>
+                                    <div id={file.id} className='files-list-item-remove' onClick={this.filesRemoveOne.bind(this, file)} />
+                                </li>
+                                )}</ul>
+                            </div>
+                            : null
+                        }
+                    </div>
+                    <div style={{color: "red", textAlign: "center", margin: "5px 0"}}>{this.state.error}</div>
+                    <div className="file-upload-button">
+                        <button onClick={this.applyJobsHandler} className="pic-upload-button" type="submit">Apply to Job</button>
                     </div>
 
                 </ReactModal>
