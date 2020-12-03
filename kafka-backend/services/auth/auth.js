@@ -17,6 +17,10 @@ const handle_request = async (payload, callback) => {
       return studentSignup(payload, callback);
     case 'studentLogin':
       return studentLogin(payload, callback);
+    case 'adminSignup':
+      return adminSignup(payload, callback);
+    case 'adminLogin':
+      return adminLogin(payload, callback);
   }
 };
 
@@ -147,6 +151,129 @@ async function studentLogin(msg, callback) {
               email: email,
             };
             return callback(null, response);
+          },
+        );
+      },
+    );
+  } catch (error) {
+    console.error(error.message);
+    response.status = 500;
+    response.message = 'Server Error';
+    return callback(null, response);
+  }
+}
+
+async function adminLogin(msg, callback) {
+  const { email, password } = msg.body;
+  // See if user exists
+  try {
+    mysqlConnectionPool.query(
+      `SELECT * FROM admin WHERE email= '${email}'`,
+      async(error, result) => {
+        if (error) {
+          console.log(error);
+          response.status = 500;
+          response.message = 'Server Error';
+          return callback(null, response);
+          }
+        if (result.length === 0) {
+          response.status = 400;
+          response.message = 'Invalid Credentials';
+          return callback(null, response);
+        }
+        const isMatch = await bcrypt.compare(password, result[0].password);
+        if (!isMatch) {
+          response.status = 400;
+          response.message = 'Invalid Credentials';
+          return callback(null, response);
+        }
+        const payload = {
+            admin: {
+                id: result[0].id,
+                name: result[0].name,
+                email: email,
+                usertype: 'admin'
+            },
+        };
+
+        jwt.sign( payload, config.get('jwtSecret'), { expiresIn: 6000000 }, (error, token) => {
+          if (error) {
+            console.log(error);
+          }
+          response.status = 200;
+          response.message = {
+            token,
+            id: result[0]._id,
+            name: result[0].name,
+            email: email,
+          };
+            return callback(null, response);
+          },
+        );
+      },
+    );
+  } catch (error) {
+    console.error(error.message);
+    response.status = 500;
+    response.message = 'Server Error';
+    return callback(null, response);
+  }
+}
+
+async function adminSignup(msg, callback) {
+  const { name, email, password } = msg.body;
+  // See if user exists
+  try {
+    mysqlConnectionPool.query(
+      `SELECT email FROM admin WHERE email= '${email}'`,
+      async (error, result) => {
+        if (error) {
+          console.log(error);
+          response.status = 500;
+          response.message = 'Server Error';
+          return callback(null, response);
+        }
+        if (result.length > 0) {
+          response.status = 400;
+          response.message = 'Admin already exists';
+          return callback(null, response);
+        }
+
+        //Encrypt password using bcrypt
+        const salt = await bcrypt.genSalt(10);
+        const passwordEncrypted = await bcrypt.hash(password, salt);
+
+        mysqlConnectionPool.query(
+          `INSERT into admin (name, email, password) 
+                        VALUES ('${name}', '${email}', '${passwordEncrypted}')`,
+          (error, result) => {
+            if (error) {
+              console.log(error);
+              response.status = 500;
+              response.message = 'Server Error';
+              return callback(null, response);
+            }
+            const payload = {
+              admin: {
+                  id: result.insertId,
+                  name: name,
+                  email: email,
+                  usertype: 'admin'
+              },
+          };
+            jwt.sign( payload, config.get('jwtSecret'), { expiresIn: 6000000 }, (error, token) => {
+              if (error) throw error;
+              const result = {
+                token,
+                id: result.insertId,
+                name: name,
+                email: email,
+              };
+                response.status = 200;
+                response.message = result;
+                return callback(null, response);
+              },
+            );
           },
         );
       },
