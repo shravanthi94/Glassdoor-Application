@@ -211,7 +211,7 @@ const JobsHomePage = ({
               </button>
 
               <Link
-                to='#'
+                to='/student/applications'
                 className='btn btn-primary gd-blue'
                 style={{ marginLeft: '22%' }}
               >
