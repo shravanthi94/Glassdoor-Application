@@ -84,3 +84,29 @@ handleTopicRequest('jobapplicant', jobApplicant);
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
 //Student topics end
+
+
+/*
+Kafka Commands: Please dont delete
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+bin/kafka-server-start.sh config/server.properties
+
+// to see topics
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+// To add topics
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic authorization
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminAnalytics
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminCompany
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminPhotos
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic adminReviews
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic studentProfile
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic response_topic
+
+
+// To delete topics
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic reviews
+
+*/

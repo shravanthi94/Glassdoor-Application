@@ -10,8 +10,8 @@ function handle_request(msg, callback) {
         bestCeos(msg, callback);
     } else if (msg.path === 'top_student_reviewer') {
         topStudentReviewer(msg, callback);
-    } else if (msg.path === 'top_student_reviewer') {
-        topStudentReviewer(msg, callback);
+    } else if (msg.path === 'top_viewed_company') {
+        topViewedCompany(msg, callback);
     } else if (msg.path === 'reviews_per_day') {
         reviewsPerDay(msg, callback);
     } 
@@ -56,7 +56,7 @@ async function mostReviewedCompany(msg, callback) {
                 }
             }
         ]);
-        query.limit(parseInt(req.query.limit));
+        query.limit(parseInt(msg.limit));
         query.exec((err, mostReviewedCompany) => {
             if (err) {
                 console.error(err.message);
@@ -84,7 +84,7 @@ async function bestAverageRating(msg, callback) {
         const query = Company.find();
         query.select('_id overAllRating name');
         query.sort({overAllRating:-1});
-        query.limit(parseInt(req.query.limit));
+        query.limit(parseInt(msg.limit));
         query.exec((err, bestAverageRating) => {
             if (err) {
                 console.error(err.message);
@@ -112,7 +112,7 @@ async function bestCeos(msg, callback) {
         const query = Company.find();
         query.select('_id ceoApprovalRating ceoName name');
         query.sort({ceoApprovalRating:-1});
-        query.limit(parseInt(req.query.limit));
+        query.limit(parseInt(msg.limit));
         query.exec((err, bestCeoRating) => {
             if (err) {
                 console.error(err.message);
@@ -175,7 +175,7 @@ async function topStudentReviewer(msg, callback) {
                 }
             }
         ]);
-        query.limit(parseInt(req.query.limit));
+        query.limit(parseInt(msg.limit));
         query.exec((err, mostStudentReviews) => {
             if (err) {
                 console.error(err.message);
@@ -269,7 +269,7 @@ async function topViewedCompany(msg, callback) {
             },
         ]);
         query.sort({"views.count": -1});
-        query.limit(parseInt(req.query.limit));
+        query.limit(parseInt(msg.limit));
         query.exec((err, viewsPerDay) => {
             if (err) {
                 console.error(err.message);

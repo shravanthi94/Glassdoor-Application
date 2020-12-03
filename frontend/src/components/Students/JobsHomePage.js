@@ -95,7 +95,8 @@ const JobsHomePage = ({
 
   const onSalaryChange = (e) => {
     setsalaryRange(e.target.value);
-    setdisplayJobs(jobs.filter((each) => each.salary === salaryRange));
+    const selectedRange = e.target.value;
+    setdisplayJobs(jobs.filter((each) => each.salary === selectedRange));
   };
 
   const allJobsDisplay = (e) => {
