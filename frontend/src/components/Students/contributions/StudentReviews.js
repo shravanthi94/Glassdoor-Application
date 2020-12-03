@@ -28,9 +28,19 @@ const StudentReviews = ({
       return (
         <Fragment>
           <div class='card mb-3  bg-light'>
-            <h5 class='card-header gd-blue' style={{ color: 'white' }}>
-              {review.company.name}
-            </h5>
+            <Link
+              to={{
+                pathname: '/student/viewReviews',
+                state: { data: review },
+              }}
+              style={{ textDecoration: 'none' }}
+              className='text-dark'
+            >
+              <h5 class='card-header gd-blue' style={{ color: 'white' }}>
+                {review.company.name}
+              </h5>
+            </Link>
+
             <div class='card-body pb-0 mb-1'>
               <h5 class='card-title'>{review.headline}</h5>
               <p class='card-text'>{review.comment}</p>

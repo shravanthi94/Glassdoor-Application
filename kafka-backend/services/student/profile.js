@@ -91,9 +91,7 @@ async function studentContribution(payload, callback) {
     } else if (query === 'interviews') {
       results = await Company.find({ 'interview.student': payload.user.id });
     } else if (query === 'salaries') {
-      const results = await Company.find({
-        'salary.student': payload.user.id,
-      });
+      results = await Company.find({ 'salary.student': payload.user.id });
     } else if (query === 'photos') {
       results = await Company.find({ 'photos.student': payload.user.id });
     }

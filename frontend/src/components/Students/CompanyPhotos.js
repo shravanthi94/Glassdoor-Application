@@ -20,8 +20,8 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
   const [activePage, setactivePage] = useState(1);
 
   // Logic for displaying current menu items
-  const indexOfLast = activePage * 3;
-  const indexOfFirst = indexOfLast - 3;
+  const indexOfLast = activePage * 6;
+  const indexOfFirst = indexOfLast - 6;
   // const currentResults = results.slice(indexOfFirst, indexOfLast);
 
   const handlePageChange = (pageNumber) => {
@@ -113,7 +113,15 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
             </td>
             <td>
               <div className='profile-counts'>10</div>
-              <div className='profile-title'>Jobs&emsp;</div>
+              <Link
+                to={{
+                  pathname: '/companyJobs',
+                  state: { data: company.overview._id },
+                }}
+                style={{ textDecoration: 'none' }}
+              >
+                <div className='profile-title'>Jobs&emsp;</div>
+              </Link>
             </td>
             <td>
               <div className='profile-counts'>
@@ -184,28 +192,26 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                     </div>
                   </div>
                 </div>
+                <div className='mt-5'>{displayPhotos()}</div>
                 <div className='mt-5'>
-                  {displayPhotos()}
-                  <div className='mt-5'>
-                    <Pagination
-                      itemClass='page-item'
-                      linkClass='page-link'
-                      activeClass='gd-blue'
-                      activeLinkClass='paginate'
-                      activePage={activePage}
-                      itemsCountPerPage={3}
-                      totalItemsCount={
-                        company.overview.photos.filter(
-                          (each) =>
-                            each.status === 'approved' ||
-                            each.student.toString() ===
-                              localStorage.id.toString(),
-                        ).length
-                      }
-                      pageRangeDisplayed={5}
-                      onChange={handlePageChange}
-                    />
-                  </div>
+                  <Pagination
+                    itemClass='page-item'
+                    linkClass='page-link'
+                    activeClass='gd-blue'
+                    activeLinkClass='paginate'
+                    activePage={activePage}
+                    itemsCountPerPage={6}
+                    totalItemsCount={
+                      company.overview.photos.filter(
+                        (each) =>
+                          each.status === 'approved' ||
+                          each.student.toString() ===
+                            localStorage.id.toString(),
+                      ).length
+                    }
+                    pageRangeDisplayed={5}
+                    onChange={handlePageChange}
+                  />
                 </div>
               </div>
             </div>

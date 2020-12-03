@@ -21,7 +21,16 @@ const StudentInterviews = ({
         return (
           <Fragment>
             <div class='card-body pb-0 mb-1'>
-              <h5 class='card-title'>{each.title}</h5>
+              <Link
+                to={{
+                  pathname: '/student/viewInterviews',
+                  state: { data: each },
+                }}
+                style={{ textDecoration: 'none' }}
+                className='text-dark'
+              >
+                <h5 class='card-title'>{each.title}</h5>
+              </Link>
               <p class='card-text'>{each.description}</p>
               <p>{each.difficulty}</p>
             </div>

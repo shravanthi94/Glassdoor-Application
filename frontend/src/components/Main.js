@@ -62,9 +62,11 @@ import StudentReviews from './Students/contributions/StudentReviews';
 import StudentSalaries from './Students/contributions/StudentSalaries';
 import StudentInterviews from './Students/contributions/StudentInterviews';
 import StudentPhotos from './Students/contributions/StudentPhotos';
+import ViewInterview from './Students/contributions/ViewInterview';
+import ViewReview from './Students/contributions/ViewReview';
+import ViewSalary from './Students/contributions/ViewSalary';
 
 import StudentApplications from './Students/StudentApplications';
-
 
 import setAuthToken from '../helpers/setAuthToken';
 import { history } from '../helpers/history';
@@ -169,6 +171,21 @@ class Main extends Component {
               exact
               path='/student/contributions/photos'
               component={StudentPhotos}
+            />
+            <PrivateRoute
+              exact
+              path='/student/viewInterviews'
+              component={ViewInterview}
+            />
+            <PrivateRoute
+              exact
+              path='/student/viewReviews'
+              component={ViewReview}
+            />
+            <PrivateRoute
+              exact
+              path='/student/viewSalaries'
+              component={ViewSalary}
             />
             <PrivateRoute
               exact
@@ -308,7 +325,7 @@ class Main extends Component {
               path='/admin/images/student'
               component={FilterStudentImages}
             />
-            <Route exact path='/student/allJobs' component={JobHomePage}/>
+            <Route exact path='/student/allJobs' component={JobHomePage} />
           </Switch>
         </Router>
       </Fragment>

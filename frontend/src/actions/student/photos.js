@@ -28,7 +28,7 @@ export const uploadCompanyPhotos = (formData, id, history) => async (
       payload: res.data,
     });
 
-    history.push({ pathname: '/companyPhotos', state: { company_id: id } });
+    // history.push({ pathname: '/companyPhotos', state: { company_id: id } });
   } catch (err) {
     console.log('error: ', err.data);
     // if (err) {
