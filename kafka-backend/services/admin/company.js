@@ -40,8 +40,8 @@ async function companyReviewsGet(msg, callback) {
     var res = {};
     try {
         console.log('Entered company_reviews_get. Message', msg);
-        const reviews = await Reviews.find({company: req.params.company_id, approvalStatus:{ $ne: 'new' }});
-        console.log("reviews list fetched");
+        const reviews = await Reviews.find({company: msg.company_id, approvalStatus:{ $ne: 'new' }});
+        console.log("reviews list fetched", reviews);
         if (!reviews || reviews.length === 0 ) {
             res.status = 404;
             res.message = JSON.stringify({ msg: 'No Reviews for the company!' });
@@ -70,7 +70,7 @@ async function hiredApplicants(msg, callback) {
         JobPostings.aggregate([
             { "$match": { 
                 $and: [
-                    {'company': mongoose.Types.ObjectId(req.params.company_id)}, 
+                    {'company': mongoose.Types.ObjectId(msg.company_id)}, 
                     { "applicants.applicantStatus": { $eq: 'hired' } }
                 ]} 
             },
@@ -125,7 +125,7 @@ async function applicantDemographics(msg, callback) {
     var res = {};
     try {
         console.log('Entered applicant_demographics. Message', msg);
-        var query = JobPostings.find({company: req.params.company_id}).select('applicants name title');
+        var query = JobPostings.find({company: msg.company_id}).select('applicants name title');
         query.populate({ path: 'applicants.student', select: 'demographics' });
         query.exec((err, jobPostings) => {
             console.log("jobPostings list fetched");
@@ -202,7 +202,7 @@ async function applicantDemographics(msg, callback) {
                 res.status = 200;
                 res.message = JSON.stringify({ 
                     jobDemographics: jobDemographics,
-                    company : req.params.company_id
+                    company : msg.company_id
                 });
                 callback(null, res);
             } else {
