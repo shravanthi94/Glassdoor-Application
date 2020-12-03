@@ -7,7 +7,7 @@ const Review = require('../../models/ReviewModel');
 const Company = require('../../models/CompanyModel');
 const Jobposting = require('../../models/JobPostingModel');
 
-const response = {};
+var response = {};
 
 const handle_request = async(payload, callback) => {
     const { topic } = payload;
@@ -20,12 +20,13 @@ const handle_request = async(payload, callback) => {
 
 async function getCurrentCompanyJobByJobId(payload, callback) {
     try {
+        console.log("Payload222", payload)
         let company = await Company.findOne({ "email": payload.company.email });
         // console.log("Print this", company._id)
         if (company) {
             const jobPosting = await Jobposting.find({
-                    "_id": payload.params.id,
-                    "company": company._id,
+                    "_id": payload.id,
+                    "company": payload.company.id,
                     // "applicants.applicantStatus": { $ne: "withdraw" }
                 }
 
@@ -33,7 +34,9 @@ async function getCurrentCompanyJobByJobId(payload, callback) {
             if (jobPosting.length > 0) {
                 // res.status(200).json(jobPosting[0]);
                 response.status = 200;
+                // console.log("Before", response)
                 response.message = jobPosting[0];
+                console.log("After", response)
                 return callback(null, response);
             } else {
                 // return res.status(400).json({ msg: 'No job posted yet!' });

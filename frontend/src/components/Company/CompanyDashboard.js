@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentCompanyProfile } from '../../actions/company/companyprofile';
 import CmpNav2 from './CmpNav2';
 import defaultImage from '../images/default_banner.jpg'
+import defaultLogo from '../images/default_logo.png'
 // import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
@@ -62,18 +63,10 @@ const CompanyDashboard = ({
                       '_logo.jpg').default
                   }
                   alt=''
-                />
+                /> 
               ) : (
-                <img
-                  className='company-logo'
-                  src={
-                    require('../../components/images/' +
-                      companyprofile.profilePic +
-                      '_logo.png').default
-                  }
-                  alt=''
-                />
-              )}
+                <img className='company-logo' src={defaultLogo} alt=''/>
+              )} 
               {companyprofile.name ? (
                 <div className='dashboard-company-name'>
                   {companyprofile.name}{' '}
@@ -271,7 +264,7 @@ const CompanyDashboard = ({
                         <span>&emsp;Top CEOs:</span>
                         {companyprofile.ceoName ? (
                           <span style={{ color: '#1861BF' }}>
-                            &nbsp;2019 (#34)
+                            {' '}{companyprofile.ceoName} &nbsp;2019 (#34)
                           </span>
                         ) : (
                           ''
@@ -386,7 +379,7 @@ const CompanyDashboard = ({
                         </tr>
                       </table>
                     ) : (
-                      ''
+                      <p style={{color: "red"}}>No Reviews yet </p>
                     )}
                   </div>
                 </div>

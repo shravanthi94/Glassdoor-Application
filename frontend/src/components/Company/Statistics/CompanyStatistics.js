@@ -119,7 +119,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                             <div class="modal-dialog modal-lg" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Applicants Statistics Report: {companyjob? companyjob.title: ''}</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Applicants Statistics Report: {companyjob && companyjob.applicants.length>0? companyjob.title: <p style={{color: "red"}}> No Stats Available</p>}</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -128,6 +128,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                         {companyjob? 
                                                                         <Fragment>
                                                                         <div style={{ display: 'flex' }}>
+                                                                    
                                                                             <Chart
                                                                                 width={'500px'}
                                                                                 height={'300px'}
@@ -144,6 +145,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                         }}
                                                                                 rootProps={{ 'data-testid': '1' }}
                                                                             />
+                                                                           
                                                                             <Chart
                                                                                 width={'500px'}
                                                                                 height={'300px'}
@@ -162,6 +164,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                         }}
                                                                                 rootProps={{ 'data-testid': '1' }}
                                                                             />
+                                                                            
                                                                             <Chart
                                                                                 width={'500px'}
                                                                                 height={'300px'}
@@ -180,6 +183,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                         </div> 
                                                                         <br/>
                                                                         <div style={{ display: 'flex' }}>
+                                                                       
                                                                         <Chart
                                                                                 width={'500px'}
                                                                                 height={'300px'}
@@ -187,8 +191,8 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                 loader={<div>Loading Chart</div>}
                                                                                 data={[
                                                                                         ['Applicants', 'Applicants categorized by Disability'],
-                                                                                        ['Yes', Disabled],
-                                                                                        ['No', NonDisabled],
+                                                                                        ['Disabled', Disabled],
+                                                                                        ['non-disabled', NonDisabled],
                                                                             
                                                                                     ]}
                                                                                 options={{
@@ -196,6 +200,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                         }}
                                                                                 rootProps={{ 'data-testid': '1' }}
                                                                             />
+                                                                           
                                                                             <Chart
                                                                                 width={'500px'}
                                                                                 height={'300px'}
@@ -203,8 +208,8 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                 loader={<div>Loading Chart</div>}
                                                                                 data={[
                                                                                         ['Applicants', 'Applicants categorized by Veteran status'],
-                                                                                        ['Yes', Veteran],
-                                                                                        ['No', NonVeteran],
+                                                                                        ['Veteran', Veteran],
+                                                                                        ['non-Veteran', NonVeteran],
                                                                                         
                                                                                     ]}
                                                                             

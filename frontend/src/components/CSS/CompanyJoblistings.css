@@ -105,3 +105,9 @@
 .modal-lg {
     max-width: 92%;
 }
+
+.company-view-button {
+    text-decoration: none;
+    color: #fff;
+    background-color: darkblue;
+}
