@@ -15,3 +15,8 @@
     border-radius: 5px;
     border-top: 5px solid #0CAA4F;
 }
+
+.company-heading {
+    color: #1861bf;
+    font-size: 24px;
+}

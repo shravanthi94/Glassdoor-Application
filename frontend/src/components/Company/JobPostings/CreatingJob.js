@@ -7,6 +7,7 @@ import {getCurrentCompanyProfile} from '../../../actions/company/companyprofile'
 import {createCompanyJob} from '../../../actions/company/companyjobpostings';
 import '../../CSS/CompanySign.css';
 import '../../CSS/CompanyProfile.css';
+import Alerts from '../../Alert';
 
 const CreatingJob = ({
     companyprofile:{companyprofile, loading}, 
@@ -75,10 +76,11 @@ const CreatingJob = ({
         <Fragment>
             <CmpNav2/>
             <div className="contentholder-company text-company">
-                Create Job 
+                <div className="company-heading font-weight-bold">Create New Job  </div>
+                <Alerts/>
                 <br/>
                 <br/>
-                <div className="form-box-company-job">
+                <div className="form-box-company-job mt-1">
                     <form className="form-company" onSubmit={(e) => onSubmit(e)}>
                     <div className="form-group-company"><p>Name</p>
                         <input type="text" name="name" value={name} onChange={(e) => onChange(e)}/>
@@ -120,6 +122,7 @@ const CreatingJob = ({
                     <div className="form-group-company">
                         <label><p>Remote</p></label>
                         <select name="Remote" value={Remote} className='dropdown company-width' onChange={(e) => onChange(e)}>
+                            <option>Choose an option</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -127,6 +130,7 @@ const CreatingJob = ({
                     <div className="form-group-company">
                         <label><p>In Person</p></label>
                         <select className='dropdown company-width' name="inPerson" value={inPerson} onChange={(e) => onChange(e)}>
+                        <option>Choose an option</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>

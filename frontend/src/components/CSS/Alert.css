@@ -16,7 +16,9 @@
 
 .alert-danger {
     background: none;
-    color: var(--danger-color)
+    color: var(--danger-color);
+    border: none;
+    font-size: 14px;
 }
 
 .alert-success {
