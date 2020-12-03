@@ -14,6 +14,8 @@ var AdminReviews = require('./services/admin/reviews');
 // Student files import
 const studentProfile = require('./services/student/profile');
 
+// Company
+
 const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
 // const fs = require('fs');
@@ -79,3 +81,6 @@ handleTopicRequest('adminReviews', AdminReviews);
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
 //Student topics end
+
+//Company topics start
+// handleTopicRequest('companyJobPosting',)

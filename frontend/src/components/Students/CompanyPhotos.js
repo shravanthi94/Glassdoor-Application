@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,36 +10,48 @@ import { uploadCompanyPhotos } from '../../actions/student/photos';
 import { BACKEND_URL } from '../../helpers/constants';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
-import jwt_decode from 'jwt-decode';
+import Pagination from 'react-js-pagination';
 
 const CompanyPhotos = ({ getCompanyProfile, company }) => {
   useEffect(() => {
     getCompanyProfile(company.overview._id);
   }, [company.overview._id, getCompanyProfile]);
 
+  const [activePage, setactivePage] = useState(1);
+
+  // Logic for displaying current menu items
+  const indexOfLast = activePage * 3;
+  const indexOfFirst = indexOfLast - 3;
+  // const currentResults = results.slice(indexOfFirst, indexOfLast);
+
+  const handlePageChange = (pageNumber) => {
+    setactivePage(pageNumber);
+  };
+
   const displayPhotos = () => {
-    const decoded = jwt_decode(localStorage.token);
-    const currentUserId = decoded.user.id.toString();
+    const currentUserId = localStorage.id.toString();
+
     if (company.overview.photos.length === 0) {
       return <p>No company photos to display</p>;
     }
-    return company.overview.photos.map((each) => {
-      if (
-        each.status === 'approved' ||
-        each.student.toString() === currentUserId
-      ) {
-        return (
-          <Fragment>
-            <img
-              className='rounded float-left p-2'
-              src={`${BACKEND_URL}/company/images/photos/${each.file}`}
-              alt=''
-              height='200px'
-              width='200px'
-            />
-          </Fragment>
-        );
-      }
+
+    const allApprovedPhotos = company.overview.photos.filter(
+      (each) =>
+        each.status === 'approved' || each.student.toString() === currentUserId,
+    );
+
+    return allApprovedPhotos.slice(indexOfFirst, indexOfLast).map((each) => {
+      return (
+        <Fragment>
+          <img
+            className='rounded float-left p-2'
+            src={`${BACKEND_URL}/company/images/photos/${each.file}`}
+            alt=''
+            height='200px'
+            width='200px'
+          />
+        </Fragment>
+      );
     });
   };
 
@@ -172,7 +184,29 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                     </div>
                   </div>
                 </div>
-                <div className='mt-5'>{displayPhotos()}</div>
+                <div className='mt-5'>
+                  {displayPhotos()}
+                  <div className='mt-5'>
+                    <Pagination
+                      itemClass='page-item'
+                      linkClass='page-link'
+                      activeClass='gd-blue'
+                      activeLinkClass='paginate'
+                      activePage={activePage}
+                      itemsCountPerPage={3}
+                      totalItemsCount={
+                        company.overview.photos.filter(
+                          (each) =>
+                            each.status === 'approved' ||
+                            each.student.toString() ===
+                              localStorage.id.toString(),
+                        ).length
+                      }
+                      pageRangeDisplayed={5}
+                      onChange={handlePageChange}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

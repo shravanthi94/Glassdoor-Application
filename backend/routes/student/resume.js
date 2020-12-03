@@ -1,28 +1,27 @@
-"use strict"
-const express = require("express");
+'use strict';
+const express = require('express');
 const router = express.Router();
 const { checkAuth } = require('../../middleware/studentAuth');
 const Student = require('../../models/StudentModel');
-router.post("/resume/:id", checkAuth, async (req, res) => {
-        try {
-            let student = await Student.findOne({ "email": req.user.email });
-            
-            if (student) {
-                let newResume={file,format};
-                newResume.file= req.body.file;
-                newResume.format= req.body.format;
-                student.resumes.unshift(newResume);
-                await job.save();
-                res.json("resume added");
-            }
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server Error');
-        }
-        
-    
-    });
-    
+
+router.post('/resume/:id', checkAuth, async (req, res) => {
+  try {
+    let student = await Student.findOne({ email: req.user.email });
+
+    if (student) {
+      let newResume = { file, format };
+      newResume.file = req.body.file;
+      newResume.format = req.body.format;
+      student.resumes.unshift(newResume);
+      await job.save();
+      res.json('resume added');
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 /*
 router.get("/", checkAuth, async (req, res) => {
 
@@ -56,6 +55,4 @@ router.get("/:resume", checkAuth, async (req, res) => {
 
 }); */
 
-
 module.exports = router;
-
