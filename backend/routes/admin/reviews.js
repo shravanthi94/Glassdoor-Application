@@ -6,7 +6,7 @@ const Review = require('../../models/ReviewModel');
 const { adminAuth, adminCheckAuth } = require('../../middleware/adminAuth');
 // const redisRead = require('../../config/RedisRead')
 // const redisWrite = require('../../config/RedisWrite')
-// const kafka = require('../kafka/client');
+const kafka = require('../../kafka/client');
 
 adminAuth();
 
@@ -15,20 +15,32 @@ adminAuth();
 // @access Private
 
 router.get('/newreviews', adminCheckAuth, async(req, res) => {
-    try {
-        console.log("Get all new reviwes from the database");
-        const reviews = await Review.find({ "approvalStatus": 'new' });
-
-        console.log("reviews list: ", reviews);
-        if (!reviews || reviews.length === 0 ) {
-            return res.status(400).json({ msg: 'No reviews for approval!' });
-        }
-        res.status(200).json(reviews);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
+    req.body.path = 'company_new_reviews';
+    console.log('company_new_reviews-> Authentication Completed');
+    kafka.make_request('adminReviews', req.body, (err, results) => {
+      if (err) {
+        res.status(500).end('System Error');
+      } else {
+        res.status(results.status).end(results.message);
+      }
+    });
 });
+
+// router.get('/newreviews', adminCheckAuth, async(req, res) => {
+//     try {
+//         console.log("Get all new reviwes from the database");
+//         const reviews = await Review.find({ "approvalStatus": 'new' });
+
+//         console.log("reviews list: ", reviews);
+//         if (!reviews || reviews.length === 0 ) {
+//             return res.status(400).json({ msg: 'No reviews for approval!' });
+//         }
+//         res.status(200).json(reviews);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error: Database');
+//     }
+// });
 
 
 // @route  POST /admin/review/approve
@@ -36,20 +48,35 @@ router.get('/newreviews', adminCheckAuth, async(req, res) => {
 // @access Private
 
 router.post('/approve/:review_id', adminCheckAuth, async(req, res) => {
-    try {
-        console.log('Review for Approval : ', req.params.review_id)
-        let review = await Review.findOne({ "_id": req.params.review_id })
-        if (review) {
-            console.log("Found the review. Updating the approvalStatus", review)
-            review = await Review.findOneAndUpdate({ "_id": req.params.review_id }, { $set: { "approvalStatus": req.body.approvalStatus } }, { new: true });
-            return res.status(200).json({ msg: 'Review approval status changed successfully.' });
-        } else {
-            return res.status(400).json({ msg: 'No Review found' });
-        }
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+    req.body.path = 'approve_review';
+    req.body.review_id = req.params.review_id;
+    req.body.approvalStatus = req.body.approvalStatus;
+    console.log('req.body.approvalStatus : ', req.body.approvalStatus);
+    console.log('approve_review-> Authentication Completed');
+    kafka.make_request('adminReviews', req.body, (err, results) => {
+      if (err) {
+        res.status(500).end('System Error');
+      } else {
+        res.status(results.status).end(results.message);
+      }
+    });
 });
+
+// router.post('/approve/:review_id', adminCheckAuth, async(req, res) => {
+//     try {
+//         console.log('Review for Approval : ', req.params.review_id)
+//         let review = await Review.findOne({ "_id": req.params.review_id })
+//         if (review) {
+//             console.log("Found the review. Updating the approvalStatus", review)
+//             review = await Review.findOneAndUpdate({ "_id": req.params.review_id }, { $set: { "approvalStatus": req.body.approvalStatus } }, { new: true });
+//             return res.status(200).json({ msg: 'Review approval status changed successfully.' });
+//         } else {
+//             return res.status(400).json({ msg: 'No Review found' });
+//         }
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
 
 module.exports = router;

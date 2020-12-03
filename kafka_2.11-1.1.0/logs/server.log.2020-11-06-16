@@ -1,0 +1,2 @@
+[2020-11-06 16:36:54,212] INFO Creating new log file: log.1d69f (org.apache.zookeeper.server.persistence.FileTxnLog)
+[2020-11-06 16:36:54,352] INFO Snapshotting: 0x1d69d to /tmp/zookeeper/version-2/snapshot.1d69d (org.apache.zookeeper.server.persistence.FileTxnSnapLog)

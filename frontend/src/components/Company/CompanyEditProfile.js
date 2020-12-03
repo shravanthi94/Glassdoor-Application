@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import CmpNav2 from './CmpNav2';
 import {editCompanyProfile, getCurrentCompanyProfile} from '../../actions/company/companyprofile';
 import {uploadCompanyProfilePic} from '../../actions/company/insertProfilePic'
+import Alerts from '../Alert';
 import '../CSS/CompanySign.css';
 import '../CSS/CompanyProfile.css';
 
@@ -101,6 +102,7 @@ const CompanyEditProfile = ({
         <Fragment>
             <CmpNav2/>
             <div className="contentholder-form-companyprofile text-company">
+                <Alerts/>
                 Update your Company Profile 
                 <br/>
                 <br/>
@@ -143,7 +145,7 @@ const CompanyEditProfile = ({
                             type="text"
                             name="name"
                             value={name}
-                            onChange={(e) => onChange(e)}
+                            // onChange={(e) => onChange(e)}
                         />
                     </div>
                     <div className="form-group-company">
@@ -152,7 +154,7 @@ const CompanyEditProfile = ({
                             type="email"
                             name="email"
                             value={email}
-                            onChange={(e) => onChange(e)}
+                            // onChange={(e) => onChange(e)}
                         />
                     </div>
                     <div className="form-group-company">

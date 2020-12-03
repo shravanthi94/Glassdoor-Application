@@ -64,14 +64,14 @@ async function approvePhoto(msg, callback) {
     var res = {};
     try {
         console.log('Entered approve_hoto. Message', msg);
-        let company = await Company.findOne({ "_id": req.params.company_id })
+        let company = await Company.findOne({ "_id": msg.company_id })
         if (company) {
             console.log("Found the company. Updating the approvalStatus");
             company.photos.map((photo) => {
-                console.log('photo.id : ', photo._id+"", ' req.params.photo_id : ', req.params.photo_id)
-                console.log('equality : ', photo._id+"" === req.params.photo_id)
-                if(photo._id+"" === req.params.photo_id) {
-                    photo.status = req.body.status;
+                console.log('photo.id : ', photo._id+"", ' msg.photo_id : ', msg.photo_id)
+                console.log('equality : ', photo._id+"" === msg.photo_id)
+                if(photo._id+"" === msg.photo_id) {
+                    photo.status = msg.status;
                     console.log("photo.status : ", photo.status);
                 }
             });

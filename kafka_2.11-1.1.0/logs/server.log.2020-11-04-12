@@ -1,0 +1,18 @@
+[2020-11-04 12:27:30,256] WARN caught end of stream exception (org.apache.zookeeper.server.NIOServerCnxn)
+EndOfStreamException: Unable to read additional data from client sessionid 0x1758f2a09720019, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:239)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2020-11-04 12:27:30,284] INFO Closed socket connection for client /0:0:0:0:0:0:0:1:55105 which had sessionid 0x1758f2a09720019 (org.apache.zookeeper.server.NIOServerCnxn)
+[2020-11-04 12:27:30,696] INFO Accepted socket connection from /127.0.0.1:64652 (org.apache.zookeeper.server.NIOServerCnxnFactory)
+[2020-11-04 12:27:30,697] INFO Client attempting to renew session 0x1758f2a09720019 at /127.0.0.1:64652 (org.apache.zookeeper.server.ZooKeeperServer)
+[2020-11-04 12:27:30,700] INFO Established session 0x1758f2a09720019 with negotiated timeout 6000 for client /127.0.0.1:64652 (org.apache.zookeeper.server.ZooKeeperServer)
+[2020-11-04 12:28:26,285] WARN caught end of stream exception (org.apache.zookeeper.server.NIOServerCnxn)
+EndOfStreamException: Unable to read additional data from client sessionid 0x1758f2a09720019, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:239)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2020-11-04 12:28:26,629] INFO Closed socket connection for client /127.0.0.1:64652 which had sessionid 0x1758f2a09720019 (org.apache.zookeeper.server.NIOServerCnxn)
+[2020-11-04 12:28:27,574] INFO Accepted socket connection from /0:0:0:0:0:0:0:1:64664 (org.apache.zookeeper.server.NIOServerCnxnFactory)
+[2020-11-04 12:28:27,574] INFO Client attempting to renew session 0x1758f2a09720019 at /0:0:0:0:0:0:0:1:64664 (org.apache.zookeeper.server.ZooKeeperServer)
+[2020-11-04 12:28:27,575] INFO Established session 0x1758f2a09720019 with negotiated timeout 6000 for client /0:0:0:0:0:0:0:1:64664 (org.apache.zookeeper.server.ZooKeeperServer)

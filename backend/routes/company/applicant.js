@@ -8,6 +8,7 @@ const Student = require('../../models/StudentModel');
 const Jobposting = require('../../models/JobPostingModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
+const kafka = require('../../kafka/client');
 
 companyAuth();
 
@@ -23,10 +24,12 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
         // console.log("Print this", company._id)
         if (company) {
             const jobPosting = await Jobposting.find({
-                $and: [{ "_id": req.params.id },
-                    { "company": company._id }
-                ]
-            }).populate('applicants.student');
+                    "_id": req.params.id,
+                    "company": company._id,
+                    // "applicants.applicantStatus": { $ne: "withdraw" }
+                }
+
+            ).populate('applicants.student');
             if (jobPosting.length > 0) {
                 res.status(200).json(jobPosting[0]);
             } else {
@@ -39,13 +42,31 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
         console.error(err.message);
         res.status(500).send('Server Error: Database');
     }
+
+    // const payload = {
+    //     topic: 'getCurrentCompanyJobByJobId',
+    //     company: req.company,
+    //     id: req.params.id
+    // };
+    // kafka.make_request('jobapplicant', payload, (err, results) => {
+    //     console.log('in result');
+    //     if (err) {
+    //         console.log('Inside err', err);
+    //         res.status(500).send('System Error, Try Again.');
+    //     } else {
+    //         if (results.status === 400) {
+    //             console.log('Inside err2', results);
+    //             return res.status(400).json({ errors: [{ msg: results.message }] });
+    //         }
+    //         if (results.status === 500) {
+    //             console.log('Inside err3', results);
+    //             return res.status(500).send('Server Error');
+    //         }
+    //         console.log('in result1234', results);
+    //         res.status(200).json(results.message);
+    //     }
+    // });
 });
-
-
-
-// @route  GET /company/applicant
-// @Desc   Employer can see the resume and cover letter attached by applicant in front of their name.
-// @access Private
 
 
 // @route  GET /company/applicant/aplicantdetail/:id
@@ -71,21 +92,6 @@ router.get('/aplicantdetail/:id', companyCheckAuth, async(req, res) => {
     }
 });
 
-// @route  GET /company/applicant/student/:id
-// @Desc   Get student detail by ID
-// @access Private
-
-// router.get('/student/:id', async(req, res) => {
-//     try {
-//         const student = await Student.findOne({ '_id': req.params.id });
-//         if (!student) return res.status(400).json({ msg: 'No student Found' });
-//         res.status(200).json(student);
-
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error: Database');
-//     }
-// });
 
 // @route  GET /company/applicant/student/:email
 // @Desc   Get student detail by emailID
@@ -123,24 +129,6 @@ router.post('/statusUpdate/:applicantId', companyCheckAuth, async(req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
-// router.put('aplicantdetail/:jobId/:appId', auth, async(req, res) => {
-//     // build profile object
-
-//     const data = {
-//         'applicants.$.applicantStatus': req.body.applicantStatus,
-//     };
-//     try {
-//         console.log('Props', data);
-//         const Job = await RestProfile.findOneAndUpdate({ restuser: req.restuser.id, 'menuitems._id': req.params.menu_id }, { $set: data }, { new: true });
-//         console.log(restprofile);
-
-//         res.json(restprofile);
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// });
 
 
 module.exports = router;
