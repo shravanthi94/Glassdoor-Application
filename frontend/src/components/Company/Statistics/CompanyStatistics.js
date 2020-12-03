@@ -126,6 +126,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         {companyjob? 
+                                                                        <Fragment>
                                                                         <div style={{ display: 'flex' }}>
                                                                             <Chart
                                                                                 width={'500px'}
@@ -161,8 +162,59 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                         }}
                                                                                 rootProps={{ 'data-testid': '1' }}
                                                                             />
-
-                                                                        </div> : 'none'}
+                                                                            <Chart
+                                                                                width={'500px'}
+                                                                                height={'300px'}
+                                                                                chartType="PieChart"
+                                                                                loader={<div>Loading Chart</div>}
+                                                                                data={[
+                                                                                        ['Applicants', 'applicants categorized by Gender'],
+                                                                                        ['Male', Male],
+                                                                                        ['Female', Female],
+                                                                                    ]}
+                                                                                options={{
+                                                                                            title: 'Applicants by Gender',
+                                                                                        }}
+                                                                                rootProps={{ 'data-testid': '1' }}
+                                                                            />
+                                                                        </div> 
+                                                                        <br/>
+                                                                        <div style={{ display: 'flex' }}>
+                                                                        <Chart
+                                                                                width={'500px'}
+                                                                                height={'300px'}
+                                                                                chartType="PieChart"
+                                                                                loader={<div>Loading Chart</div>}
+                                                                                data={[
+                                                                                        ['Applicants', 'Applicants categorized by Disability'],
+                                                                                        ['Yes', Disabled],
+                                                                                        ['No', NonDisabled],
+                                                                            
+                                                                                    ]}
+                                                                                options={{
+                                                                                            title: 'Applicants categorized by Disability',
+                                                                                        }}
+                                                                                rootProps={{ 'data-testid': '1' }}
+                                                                            />
+                                                                            <Chart
+                                                                                width={'500px'}
+                                                                                height={'300px'}
+                                                                                chartType="PieChart"
+                                                                                loader={<div>Loading Chart</div>}
+                                                                                data={[
+                                                                                        ['Applicants', 'Applicants categorized by Veteran status'],
+                                                                                        ['Yes', Veteran],
+                                                                                        ['No', NonVeteran],
+                                                                                        
+                                                                                    ]}
+                                                                            
+                                                                                options={{
+                                                                                            title: 'Applicants categorized by Veteran status',
+                                                                                        }}
+                                                                                rootProps={{ 'data-testid': '1' }}
+                                                                            />
+                                                                        </div>
+                                                                        </Fragment>: <p>No Stats Available</p>}
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -218,6 +270,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         {companyjob? 
+                                                                        <Fragment>
                                                                         <div style={{ display: 'flex' }}>
                                                                             <Chart
                                                                                 width={'500px'}
@@ -253,8 +306,61 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                                                                         }}
                                                                                 rootProps={{ 'data-testid': '1' }}
                                                                             />
+                                                                            <Chart
+                                                                                width={'500px'}
+                                                                                height={'300px'}
+                                                                                chartType="PieChart"
+                                                                                loader={<div>Loading Chart</div>}
+                                                                                data={[
+                                                                                        ['Applicants', 'applicants categorized by Gender'],
+                                                                                        ['Male', Male],
+                                                                                        ['Female', Female],
+                                                                                    ]}
+                                                                                options={{
+                                                                                            title: 'Applicants by Gender',
+                                                                                        }}
+                                                                                rootProps={{ 'data-testid': '1' }}
+                                                                            />
 
-                                                                        </div> : 'none'}
+                                                                        </div> 
+                                                                        <br/>
+                                                                        <div style={{ display: 'flex' }}>
+                                                                        <Chart
+                                                                                width={'500px'}
+                                                                                height={'300px'}
+                                                                                chartType="PieChart"
+                                                                                loader={<div>Loading Chart</div>}
+                                                                                data={[
+                                                                                        ['Applicants', 'Applicants categorized by Disability'],
+                                                                                        ['Yes', Disabled],
+                                                                                        ['No', NonDisabled],
+                                                                            
+                                                                                    ]}
+                                                                                options={{
+                                                                                            title: 'Applicants categorized by Disability',
+                                                                                        }}
+                                                                                rootProps={{ 'data-testid': '1' }}
+                                                                            />
+                                                                            <Chart
+                                                                                width={'500px'}
+                                                                                height={'300px'}
+                                                                                chartType="PieChart"
+                                                                                loader={<div>Loading Chart</div>}
+                                                                                data={[
+                                                                                        ['Applicants', 'Applicants categorized by Veteran status'],
+                                                                                        ['Yes', Veteran],
+                                                                                        ['No', NonVeteran],
+                                                                                        
+                                                                                    ]}
+                                                                                options={{
+                                                                                            title: 'Applicants categorized by Veteran status',
+                                                                                        }}
+                                                                                rootProps={{ 'data-testid': '1' }}
+                                                                            />
+                                                                        </div>
+
+                                                                        </Fragment>
+                                                                        : <p>No Status Available</p>}
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
