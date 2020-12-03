@@ -20,10 +20,10 @@ const Demographics = ({
     ethnicity: '',
     gender: '',
     disability: '',
-    vetran: false,
+    veteran: '',
   });
 
-  const { ethnicity, gender, disability, vetran } = formData;
+  const { ethnicity, gender, disability, veteran } = formData;
 
   const onChange = (e) =>
     setformData({ ...formData, [e.target.name]: e.target.value });
@@ -44,10 +44,10 @@ const Demographics = ({
         loading || !profile.demographics.disability
           ? ''
           : profile.demographics.disability,
-      vetran:
-        loading || !profile.demographics.vetran
-          ? false
-          : profile.demographics.vetran,
+      veteran:
+        loading || !profile.demographics.veteran
+          ? ''
+          : profile.demographics.veteran,
     });
   }, [loading]);
 
@@ -164,11 +164,11 @@ const Demographics = ({
                     </option>
                   </select>
 
-                  <h5 className='mt-5'>Vetran Status</h5>
+                  <h5 className='mt-5'>Veteran Status</h5>
                   <select
                     className='dropdown dropdown-wide'
-                    name='vetran'
-                    value={vetran}
+                    name='veteran'
+                    value={veteran}
                     onChange={(e) => onChange(e)}
                   >
                     <option className='dropdownOptionLabel'>Select</option>

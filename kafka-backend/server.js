@@ -12,6 +12,7 @@ var AdminPhotos = require('./services/admin/photos');
 var AdminReviews = require('./services/admin/reviews');
 
 // Student files import
+const studentProfile = require('./services/student/profile');
 
 const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
@@ -76,5 +77,5 @@ handleTopicRequest('adminReviews', AdminReviews);
 //Admin topics end
 
 //Student topics Start
-
+handleTopicRequest('studentProfile', studentProfile);
 //Student topics end

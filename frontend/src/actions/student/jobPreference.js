@@ -25,7 +25,7 @@ export const updateStudentJobPreference = (
     dispatch(setAlert('Profile Updated', 'success'));
 
     if (!edit) {
-      history.push('/student/landing');
+      history.push('/student/profile');
     }
   } catch (err) {
     const errors = err.response.data.errors;
