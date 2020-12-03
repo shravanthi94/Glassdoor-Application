@@ -8,8 +8,9 @@ import {
 
 export const getApplications = (student_id) => async (dispatch) => {
   console.log('inside getApplications ');
+  
   try {
-    const res = await axios.get(`/student/applications/job/${student_id}`);
+    const res = await axios.get(`/student/applications/${student_id}`);
 
     dispatch({
       type: STUDENT_GET_APPLICATIONS,
