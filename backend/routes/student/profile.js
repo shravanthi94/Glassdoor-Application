@@ -11,6 +11,8 @@ const Student = require('../../models/StudentModel');
 const Review = require('../../models/ReviewModel');
 const Company = require('../../models/CompanyModel');
 
+const kafka = require('../../kafka/client');
+
 // @route  POST /student/profile/basic
 // @desc   Update current student basic details
 // @access Private
@@ -22,21 +24,41 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const studentId = req.user.id;
-    const { name, email } = req.body;
+    // const studentId = req.user.id;
+    // const { name, email } = req.body;
 
-    try {
-      const student = await Student.findById(studentId).select('-password');
-      student.name = name;
-      student.email = email;
+    // try {
+    //   const student = await Student.findById(studentId).select('-password');
+    //   student.name = name;
+    //   student.email = email;
 
-      await student.save();
+    //   await student.save();
 
-      res.status(200).json(student);
-    } catch (err) {
-      console.log(err);
-      res.status(500).send('Server Error');
-    }
+    //   res.status(200).json(student);
+    // } catch (err) {
+    //   console.log(err);
+    //   res.status(500).send('Server Error');
+    // }
+    const payload = {
+      topic: 'updateStudentBasics',
+      body: req.body,
+      user: req.user,
+    };
+    kafka.make_request('studentProfile', payload, (err, results) => {
+      console.log('in result');
+      if (err) {
+        console.log('Inside err');
+        res.status(500).send('System Error, Try Again.');
+      } else {
+        if (results.status === 400) {
+          return res.status(400).json({ errors: [{ msg: results.message }] });
+        }
+        if (results.status === 500) {
+          return res.status(500).send('Server Error');
+        }
+        res.status(200).json(results.message);
+      }
+    });
   },
 );
 
@@ -100,58 +122,99 @@ router.get('/view/:img', (req, res) => {
 // @desc   Count of student review and rating
 // @access Public
 router.get('/counts', checkAuth, async (req, res) => {
-  try {
-    const reviewCount = await Review.find({
-      student: req.user.id,
-    }).countDocuments();
+  // try {
+  //   const reviewCount = await Review.find({
+  //     student: req.user.id,
+  //   }).countDocuments();
 
-    const ratingCount = await Review.find({
-      student: req.user.id,
-      overAllRating: { $ne: null },
-    }).countDocuments();
+  //   const ratingCount = await Review.find({
+  //     student: req.user.id,
+  //     overAllRating: { $ne: null },
+  //   }).countDocuments();
 
-    const results = {
-      reviewCount,
-      ratingCount,
-    };
+  //   const results = {
+  //     reviewCount,
+  //     ratingCount,
+  //   };
 
-    res.status(200).json(results);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Server Error');
-  }
+  //   res.status(200).json(results);
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).send('Server Error');
+  // }
+
+  const payload = {
+    topic: 'studentCounts',
+    user: req.user,
+  };
+  kafka.make_request('studentProfile', payload, (err, results) => {
+    console.log('in result');
+    if (err) {
+      console.log('Inside err');
+      res.status(500).send('System Error, Try Again.');
+    } else {
+      if (results.status === 400) {
+        return res.status(400).json({ errors: [{ msg: results.message }] });
+      }
+      if (results.status === 500) {
+        return res.status(500).send('Server Error');
+      }
+      res.status(200).json(results.message);
+    }
+  });
 });
 
 // @route  GET /student/profile/contributions/:query
 // @desc   View the student contributions
 // @access Private
 router.get('/contributions/:query', checkAuth, async (req, res) => {
-  const query = req.params.query;
-  console.log('Query: ', query);
-  try {
-    let results = [];
-    if (query === 'reviews') {
-      results = await Review.find({ student: req.user.id }).populate('company');
-    } else if (query === 'interviews') {
-      results = await Company.find({ 'interview.student': req.user.id });
-    } else if (query === 'salaries') {
-      const results = await Company.find({
-        'salary.student': req.user.id,
-      });
-    } else if (query === 'photos') {
-      results = await Company.find({ 'photos.student': req.user.id });
-    }
+  // const query = req.params.query;
+  // console.log('Query: ', query);
+  // try {
+  //   let results = [];
+  //   if (query === 'reviews') {
+  //     results = await Review.find({ student: req.user.id }).populate('company');
+  //   } else if (query === 'interviews') {
+  //     results = await Company.find({ 'interview.student': req.user.id });
+  //   } else if (query === 'salaries') {
+  //     const results = await Company.find({
+  //       'salary.student': req.user.id,
+  //     });
+  //   } else if (query === 'photos') {
+  //     results = await Company.find({ 'photos.student': req.user.id });
+  //   }
 
-    if (!results || results.length === 0) {
-      console.log('here');
-      return res.status(400).json({ errors: [{ msg: 'No results found.' }] });
-    }
+  //   if (!results || results.length === 0) {
+  //     console.log('here');
+  //     return res.status(400).json({ errors: [{ msg: 'No results found.' }] });
+  //   }
 
-    res.status(200).json(results);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Server Error');
-  }
+  //   res.status(200).json(results);
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).send('Server Error');
+  // }
+
+  const payload = {
+    topic: 'studentContribution',
+    user: req.user,
+    params: req.params,
+  };
+  kafka.make_request('studentProfile', payload, (err, results) => {
+    console.log('in result');
+    if (err) {
+      console.log('Inside err');
+      res.status(500).send('System Error, Try Again.');
+    } else {
+      if (results.status === 400) {
+        return res.status(400).json({ errors: [{ msg: results.message }] });
+      }
+      if (results.status === 500) {
+        return res.status(500).send('Server Error');
+      }
+      res.status(200).json(results.message);
+    }
+  });
 });
 
 module.exports = router;
