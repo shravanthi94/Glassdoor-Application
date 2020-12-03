@@ -42,13 +42,19 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
         // console.log("company applicants", applicantsApplied)
     }
 
-    // applicants applied statistics by ethnicity
+    // applicants applied statistics by Demographics
 
     let AmericanIndianorAlaskaNative =0
     let Asian =0
     let BlackorAfricanAmerican =0
-    let NativeHawaiianorOtherPacificIslander
+    let NativeHawaiianorOtherPacificIslander =0
     let White =0
+    let Male =0
+    let Female =0
+    let Disabled =0
+    let NonDisabled=0
+    let Veteran =0
+    let NonVeteran =0
 
     if(companyjob)
     {
@@ -62,6 +68,19 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
         console.log("company applicants by NativeHawaiian...", NativeHawaiianorOtherPacificIslander)
         White  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.ethnicity==="White"))).length
         console.log("company applicants by White...", White)
+        Male  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.gender==="Male"))).length
+        console.log("company applicants by White...", Male)
+        Female  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.gender==="Female"))).length
+        console.log("company applicants by White...", Female)
+        Disabled  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.disability==="Yes"))).length
+        console.log("company applicants by White...", Disabled)
+        NonDisabled  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.disability==="No"))).length
+        console.log("company applicants by White...", NonDisabled)
+        Veteran  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.veteran==="Yes"))).length
+        console.log("company applicants by White...", Veteran)
+        NonVeteran  = (companyjob.applicants.filter(applicant=>(applicant.student.demographics.veteran==="No"))).length
+        console.log("company applicants by White...", NonVeteran)
+
     }
 
 
