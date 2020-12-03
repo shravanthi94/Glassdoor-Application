@@ -25,6 +25,14 @@ const ViewApplicants = ({
         getStudentDetailByEmail(stuId)
         //history.push(path);
       }
+    
+    let filteredapplicants = false
+    if (companyjob)
+    {
+        filteredapplicants = companyjob.applicants.filter(applicant=>applicant.applicantStatus !== "withdraw")
+        console.log ("filtered applicants is ",filteredapplicants)
+    }
+
 
     return (
         <Fragment>
@@ -33,7 +41,7 @@ const ViewApplicants = ({
                 <div className="row">
                 
                         <div className="col-5">
-                        {companyjob && !loading && companyjob.applicants.length>0 ? companyjob.applicants.map(applicant=>(
+                        {companyjob && !loading && filteredapplicants.length>0 ? filteredapplicants.map(applicant=>(
                     <Fragment>
                             <div className="card" style={{ width: '29rem', border:'1px solid #888' }}>
                                 <div className="card-body">
@@ -47,8 +55,8 @@ const ViewApplicants = ({
                                                     <tr><td> <h6><Link onClick={(e)=> studentDetail(applicant.email)} className="joblisting-title-company">{applicant.student.name}</Link></h6></td></tr>
                                                     <tr className="card-title"><td>"{applicant.student.email}"</td></tr>
                                                     <a href={pdf} download>Sample</a>
-                                                    <tr className="card-title"><td><a href={`../../files/${applicant.resume}`} download>{applicant.resume}</a></td></tr>
-                                                    <Link to={`../../files/${applicant.resume}`} target="_blank" download>Download</Link>
+                                                    <tr className="card-title"><td><a href={`file:/Users/harika_pradeep/Downloads/CMPE273_Fall2020/GlassDoor_App/Glassdoor-Application/frontend/src/components/files/${applicant.resume}`} download>{applicant.resume}</a></td></tr>
+                                                    <Link to={`file:../../files/${applicant.resume}`} target="_blank" download>Download</Link>
                                     
                                                     <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td>
                                                         <td><Link to={`/updateStatus/${applicant._id}`} className='compnay-view-button ml-7'>Update Status</Link></td>

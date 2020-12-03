@@ -5,11 +5,24 @@ import { Chart } from "react-google-charts";
 import { connect } from 'react-redux';
 import { getCurrentCompanyJobs, getJobDetailById } from '../../../actions/company/companyjobpostings';
 import CmpNav2 from '../CmpNav2';
+import Pagination from 'react-js-pagination';
 
 const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs:{companyjobs, companyjob, loading}}) => {
     useEffect(()=>{
         getCurrentCompanyJobs()
     }, [])
+
+    const [activePage, setactivePage] = useState(1);
+
+  // Logic for displaying current menu items
+  const indexOfLast = activePage * 4;
+  const indexOfFirst = indexOfLast - 4;
+  // const currentResults = results.slice(indexOfFirst, indexOfLast);
+
+  const handlePageChange = (pageNumber) => {
+    setactivePage(pageNumber);
+  };
+
 
     const jobDetail = (jobId) =>{ 
         getJobDetailById(jobId)
@@ -95,7 +108,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
 
             <div className='contentholder-Jobs-company mt-1'>
                 <div className="company-cards-3columns">
-                {companyjobs? curYearJobs.map(job=>(
+                {companyjobs? curYearJobs.slice(indexOfFirst, indexOfLast).map(job=>(
                             <Fragment>
                                 <div className="company-cards-column-one" style={{ width: '29rem', border:'1px solid #888' }}>
                                 {/* <div className="card-body"> */}
@@ -237,8 +250,23 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                 </div>
                             </Fragment> )) : <p> No jobs this year</p>
                         }
+                        
 
                 </div>
+                <div>
+                <Pagination
+                    itemClass='page-item'
+                    linkClass='page-link'
+                    // activeClass='gd-blue'
+                    activeLinkClass='paginate'
+                    activePage={activePage}
+                    itemsCountPerPage={4}
+                    totalItemsCount={curYearJobs.length}
+                    pageRangeDisplayed={10}
+                    onChange={handlePageChange}/>
+                </div>
+                
+                
             </div>
 
             <div className="contentholder-Jobs-company mt-3">
@@ -248,7 +276,7 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
             </div>
             <div className='contentholder-Jobs-company mt-1'>
                 <div className="company-cards-3columns">
-                {companyjobs? lastYearJobs.map(job=>(
+                {companyjobs? lastYearJobs.slice(indexOfFirst, indexOfLast).map(job=>(
                             <Fragment>
                                 <div className="company-cards-column-one" style={{ width: '29rem', border:'1px solid #888' }}>
                                 {/* <div className="card-body"> */}
@@ -383,7 +411,20 @@ const CompanyStatistics = ({getCurrentCompanyJobs, getJobDetailById, companyjobs
                                 </div>
                             </Fragment> )) : <p> No jobs this year</p>
                         }
+                        <br/>
+                        
                 </div>
+                <Pagination
+                                    itemClass='page-item'
+                                    linkClass='page-link'
+                                    // activeClass='gd-blue'
+                                    activeLinkClass='paginate'
+                                    activePage={activePage}
+                                    itemsCountPerPage={4}
+                                    totalItemsCount={lastYearJobs.length}
+                                    pageRangeDisplayed={10}
+                                    onChange={handlePageChange}
+                                />
 
             </div>
         </Fragment>

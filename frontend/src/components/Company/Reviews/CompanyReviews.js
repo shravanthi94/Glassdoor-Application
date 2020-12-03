@@ -12,6 +12,8 @@ import '../../CSS/CompanyReviews.css'
 import Paginate from '../Paginate';
 import {markReviewFav, markReviewFeatured} from '../../../actions/company/companyreviews';
 import Alert from '../../Alert';
+import defaultLogo from '../../images/default_logo.png';
+import Pagination from 'react-js-pagination';
 
 const CompanyReviews = ({
     getCurrentCompanyReviews, 
@@ -27,13 +29,24 @@ const CompanyReviews = ({
         getCurrentCompanyProfile()
     },[getCurrentCompanyProfile, getCurrentCompanyReviews])
 
-    const [curPage, setCurPg] = useState(1);
-    const [profilesPerPage, setProfilesPerPage] = useState(3);
+    // const [curPage, setCurPg] = useState(1);
+    // const [profilesPerPage, setProfilesPerPage] = useState(3);
 
-    const lastpostidx = curPage * profilesPerPage;
-    const firstpostidx = lastpostidx-profilesPerPage;
+    // const lastpostidx = curPage * profilesPerPage;
+    // const firstpostidx = lastpostidx-profilesPerPage;
 
-    const paginate = pg => setCurPg(pg);
+    // const paginate = pg => setCurPg(pg);
+
+    const [activePage, setactivePage] = useState(1);
+
+  // Logic for displaying current menu items
+  const indexOfLast = activePage * 3;
+  const indexOfFirst = indexOfLast - 3;
+  // const currentResults = results.slice(indexOfFirst, indexOfLast);
+
+  const handlePageChange = (pageNumber) => {
+    setactivePage(pageNumber);
+  };
 
     const markFav =(rev_id)=>{
         markReviewFav(rev_id)
@@ -122,13 +135,13 @@ const CompanyReviews = ({
                     
                     <div className="company-cards-3columns">
                         
-                        {(companyreviews && companyreviews.length > 0) ? companyreviews.slice(firstpostidx,lastpostidx).map(review => (
+                        {(companyreviews && companyreviews.length > 0) ? companyreviews.slice(indexOfFirst,indexOfLast).map(review => (
                             <React.Fragment>
                             <div className='company-cards-column-one'>
                                 <div className="overview-review-date">{(review.date + "").substring(0, 10)}</div>
                                     <table className="overview-reviews-table-all">
                                         <tr>
-                                            <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../../components/images/' + companyprofile.logo + '_logo.jpg').default} alt="" /></td>
+                                            <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={companyprofile.logo? require('../../../components/images/' + companyprofile.logo + '_logo.jpg').default : companyprofile.logo} alt="" /></td>
                                             <td>
                                                 <table>
                                                     <tr className="overview-review-headline"><td>"{review.headline}"</td></tr>
@@ -172,12 +185,27 @@ const CompanyReviews = ({
                         )) : <div> No Reviews Yets</div>
                         
                         } 
-                        <div>
-                            <Paginate itemsPerPage={profilesPerPage} totalItems={companyreviews.length} paginate={paginate}/>
-
-                        </div>
+                        <br/>
+                        
 
                     </div>
+                    
+                            {/* <Paginate itemsPerPage={profilesPerPage} totalItems={companyreviews.length} paginate={paginate}/> */}
+                            <div style={{marginLeft:"40%"}}>
+            <Pagination
+              itemClass='page-item'
+              linkClass='page-link'
+              activeClass='gd-blue'
+              activeLinkClass='paginate'
+              activePage={activePage}
+              itemsCountPerPage={3}
+              totalItemsCount={companyreviews.length}
+              pageRangeDisplayed={10}
+              onChange={handlePageChange}
+            />
+          </div>
+
+                       
                 </Fragment>                 
                     }
                 </div>

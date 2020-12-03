@@ -87,7 +87,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
-            <Route exact path='/student/update/resume' component={CompanyResume} />
+            {/* <Route exact path='/student/update/resume' component={CompanyResume} /> */}
             <Route
               exact
               path='/companyJobDetails'
