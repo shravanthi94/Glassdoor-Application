@@ -19,53 +19,53 @@ companyAuth();
 // @access Private
 
 router.get('/:id', companyCheckAuth, async(req, res) => {
-    try {
-        let company = await Company.findOne({ "email": req.company.email });
-        // console.log("Print this", company._id)
-        if (company) {
-            const jobPosting = await Jobposting.find({
-                    "_id": req.params.id,
-                    "company": company._id,
-                    // "applicants.applicantStatus": { $ne: "withdraw" }
-                }
+    // try {
+    //     let company = await Company.findOne({ "email": req.company.email });
+    //     // console.log("Print this", company._id)
+    //     if (company) {
+    //         const jobPosting = await Jobposting.find({
+    //                 "_id": req.params.id,
+    //                 "company": company._id,
+    //                 // "applicants.applicantStatus": { $ne: "withdraw" }
+    //             }
 
-            ).populate('applicants.student');
-            if (jobPosting.length > 0) {
-                res.status(200).json(jobPosting[0]);
-            } else {
-                return res.status(400).json({ msg: 'No job posted yet!' });
-            }
-
-
-        }
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
-
-    // const payload = {
-    //     topic: 'getCurrentCompanyJobByJobId',
-    //     company: req.company,
-    //     id: req.params.id
-    // };
-    // kafka.make_request('jobapplicant', payload, (err, results) => {
-    //     console.log('in result');
-    //     if (err) {
-    //         console.log('Inside err', err);
-    //         res.status(500).send('System Error, Try Again.');
-    //     } else {
-    //         if (results.status === 400) {
-    //             console.log('Inside err2', results);
-    //             return res.status(400).json({ errors: [{ msg: results.message }] });
+    //         ).populate('applicants.student');
+    //         if (jobPosting.length > 0) {
+    //             res.status(200).json(jobPosting[0]);
+    //         } else {
+    //             return res.status(400).json({ msg: 'No job posted yet!' });
     //         }
-    //         if (results.status === 500) {
-    //             console.log('Inside err3', results);
-    //             return res.status(500).send('Server Error');
-    //         }
-    //         console.log('in result1234', results);
-    //         res.status(200).json(results.message);
+
+
     //     }
-    // });
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error: Database');
+    // }
+
+    const payload = {
+        topic: 'getCurrentCompanyJobByJobId',
+        company: req.company,
+        id: req.params.id
+    };
+    kafka.make_request('jobapplicant', payload, (err, results) => {
+        console.log('in result');
+        if (err) {
+            console.log('Inside err', err);
+            res.status(500).send('System Error, Try Again.');
+        } else {
+            // if (results.status === 400) {
+            //     console.log('Inside err2', results);
+            //     return res.status(400).json({ errors: [{ msg: results.message }] });
+            // }
+            // if (results.status === 500) {
+            //     console.log('Inside err3', results);
+            //     return res.status(500).send('Server Error');
+            // }
+            console.log('in result1234', results);
+            res.status(200).json(results);
+        }
+    });
 });
 
 

@@ -37,7 +37,7 @@ async function getCurrentCompanyJobByJobId(payload, callback) {
                 // console.log("Before", response)
                 response.message = jobPosting[0];
                 console.log("After", response)
-                return callback(null, response);
+                return callback(null, jobPosting[0]);
             } else {
                 // return res.status(400).json({ msg: 'No job posted yet!' });
                 response.status = 400;
