@@ -5,6 +5,9 @@ import '../CSS/interviews.css';
 import { getCompanyProfile } from '../../actions/company/getCompanyProfile';
 import { addInterview } from '../../actions/company/addCompanyInterview';
 import { Redirect } from 'react-router';
+import { BACKEND_URL } from '../../helpers/constants';
+import defaultImage from '../images/default_banner.jpg';
+import defaultLogo from '../images/default_logo.png';
 
 class AddCompanyInterview extends Component {
 
@@ -119,7 +122,31 @@ class AddCompanyInterview extends Component {
                                         <div style={{ fontSize: "17px", color: "#7F7F7F", marginBottom: "20px" }}> Your anonymous experience will help other job seekers.</div>
                                         <table>
                                             <tr>
-                                                <td style={{ verticalAlign: "top" }}><img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td>
+                                                <td style={{ verticalAlign: "top" }}>
+                                                    
+                                                    {/* <img className="overview-logo-jobs" src={require('../../components/images/' + this.props.company.overview.logo + '_logo.jpg').default} alt="" /></td> */}
+
+
+                {this.props.company.overview.logo ? (
+                <img
+                  className='overview-logo'
+                  src={
+                    require('../../components/images/' +
+                      this.props.company.overview.logo +
+                      '_logo.jpg').default
+                  }
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner'
+                  src={defaultLogo}
+                  alt='company banner'
+                />
+              )}</td>
+
+
+
                                                 <td>
                                                     <table>
                                                         <tr> <div class="form-group"> Employer Name</div> </tr>

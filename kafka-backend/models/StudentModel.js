@@ -56,11 +56,10 @@ const StudentSchema = new mongoose.Schema({
   primaryResume: {
     type: String,
   },
-
   resumes: [
     {
       file: { type: String },
-      format: { type: String },
+      isPrimary: { type: Boolean },
     },
   ],
 
