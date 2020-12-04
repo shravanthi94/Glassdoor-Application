@@ -26,7 +26,7 @@ const ReviewSchema = new mongoose.Schema({
         default: false,
     },
     currentOrFormer: { type: String },
-    reply: {
+    reply: [{
         message: {
             type: String,
         },
@@ -34,7 +34,7 @@ const ReviewSchema = new mongoose.Schema({
             type: Date,
             default: Date.now(),
         },
-    },
+    }]
 });
 
 const Review = mongoose.model('review', ReviewSchema);

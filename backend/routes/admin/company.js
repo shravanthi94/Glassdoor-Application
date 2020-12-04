@@ -1,10 +1,3 @@
-// 1. Admin users should be able to see the list of companies in the system.
-// 2. They should be able to search for companies using Company name.
-// 3. On clicking a Company name from results, they should be able to view all the reviews 
-// of the company(both approved reviews and rejected reviews).
-// 4. Admin user should also be able to see the statistics of job related data of that particular company.
-// For example (Number of hired applicant, demography of the applicant).
-
 const express = require('express');
 const mongoose = require('mongoose');
 
