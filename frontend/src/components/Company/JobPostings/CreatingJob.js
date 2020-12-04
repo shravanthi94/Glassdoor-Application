@@ -91,13 +91,16 @@ const CreatingJob = ({
                     <div className="form-group-company"><p>Job Tile</p>
                         <input type="text" name="title" value={title} onChange={(e) => onChange(e)}/>
                     </div>
-                    <label className="form-group-company"> Job Type</label>
+                    <div className="form-group-company">
+                    <label><p>Job Type</p> </label>
                     <select className='dropdown company-width' value={jobType} name='jobType' onChange={(e) => onChange(e)}>
                         <option className='dropdownOptionLabel'>Job Type</option>
                         <option className='dropdownOptionLabel' value='Full-time'>Full-time</option>
                         <option className='dropdownOptionLabel' value='Part-time'>Part-time</option>
                         <option className='dropdownOptionLabel' value='Internship'>Internship</option>
                     </select>
+                    </div>
+                    
                     <br/>
                     <label className="form-group-company"> Salary Range</label>
                     <select className='dropdown company-width' value={salary} name='salary' onChange={(e) => onChange(e)}>
