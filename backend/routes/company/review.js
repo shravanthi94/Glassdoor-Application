@@ -58,6 +58,38 @@ router.post('/student', companyCheckAuth, async(req, res) => {
 });
 
 
+//check how to verify
+router.post('/helpful', companyCheckAuth, async(req, res) => {
+
+
+    console.log("helpful backend: ", req.body);
+    const payload = {
+        topic: 'postMostHelpfulVote',
+        body: req.body,
+        // params: req.params
+    };
+    kafka.make_request('companyReviews', payload, (err, results) => {
+        console.log('in result');
+        if (err) {
+            console.log('Inside err', err);
+            res.status(500).send('System Error, Try Again.');
+        } else {
+            if (results.status === 400) {
+                console.log('Inside err2', results);
+                return res.status(400).json({ msg: results.message });
+            }
+            if (results.status === 500) {
+                console.log('Inside err3', results);
+                return res.status(500).send('Server Error');
+            }
+            console.log('in result1234', results);
+            res.status(200).json(results.message);
+        }
+    });
+});
+
+
+
 // @route  GET /company/review
 // @Desc   Get all reviews of the company by id
 // @access Private

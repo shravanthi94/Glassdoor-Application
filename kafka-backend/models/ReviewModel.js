@@ -44,6 +44,10 @@ const ReviewSchema = new mongoose.Schema({
     currentOrFormer: {
         type: String
     },
+    mostHelpfulVotes:{
+        type: Number,
+        default: 0,
+    },
     reply: [{
         message: {
             type: String
