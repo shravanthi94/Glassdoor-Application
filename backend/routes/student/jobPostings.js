@@ -77,37 +77,37 @@ router.get("/details/:id", async(req, res) => {
 
 });
 
-router.get("/applied", checkAuth, async(req, res) => {
+// router.get("/applied", checkAuth, async(req, res) => {
 
-    try {
-        let jobs = await Jobposting.find({ "applicants.student": req.body.student });
-        if (!jobs) {
-            return res.status(400).json({ msg: 'No jobs posted yet' });
-        }
-        res.status(200).json(jobs);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send({ msg: 'Server Error: Database' });
-    }
-});
+//     try {
+//         let jobs = await Jobposting.find({ "applicants.student": req.body.student });
+//         if (!jobs) {
+//             return res.status(400).json({ msg: 'No jobs posted yet' });
+//         }
+//         res.status(200).json(jobs);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send({ msg: 'Server Error: Database' });
+//     }
+// });
 
-router.post("/withdraw/:id", async(req, res) => {
+// router.post("/withdraw/:id", async(req, res) => {
 
-    try {
-        console.log("job_id to withdraw: ", req.params.id);
-        console.log("student_id to withdraw: ", req.body.student);
-        let job = await Jobposting.findOne({ _id: req.params.id })
-        console.log("before filter", job.applicants)
-        job.applicants = job.applicants.filter(data => data.student != req.body.student);;
-        console.log("AFTER filter:", job.applicants)
-        job.save();
-        res.status(200).json('application withdrawn');
+//     try {
+//         console.log("job_id to withdraw: ", req.params.id);
+//         console.log("student_id to withdraw: ", req.body.student);
+//         let job = await Jobposting.findOne({ _id: req.params.id })
+//         console.log("before filter", job.applicants)
+//         job.applicants = job.applicants.filter(data => data.student != req.body.student);;
+//         console.log("AFTER filter:", job.applicants)
+//         job.save();
+//         res.status(200).json('application withdrawn');
 
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
-});
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error: Database');
+//     }
+// });
 
 
 var storage = multer.diskStorage({
