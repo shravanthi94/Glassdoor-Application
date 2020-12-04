@@ -112,7 +112,7 @@ router.post('/', checkAuth, async(req, res) => {
             redisClient.del(studentProfileRedis, function (err, reply) {
                 console.log("Redis Delete of studentProfile", reply);
             });
-            } 
+            }  
         });
 
 

@@ -221,7 +221,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                       <Link
                         to={`/company/upload/photos/${company.overview._id}`}
                         className='btn btn-outline-primary'
-                        style={{ marginLeft: '250%', color: '#1861BF' }}
+                        style={{ marginLeft: '60px', color: '#1861BF' }}
                       >
                         Add Photos
                       </Link>

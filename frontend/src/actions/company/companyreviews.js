@@ -67,7 +67,7 @@ export const markReviewFeatured = (id) => async dispatch => {
         console.log(err)
         dispatch({
             type: COMPANY_REVIEWS_ERROR,
-            payload: { msg: err, status: err.response.status }
+            payload: { msg: err } //status: err.response.status
         })
 
     }
