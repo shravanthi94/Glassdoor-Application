@@ -6,6 +6,10 @@ const { checkAuth } = require('../../middleware/studentAuth');
 const Student = require('../../models/StudentModel');
 
 const kafka = require('../../kafka/client');
+const redisRead = require('../../config/RedisRead');
+const redis = require("redis");
+const redisPort = process.env.PORT || 6379;
+const redisClient = redis.createClient(redisPort);
 
 router.post('/', checkAuth, async (req, res) => {
   // const studentEmail = req.user.email;
@@ -28,7 +32,19 @@ router.post('/', checkAuth, async (req, res) => {
   //   console.log(err);
   //   res.status(500).send('Server Error');
   // }
-
+  try {
+    var studentProfileRedis = 'studentProfile' + req.user.id;
+    console.log('studentProfile :', studentProfileRedis)
+    redisRead.get(studentProfileRedis, async (err, studentProfile) => {
+      if(studentProfile !== null) {
+        console.log('!!!!!!!!!!!!', studentProfile);
+        console.log("deleting studentProfile from inside redis");
+        redisClient.del(studentProfileRedis, function (err, reply) {
+          console.log("Redis Delete of studentProfile Error", err);
+          console.log("Redis Delete of studentProfile", reply);
+        });
+      } 
+    });
   const payload = {
     topic: 'updateJobPreference',
     body: req.body,
@@ -49,5 +65,11 @@ router.post('/', checkAuth, async (req, res) => {
       res.status(200).json(results.message);
     }
   });
-});
+} catch (err) {
+  console.error(err.message);
+  res.status(500).send('Redis Server Error');
+}
+},
+);
+
 module.exports = router;
