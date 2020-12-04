@@ -1,3 +1,4 @@
+// check if we r using first route
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
@@ -16,22 +17,40 @@ companyAuth();
 //@desc  Get registered company user
 //@access Public
 router.get('/', companyCheckAuth, async(req, res) => {
-    const email = req.company.email;
-    try {
-        mysqlConnectionPool.query(
-            `SELECT id, email, name FROM company WHERE email = '${email}'`,
-            (error, result) => {
-                if (error) {
-                    console.log(error);
-                    return res.status(500).send('Database Server Error');
-                }
-                res.json(result);
+    // const email = req.company.email;
+    // try {
+    //     mysqlConnectionPool.query(
+    //         `SELECT id, email, name FROM company WHERE email = '${email}'`,
+    //         (error, result) => {
+    //             if (error) {
+    //                 console.log(error);
+    //                 return res.status(500).send('Database Server Error');
+    //             }
+    //             res.json(result);
+    //         }
+    //     );
+    // } catch (err) {
+    //     console.log(err);
+    //     res.status(500).send('Server Error');
+    // }
+
+    const payload = {
+        topic: 'getRegisteredCompany',
+        company: req.company,
+    };
+    console.log("Update Status,", payload)
+    kafka.make_request('companyProfile', payload, (err, results) => {
+        console.log('in result');
+        if (err) {
+            console.log('Inside err');
+            res.status(500).send('System Error, Try Again.');
+        } else {
+            if (results.status === 500) {
+                return res.status(500).send('Server Error');
             }
-        );
-    } catch (err) {
-        console.log(err);
-        res.status(500).send('Server Error');
-    }
+            res.status(200).json(results.message);
+        }
+    });
 });
 
 //@route POST /company/login
