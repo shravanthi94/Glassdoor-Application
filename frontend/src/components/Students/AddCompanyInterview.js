@@ -97,7 +97,7 @@ class AddCompanyInterview extends Component {
         var final_msg = "";
 
         if (this.state.submitted && this.props.addFlag) {
-            redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.state.company_id } }} />
+            redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.props.company.overview._id } }} />
         } 
         
         // else if (this.state.submitted && !this.props.addFlag) {
