@@ -9,6 +9,8 @@ import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import CompanySideBar from '../Common/CompanySideBar';
 import Pagination from 'react-js-pagination';
+import { BACKEND_URL } from '../../helpers/constants';
+import defaultImage from '../images/default_banner.jpg';
 
 class CompanyOverview extends Component {
   constructor(props) {
@@ -99,7 +101,7 @@ class CompanyOverview extends Component {
             <Navigation />
             <UtilityBar />
             <div className='profile-row-one'>
-              <img
+              {/* <img
                 className='company-banner-blur'
                 src={
                   require('../../components/images/' +
@@ -107,16 +109,38 @@ class CompanyOverview extends Component {
                     '_banner.jpg').default
                 }
                 alt=''
-              />
-              <img
-                className='overview-logo'
-                src={
-                  require('../../components/images/' +
-                    this.props.company.overview.logo +
-                    '_logo.jpg').default
-                }
-                alt=''
-              />
+              /> */}
+              {this.props.company.overview.profilePic.image ? (
+                <img
+                  className='company-banner-blur'
+                  src={`${BACKEND_URL}/company/profilepic/${this.props.company.overview.profilePic.image}`}
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner-blur'
+                  src={defaultImage}
+                  alt='company banner'
+                />
+              )}
+              {this.props.company.overview.logo ? (
+                <img
+                  className='overview-logo'
+                  src={
+                    require('../../components/images/' +
+                      this.props.company.overview.logo +
+                      '_logo.jpg').default
+                  }
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner'
+                  src={defaultImage}
+                  alt='company banner'
+                />
+              )}
+
               <div className='overview-company-name'>{company_name}</div>
               <table className='profile-row-one-table'>
                 <td className='profile-titles-selected'>
@@ -384,7 +408,7 @@ class CompanyOverview extends Component {
                             <table className='overview-reviews-table-all'>
                               <tr>
                                 <td style={{ verticalAlign: 'top' }}>
-                                  <img
+                                  {/* <img
                                     className='overview-logo-jobs'
                                     src={
                                       require('../../components/images/' +
@@ -392,7 +416,24 @@ class CompanyOverview extends Component {
                                         '_logo.jpg').default
                                     }
                                     alt=''
-                                  />
+                                  /> */}
+                                  {this.props.company.overview.logo ? (
+                                    <img
+                                      className='overview-logo-jobs'
+                                      src={
+                                        require('../../components/images/' +
+                                          this.props.company.overview.logo +
+                                          '_logo.jpg').default
+                                      }
+                                      alt=''
+                                    />
+                                  ) : (
+                                    <img
+                                      className='overview-logo-jobs'
+                                      src={defaultImage}
+                                      alt='company banner'
+                                    />
+                                  )}
                                 </td>
                                 <td>
                                   <table>
