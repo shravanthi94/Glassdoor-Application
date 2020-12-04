@@ -110,7 +110,7 @@ const CompanyPhotos = ({ getCompanyProfile, company }) => {
                 />
               ) : (
                 <img
-                  className='company-banner'
+                  className='overview-logo'
                   src={defaultLogo}
                   alt='company banner'
                 />

@@ -139,7 +139,7 @@ class AddCompanySalary extends Component {
                                                  {this.props.company.overview.logo ? (
    
                 <img
-                  className='overview-logo'
+                  className='overview-logo-jobs'
                   src={
                     require('../../components/images/' +
                       this.props.company.overview.logo +
@@ -149,7 +149,7 @@ class AddCompanySalary extends Component {
                 />
               ) : (
                 <img
-                  className='company-banner'
+                  className='overview-logo-jobs'
                   src={defaultLogo}
                   alt='company banner'
                 />

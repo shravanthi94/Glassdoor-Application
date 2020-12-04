@@ -53,7 +53,7 @@ class CompanySideBar extends Component {
                             <td>
 
                                 {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
-                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                                    className='overview-logo-jobs' src={defaultLogo} alt='company banner' />}
                             </td>
                             <td style={{ marginLeft: "20px" }}><tr>Software Engineer I</tr>
                                 <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
@@ -64,7 +64,7 @@ class CompanySideBar extends Component {
                             <td>
 
                                 {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
-                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                                    className='overview-logo-jobs' src={defaultLogo} alt='company banner' />}
                             </td>
                             <td style={{ marginLeft: "20px" }}><tr>Software Engineer II</tr>
                                 <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
@@ -76,7 +76,7 @@ class CompanySideBar extends Component {
                             <td>
 
                                 {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
-                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                                    className='overview-logo-jobs' src={defaultLogo} alt='company banner' />}
                             </td>
                             <td style={{ marginLeft: "20px" }}><tr>Software Engineer III</tr>
                                 <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
@@ -88,7 +88,7 @@ class CompanySideBar extends Component {
                             <td>
 
                                 {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
-                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                                    className='overview-logo-jobs' src={defaultLogo} alt='company banner' />}
                             </td>
                             <td style={{ marginLeft: "20px" }}><tr>Back End Software Engineer</tr>
                                 <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
@@ -100,7 +100,7 @@ class CompanySideBar extends Component {
                             <td>
 
                                 {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
-                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                                    className='overview-logo-jobs' src={defaultLogo} alt='company banner' />}
                             </td>
                             <td style={{ marginLeft: "20px" }}><tr>Machine Learning Engineer</tr>
                                 <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
@@ -112,7 +112,7 @@ class CompanySideBar extends Component {
                             <td>
 
                                 {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
-                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                                    className='overview-logo-jobs' src={defaultLogo} alt='company banner' />}
                             </td>
                             <td style={{ marginLeft: "20px" }}><tr>Product Manager</tr>
                                 <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
