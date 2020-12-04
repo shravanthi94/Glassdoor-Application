@@ -429,7 +429,7 @@ class CompanyReviews extends Component {
                               <div className='overview-social-media-logos'>
                                 <i class='fas fa-link'></i>
                               </div>
-                              <div className='overview-helpful-button'>
+                              <div className='overview-helpful-button' onClick={() => this.mostHelpfulVotesHandler(review)}>
                                 Helpful
                               </div>
                             </div>
