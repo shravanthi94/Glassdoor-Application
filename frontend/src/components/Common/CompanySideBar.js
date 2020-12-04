@@ -47,14 +47,84 @@ class CompanySideBar extends Component {
                     <div className="profile-row-two-column2-row2">
                         <div style={{ fontSize: "20px", marginLeft: "20px", marginTop: "20px" }}> Jobs You May Like </div>
                         <table className="overview-jobs-like">
-                            <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td style={{ marginLeft: "20px" }}><tr>Software Engineer Intern</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                            <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
+                            <tr>
+                            <td>
+
+                                {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
+                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                            </td>
+                            <td style={{ marginLeft: "20px" }}><tr>Software Engineer I</tr>
+                                <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
+                            </td>
+                            </tr>
+
+                            <tr>
+                            <td>
+
+                                {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
+                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                            </td>
+                            <td style={{ marginLeft: "20px" }}><tr>Software Engineer II</tr>
+                                <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
+                            </td>
+                            </tr>
+
+
+                            <tr>
+                            <td>
+
+                                {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
+                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                            </td>
+                            <td style={{ marginLeft: "20px" }}><tr>Software Engineer III</tr>
+                                <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
+                            </td>
+                            </tr>
+
+
+                            <tr>
+                            <td>
+
+                                {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
+                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                            </td>
+                            <td style={{ marginLeft: "20px" }}><tr>Back End Software Engineer</tr>
+                                <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
+                            </td>
+                            </tr>
+
+
+                            <tr>
+                            <td>
+
+                                {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
+                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                            </td>
+                            <td style={{ marginLeft: "20px" }}><tr>Machine Learning Engineer</tr>
+                                <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
+                            </td>
+                            </tr>
+
+
+                            <tr>
+                            <td>
+
+                                {company_logo ? <img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /> : <img
+                                    className='company-banner' src={defaultLogo} alt='company banner' />}
+                            </td>
+                            <td style={{ marginLeft: "20px" }}><tr>Product Manager</tr>
+                                <tr className="overview-job-location">{company_name} - San Jose, CA</tr>
+                            </td>
+                            </tr>
+
+                            {/* <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer I</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                             <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer II</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                             <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Software Engineer III</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                             <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Machine Learning Engineer </tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                             <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Back End Software Engineer</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
                             <tr><td><img className="overview-logo-jobs" src={require('../../components/images/' + company_logo + '_logo.jpg').default} alt="" /></td><td><tr className="overview-job-title">Product Manager</tr><tr className="overview-job-location">{company_name} - San Jose, CA</tr></td></tr>
-                        </table>
+                         */}
+                         </table>
                         <br />
                     </div>
                 </div>
