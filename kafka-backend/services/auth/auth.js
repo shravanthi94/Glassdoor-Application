@@ -19,7 +19,7 @@ const handle_request = async(payload, callback) => {
             return studentLogin(payload, callback);
         case 'companySignup':
             return companySignup(payload, callback);
-        case 'companyLogin':
+        case 'test':
             return companyLogin(payload, callback);
         case 'adminSignup':
             return adminSignup(payload, callback);

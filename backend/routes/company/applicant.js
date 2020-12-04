@@ -129,39 +129,39 @@ router.get('/aplicantdetail/:id', companyCheckAuth, async(req, res) => {
 //Kafka Not Working
 
 router.get('/student/:email', async(req, res) => {
-    try {
-        const student = await Student.findOne({ 'email': req.params.email });
-        if (!student) return res.status(400).json({ msg: 'No student Found' });
-        res.status(200).json(student);
+    // try {
+    //     const student = await Student.findOne({ 'email': req.params.email });
+    //     if (!student) return res.status(400).json({ msg: 'No student Found' });
+    //     res.status(200).json(student);
 
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error: Database');
+    // }
 
-    // const payload = {
-    //     topic: 'getApplicantDetailbyEmail',
-    //     // company: req.company,
-    //     params: req.params
-    // };
-    // kafka.make_request('jobapplicant', payload, (err, results) => {
-    //     console.log('in result');
-    //     if (err) {
-    //         console.log('Inside err', err);
-    //         res.status(500).send('System Error, Try Again.');
-    //     } else {
-    //         if (results.status === 400) {
-    //             console.log('Inside err2', results);
-    //             return res.status(400).json({ msg: results.message });
-    //         }
-    //         if (results.status === 500) {
-    //             console.log('Inside err3', results);
-    //             return res.status(500).send('Server Error');
-    //         }
-    //         console.log('in result1234', results);
-    //         res.status(200).json(results.message);
-    //     }
-    // });
+    const payload = {
+        topic: 'studentDetailsByEmail',
+        // company: req.company,
+        params: req.params
+    };
+    kafka.make_request('jobapplicant', payload, (err, results) => {
+        console.log('in result');
+        if (err) {
+            console.log('Inside err', err);
+            res.status(500).send('System Error, Try Again.');
+        } else {
+            if (results.status === 400) {
+                console.log('Inside err2', results);
+                return res.status(400).json({ msg: results.message });
+            }
+            if (results.status === 500) {
+                console.log('Inside err3', results);
+                return res.status(500).send('Server Error');
+            }
+            console.log('in result1234', results);
+            res.status(200).json(results.message);
+        }
+    });
 });
 
 // @route  POST /company/applicant/statusUpdate/:applicantId

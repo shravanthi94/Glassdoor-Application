@@ -77,7 +77,7 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
     //     res.status(500).send('Server Error: Database');
     // }
     const payload = {
-        topic: 'getStudentsReviewsByCompanyId',
+        topic: 'getReviewsByCompanyId',
         params: req.params,
         // params: req.params
     };
@@ -165,12 +165,12 @@ router.post('/', companyCheckAuth, async(req, res) => {
             res.status(500).send('System Error, Try Again.');
         } else {
             if (results.status === 400) {
-                return res.status(400).json({ errors: [{ msg: results.message }] });
+                return res.status(400).json({ msg: results.message });
             }
             if (results.status === 500) {
                 return res.status(500).send('Server Error');
             }
-            res.status(200).json({ msg: "Review successfully added" });
+            return res.status(200).json({ msg: results.message });
 
         }
     });
@@ -411,30 +411,30 @@ router.post('/featured/:id', companyCheckAuth, async(req, res) => {
 // @Desc   GET all the featured reviews 
 // @access Private
 // not required 
-router.get('/featured/all', companyCheckAuth, async(req, res) => {
+// router.get('/featured/all', companyCheckAuth, async(req, res) => {
 
-    try {
-        const company = await Company.findOne({ "email": req.company.email })
-        if (company) {
-            console.log("company Id", company._id)
-            const reviews = await Review.find({ $and: [{ "company": company._id }, { "featured": true }] });
-            // console.log("after query")
-            if (!reviews) {
+//     try {
+//         const company = await Company.findOne({ "email": req.company.email })
+//         if (company) {
+//             console.log("company Id", company._id)
+//             const reviews = await Review.find({ $and: [{ "company": company._id }, { "featured": true }] });
+//             // console.log("after query")
+//             if (!reviews) {
 
-                return res.status(400).json({ msg: 'No reviews for this company' });
+//                 return res.status(400).json({ msg: 'No reviews for this company' });
 
-            }
-            //const results = JSON.stringify(reviews)
-            res.status(200).json(reviews)
-        } else {
-            return res.status(400).json({ msg: 'No company found' });
-        }
+//             }
+//             //const results = JSON.stringify(reviews)
+//             res.status(200).json(reviews)
+//         } else {
+//             return res.status(400).json({ msg: 'No company found' });
+//         }
 
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
 
 // @route  POST /company/review
 // @Desc   Post a reply to review
@@ -442,50 +442,54 @@ router.get('/featured/all', companyCheckAuth, async(req, res) => {
 
 router.post('/reply/:id', companyCheckAuth, async(req, res) => {
 
-    try {
-        // console.log(req.params.id)
-        console.log(req.body)
-        const reply = req.body.reply
-        console.log("reply inside post is ", reply)
-        let review = await Review.findOne({ "_id": req.params.id })
-        if (review) {
+    // try {
+    //     // console.log(req.params.id)
+    //     console.log(req.body)
+    //     const reply = req.body.reply
+    //     console.log("reply inside post is ", reply)
+    //     let review = await Review.findOne({ "_id": req.params.id })
+    //     console.log("find review", review)
+    //     if (review) {
+    //         console.log("1")
+    //             // review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "reply.message": reply } }, { new: true });
+    //         review.reply.push({ message: reply })
+    //         await review.save()
+    //         console.log("2")
+    //         return res.status(200).json(review);
+    //     } else {
+    //         return res.status(400).json({ msg: 'No Review found' });
+    //     }
 
-            review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "reply.message": reply } }, { new: true });
-            return res.status(200).json(review);
-        } else {
-            return res.status(400).json({ msg: 'No Review found' });
-        }
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error');
+    // }
 
     // not working
-    // const payload = {
-    //     topic: 'replyMessage',
-    //     params: req.params,
-    //     body: req.body
-    // };
-    // console.log("review", payload)
-    // kafka.make_request('companyReviews', payload, (err, results) => {
-    //     console.log('in result');
-    //     if (err) {
-    //         console.log('Inside err', err);
-    //         res.status(500).send('System Error, Try Again.');
-    //     } else {
-    //         if (results.status === 400) {
-    //             console.log('Inside err2', results);
-    //             return res.status(400).json({ msg: results.message });
-    //         }
-    //         if (results.status === 500) {
-    //             console.log('Inside err3', results);
-    //             return res.status(500).send('Server Error');
-    //         }
-    //         console.log('in result1234', results);
-    //         res.status(200).json(results.message);
-    //     }
-    // });
+    const payload = {
+        topic: 'replyMessage',
+        params: req.params,
+        body: req.body
+    };
+    console.log("review", payload)
+    kafka.make_request('companyReviews', payload, (err, results) => {
+        console.log('in result');
+        if (err) {
+            console.log('Inside err', err);
+            res.status(500).send('System Error, Try Again.');
+        } else {
+            if (results.status === 400) {
+                console.log('Inside err2', results);
+                return res.status(400).json({ msg: results.message });
+            }
+            if (results.status === 500) {
+                console.log('Inside err3', results);
+                return res.status(500).send('Server Error');
+            }
+            console.log('in result1234', results);
+            res.status(200).json(results.message);
+        }
+    });
 });
 
 

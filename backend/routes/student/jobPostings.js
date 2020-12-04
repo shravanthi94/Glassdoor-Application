@@ -5,6 +5,7 @@ const { checkAuth } = require('../../middleware/studentAuth');
 const Jobposting = require('../../models/JobPostingModel');
 const Student = require('../../models/StudentModel');
 const path = require("path");
+const fs = require("fs")
 const multer = require("multer");
 
 // @route  POST /student/jobs
@@ -121,6 +122,7 @@ var storage = multer.diskStorage({
     }
 })
 
+
 const maxSize = 1 * 10000 * 10000;
 
 var upload = multer({
@@ -151,6 +153,7 @@ var upload = multer({
     maxCount: 1
 }]);
 
+// @route /student/jobs
 router.post("/company", async(req, res) => {
 
     try {
@@ -186,4 +189,20 @@ router.post("/company", async(req, res) => {
     }
 });
 
+
+// @route  GET /student/jobs
+// @desc   download resume
+// @access Public
+router.get('/company/:filename', (req, res) => {
+    const resume = `${path.join(__dirname, '../..')}/public/uploads/files/${
+      req.params.filename
+    }`;
+    if (fs.existsSync(resume)) {
+        res.sendFile(resume);
+    } else {
+        // res.sendFile(
+        //     `${path.join(__dirname, '../..')}/public/uploads/company/default.png`,
+        // );
+    }
+});
 module.exports = router;
