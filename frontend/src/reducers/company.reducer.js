@@ -64,6 +64,22 @@ const comStore = (state = initialState, action) => {
         loading: false,
       };
 
+    case 'ADD_COMPANY_REVIEW_HELPFUL_VOTE':
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+
+    case 'EASY_APPLY_JOB':
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+
     default:
       return state;
   }

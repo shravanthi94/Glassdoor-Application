@@ -325,6 +325,13 @@ body {
     margin-left: 300px;
 }
 
+.overview-helpful-button:hover{
+    color: white;
+    border: solid 2px #1861BF;
+    background: #1861BF;
+    cursor: pointer;
+}
+
 .profile-titles-selected{
     border-bottom:5px solid #00A1DF;
 }
