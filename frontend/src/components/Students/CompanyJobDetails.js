@@ -348,60 +348,60 @@ class CompanyJobDetails extends Component {
 
                     <table className='job-postings-table'>
                       {this.state.filteredJobs &&
-                      this.state.filteredJobs !== 0 ? (
-                        this.state.filteredJobs.map((job) => (
+                        this.state.filteredJobs !== 0 ? (
+                          this.state.filteredJobs.map((job) => (
+                            <tr>
+                              <td>
+                                <div>
+                                  <img
+                                    className='job-postings-logo'
+                                    style={{
+                                      width: '40px',
+                                      height: '40px',
+                                      marginRight: '10px',
+                                    }}
+                                    src={
+                                      require('../../components/images/' +
+                                        this.props.company.overview.logo +
+                                        '_logo.jpg').default
+                                    }
+                                    alt=''
+                                  />
+                                </div>
+                              </td>
+                              <td
+                                className='company-salary-job-title'
+                                style={{ fontSize: '15px' }}
+                              >
+                                <div>
+                                  <span
+                                    style={{
+                                      color: 'black',
+                                      fontWeight: 'normal',
+                                    }}
+                                  >
+                                    {company_name}
+                                  </span>
+                                </div>
+                                <div onClick={() => this.changeJobHandler(job)}>
+                                  {job.title}
+                                </div>
+                                <div>
+                                  <span className='job-city-state'>
+                                    {' '}
+                                    {job.city}, {job.state}
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
                           <tr>
                             <td>
-                              <div>
-                                <img
-                                  className='job-postings-logo'
-                                  style={{
-                                    width: '40px',
-                                    height: '40px',
-                                    marginRight: '10px',
-                                  }}
-                                  src={
-                                    require('../../components/images/' +
-                                      this.props.company.overview.logo +
-                                      '_logo.jpg').default
-                                  }
-                                  alt=''
-                                />
-                              </div>
-                            </td>
-                            <td
-                              className='company-salary-job-title'
-                              style={{ fontSize: '15px' }}
-                            >
-                              <div>
-                                <span
-                                  style={{
-                                    color: 'black',
-                                    fontWeight: 'normal',
-                                  }}
-                                >
-                                  {company_name}
-                                </span>
-                              </div>
-                              <div onClick={() => this.changeJobHandler(job)}>
-                                {job.title}
-                              </div>
-                              <div>
-                                <span className='job-city-state'>
-                                  {' '}
-                                  {job.city}, {job.state}
-                                </span>
-                              </div>
+                              <div> No Job Postings Yets</div>
                             </td>
                           </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td>
-                            <div> No Job Postings Yets</div>
-                          </td>
-                        </tr>
-                      )}
+                        )}
                     </table>
                     <br />
                     <br />
@@ -486,8 +486,8 @@ class CompanyJobDetails extends Component {
                             </ul>
                           ))
                         ) : (
-                          <p>No Qualifications mentioned</p>
-                        )}
+                            <p>No Qualifications mentioned</p>
+                          )}
                         <div className='font-weight-bold'>
                           Responsibilities:{' '}
                         </div>
@@ -498,8 +498,8 @@ class CompanyJobDetails extends Component {
                             </ul>
                           ))
                         ) : (
-                          <p>No responsibilities mentioned</p>
-                        )}
+                            <p>No responsibilities mentioned</p>
+                          )}
                       </div>
                     </div>
                     <br />
@@ -509,8 +509,8 @@ class CompanyJobDetails extends Component {
             </div>
           </div>
         ) : (
-          <div> No Reviews for the Company Profile</div>
-        )}
+            <div> No Reviews for the Company Profile</div>
+          )}
 
         <ReactModal
           isOpen={this.state.showModal}
@@ -568,10 +568,10 @@ class CompanyJobDetails extends Component {
                             src={file.preview.url}
                           />
                         ) : (
-                          <div className='files-list-item-preview-extension'>
-                            {file.extension}
-                          </div>
-                        )}
+                            <div className='files-list-item-preview-extension'>
+                              {file.extension}
+                            </div>
+                          )}
                       </div>
                       <div className='files-list-item-content'>
                         <div className='files-list-item-content-item files-list-item-content-item-1'>

@@ -113,7 +113,7 @@ router.get("/details/:id", async(req, res) => {
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
         console.log("call back");
-        cb(null, "../frontend/src/components/files")
+        cb(null, `${path.join(__dirname, '../..')}/public/uploads/files`)
     },
     filename: function(req, file, cb) {
         console.log("cb file name: ", file);
