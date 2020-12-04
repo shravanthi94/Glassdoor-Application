@@ -13,7 +13,6 @@ const jobPreferences = require('./routes/student/jobPreferences');
 const resume = require('./routes/student/resume');
 const jobPostings = require('./routes/student/jobPostings');
 const studentProfile = require('./routes/student/profile');
-
 const applications = require('./routes/student/applications');
 
 // Company
@@ -79,12 +78,10 @@ app.use('/company/overview', overviewCompany);
 app.use('/company/salary', salaryCompany);
 // Company - Photos
 app.use('/company/images', companyPhotos);
-
 //  Company - SALARY
 app.use('/company/interview', interviewCompany);
 //  Company - JOB
 app.use('/company/job', jobCompany);
-
 //Company - Profile Pic
 app.use('/company/profilepic', companyProfilePic);
 

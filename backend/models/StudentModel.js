@@ -4,9 +4,7 @@ const StudentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   profilePic: {
-    image: {
-      type: String,
-    },
+    image: { type: String },
     status: {
       type: String,
       default: 'new',
@@ -52,18 +50,13 @@ const StudentSchema = new mongoose.Schema({
       default: '',
     },
   },
-
   resumes: [
     {
       file: { type: String },
       isPrimary: { type: Boolean },
-    }
+    },
   ],
-
-  applications: {
-    type: String,
-  },
-
+  applications: { type: String },
   date: { type: Date, default: Date.now() },
 });
 
