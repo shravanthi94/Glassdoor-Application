@@ -109,7 +109,7 @@ class AddCompanySalary extends Component {
         // }
 
         if (this.state.submitted && this.props.addFlag) {
-            redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.state.company_id } }} />
+            redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.props.company.overview._id } }} />
         } else if (this.state.submitted && !this.props.addFlag) {
             final_msg = <div class="alert alert-danger" role="alert">{this.props.addMsg}</div>
         }

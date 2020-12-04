@@ -7,7 +7,8 @@ const Student = require('../../models/StudentModel');
 const Company = require('../../models/CompanyModel');
 const Jobposting = require('../../models/JobPostingModel');
 const Review = require('../../models/ReviewModel');
-
+const redisRead = require('../../config/RedisRead');
+const redisWrite = require('../../config/RedisWrite');
 const kafka = require('../../kafka/client');
 
 router.get('/', checkAuth, async (req, res) => {
@@ -18,6 +19,16 @@ router.get('/', checkAuth, async (req, res) => {
   //   console.log(err);
   //   res.status(500).send('Server Error');
   // }
+
+  try {
+    var studentProfile = 'studentProfile' + req.user.id;
+    console.log('studentProfile :', studentProfile)
+    redisRead.get(studentProfile, async (err, studentProfile) => {
+      if(studentProfile !== null) {
+        console.log("fetching studentProfile from inside redis")
+        return res.status(200).json(JSON.parse(studentProfile));
+      } else {
+        console.log("fetching studentProfile from kafka call");
 
   const payload = {
     topic: 'currentStudent',
@@ -35,9 +46,20 @@ router.get('/', checkAuth, async (req, res) => {
       if (results.status === 500) {
         return res.status(500).send('Server Error');
       }
+      if(results.status) {
+        var studentProfile = 'studentProfile' + req.user.id;
+        redisWrite.setex(studentProfile, 36000, JSON.stringify(results.message));
+        console.log("writing studentProfile to redis finished", JSON.stringify(results.message))
+      }
       res.status(200).json(results.message);
     }
   });
+}
+});
+} catch (err) {
+console.error(err.message);
+res.status(500).send('Server Error');
+}
 });
 
 router.get('/search/:data/:query', async (req, res) => {

@@ -12,6 +12,10 @@ const Review = require('../../models/ReviewModel');
 const Company = require('../../models/CompanyModel');
 
 const kafka = require('../../kafka/client');
+const redisRead = require('../../config/RedisRead');
+const redis = require("redis");
+const redisPort = process.env.PORT || 6379;
+const redisClient = redis.createClient(redisPort);
 
 // @route  POST /student/profile/basic
 // @desc   Update current student basic details
@@ -39,6 +43,18 @@ router.post(
     //   console.log(err);
     //   res.status(500).send('Server Error');
     // }
+    try {
+      var studentProfileRedis = 'studentProfile' + req.user.id;
+      console.log('studentProfile :', studentProfileRedis)
+      redisRead.get(studentProfileRedis, async (err, studentProfile) => {
+        if(studentProfile !== null) {
+          console.log("deleting studentProfile from inside redis");
+          redisClient.del(studentProfileRedis, function (err, reply) {
+            console.log("Redis Delete of studentProfile", reply);
+          });
+        } 
+      });
+    
     const payload = {
       topic: 'updateStudentBasics',
       body: req.body,
@@ -59,6 +75,10 @@ router.post(
         res.status(200).json(results.message);
       }
     });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Redis Server Error');
+  }
   },
 );
 
@@ -83,6 +103,18 @@ const studentuploads = multer({
 router.post('/image', checkAuth, async (req, res) => {
   console.log('Image upload backend', req.file);
   studentuploads(req, res, async (err) => {
+    
+    try {
+      var studentProfileRedis = 'studentProfile' + req.user.id;
+      console.log('studentProfile :', studentProfileRedis)
+      redisRead.get(studentProfileRedis, async (err, studentProfile) => {
+        if(studentProfile !== null) {
+          console.log("deleting studentProfile from inside redis");
+          redisClient.del(studentProfileRedis, function (err, reply) {
+            console.log("Redis Delete of studentProfile", reply);
+          });
+        } 
+      });
     if (!err) {
       try {
         const student = await Student.findById(req.user.id);
@@ -99,6 +131,11 @@ router.post('/image', checkAuth, async (req, res) => {
     } else {
       console.log('Error!', err);
     }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Redis Server Error');
+  }
+
   });
 });
 

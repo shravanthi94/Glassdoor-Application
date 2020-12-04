@@ -29,6 +29,8 @@ const handle_request = async(payload, callback) => {
             return markFeaturedReview(payload, callback);
         case 'replyMessage':
             return replyMessage(payload, callback);
+        case 'postMostHelpfulVote':
+            return postMostHelpfulVote(payload, callback);
 
     }
 }
@@ -40,7 +42,7 @@ async function getStudentsReviewsByCompanyId(payload, callback) {
         console.log("company id: ", payload.body.companyId);
         console.log("student id: ", payload.body.studentId);
 
-        const reviews = await Review.find({ "company": payload.body.companyId, $or: [{ "approvalStatus": "approved" }, { "student": payload.body.studentId }] })
+        const reviews = await Review.find({ "company": payload.body.companyId, $or: [{ "approvalStatus": "approved" }, { "student": payload.body.studentId }] }).sort({ mostHelpfulVotes: -1 })
 
         console.log("reviews list: ", reviews);
         if (!reviews) {
@@ -88,7 +90,9 @@ async function getReviewsByCompanyId(payload, callback) {
 }
 
 async function postNewReview(payload, callback) {
+    console.log("Addnewreview", payload)
     try {
+
         console.log("review details: ", payload.body);
 
         var comment = "";
@@ -288,10 +292,14 @@ async function replyMessage(payload, callback) {
         const reply = payload.body.message
         console.log("reply inside post is ", reply)
         let review = await Review.findOne({ "_id": payload.params.id })
+        console.log("result review", review)
         if (review) {
-
-            review = await Review.findOneAndUpdate({ "_id": payload.params.id }, { $set: { "reply.message": reply } }, { new: true });
-            // return res.status(200).json(review);
+            console.log("1")
+                // review = await Review.findOneAndUpdate({ "_id": payload.params.id }, { $set: { "reply.message": reply } }, { new: true });
+            review.reply.push({ message: reply })
+            await review.save()
+                // return res.status(200).json(review);
+            console.log("2", review)
             response.status = 200;
             response.message = review
             console.log("reply response", response)
@@ -300,6 +308,7 @@ async function replyMessage(payload, callback) {
             // return res.status(400).json({ msg: 'No Review found' });
             response.status = 400;
             response.message = 'No Review found';
+            console.log("error", response)
             return callback(null, response);
         }
 
@@ -309,6 +318,37 @@ async function replyMessage(payload, callback) {
         response.status = 500;
         response.message = 'Server Error';
         return callback(null, response);
+    }
+}
+
+
+async function postMostHelpfulVote(payload, callback){
+    try {
+        // console.log(req.params.id)
+        
+        const { body } = payload;
+        console.log("most helpful id: ", payload.body.review_id);
+
+        await Review.update({ _id: payload.body.review_id }, { $inc: { mostHelpfulVotes: 1 } });
+        const reviews = await Review.find({ "company": payload.body.company_id, $or: [{ "approvalStatus": "approved" }, { "student": payload.body.student_id }]}).sort({ mostHelpfulVotes: -1 });
+
+        console.log("reviews list: ", reviews);
+        if (!reviews) {
+            // return res.status(400).json({ msg: 'No reviews yet!' });
+            response.status = 400;
+            response.message = 'No reviews yet!';
+            return callback(null, response);
+        }
+        // res.status(200).json(reviews);
+        response.status = 200;
+        response.message = reviews;
+        return callback(null, response);
+    } catch (err) {
+        console.error(err.message);
+        // res.status(500).send('Server Error: Database');
+        repsonse.status = 500;
+        response.message = 'Server Error: Database';
+        return callback(null, response)
     }
 }
 

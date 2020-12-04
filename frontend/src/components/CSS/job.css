@@ -91,6 +91,20 @@
     color: white;  
 }
 
+.company-apply-job-select{
+  width: 125px;
+  border:none;
+  border:solid 2px #1861BF;
+  border-radius: 0px;
+  border-spacing: 100px;
+  padding: 8px;
+  text-align: center;
+  background: #1861BF;
+  font-size: 15px;
+  color: white;  
+  margin-left: 30px;
+}
+
 .file-upload div {
     display: inline-block;
     

@@ -3,11 +3,11 @@ const express = require('express');
 const router = express.Router();
 const { checkAuth } = require('../../middleware/studentAuth');
 const Jobposting = require('../../models/JobPostingModel');
-const Student = require('../../models/StudentModel');
 const path = require('path');
 const multer = require('multer');
 
 const kafka = require('../../kafka/client');
+const fs = require('fs');
 
 // @route  POST /student/jobs
 // @Desc   Apply for a particular job
@@ -176,6 +176,7 @@ var upload = multer({
   },
 ]);
 
+// @route /student/jobs
 router.post('/company', async (req, res) => {
   try {
     console.log('all data: ', req.body);
@@ -218,4 +219,19 @@ router.post('/company', async (req, res) => {
   }
 });
 
+// @route  GET /student/jobs
+// @desc   download resume
+// @access Public
+router.get('/company/:filename', (req, res) => {
+  const resume = `${path.join(__dirname, '../..')}/public/uploads/files/${
+    req.params.filename
+  }`;
+  if (fs.existsSync(resume)) {
+    res.sendFile(resume);
+  } else {
+    // res.sendFile(
+    //     `${path.join(__dirname, '../..')}/public/uploads/company/default.png`,
+    // );
+  }
+});
 module.exports = router;
