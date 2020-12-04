@@ -90,7 +90,9 @@ async function getReviewsByCompanyId(payload, callback) {
 }
 
 async function postNewReview(payload, callback) {
+    console.log("Addnewreview", payload)
     try {
+
         console.log("review details: ", payload.body);
 
         var comment = "";
@@ -290,10 +292,14 @@ async function replyMessage(payload, callback) {
         const reply = payload.body.message
         console.log("reply inside post is ", reply)
         let review = await Review.findOne({ "_id": payload.params.id })
+        console.log("result review", review)
         if (review) {
-
-            review = await Review.findOneAndUpdate({ "_id": payload.params.id }, { $set: { "reply.message": reply } }, { new: true });
-            // return res.status(200).json(review);
+            console.log("1")
+                // review = await Review.findOneAndUpdate({ "_id": payload.params.id }, { $set: { "reply.message": reply } }, { new: true });
+            review.reply.push({ message: reply })
+            await review.save()
+                // return res.status(200).json(review);
+            console.log("2", review)
             response.status = 200;
             response.message = review
             console.log("reply response", response)
@@ -302,6 +308,7 @@ async function replyMessage(payload, callback) {
             // return res.status(400).json({ msg: 'No Review found' });
             response.status = 400;
             response.message = 'No Review found';
+            console.log("error", response)
             return callback(null, response);
         }
 

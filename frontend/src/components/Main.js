@@ -91,241 +91,61 @@ class Main extends Component {
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
             <Route exact path='/student/update/resume' component={CompanyResume} />
-            <Route
-              exact
-              path='/companyJobDetails'
-              component={CompanyJobDetails}
-            />
-            <Route
-              exact
-              path='/companyInterviews'
-              component={CompanyInterviews}
-            />
+            <Route exact path='/companyJobDetails' component={CompanyJobDetails}/>
+            <Route exact path='/companyInterviews' component={CompanyInterviews} />
             <Route exact path='/companySalaries' component={CompanySalaries} />
             <Route exact path='/companyPhotos' component={CompanyPhotos} />
-            <Route
-              exact
-              path='/company/upload/photos/:id'
-              component={AddPhotos}
-            />
-            <Route
-              exact
-              path='/addCompanySalary'
-              component={AddCompanySalary}
-            />
+            <Route exact path='/company/upload/photos/:id' component={AddPhotos} />
+            <Route exact path='/addCompanySalary' component={AddCompanySalary} />
             <Route exact path='/addInterviewExp' component={AddInterviewExp} />
             <Route exact path='/companySideBar' component={CompanySideBar} />
-            <Route
-              exact
-              path='/addCompanyInterview'
-              component={AddCompanyInterview}
-            />
+            <Route exact path='/addCompanyInterview' component={AddCompanyInterview} />
             <Route exact path='/companyJobs' component={CompanyJobs} />
-            <Route
-              exact
-              path='/addCompanyReview'
-              component={AddCompanyReview}
-            />
+            <Route exact path='/addCompanyReview' component={AddCompanyReview} />
             <Route exact path='/student/signin' component={Login} />
-            <Route
-              exact
-              path='/student/landing'
-              component={StudentLandingPage}
-            />
-            <PrivateRoute
-              exact
-              path='/student/profile'
-              component={StudentProfile}
-            />
-            <PrivateRoute
-              exact
-              path='/student/update/jobPreference'
-              component={JobPreference}
-            />
-
-            <PrivateRoute
-              exact
-              path='/student/update/demographics'
-              component={Demographics}
-            />
-            <PrivateRoute
-              exact
-              path='/student/contributions/reviews'
-              component={StudentReviews}
-            />
-            <PrivateRoute
-              exact
-              path='/student/contributions/salaries'
-              component={StudentSalaries}
-            />
-            <PrivateRoute
-              exact
-              path='/student/applications'
-              component={StudentApplications}
-            />
-            <PrivateRoute
-              exact
-              path='/student/contributions/interviews'
-              component={StudentInterviews}
-            />
-            <PrivateRoute
-              exact
-              path='/student/contributions/photos'
-              component={StudentPhotos}
-            />
-            <PrivateRoute
-              exact
-              path='/student/viewInterviews'
-              component={ViewInterview}
-            />
-            <PrivateRoute
-              exact
-              path='/student/viewReviews'
-              component={ViewReview}
-            />
-            <PrivateRoute
-              exact
-              path='/student/viewSalaries'
-              component={ViewSalary}
-            />
-            <PrivateRoute
-              exact
-              path='/companydashboard'
-              component={CompanyDashboard}
-            />
-            <PrivateRoute
-              exact
-              path='/company/reviewspage'
-              component={CompanyDashboardReviews}
-            />
-            <PrivateRoute
-              exact
-              path='/company/updateprofile'
-              component={CompanyEditProfile}
-            />
-            <PrivateRoute
-              exact
-              path='/company/jobpostings'
-              component={CompanyJobPostings}
-            />
-            <PrivateRoute
-              exact
-              path='/company/addjob'
-              component={CompanyCreateJob}
-            />
-            <PrivateRoute
-              exact
-              path='/student/search/:data/:query'
-              component={SearchResults}
-            />
-            <PrivateRoute
-              exact
-              path='/companydashboard'
-              component={CompanyDashboard}
-            />
-            {/* <PrivateRoute */}
-            <PrivateRoute
-              exact
-              path='/company/viewapplicants/:id'
-              component={ViewApplicants}
-            />
-            <PrivateRoute
-              exact
-              path='/company/reviewspage'
-              component={CompanyDashboardReviews}
-            />
-            <PrivateRoute
-              exact
-              path='/company/updateprofile'
-              component={CompanyEditProfile}
-            />
-            <PrivateRoute
-              exact
-              path='/company/jobpostings'
-              component={CompanyJobPostings}
-            />
-            <PrivateRoute
-              exact
-              path='/company/addjob'
-              component={CompanyCreateJob}
-            />
-            <PrivateRoute
-              exact
-              path='/company/reply/review/:id'
-              component={CompanyReplyMessage}
-            />
-            {/* <PrivateRoute exact path='/company/viewapplicantdetails/:id' component={ViewApplicantDetails}/> */}
-            <PrivateRoute
-              exact
-              path='/company/reply/review/:id'
-              component={CompanyReplyMessage}
-            />
-            <PrivateRoute
-              exact
-              path='/updateStatus/:id'
-              component={UpdateApplicantStatus}
-            />
-            <PrivateRoute
-              exact
-              path='/company/statistics'
-              component={CompanyStatistics}
-            />
-
+            <Route exact path='/student/landing' component={StudentLandingPage} />
+            <PrivateRoute exact path='/student/profile' component={StudentProfile} />
+            <PrivateRoute exact path='/student/update/jobPreference' component={JobPreference} />
+            <PrivateRoute exact path='/student/update/demographics' component={Demographics} />
+            <PrivateRoute exact path='/student/contributions/reviews' component={StudentReviews} />
+            <PrivateRoute exact path='/student/contributions/salaries' component={StudentSalaries} />
+            <PrivateRoute exact path='/student/applications' component={StudentApplications} />
+            <PrivateRoute exact path='/student/contributions/interviews' component={StudentInterviews}/>
+            <PrivateRoute exact path='/student/contributions/photos' component={StudentPhotos} />
+            <PrivateRoute exact path='/student/viewInterviews' component={ViewInterview}/>
+            <PrivateRoute exact path='/student/viewReviews' component={ViewReview} />
+            <PrivateRoute exact path='/student/viewSalaries' component={ViewSalary} />
+            <PrivateRoute exact path='/companydashboard' component={CompanyDashboard} />
+            <PrivateRoute exact path='/company/reviewspage' component={CompanyDashboardReviews} />
+            <PrivateRoute exact path='/company/updateprofile' component={CompanyEditProfile} />
+            <PrivateRoute exact path='/company/jobpostings' component={CompanyJobPostings} />
+            <PrivateRoute exact path='/company/addjob' component={CompanyCreateJob} />
+            <PrivateRoute exact path='/student/search/:data/:query' component={SearchResults} />
+            <PrivateRoute exact path='/companydashboard' component={CompanyDashboard} />
+            <PrivateRoute exact path='/company/viewapplicants/:id' component={ViewApplicants} />
+            <PrivateRoute exact path='/company/reviewspage' component={CompanyDashboardReviews} />
+            <PrivateRoute exact path='/company/updateprofile' component={CompanyEditProfile} />
+            <PrivateRoute exact path='/company/jobpostings' component={CompanyJobPostings} />
+            <PrivateRoute exact path='/company/addjob' component={CompanyCreateJob} />
+            <PrivateRoute exact path='/company/reply/review/:id' component={CompanyReplyMessage} />
+            <PrivateRoute exact path='/company/reply/review/:id' component={CompanyReplyMessage} />
+            <PrivateRoute exact path='/updateStatus/:id' component={UpdateApplicantStatus} />
+            <PrivateRoute exact path='/company/statistics'  component={CompanyStatistics} />
             {/* Admin Routes */}
             <Route exact path='/admin/signin' component={AdminLogin} />
             <Route exact path='/admin/reviewsPerDay' component={AdminLanding} />
             <Route exact path='/admin/reviews' component={FilterReviews} />
-            <Route
-              exact
-              path='/admin/companyAverageRating'
-              component={CompanyAverageRating}
-            />
-            <Route
-              exact
-              path='/admin/mostReviewedCompany'
-              component={MostReviewedCompany}
-            />
-            <Route
-              exact
-              path='/admin/topStudentReviewers'
-              component={TopStudentReviewers}
-            />
+            <Route exact path='/admin/companyAverageRating' component={CompanyAverageRating}/>
+            <Route exact path='/admin/mostReviewedCompany' component={MostReviewedCompany}/>
+            <Route exact path='/admin/topStudentReviewers' component={TopStudentReviewers} />
             <Route exact path='/admin/topCeo' component={TopCeo} />
-            <Route
-              exact
-              path='/admin/mostViewedCompanies'
-              component={MostViewedCompanies}
-            />
-            <Route
-              exact
-              path='/admin/companySearch'
-              component={CompanySearch}
-            />
-            <Route
-              exact
-              path='/admin/companySearchResult/:data/:query'
-              component={SearchResults}
-            />
-            <Route
-              exact
-              path='/admin/companyDetails/*'
-              component={CompanyDetailsReviews}
-            />
-            <Route
-              exact
-              path='/admin/companyStastics/*'
-              component={CompanyDetailsStastics}
-            />
-            <Route
-              exact
-              path='/admin/images/company'
-              component={FilterCompanyImages}
-            />
-            <Route
-              exact
-              path='/admin/images/student'
-              component={FilterStudentImages}
-            />
+            <Route exact path='/admin/mostViewedCompanies' component={MostViewedCompanies} />
+            <Route exact path='/admin/companySearch' component={CompanySearch} />
+            <Route exact path='/admin/companySearchResult/:data/:query' component={SearchResults} />
+            <Route exact path='/admin/companyDetails/*' component={CompanyDetailsReviews}/>
+            <Route exact path='/admin/companyStastics/*' component={CompanyDetailsStastics} />
+            <Route exact path='/admin/images/company' component={FilterCompanyImages} />
+            <Route exact path='/admin/images/student' component={FilterStudentImages} />
             <Route exact path='/student/allJobs' component={JobHomePage} />
           </Switch>
         </Router>

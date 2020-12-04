@@ -5,6 +5,7 @@ const { checkAuth } = require('../../middleware/studentAuth');
 const Student = require('../../models/StudentModel');
 const path = require('path');
 const multer = require('multer');
+const kafka = require('../../kafka/client');
 // const { delete } = require("../../app");
 
 // router.post('/resume/:id', checkAuth, async (req, res) => {

@@ -8,7 +8,7 @@ import '../../CSS/CompanyLanding.css'
 import {getJobDetailById,getStudentDetailByEmail} from '../../../actions/company/companyjobpostings'
 import  {BACKEND_URL}  from '../../../helpers/constants';
 // import pdf from '../../files/resume-1606883439279.pdf'
-import pdf from '../../../components/files/resume-1606883439279.pdf'
+// import pdf from '../../../components/files/resume-1606883439279.pdf'
 
 const ViewApplicants = ({
     getJobDetailById, 
@@ -51,14 +51,12 @@ const ViewApplicants = ({
                                     <table className="overview-reviews-table-all">
                                         <tr>
                                             <td>
-                                            {/* file:///Users/harika_pradeep/Downloads/CMPE273_Fall2020/GlassDoor_App/Glassdoor-Application/frontend/src/components/files/"+applicant.student.resume} */}
-                                            {/* '/Users/harika_pradeep/Downloads/CMPE273LabResume3.pdf' */}
                                                 <table>
                                                     <tr><td> <h6><Link onClick={(e)=> studentDetail(applicant.email)} className="joblisting-title-company">{applicant.student.name}</Link></h6></td></tr>
                                                     <tr className="card-title"><td>"{applicant.student.email}"</td></tr>
-                                                    <a href={pdf} download>Sample</a>
-                                                    <tr className="card-title"><td><a href={pdf+applicant.resume} download >{applicant.resume}</a></td></tr>
-                                                    <Link to={`file:../../files/${applicant.resume}`} target="_blank" download>Download</Link>
+                                                   
+                                                    {applicant.resume &&<tr className="card-title"><td><a href={`${BACKEND_URL}/student/jobs/company/${applicant.resume}`} target="_blank" download >Download Resume</a></td></tr>}
+                                                   {applicant.coverLetter && <tr className="card-title"><td><a href={`${BACKEND_URL}/student/jobs/company/${applicant.coverLetter}`} target="_blank" download >Download Cover</a></td></tr>}
                                     
                                                     <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td>
                                                         <td><Link to={`/updateStatus/${applicant._id}`} className='compnay-view-button ml-7'>Update Status</Link></td>
@@ -106,7 +104,7 @@ const ViewApplicants = ({
                                 </Fragment>: 
                                 <Fragment> 
                                 <h6 className='joblisting-title-company'>{companyjob? companyjob.title:''} &emsp;
-                                <Link className='compnay-view-button ml-7'> Update Status</Link> </h6>
+                                {/* <Link className='compnay-view-button ml-7'> Update Status</Link> */} </h6>
                                 <hr/>
                                 <div className='font-weight-bold'>Job Preference: </div>
                                 {profile? 

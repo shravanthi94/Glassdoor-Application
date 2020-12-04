@@ -25,12 +25,14 @@ const handle_request = async(payload, callback) => {
 
 async function makeResumePrimary(payload, callback) {
     try {
-        console.log('primary: ', payload.body);
+        console.log('primary: ', payload.body.studentId);
+        console.log('primary: ', payload.body.resumeId);
         var data = { 'resumes.$.isPrimary': true };
 
-        let primaryResume = await Student.findOneAndUpdate({ _id: payload.body.studentId, 'resumes.isPrimary': true }, { $set: { 'resumes.$.isPrimary': false } }, { new: true }, );
+        let primaryResume = await Student.findOneAndUpdate({ _id: payload.body.studentId, 'resumes.isPrimary': true }, { $set: { 'resumes.$.isPrimary': false } }, { new: true });
+        // console.log("primary Resume object: ", primaryResume);
 
-        let student = await Student.findOneAndUpdate({ _id: payload.body.studentId, 'resumes._id': payload.body.resumeId }, { $set: data }, { new: true }, );
+        let student = await Student.findOneAndUpdate({ _id: payload.body.studentId, 'resumes._id': payload.body.resumeId }, { $set: data }, { new: true } );
 
         if (!student) {
             // res.status(400).send("Couldn't make primary. Try after sometime");
@@ -38,7 +40,8 @@ async function makeResumePrimary(payload, callback) {
             response.message = ("Couldn't make primary. Try after sometime");
             return callback(null, response);
         } else {
-            // res.status(200).send(student);
+            console.log("new student profile: ", student);
+
             response.status = 200;
             response.message = student;
             return callback(null, response);

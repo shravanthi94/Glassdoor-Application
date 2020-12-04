@@ -12,14 +12,15 @@ var response = {};
 
 const handle_request = async(payload, callback) => {
     const { topic } = payload;
-    console.log('In topic: ', topic);
+    console.log('In topicassadfw: ', topic);
     switch (topic) {
         case 'getCurrentCompanyJobByJobId':
             return getCurrentCompanyJobByJobId(payload, callback);
+        case 'studentDetailsByEmail':
+            console.log("coming here")
+            return getApplicantDetailByEmail(payload, callback);
         case 'getApplicantDetail':
             return getApplicantDetail(payload, callback);
-        case 'getApplicantDetailByEmail':
-            return getApplicantDetailByEmail(payload, callback);
         case 'updateApplicantStatus':
             return updateApplicantStatus(payload, callback);
     }
@@ -93,7 +94,7 @@ async function getApplicantDetail(payload, callback) {
 }
 
 async function getApplicantDetailByEmail(payload, callback) {
-    console.log("Inside In topic")
+    console.log("Inside In topic", payload)
     try {
         console.log("getApplicantDetailbyEmail", payload)
         const student = await Student.findOne({ 'email': payload.params.email });
