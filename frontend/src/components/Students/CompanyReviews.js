@@ -9,6 +9,7 @@ import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import CompanySideBar from '../Common/CompanySideBar';
 import Pagination from 'react-js-pagination';
+import { addMostHelpfulVote } from '../../actions/company/addMostHelpfulVote';
 
 class CompanyReviews extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class CompanyReviews extends Component {
     };
 
     this.redirectHandler = this.redirectHandler.bind(this);
+    this.mostHelpfulVotesHandler = this.mostHelpfulVotesHandler.bind(this);
   }
 
   componentDidMount() {
@@ -36,9 +38,9 @@ class CompanyReviews extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('Did update:', this.props.company.overview.featuredreviews);
-    if (this.state.reviews !== this.props.company.overview.featuredreviews) {
-      this.setState({ reviews: this.props.company.overview.featuredreviews });
+    console.log('Did update:', this.props.reviews);
+    if (this.state.reviews !== this.props.reviews) {
+      this.setState({ reviews: this.props.reviews});
     }
 
     console.log('Did update: ', this.state.reviews);
@@ -47,6 +49,16 @@ class CompanyReviews extends Component {
   handlePageChange(pageNumber) {
     console.log(`active page is ${pageNumber}`);
     this.setState({ activePage: pageNumber });
+  }
+
+  mostHelpfulVotesHandler(review){
+    console.log("most helpful ", review);
+    var data = {
+      review_id : review._id,
+      company_id: this.props.company.overview._id,
+      student_id: this.props.studentId
+    }
+    this.props.postMostHelpfulVote(data);
   }
 
   redirectHandler = (e) => {
@@ -338,6 +350,7 @@ class CompanyReviews extends Component {
                           <div>
                             <div className='overview-review-date'>
                               {(review.date + '').substring(0, 10)}
+                             { review.mostHelpfulVotes !== 0 ? <div style={{marginLeft:"400px"}}> Helpful ({review.mostHelpfulVotes}) </div> : "" }
                             </div>
                             <table className='overview-reviews-table-all'>
                               <tr>
@@ -416,7 +429,7 @@ class CompanyReviews extends Component {
                               <div className='overview-social-media-logos'>
                                 <i class='fas fa-link'></i>
                               </div>
-                              <div className='overview-helpful-button'>
+                              <div className='overview-helpful-button' onClick={() => this.mostHelpfulVotesHandler(review)}>
                                 Helpful
                               </div>
                             </div>
@@ -474,6 +487,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCompanyReviews: (payload) => dispatch(getCompanyReviews(payload)),
+    postMostHelpfulVote: (payload) => dispatch(addMostHelpfulVote(payload))
   };
 };
 

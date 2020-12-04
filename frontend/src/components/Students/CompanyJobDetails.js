@@ -8,6 +8,8 @@ import UtilityBar from './UtilityBar';
 import ReactModal from 'react-modal';
 import Files from 'react-files';
 import { appyJob } from '../../actions/company/applyJob';
+import { easyApplyJob } from '../../actions/student/easyApplyJob';
+import { resume } from '../../actions/student/resume';
 
 class CompanyJobDetails extends Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class CompanyJobDetails extends Component {
       files: [],
       applyJobFlag: false,
       error: '',
+      easyApplyJobFlag: false
     };
 
     this.redirectHandler = this.redirectHandler.bind(this);
@@ -41,10 +44,12 @@ class CompanyJobDetails extends Component {
     this.coverLetterHandler = this.coverLetterHandler.bind(this);
     this.applyJobsHandler = this.applyJobsHandler.bind(this);
     this.filesUploadHandler = this.filesUploadHandler.bind(this);
+    this.easyApplyHandler = this.easyApplyHandler.bind(this);
   }
 
   componentDidMount() {
-    this.props.getCompanyJobs(this.state.company_id);
+    console.log("get jobs :", this.props.company.overview._id);
+    this.props.getCompanyJobs(this.props.company.overview._id);
   }
 
   componentDidUpdate(prevProps) {
@@ -105,6 +110,37 @@ class CompanyJobDetails extends Component {
     });
   };
 
+  easyApplyHandler = (e) => {
+    
+    e.preventDefault();
+
+    var resumeName= "";
+
+    this.props.student.resumes.map(resume => {
+      if(resume.isPrimary){
+        resumeName = resume.file
+      }
+    })
+
+    if(!resumeName || resumeName.length === 0){
+      resumeName = this.props.student.resumes[0]
+    }
+
+    var data = {
+      studentId:  this.props.studentId,
+      studentEmail: this.props.studentEmail,
+      jobId: this.state.jobDetail._id,
+      file: resumeName
+    }
+    console.log("data easy apply: ", this.props.data);
+
+    this.setState({
+      easyApplyJobFlag: true
+    })
+
+    this.props.easyApplyJob(data);
+  }
+
   applyJobsHandler = (e) => {
     e.preventDefault();
 
@@ -129,7 +165,7 @@ class CompanyJobDetails extends Component {
       formData.append('jobId', this.state.jobDetail._id);
 
       this.setState({
-        applyJobFlag: 'true',
+        applyJobFlag: true,
       });
 
       this.props.appyJob(formData);
@@ -209,11 +245,16 @@ class CompanyJobDetails extends Component {
   render() {
     var company_name = '';
     var redirectVar = '';
+    var applyMsg = "";
 
     var companyjob = this.state.jobDetail;
 
     if (this.props.company) {
       company_name = this.props.company.overview.name;
+    }
+
+    if((this.state.easyApplyJobFlag && this.props.applyJobFlag)){
+      applyMsg = <div style={{color:"green", marginLeft:"22px", fontSize:"18px", paddingTop:"10px"}}> Applied </div>
     }
 
     if (this.state.isRedirect) {
@@ -427,6 +468,14 @@ class CompanyJobDetails extends Component {
                           >
                             &nbsp;&nbsp;Apply To Job
                           </button>
+                          <button
+                            onClick={this.easyApplyHandler}
+                            className='company-apply-job-select'
+                          >
+                            &nbsp;<i class="fas fa-bolt"></i>&emsp;Easy Apply
+                          </button>
+
+                          { applyMsg}
                         </div>
                         <hr />
                         <table className='overview-table'>
@@ -615,10 +664,12 @@ const mapStateToProps = (state) => {
   return {
     company: state.comStore.company || '',
     jobs: state.comStore.jobs || '',
+    student: state.studentProfile.profile,
     studentId: state.studentProfile.profile._id,
     studentEmail: state.studentProfile.profile.email,
     applyJobMsg: state.comStore.applyJobMsg || '',
     applyJobFlag: state.comStore.applyJobFlag || '',
+
   };
 };
 
@@ -626,6 +677,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     appyJob: (payload) => dispatch(appyJob(payload)),
     getCompanyJobs: (payload) => dispatch(getCompanyJobs(payload)),
+    easyApplyJob: (payload) => dispatch(easyApplyJob(payload))
   };
 };
 

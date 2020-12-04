@@ -115,6 +115,7 @@ const StudentProfile = ({
                             name='email'
                             value={email}
                             onChange={(e) => onChange(e)}
+                            disabled
                           />
                         </div>
                         <div class='modal-footer'>

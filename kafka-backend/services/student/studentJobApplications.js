@@ -6,7 +6,9 @@ function handle_request(msg, callback) {
         myJobApplications(msg, callback);
     } else if (msg.path === 'withdraw_application') {
         withdrawApplication(msg, callback);
-    } 
+    } else if (msg.path === "easyApplyJobs"){
+        easyJobApplication(msg, callback);
+    }
 }
 
 async function myJobApplications(msg, callback) {
@@ -89,5 +91,42 @@ async function withdrawApplication(msg, callback) {
         callback(null, res);
     }
 }
+
+
+
+async function easyJobApplication(msg, callback) {
+    var res = {};
+
+    try {
+        console.log('easyJobApplication : ', msg.body)
+        var data = {
+            resume: msg.body.file,
+            student: msg.body.studentId,
+            email: msg.body.studentEmail
+        };
+        console.log('easyJobApplication : ', data)
+
+        const jobs = await JobPostings.findByIdAndUpdate({ _id: msg.body.jobId }, { $push: { applicants: data } }, { new: true });
+
+        if (!jobs) {
+
+            res.status = 400;
+            res.message = JSON.stringify({ msg: "Apply Failed!" });
+            callback(null, res);
+
+        } else {
+
+            res.status = 200;
+            res.message = JSON.stringify({msg:"Applied"});
+            callback(null, res);
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status = 500;
+        res.message = 'Server Error: Database';
+        callback(null, res);
+    }
+}
+
 
 exports.handle_request = handle_request;
