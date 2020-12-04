@@ -3,7 +3,7 @@ const chai = require('chai');
 chai.use(require('chai-http'));
 const { expect } = require('chai');
 
-const host = 'http://localhost';
+const host = 'http://3.239.5.158';
 const port = '3001';
 const url = `${host}:${port}`;
 
