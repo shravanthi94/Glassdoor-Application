@@ -10,6 +10,9 @@ import Files from 'react-files';
 import { appyJob } from '../../actions/company/applyJob';
 import { easyApplyJob } from '../../actions/student/easyApplyJob';
 import { resume } from '../../actions/student/resume';
+import { BACKEND_URL } from '../../helpers/constants';
+import defaultImage from '../images/default_banner.jpg';
+import defaultLogo from '../images/default_logo.png';
 
 class CompanyJobDetails extends Component {
   constructor(props) {
@@ -289,7 +292,7 @@ class CompanyJobDetails extends Component {
             <Navigation />
             <UtilityBar />
             <div className='profile-row-one'>
-              <img
+              {/* <img
                 className='company-banner-blur'
                 src={
                   require('../../components/images/' +
@@ -306,7 +309,41 @@ class CompanyJobDetails extends Component {
                     '_logo.jpg').default
                 }
                 alt=''
-              />
+              /> */}
+
+
+{this.props.company.overview.profilePic.image ? (
+                <img
+                  className='company-banner-blur'
+                  src={`${BACKEND_URL}/company/profilepic/${this.props.company.overview.profilePic.image}`}
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner-blur'
+                  src={defaultImage}
+                  alt='company banner'
+                />
+              )}
+              {this.props.company.overview.logo ? (
+                <img
+                  className='overview-logo'
+                  src={
+                    require('../../components/images/' +
+                      this.props.company.overview.logo +
+                      '_logo.jpg').default
+                  }
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner'
+                  src={defaultLogo}
+                  alt='company banner'
+                />
+              )}
+
+
               <div className='overview-company-name'>{company_name}</div>
               <table className='profile-row-one-table'>
                 <td>
@@ -394,7 +431,7 @@ class CompanyJobDetails extends Component {
                             <tr>
                               <td>
                                 <div>
-                                  <img
+                                  {/* <img
                                     className='job-postings-logo'
                                     style={{
                                       width: '40px',
@@ -407,7 +444,28 @@ class CompanyJobDetails extends Component {
                                         '_logo.jpg').default
                                     }
                                     alt=''
-                                  />
+                                  /> */}
+
+
+{this.props.company.overview.logo ? (
+                                    <img
+                                      className='overview-logo-jobs'
+                                      src={
+                                        require('../../components/images/' +
+                                          this.props.company.overview.logo +
+                                          '_logo.jpg').default
+                                      }
+                                      alt=''
+                                    />
+                                  ) : (
+                                    <img
+                                      className='overview-logo-jobs'
+                                      src={defaultLogo}
+                                      alt='company banner'
+                                    />
+                                  )}
+
+
                                 </div>
                               </td>
                               <td

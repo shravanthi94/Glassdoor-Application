@@ -11,6 +11,8 @@ import CompanySideBar from '../Common/CompanySideBar';
 import Pagination from 'react-js-pagination';
 import { BACKEND_URL } from '../../helpers/constants';
 import defaultImage from '../images/default_banner.jpg';
+import defaultLogo from '../images/default_logo.png';
+
 
 class CompanyOverview extends Component {
   constructor(props) {
@@ -136,7 +138,7 @@ class CompanyOverview extends Component {
               ) : (
                 <img
                   className='company-banner'
-                  src={defaultImage}
+                  src={defaultLogo}
                   alt='company banner'
                 />
               )}
@@ -430,7 +432,7 @@ class CompanyOverview extends Component {
                                   ) : (
                                     <img
                                       className='overview-logo-jobs'
-                                      src={defaultImage}
+                                      src={defaultLogo}
                                       alt='company banner'
                                     />
                                   )}

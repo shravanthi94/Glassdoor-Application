@@ -7,6 +7,9 @@ import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import CompanySideBar from '../Common/CompanySideBar';
 import Pagination from 'react-js-pagination';
+import { BACKEND_URL } from '../../helpers/constants';
+import defaultImage from '../images/default_banner.jpg';
+import defaultLogo from '../images/default_logo.png';
 
 class CompanySalaries extends Component {
   constructor(props) {
@@ -104,7 +107,7 @@ class CompanySalaries extends Component {
             <Navigation />
             <UtilityBar />
             <div className='profile-row-one'>
-              <img
+              {/* <img
                 className='company-banner-blur'
                 src={
                   require('../../components/images/' +
@@ -121,7 +124,43 @@ class CompanySalaries extends Component {
                     '_logo.jpg').default
                 }
                 alt=''
-              />
+              /> */}
+
+
+{this.props.company.overview.profilePic.image ? (
+                <img
+                  className='company-banner-blur'
+                  src={`${BACKEND_URL}/company/profilepic/${this.props.company.overview.profilePic.image}`}
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner-blur'
+                  src={defaultImage}
+                  alt='company banner'
+                />
+              )}
+              {this.props.company.overview.logo ? (
+                <img
+                  className='overview-logo'
+                  src={
+                    require('../../components/images/' +
+                      this.props.company.overview.logo +
+                      '_logo.jpg').default
+                  }
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner'
+                  src={defaultLogo}
+                  alt='company banner'
+                />
+              )}
+
+
+
+
               <div className='overview-company-name'>{company_name}</div>
               <table className='profile-row-one-table'>
                 <td>
