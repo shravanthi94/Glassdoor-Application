@@ -45,7 +45,7 @@ async function updateStudentBasics(payload, callback) {
     response.message = student;
     return callback(null, response);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     response.status = 500;
     response.message = 'Server Error';
     return callback(null, response);
@@ -72,7 +72,7 @@ async function studentCounts(payload, callback) {
     response.message = results;
     return callback(null, response);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     response.status = 500;
     response.message = 'Server Error';
     return callback(null, response);
@@ -106,7 +106,7 @@ async function studentContribution(payload, callback) {
     response.message = results;
     return callback(null, response);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     response.status = 500;
     response.message = 'Server Error';
     return callback(null, response);
@@ -157,7 +157,7 @@ async function updateJobPreference(payload, callback) {
     response.message = student;
     return callback(null, response);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     response.status = 500;
     response.message = 'Server Error';
     return callback(null, response);
@@ -183,14 +183,14 @@ async function studentSearchResults(payload, callback) {
   const query = payload.params.query;
   try {
     let results = [];
-    // let interviewCount, salaryCount;
+
     if (query === 'JOBS') {
       results = await Jobposting.find({
-        title: { $regex: new RegExp('^' + searchData.toLowerCase(), 'i') },
+        title: { $regex: searchData, $options: 'i' },
       }).populate('company');
     } else {
       results = await Company.find({
-        name: { $regex: new RegExp('^' + searchData.toLowerCase(), 'i') },
+        name: { $regex: searchData, $options: 'i' },
       });
     }
 

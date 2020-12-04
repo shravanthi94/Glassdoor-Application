@@ -33,25 +33,29 @@ const LandingPage = ({ getCurrentProfile, student: { profile, loading } }) => {
               {' '}
               <h3 className='item-top-nav'>
                 <i class='fas fa-briefcase fa-lg gd-color'></i>{' '}
-                <Link to='/student/allJobs' className='h5'>
+                <Link to='/student/allJobs' className='h5 on-hover'>
                   Jobs
                 </Link>
               </h3>
               <h3 className='item-top-nav'>
                 <i class='fas fa-city fa-lg gd-color'></i>{' '}
-                <Link to='/student/allCompanies' className='h5'>
-                  Companies
-                </Link>
+                <Link className='h5 on-hover'>Companies</Link>
               </h3>
               <h3 className='item-top-nav'>
                 <i class='fas fa-money-bill-wave fa-lg gd-color'></i>{' '}
-                <Link to='/student/salaries' className='h5'>
+                <Link
+                  to='/student/contributions/salaries'
+                  className='h5 on-hover'
+                >
                   Salaries
                 </Link>
               </h3>
               <h3 className='item-top-nav'>
                 <i class='fas fa-comment-dots fa-lg gd-color'></i>{' '}
-                <Link to='/student/interviews' className='h5'>
+                <Link
+                  to='/student/contributions/interviews'
+                  className='h5 on-hover'
+                >
                   Interviews
                 </Link>
               </h3>

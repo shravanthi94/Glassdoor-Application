@@ -2,10 +2,10 @@ import axios from 'axios';
 import { setAlert } from '../alert';
 
 import {
-    STUDENT_GETALLJOBS,
-    STUDENT_JOB_DETAILS,
-    STUDENT_APPLY_JOB,
-    STUDENT_JOBERROR
+  STUDENT_GETALLJOBS,
+  STUDENT_JOB_DETAILS,
+  STUDENT_APPLY_JOB,
+  STUDENT_JOBERROR,
 } from '../types';
 
 /*export const addResume = (formData, id, history) => async (dispatch) => {
@@ -33,34 +33,34 @@ import {
   }
 };
 */
-export const getAllJobs = () => async(dispatch) => {
-    try {
-        const res = await axios.get(`/student/jobs/`);
+export const getAllJobs = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/student/jobs');
 
-        dispatch({
-            type: STUDENT_GETALLJOBS,
-            payload: res.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: STUDENT_JOBERROR,
-            payload: { msg: err, status: err.response.status },
-        });
-    }
+    dispatch({
+      type: STUDENT_GETALLJOBS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: STUDENT_JOBERROR,
+      payload: { msg: err, status: err.response.status },
+    });
+  }
 };
 
-export const getJobDetails = (id) => async(dispatch) => {
-    try {
-        const res = await axios.get(`/student/jobs/details/${id}`);
+export const getJobDetails = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/student/jobs/details/${id}`);
 
-        dispatch({
-            type: STUDENT_JOB_DETAILS,
-            payload: res.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: STUDENT_JOBERROR,
-            payload: { msg: err, status: err.response.status },
-        });
-    }
+    dispatch({
+      type: STUDENT_JOB_DETAILS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: STUDENT_JOBERROR,
+      payload: { msg: err, status: err.response.status },
+    });
+  }
 };
