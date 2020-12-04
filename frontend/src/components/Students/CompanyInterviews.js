@@ -249,7 +249,7 @@ class CompanyInterviews extends Component {
                 />
               ) : (
                 <img
-                  className='company-banner'
+                  className='overview-logo'
                   src={defaultLogo}
                   alt='company banner'
                 />
