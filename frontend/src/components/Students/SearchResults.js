@@ -71,7 +71,7 @@ const SearchResults = ({
                     {query === 'Interviews' && (
                       <Link
                         to={{
-                          pathname: '/companyInterviews',
+                          pathname: '/companyOverview',
                           state: { data: each._id },
                         }}
                       >
@@ -81,7 +81,7 @@ const SearchResults = ({
                     {query === 'Salaries' && (
                       <Link
                         to={{
-                          pathname: '/companySalaries',
+                          pathname: '/companyOverview',
                           state: { data: each._id },
                         }}
                       >
