@@ -29,9 +29,19 @@ const StudentSalaries = ({
         return (
           <Fragment>
             <div class='card-body pb-0 mb-1'>
-              <h5 class='card-title'>{each.title}</h5>
-              <p class='card-text'>{each.description}</p>
-              <p>{each.difficulty}</p>
+              <div className='card m-2 p-2 bg-light'>
+                <Link
+                  to={{
+                    pathname: '/student/viewSalaries',
+                    state: { data: each },
+                  }}
+                  style={{ textDecoration: 'none' }}
+                  className='text-dark'
+                >
+                  <h5 class='card-title'>{each.jobTitle}</h5>
+                </Link>
+                <p>Average total pay {each.avgTotalPay}</p>
+              </div>
             </div>
           </Fragment>
         );

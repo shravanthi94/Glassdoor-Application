@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Company = require('../../models/CompanyModel');
 const Reviews = require('../../models/ReviewModel');
-
+const redisRead = require('../../config/RedisRead')
+const redisWrite = require('../../config/RedisWrite')
 const kafka = require('../../kafka/client');
 
 const { adminAuth, adminCheckAuth } = require('../../middleware/adminAuth');
@@ -14,16 +15,33 @@ adminAuth();
 // @access Private
 
 router.get('/most-reviewed-company', adminCheckAuth, async(req, res) => {
-    req.body.path = 'most_reviewed_company';
-    req.body.limit = req.query.limit;
-    console.log('most_reviewed_company-> Authentication Completed');
-    kafka.make_request('adminAnalytics', req.body, (err, results) => {
-      if (err) {
-        res.status(500).end('System Error');
+  try {
+    redisRead.get('redisMostReviewedCompany', async (err, redisMostReviewedCompany) => {
+      if(redisMostReviewedCompany !== null) {
+        console.log("fetching redisMostReviewedCompany from inside redis")
+        return res.status(200).json(JSON.parse(redisMostReviewedCompany));
       } else {
-        res.status(results.status).end(results.message);
+        console.log("fetching redisMostReviewedCompany from kafka call");
+        req.body.path = 'most_reviewed_company';
+        req.body.limit = req.query.limit;
+        console.log('most_reviewed_company-> Authentication Completed');
+        kafka.make_request('adminAnalytics', req.body, (err, results) => {
+          if (err) {
+            res.status(500).end('System Error');
+          } else {
+            if(results.status) {
+              redisWrite.setex('redisMostReviewedCompany', 36000, results.message);
+              console.log("writing redisMostReviewedCompany to redis finished", JSON.stringify(results))
+            }
+            res.status(results.status).end(results.message);
+          }
+        });
       }
     });
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+  }
 });
 
 // @route  GET /admin/analytics/best-average-rating
@@ -31,16 +49,33 @@ router.get('/most-reviewed-company', adminCheckAuth, async(req, res) => {
 // @access Private
 
 router.get('/best-average-rating', adminCheckAuth, async(req, res) => {
-    req.body.path = 'best_average_rating';
-    req.body.limit = req.query.limit;
-    console.log('best_average_rating-> Authentication Completed');
-    kafka.make_request('adminAnalytics', req.body, (err, results) => {
-      if (err) {
-        res.status(500).end('System Error');
-      } else {
-        res.status(results.status).end(results.message);
-      }
-    });
+  try {
+  redisRead.get('bestAverageRating', async (err, bestAverageRating) => {
+    if(bestAverageRating !== null) {
+      console.log("fetching bestAverageRating from inside redis")
+      return res.status(200).json(JSON.parse(bestAverageRating));
+    } else {
+      console.log("fetching bestAverageRating from kafka call");
+      req.body.path = 'best_average_rating';
+      req.body.limit = req.query.limit;
+      console.log('best_average_rating-> Authentication Completed');
+      kafka.make_request('adminAnalytics', req.body, (err, results) => {
+        if (err) {
+          res.status(500).end('System Error');
+        } else {
+          if(results.status) {
+            redisWrite.setex('bestAverageRating', 36000, results.message);
+            console.log("writing bestAverageRating to redis finished", JSON.stringify(results))
+          }
+          res.status(results.status).end(results.message);
+        }
+      });
+    }
+});
+} catch (err) {
+  console.error(err.message);
+  res.status(500).send('Server Error');
+}
 });
 
 // @route  GET /admin/analytics/top-ceo
@@ -48,6 +83,13 @@ router.get('/best-average-rating', adminCheckAuth, async(req, res) => {
 // @access Private
 
 router.get('/top-ceo', adminCheckAuth, async(req, res) => {
+  try {
+    redisRead.get('topCeo', async (err, topCeo) => {
+      if(topCeo !== null) {
+        console.log("fetching topCeo from inside redis")
+        return res.status(200).json(JSON.parse(topCeo));
+      } else {
+        console.log("fetching topCeo from kafka call");
     req.body.path = 'best_ceos';
     req.body.limit = req.query.limit;
     console.log('best_ceos-> Authentication Completed');
@@ -55,9 +97,19 @@ router.get('/top-ceo', adminCheckAuth, async(req, res) => {
       if (err) {
         res.status(500).end('System Error');
       } else {
+        if(results.status) {
+          redisWrite.setex('topCeo', 36000, results.message);
+          console.log("writing topCeo to redis finished", JSON.stringify(results))
+        }
         res.status(results.status).end(results.message);
       }
     });
+  }
+});
+} catch (err) {
+console.error(err.message);
+res.status(500).send('Server Error');
+}
 });
 
 // @route  GET /admin/analytics/top-student-reviewer
@@ -65,6 +117,13 @@ router.get('/top-ceo', adminCheckAuth, async(req, res) => {
 // @access Private
 
 router.get('/top-student-reviewer', adminCheckAuth, async(req, res) => {
+  try {
+    redisRead.get('topStudentReviewer', async (err, topStudentReviewer) => {
+      if(topStudentReviewer !== null) {
+        console.log("fetching topStudentReviewer from inside redis")
+        return res.status(200).json(JSON.parse(topStudentReviewer));
+      } else {
+        console.log("fetching topStudentReviewer from kafka call");
     req.body.path = 'top_student_reviewer';
     req.body.limit = req.query.limit;
     console.log('top_student_reviewer-> Authentication Completed');
@@ -72,9 +131,19 @@ router.get('/top-student-reviewer', adminCheckAuth, async(req, res) => {
       if (err) {
         res.status(500).end('System Error');
       } else {
+        if(results.status) {
+          redisWrite.setex('topStudentReviewer', 36000, results.message);
+          console.log("writing topStudentReviewer to redis finished", JSON.stringify(results))
+        }
         res.status(results.status).end(results.message);
       }
     });
+  }
+});
+} catch (err) {
+console.error(err.message);
+res.status(500).send('Server Error');
+}
 });
 
 // @route  GET /admin/analytics/reviews-per-day
@@ -82,6 +151,13 @@ router.get('/top-student-reviewer', adminCheckAuth, async(req, res) => {
 // @access Private
 
 router.get('/reviews-per-day', adminCheckAuth, async(req, res) => {
+  try {
+    redisRead.get('reviewsPerDay', async (err, reviewsPerDay) => {
+      if(reviewsPerDay !== null) {
+        console.log("fetching reviewsPerDay from inside redis")
+        return res.status(200).json(JSON.parse(reviewsPerDay));
+      } else {
+        console.log("fetching reviewsPerDay from kafka call");
     req.body.path = 'reviews_per_day';
     req.body.limit = req.query.limit;
     console.log('reviews_per_day-> Authentication Completed');
@@ -89,9 +165,19 @@ router.get('/reviews-per-day', adminCheckAuth, async(req, res) => {
       if (err) {
         res.status(500).end('System Error');
       } else {
+        if(results.status) {
+          redisWrite.setex('reviewsPerDay', 36000, results.message);
+          console.log("writing reviewsPerDay to redis finished", JSON.stringify(results))
+        }
         res.status(results.status).end(results.message);
       }
     });
+  }
+});
+} catch (err) {
+console.error(err.message);
+res.status(500).send('Server Error');
+}
 });
 
 // @route  GET /admin/analytics/top-viewed-company

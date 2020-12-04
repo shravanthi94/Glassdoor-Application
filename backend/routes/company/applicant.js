@@ -7,7 +7,10 @@ const { check, validationResult } = require('express-validator');
 const Company = require('../../models/CompanyModel');
 const Student = require('../../models/StudentModel');
 const Jobposting = require('../../models/JobPostingModel');
-const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
+const {
+    companyAuth,
+    companyCheckAuth,
+} = require('../../middleware/companyAuth');
 const mysqlConnectionPool = require('../../config/sqlConnectionPool');
 const kafka = require('../../kafka/client');
 
@@ -71,7 +74,6 @@ router.get('/:id', companyCheckAuth, async(req, res) => {
     });
 });
 
-
 // @route  GET /company/applicant/aplicantdetail/:id
 // @Desc   Get applicant detail by ID
 // @access Private
@@ -119,7 +121,6 @@ router.get('/aplicantdetail/:id', companyCheckAuth, async(req, res) => {
     });
 
 });
-
 
 // @route  GET /company/applicant/student/:email
 // @Desc   Get student detail by emailID

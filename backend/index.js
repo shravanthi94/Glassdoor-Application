@@ -60,7 +60,6 @@ app.use('/student/jobs', jobPostings);
 //  Student - JOB APPLICATIONS
 app.use('/student/applications', applications);
 
-
 /*  Routes for Company */
 // Company - SIGNUP
 app.use('/company/signup', signupCompany);
@@ -102,8 +101,12 @@ app.use('/admin/companies', company);
 //  Admin - ANALYTICS
 app.use('/admin/analytics', analytics);
 
+app.get('/', (req, res) => {
+  res.status(200).send('Hello');
+});
+
 //  Connection to a port
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`Application started listening to port ${PORT} successfully.`);
+  console.log(`Application started listening to port ${PORT} successfully.`);
 });
