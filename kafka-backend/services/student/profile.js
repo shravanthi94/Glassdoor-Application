@@ -45,7 +45,7 @@ async function updateStudentBasics(payload, callback) {
     response.message = student;
     return callback(null, response);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     response.status = 500;
     response.message = 'Server Error';
     return callback(null, response);
