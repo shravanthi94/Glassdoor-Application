@@ -442,51 +442,50 @@ router.get('/featured/all', companyCheckAuth, async(req, res) => {
 
 router.post('/reply/:id', companyCheckAuth, async(req, res) => {
 
-    // try {
-    //     // console.log(req.params.id)
-    //     console.log(req.body)
-    //     const reply = req.body.message
-    //     console.log("reply inside post is ", reply)
-    //     let review = await Review.findOne({ "_id": req.params.id })
-    //     if (review) {
+    try {
+        // console.log(req.params.id)
+        console.log(req.body)
+        const reply = req.body.reply
+        console.log("reply inside post is ", reply)
+        let review = await Review.findOne({ "_id": req.params.id })
+        if (review) {
 
-    //         review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "reply.message": reply } }, { new: true });
-    //         return res.status(200).json(review);
-    //     } else {
-    //         return res.status(400).json({ msg: 'No Review found' });
-    //     }
+            review = await Review.findOneAndUpdate({ "_id": req.params.id }, { $set: { "reply.message": reply } }, { new: true });
+            return res.status(200).json(review);
+        } else {
+            return res.status(400).json({ msg: 'No Review found' });
+        }
 
-    // } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send('Server Error');
-    // }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 
     // not working
-
-    const payload = {
-        topic: 'replyMessage',
-        params: req.params,
-        body: req.body
-    };
-    console.log(payload)
-    kafka.make_request('companyReviews', payload, (err, results) => {
-        console.log('in result');
-        if (err) {
-            console.log('Inside err', err);
-            res.status(500).send('System Error, Try Again.');
-        } else {
-            if (results.status === 400) {
-                console.log('Inside err2', results);
-                return res.status(400).json({ msg: results.message });
-            }
-            if (results.status === 500) {
-                console.log('Inside err3', results);
-                return res.status(500).send('Server Error');
-            }
-            console.log('in result1234', results);
-            res.status(200).json(results.message);
-        }
-    });
+    // const payload = {
+    //     topic: 'replyMessage',
+    //     params: req.params,
+    //     body: req.body
+    // };
+    // console.log("review", payload)
+    // kafka.make_request('companyReviews', payload, (err, results) => {
+    //     console.log('in result');
+    //     if (err) {
+    //         console.log('Inside err', err);
+    //         res.status(500).send('System Error, Try Again.');
+    //     } else {
+    //         if (results.status === 400) {
+    //             console.log('Inside err2', results);
+    //             return res.status(400).json({ msg: results.message });
+    //         }
+    //         if (results.status === 500) {
+    //             console.log('Inside err3', results);
+    //             return res.status(500).send('Server Error');
+    //         }
+    //         console.log('in result1234', results);
+    //         res.status(200).json(results.message);
+    //     }
+    // });
 });
 
 
