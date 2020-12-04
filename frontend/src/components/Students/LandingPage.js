@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -89,9 +90,7 @@ const LandingPage = ({ getCurrentProfile, student: { profile, loading } }) => {
           </a>
           <br />
           <i class='fas fa-map-marker-alt fa-lg mt-2'></i>{' '}
-          <a href='/' className='student-location'>
-            San Jose, CA
-          </a>
+          <a className='student-location'>San Jose, CA</a>
           <hr />
           <h4 className='job-text pl-25'>Find the job you'll love</h4>
           <br />
