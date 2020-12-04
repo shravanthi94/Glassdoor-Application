@@ -115,14 +115,14 @@ async function studentContribution(payload, callback) {
 
 async function updateStudentDemographics(payload, callback) {
   const studentEmail = payload.user.email;
-  const { ethnicity, gender, disability, vetran } = payload.body;
+  const { ethnicity, gender, disability, veteran } = payload.body;
 
   try {
     const student = await Student.findOne({ email: studentEmail });
     student.demographics.ethnicity = ethnicity;
     student.demographics.gender = gender;
     student.demographics.disability = disability;
-    student.demographics.vetran = vetran;
+    student.demographics.veteran = veteran;
 
     await student.save();
 

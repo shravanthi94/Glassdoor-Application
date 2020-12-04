@@ -80,7 +80,7 @@ const LandingPage = ({ getCurrentProfile, student: { profile, loading } }) => {
           )}
           <h3 className='name py pl-25'>{profile.name}</h3>
           <i class='fas fa-briefcase fa-lg mt-3'></i>{' '}
-          <a href='/' className='student-job-link'>
+          <a className='student-job-link' style={{ color: 'rgb(24, 97, 191)' }}>
             Add Job Title
           </a>
           <br />

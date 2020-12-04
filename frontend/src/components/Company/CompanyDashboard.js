@@ -4,13 +4,12 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCurrentCompanyProfile } from '../../actions/company/companyprofile';
 import CmpNav2 from './CmpNav2';
-import defaultImage from '../images/default_banner.jpg'
-import defaultLogo from '../images/default_logo.png'
+import defaultImage from '../images/default_banner.jpg';
+import defaultLogo from '../images/default_logo.png';
 // import Spinner from '../Spinner/spinner';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../CSS/CompanyDashboard.css';
-import {BACKEND_URL} from '../../helpers/constants';
-
+import { BACKEND_URL } from '../../helpers/constants';
 
 const CompanyDashboard = ({
   getCurrentCompanyProfile,
@@ -41,19 +40,37 @@ const CompanyDashboard = ({
   //     let path=`/company/applicants`;
   //     history.push(path)
   // }
-  const statisticsRoute = ()=>{
-    let path =`/company/statistics`;
-    history.push(path)
-  }
+  const statisticsRoute = () => {
+    let path = `/company/statistics`;
+    history.push(path);
+  };
 
-    return (
+  return (
     <Fragment>
       <CmpNav2 />
-      <div className='contentholder-company text-company'>
-        {loading && companyprofile === null ? (' ') : (
-          <div className='overview-all'> <div className='profile-row-one-company'>{companyprofile.profilePic.image ? (
-                <img className='company-banner' src={`${BACKEND_URL}/company/profilepic/${companyprofile.profilePic.image}`} alt=''/>) : (
-                <img className='company-banner' src={defaultImage} alt='company banner'/>)}
+      <div
+        className='contentholder-company text-company'
+        style={{ marginTop: '0px' }}
+      >
+        {loading && companyprofile === null ? (
+          ' '
+        ) : (
+          <div className='overview-all'>
+            {' '}
+            <div className='profile-row-one-company'>
+              {companyprofile.profilePic.image ? (
+                <img
+                  className='company-banner'
+                  src={`${BACKEND_URL}/company/profilepic/${companyprofile.profilePic.image}`}
+                  alt=''
+                />
+              ) : (
+                <img
+                  className='company-banner'
+                  src={defaultImage}
+                  alt='company banner'
+                />
+              )}
               {companyprofile.logo ? (
                 <img
                   className='company-logo'
@@ -63,10 +80,10 @@ const CompanyDashboard = ({
                       '_logo.jpg').default
                   }
                   alt=''
-                /> 
+                />
               ) : (
-                <img className='company-logo' src={defaultLogo} alt=''/>
-              )} 
+                <img className='company-logo' src={defaultLogo} alt='' />
+              )}
               {companyprofile.name ? (
                 <div className='dashboard-company-name'>
                   {companyprofile.name}{' '}
@@ -120,7 +137,9 @@ const CompanyDashboard = ({
                   <div className='profile-counts'>
                     <i class='fas fa-chart-line'></i>
                   </div>
-                  <div className='profile-title' onClick={statisticsRoute}>Statistics&emsp;</div>
+                  <div className='profile-title' onClick={statisticsRoute}>
+                    Statistics&emsp;
+                  </div>
                 </td>
                 <div>
                   &emsp;&emsp;
@@ -134,7 +153,6 @@ const CompanyDashboard = ({
                 </div>
               </table>
             </div>
-
             <div className='side-by-side-overview'>
               <div className='profile-row-two'>
                 <div className='profile-row-two-row1'>
@@ -264,7 +282,8 @@ const CompanyDashboard = ({
                         <span>&emsp;Top CEOs:</span>
                         {companyprofile.ceoName ? (
                           <span style={{ color: '#1861BF' }}>
-                            {' '}{companyprofile.ceoName} &nbsp;2019 (#34)
+                            {' '}
+                            {companyprofile.ceoName} &nbsp;2019 (#34)
                           </span>
                         ) : (
                           ''
@@ -379,7 +398,7 @@ const CompanyDashboard = ({
                         </tr>
                       </table>
                     ) : (
-                      <p style={{color: "red"}}>No Reviews yet </p>
+                      <p style={{ color: 'red' }}>No Reviews yet </p>
                     )}
                   </div>
                 </div>
