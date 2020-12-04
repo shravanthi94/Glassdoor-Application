@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { login } from '../../actions/admin/auth';
 import glassdoor from '../images/glassdoor.png';
 import '../CSS/navbar.css';
+import Alert from '../Alert';
 
 const Login = ({ isAuthenticated, login }) => {
   const [formData, setformData] = useState({
@@ -33,15 +34,24 @@ const Login = ({ isAuthenticated, login }) => {
             <Link to='/' className='header-nav-link'>
               <img src={glassdoor} className='logo' alt='logo-img' />
             </Link>
-            <br/>
+            <br />
           </div>
         </div>
         <h1 className='headingAdmin'>
           Sign In to get instant access to <br /> <br />
           <br /> <br /> stastics about companies and jobs
         </h1>
+        <div
+          style={{
+            width: '300px',
+            marginLeft: '40%',
+            backgroundColor: 'white',
+          }}
+        >
+          <Alert />
+        </div>
         <br />
-        <div className='container' style={{marginLeft:'40%'}}>
+        <div className='container' style={{ marginLeft: '40%' }}>
           <form className='form' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
               <input
@@ -65,7 +75,7 @@ const Login = ({ isAuthenticated, login }) => {
                 required
               />
             </div>
-            <input type='submit' value='Sign In' style={{marginLeft:'8%'}}/>
+            <input type='submit' value='Sign In' style={{ marginLeft: '8%' }} />
           </form>
         </div>
       </div>

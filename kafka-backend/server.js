@@ -12,9 +12,17 @@ var AdminReviews = require('./services/admin/reviews');
 // Student files import
 const studentProfile = require('./services/student/profile');
 const studentJobApplications = require('./services/student/studentJobApplications');
+const studentJobs = require('./services/student/studentJobs');
+const studentResume = require('./services/student/resume');
+
 // Company files import
 const jobApplicant = require('./services/company/applicant');
 const jobs = require('./services/company/jobPosting');
+const interviews = require('./services/company/interview');
+const salary = require('./services/company/salary');
+const overview = require('./services/company/overview');
+const companyprofile = require('./services/company/profile');
+const companyreviews = require('./services/company/reviews');
 
 const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
@@ -81,11 +89,19 @@ handleTopicRequest('adminReviews', AdminReviews);
 //Company topics Start
 handleTopicRequest('jobapplicant', jobApplicant);
 handleTopicRequest('companyJobPosting', jobs);
+handleTopicRequest('interviewStudent', interviews);
+handleTopicRequest('salaryStudent', salary);
+handleTopicRequest('overviewCompanyStudent', overview);
+handleTopicRequest('companyProfile', companyprofile);
+handleTopicRequest('companyReviews', companyreviews);
+
 //Company topics End
 
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
 handleTopicRequest('studentJobApplications', studentJobApplications);
+handleTopicRequest('studentJobs', studentJobs);
+handleTopicRequest('studentResume', studentResume)
 //Student topics end
 
 /*
