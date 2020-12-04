@@ -13,6 +13,8 @@ var AdminReviews = require('./services/admin/reviews');
 
 // Student files import
 const studentProfile = require('./services/student/profile');
+const studentJobs = require('./services/student/studentJobs');
+const studentResume = require('./services/student/resume');
 
 // Company files import
 const jobApplicant = require('./services/company/applicant');
@@ -96,7 +98,9 @@ handleTopicRequest('companyReviews', companyreviews)
 
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
-//Student topics end
+handleTopicRequest('studentJobs', studentJobs);
+handleTopicRequest('studentResume', studentResume)
+    //Student topics end
 
 /*
 Kafka Commands: Please dont delete

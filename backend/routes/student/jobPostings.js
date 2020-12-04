@@ -11,71 +11,71 @@ const multer = require("multer");
 // @Desc   Apply for a particular job
 // @access Private
 
-router.post("/apply/:jobId", checkAuth, async(req, res) => {
-    try {
-        let student = await Student.findOne({ "email": req.user.email });
-        if (student) {
-            const newJobApplicant = {
-                student: student._id,
-                email: req.user.email,
-                // resume: req.body.resume,
-                // coverletter: req.body.coverletter
-            };
-            console.log(req.params.jobId)
-            let job = await Jobposting.findOne({ "_id": req.params.jobId })
-            job.applicants.unshift(newJobApplicant);
-            await job.save();
-            res.json(job)
-        }
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
+// router.post("/apply/:jobId", checkAuth, async(req, res) => {
+//     try {
+//         let student = await Student.findOne({ "email": req.user.email });
+//         if (student) {
+//             const newJobApplicant = {
+//                 student: student._id,
+//                 email: req.user.email,
+//                 // resume: req.body.resume,
+//                 // coverletter: req.body.coverletter
+//             };
+//             console.log(req.params.jobId)
+//             let job = await Jobposting.findOne({ "_id": req.params.jobId })
+//             job.applicants.unshift(newJobApplicant);
+//             await job.save();
+//             res.json(job)
+//         }
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
 
 
-});
+// });
 
-router.get("/", checkAuth, async(req, res) => {
+// router.get("/", checkAuth, async(req, res) => {
 
-    try {
-        let jobs = await Jobposting.find().sort({ date: -1 }).populate('company');
-        if (!jobs) {
-            return res.status(400).json({ msg: 'No jobs posted yet' });
-        }
-        //     let jobs_out=[]
-        //     for(let job in jobs){
-        //     let out ={ title:'', company:'', city:'', state:'',  date};
-        //     out.title = job.title;
-        //     out.city = job.city;
-        //     out.state = job.state;
-        //     out.company=job.name;
-        //     out.date=  job.date;
-        //     jobs_out.push(out);
-        // }
-        res.status(200).json(jobs);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send({ msg: 'Server Error: Database' });
-    }
-
-
-});
-
-router.get("/details/:id", async(req, res) => {
-
-    try {
-        let job = await Jobposting.findById(req.params.id);
-        if (!job) {
-            return res.status(400).json({ msg: 'No jobs posted yet' });
-        }
-        res.status(200).json(job);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send({ msg: 'Server Error: Database' });
-    }
+//     try {
+//         let jobs = await Jobposting.find().sort({ date: -1 }).populate('company');
+//         if (!jobs) {
+//             return res.status(400).json({ msg: 'No jobs posted yet' });
+//         }
+//         //     let jobs_out=[]
+//         //     for(let job in jobs){
+//         //     let out ={ title:'', company:'', city:'', state:'',  date};
+//         //     out.title = job.title;
+//         //     out.city = job.city;
+//         //     out.state = job.state;
+//         //     out.company=job.name;
+//         //     out.date=  job.date;
+//         //     jobs_out.push(out);
+//         // }
+//         res.status(200).json(jobs);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send({ msg: 'Server Error: Database' });
+//     }
 
 
-});
+// });
+
+// router.get("/details/:id", async(req, res) => {
+
+//     try {
+//         let job = await Jobposting.findById(req.params.id);
+//         if (!job) {
+//             return res.status(400).json({ msg: 'No jobs posted yet' });
+//         }
+//         res.status(200).json(job);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send({ msg: 'Server Error: Database' });
+//     }
+
+
+// });
 
 // router.get("/applied", checkAuth, async(req, res) => {
 
