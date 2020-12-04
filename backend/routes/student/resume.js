@@ -6,6 +6,10 @@ const Student = require('../../models/StudentModel');
 const path = require('path');
 const multer = require('multer');
 const kafka = require('../../kafka/client');
+const redisRead = require('../../config/RedisRead');
+const redis = require("redis");
+const redisPort = process.env.PORT || 6379;
+const redisClient = redis.createClient(redisPort);
 // const { delete } = require("../../app");
 
 // router.post('/resume/:id', checkAuth, async (req, res) => {
@@ -99,6 +103,18 @@ router.post('/', checkAuth, async(req, res) => {
         console.log('inside backend upload resume: ', req.body);
 
         console.log('all data: ', req.body);
+
+        var studentProfileRedis = 'studentProfile' + req.body.studentId;
+        console.log('studentProfile :', studentProfileRedis)
+        redisRead.get(studentProfileRedis, async (err, studentProfile) => {
+            if(studentProfile !== null) {
+            console.log("deleting studentProfile from inside redis");
+            redisClient.del(studentProfileRedis, function (err, reply) {
+                console.log("Redis Delete of studentProfile", reply);
+            });
+            } 
+        });
+
 
         upload(req, res, async(err) => {
             if (err) {
