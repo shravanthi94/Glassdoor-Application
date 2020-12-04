@@ -13,6 +13,7 @@ import UtilityBar from './UtilityBar';
 import Pagination from 'react-js-pagination';
 import defaultImage from '../images/default_banner.jpg';
 import CompanySideBar from '../Common/CompanySideBar';
+import defaultLogo from '../images/default_logo.png';
 
 const CompanyPhotos = ({ getCompanyProfile, company }) => {
   useEffect(() => {
