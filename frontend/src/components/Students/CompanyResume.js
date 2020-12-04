@@ -40,6 +40,8 @@ class CompanyResume extends Component {
         console.log("inside upload handler: ", this.state.resume);
         console.log("inside upload handler name: ", this.state.resume.name);
 
+        if (this.state.resume && this.state.resume.name &&   this.state.resume.name !== 0) {
+
         const formData = new FormData();
         formData.append("resume", this.state.resume, this.state.resume.name);
         formData.append("studentId", this.props.studentId);
@@ -49,6 +51,7 @@ class CompanyResume extends Component {
         })
 
         this.props.uploadResume(formData);
+    }
     }
 
     primaryResumeHandler = (e, resume) => {

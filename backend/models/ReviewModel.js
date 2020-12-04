@@ -26,6 +26,7 @@ const ReviewSchema = new mongoose.Schema({
     default: false,
   },
   currentOrFormer: { type: String },
+  mostHelpfulVotes: { type: Number, default: 0 },
   reply: [
     {
       message: {

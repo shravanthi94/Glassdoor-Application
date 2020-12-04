@@ -6,6 +6,13 @@ const redisRead = require('../../config/RedisRead')
 const redisWrite = require('../../config/RedisWrite')
 const kafka = require('../../kafka/client');
 
+// const redis = require("redis");
+// const redisPort = process.env.PORT || 6379;
+// const redisClient = redis.createClient(redisPort);
+// redisClient.del('redisMostReviewedCompany', function (err, reply) {
+//   console.log("Redis Delete of redisMostReviewedCompany", reply);
+// });
+
 const { adminAuth, adminCheckAuth } = require('../../middleware/adminAuth');
 
 adminAuth();

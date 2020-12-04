@@ -65,6 +65,7 @@ import StudentPhotos from './Students/contributions/StudentPhotos';
 import ViewInterview from './Students/contributions/ViewInterview';
 import ViewReview from './Students/contributions/ViewReview';
 import ViewSalary from './Students/contributions/ViewSalary';
+import CompanyResume from './Students/CompanyResume';
 
 import StudentApplications from './Students/StudentApplications';
 
@@ -89,7 +90,7 @@ class Main extends Component {
             <Route exact path='/companysignin' component={CompanyLogin} />
             <Route exact path='/companyOverview' component={CompanyOverview} />
             <Route exact path='/companyReviews' component={CompanyReviews} />
-            {/* <Route exact path='/student/update/resume' component={CompanyResume} /> */}
+            <Route exact path='/student/update/resume' component={CompanyResume} />
             <Route
               exact
               path='/companyJobDetails'
