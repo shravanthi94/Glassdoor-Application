@@ -37,13 +37,25 @@ const Navbar = ({ isAuthenticated, signup }) => {
             </Link>
           </div>
           <div className='right-nav'>
-            <Link to='/student/signin' className='header-nav-button'>
+            <Link
+              to='/student/signin'
+              className='header-nav-button'
+              style={{ textDecoration: 'none' }}
+            >
               Signin
             </Link>
-            <Link to='/company' className='header-nav-link job-link'>
+            <Link
+              to='/company'
+              className='header-nav-link job-link'
+              style={{ textDecoration: 'none' }}
+            >
               Post Jobs
             </Link>
-            <Link to='/admin/signin' className='header-nav-link job-link'>
+            <Link
+              to='/admin/signin'
+              className='header-nav-link job-link'
+              style={{ textDecoration: 'none' }}
+            >
               Admin Login
             </Link>
           </div>

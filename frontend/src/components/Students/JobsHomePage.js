@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import spinner from '../Spinner/spinner';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import { getAllJobs, getJobDetails } from '../../actions/student/jobpostings';
 import '../CSS/studentLandingPage.css';
 import logo from '../images/default_logo.png';
+import Pagination from 'react-js-pagination';
 
 const JobsHomePage = ({
   getAllJobs,
@@ -24,9 +24,19 @@ const JobsHomePage = ({
   const [location, setlocation] = useState('');
   const [salaryRange, setsalaryRange] = useState('');
 
-  useState(() => {
+  const [activePage, setactivePage] = useState(1);
+
+  // Logic for displaying current menu items
+  const indexOfLast = activePage * 5;
+  const indexOfFirst = indexOfLast - 5;
+
+  const handlePageChange = (pageNumber) => {
+    setactivePage(pageNumber);
+  };
+
+  useEffect(() => {
     getAllJobs();
-  }, []);
+  }, [getAllJobs]);
 
   useEffect(() => {
     setdisplayJobs(jobs);
@@ -89,11 +99,17 @@ const JobsHomePage = ({
   };
 
   const onLocationChange = (e) => {
+    if (e.target.value === '') {
+      setdisplayJobs(jobs);
+    }
     setlocation(e.target.value);
     setdisplayJobs(jobs.filter((each) => each.city.includes(location)));
   };
 
   const onSalaryChange = (e) => {
+    if (e.target.value === '') {
+      setdisplayJobs(jobs);
+    }
     setsalaryRange(e.target.value);
     const selectedRange = e.target.value;
     setdisplayJobs(jobs.filter((each) => each.salary === selectedRange));
@@ -141,7 +157,9 @@ const JobsHomePage = ({
                 value={rating}
                 onChange={(e) => onRatingChange(e)}
               >
-                <option className='dropdownOptionLabel'>Ratings</option>
+                <option className='dropdownOptionLabel' value=''>
+                  Ratings
+                </option>
                 <option className='dropdownOptionLabel' value='Most Rated'>
                   Most Rated
                 </option>
@@ -156,7 +174,9 @@ const JobsHomePage = ({
                 value={salaryRange}
                 onChange={(e) => onSalaryChange(e)}
               >
-                <option className='dropdownOptionLabel'>Salary Range</option>
+                <option className='dropdownOptionLabel' value=''>
+                  Salary Range
+                </option>
                 <option className='dropdownOptionLabel' value='$50k-$100k'>
                   $50k-$100k
                 </option>
@@ -221,7 +241,7 @@ const JobsHomePage = ({
             </div>
             <div className='col-5 m-0'>
               {!loading && displayJobs.length > 0 ? (
-                displayJobs.map((jobItem) => (
+                displayJobs.slice(indexOfFirst, indexOfLast).map((jobItem) => (
                   <Fragment>
                     <div className='card mb-2'>
                       <div className='card-body'>
@@ -295,6 +315,19 @@ const JobsHomePage = ({
               ) : (
                 <p>No Jobs posted yet</p>
               )}
+              <div>
+                <Pagination
+                  itemClass='page-item'
+                  linkClass='page-link'
+                  activeClass='gd-blue'
+                  activeLinkClass='paginate'
+                  activePage={activePage}
+                  itemsCountPerPage={5}
+                  totalItemsCount={displayJobs.length}
+                  pageRangeDisplayed={10}
+                  onChange={handlePageChange}
+                />
+              </div>
             </div>
             <div class='col-7' style={{ margin: '0' }}>
               {!job ? (

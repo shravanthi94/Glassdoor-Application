@@ -1,6 +1,5 @@
 var connection = new require('./kafka/connection');
 const connectDB = require('./config/db');
-
 const auth = require('./services/auth/auth');
 
 var Reviews = require('./services/reviews');
@@ -8,13 +7,11 @@ var AdminAnalytics = require('./services/admin/analytics');
 var AdminCompany = require('./services/admin/company');
 var AdminPhotos = require('./services/admin/photos');
 var AdminReviews = require('./services/admin/reviews');
-
 // Student files import
 const studentProfile = require('./services/student/profile');
 const studentJobApplications = require('./services/student/studentJobApplications');
 const studentJobs = require('./services/student/studentJobs');
 const studentResume = require('./services/student/resume');
-
 // Company files import
 const jobApplicant = require('./services/company/applicant');
 const jobs = require('./services/company/jobPosting');
@@ -23,27 +20,6 @@ const salary = require('./services/company/salary');
 const overview = require('./services/company/overview');
 const companyprofile = require('./services/company/profile');
 const companyreviews = require('./services/company/reviews');
-
-const { mongoURI } = require('./config/configuration');
-const mongoose = require('mongoose');
-// const fs = require('fs');
-
-// var options = {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   reconnectTries: Number.MAX_VALUE,
-//   reconnectInterval: 500, // Reconnect every 500ms
-//   poolSize: 500,
-//   bufferMaxEntries: 0,
-// };
-
-// mongoose.connect(mongoURI, options, (err, res) => {
-//   if (err) {
-//     console.log(`MongoDB Connection Failed`);
-//   } else {
-//     console.log(`MongoDB Connected`);
-//   }
-// });
 
 // connect databse
 connectDB();
@@ -78,13 +54,11 @@ function handleTopicRequest(topic_name, fname) {
 
 // Authorization
 handleTopicRequest('authorization', auth);
-
 //Admin topics Start
 handleTopicRequest('adminAnalytics', AdminAnalytics);
 handleTopicRequest('adminCompany', AdminCompany);
 handleTopicRequest('adminPhotos', AdminPhotos);
 handleTopicRequest('adminReviews', AdminReviews);
-//Admin topics end
 
 //Company topics Start
 handleTopicRequest('jobapplicant', jobApplicant);
@@ -95,14 +69,11 @@ handleTopicRequest('overviewCompanyStudent', overview);
 handleTopicRequest('companyProfile', companyprofile);
 handleTopicRequest('companyReviews', companyreviews);
 
-//Company topics End
-
 //Student topics Start
 handleTopicRequest('studentProfile', studentProfile);
 handleTopicRequest('studentJobApplications', studentJobApplications);
 handleTopicRequest('studentJobs', studentJobs);
-handleTopicRequest('studentResume', studentResume)
-//Student topics end
+handleTopicRequest('studentResume', studentResume);
 
 /*
 Kafka Commands: Please dont delete

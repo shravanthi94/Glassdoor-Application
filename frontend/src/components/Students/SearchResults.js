@@ -27,26 +27,13 @@ const SearchResults = ({
   const [activePage, setactivePage] = useState(1);
 
   // Logic for displaying current menu items
-  const indexOfLast = activePage * 1;
-  const indexOfFirst = indexOfLast - 1;
+  const indexOfLast = activePage * 4;
+  const indexOfFirst = indexOfLast - 4;
   // const currentResults = results.slice(indexOfFirst, indexOfLast);
 
   const handlePageChange = (pageNumber) => {
     setactivePage(pageNumber);
   };
-
-  // const displayInterviews = () => {
-  //   if (results.length === 0) {
-  //     return '';
-  //   }
-  //   const currentResults = results[0].interview.slice(
-  //     indexOfFirst,
-  //     indexOfLast,
-  //   );
-  //   return currentResults.map((each) => {
-  //     return <Fragment>{each.title}</Fragment>;
-  //   });
-  // };
 
   const displayResults = () => {
     const currentResults = results.slice(indexOfFirst, indexOfLast);
@@ -221,7 +208,7 @@ const SearchResults = ({
               Showing results for{' '}
               <strong class='capitalize'>{searchData}</strong>
             </h1>
-            <p>Showing 1–10 of 550 Companies</p>
+            <p>Showing 1-4 of {results.length} Companies</p>
           </div>
           <div>{displayResults()}</div>
           <hr />
@@ -232,7 +219,7 @@ const SearchResults = ({
               activeClass='gd-blue'
               activeLinkClass='paginate'
               activePage={activePage}
-              itemsCountPerPage={1}
+              itemsCountPerPage={4}
               totalItemsCount={results.length}
               pageRangeDisplayed={10}
               onChange={handlePageChange}

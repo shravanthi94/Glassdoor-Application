@@ -122,7 +122,7 @@ class CompanyDetailsReviews extends Component {
                             <div className="admin-company-name">{this.props.location.state.name}</div>
                             <table className="analytics-row-one-table">
                                 <td className="profile-titles-selected"><div className="profile-title">Company Reviews</div></td>
-                                <td><div className="profile-title" onClick={() => this.redirectHandler("company_stastics")}>Company Stastics</div></td>
+                                <td><div className="profile-title" onClick={() => this.redirectHandler("company_stastics")}>Company Job Stastics</div></td>
                             </table>
                         </div>
 
@@ -136,8 +136,8 @@ class CompanyDetailsReviews extends Component {
 
                         <div className="admin-company-name">{this.props.location.state.name}</div>
                         <table className="analytics-row-one-table">
-                            <td className="profile-titles-selected"><div className="profile-title">Reviews per day</div></td>
-                            <td><div className="profile-title" onClick={() => this.redirectHandler("company_stastics")}>Company Stastics</div></td>
+                            <td className="profile-titles-selected"><div className="profile-title">Company Reviews</div></td>
+                            <td><div className="profile-title" onClick={() => this.redirectHandler("company_stastics")}>Company Job Stastics</div></td>
                         </table>
                     </div>
 
