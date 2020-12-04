@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { COMPANY_AVERAGE_RATING, MOST_REVIEWED_COMPANY, TOP_STUDENT_REVIEWERS, TOP_CEO, MOST_VIEWED_COMPANY, REVIEW_PER_DAY } from "../types";
 import { REVIEW_PER_DAY_ERROR, COMPANY_AVERAGE_RATING_ERROR, MOST_REVIEWED_COMPANY_ERROR, TOP_STUDENT_REVIEWERS_ERROR, TOP_CEO_ERROR, MOST_VIEWED_COMPANY_ERROR } from "../types";
+import { BACKEND_URL } from '../../helpers/constants';
 
 export const getReviewsPerDay = () => async dispatch => {
     console.log("analytics -> getReviewsPerDay -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/reviews-per-day')
+        const res = await axios.get(`${BACKEND_URL}/admin/analytics/reviews-per-day`)
 
         dispatch({
             type: REVIEW_PER_DAY,
@@ -23,7 +24,7 @@ export const getReviewsPerDay = () => async dispatch => {
 export const getCompanyAverageRating = () => async dispatch => {
     console.log("analytics -> getCompanyAverageRating -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/best-average-rating?limit=5')
+        const res = await axios.get(`${BACKEND_URL}/admin/analytics/best-average-rating?limit=5`)
 
         dispatch({
             type: COMPANY_AVERAGE_RATING,
@@ -41,7 +42,7 @@ export const getCompanyAverageRating = () => async dispatch => {
 export const getMostReviewedCompany = () => async dispatch => {
     console.log("analytics -> getMostReviewedCompany -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/most-reviewed-company?limit=5')
+        const res = await axios.get(`${BACKEND_URL}/admin/analytics/most-reviewed-company?limit=5`)
 
         dispatch({
             type: MOST_REVIEWED_COMPANY,
@@ -59,7 +60,7 @@ export const getMostReviewedCompany = () => async dispatch => {
 export const getTopStudentReviewers = () => async dispatch => {
     console.log("analytics -> getTopStudentReviewers -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/top-student-reviewer?limit=5')
+        const res = await axios.get(`${BACKEND_URL}/admin/analytics/top-student-reviewer?limit=5`)
 
         dispatch({
             type: TOP_STUDENT_REVIEWERS,
@@ -77,7 +78,7 @@ export const getTopStudentReviewers = () => async dispatch => {
 export const getTopCeo = () => async dispatch => {
     console.log("analytics -> getTopCeo -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/top-ceo?limit=10')
+        const res = await axios.get(`${BACKEND_URL}/admin/analytics/top-ceo?limit=10`)
 
         dispatch({
             type: TOP_CEO,
@@ -95,7 +96,7 @@ export const getTopCeo = () => async dispatch => {
 export const getMostViewedcompany = () => async dispatch => {
     console.log("analytics -> getMostViewedcompany -> method entered");
     try {
-        const res = await axios.get('/admin/analytics/top-viewed-company?limit=10')
+        const res = await axios.get(`${BACKEND_URL}/admin/analytics/top-viewed-company?limit=10`)
 
         dispatch({
             type: MOST_VIEWED_COMPANY,
