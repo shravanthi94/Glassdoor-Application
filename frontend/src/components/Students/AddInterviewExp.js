@@ -132,11 +132,11 @@ class AddInterviewExp extends Component {
         var final_msg = "";
 
         if (this.state.isRedirect) {
-            redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { company_id: this.state.company_id } }} />
+            redirectVar = <Redirect to={{ pathname: this.state.redirectPath, state: { company_id: this.props.company.overview._id } }} />
         }
 
         if(this.state.submitted && this.props.addFlag){
-            redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.state.company_id } }} />
+            redirectVar = <Redirect to={{ pathname: "/companyOverview", state: { data: this.props.company.overview._id } }} />
         } else if (this.state.submitted && !this.props.addFlag) {
             final_msg = <div class="alert alert-danger" role="alert">{this.props.addMsg}</div>
         }
