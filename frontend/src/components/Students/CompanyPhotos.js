@@ -11,7 +11,6 @@ import { BACKEND_URL } from '../../helpers/constants';
 import Navigation from './Navigation';
 import UtilityBar from './UtilityBar';
 import Pagination from 'react-js-pagination';
-import { BACKEND_URL } from '../../helpers/constants';
 import defaultImage from '../images/default_banner.jpg';
 import CompanySideBar from '../Common/CompanySideBar';
 
