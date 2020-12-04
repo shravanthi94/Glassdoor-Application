@@ -59,14 +59,14 @@ router.get("/:resume", checkAuth, async (req, res) => {
 }); */
 
 var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        console.log('call back');
-        cb(null, '../frontend/src/components/files');
-    },
-    filename: function(req, file, cb) {
-        console.log('cb file name: ', file);
-        cb(null, Date.now() + '_' + file.originalname);
-    },
+  destination: function (req, file, cb) {
+    console.log('call back');
+    cb(null, `${path.join(__dirname, '../..')}/public/uploads/files`);
+  },
+  filename: function (req, file, cb) {
+    console.log('cb file name: ', file);
+    cb(null, Date.now() + '_' + file.originalname);
+  },
 });
 
 const maxSize = 1 * 10000 * 10000;
