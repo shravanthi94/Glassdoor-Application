@@ -56,7 +56,7 @@ const ViewApplicants = ({
                                                     <tr className="card-title"><td>"{applicant.student.email}"</td></tr>
                                                    
                                                     {applicant.resume &&<tr className="card-title"><td><a href={`${BACKEND_URL}/student/jobs/company/${applicant.resume}`} target="_blank" download >Download Resume</a></td></tr>}
-                                                   {applicant.cover && <tr className="card-title"><td><a href={`${BACKEND_URL}/student/jobs/company/${applicant.cover}`} target="_blank" download >Download Cover</a></td></tr>}
+                                                   {applicant.coverLetter && <tr className="card-title"><td><a href={`${BACKEND_URL}/student/jobs/company/${applicant.coverLetter}`} target="_blank" download >Download Cover</a></td></tr>}
                                     
                                                     <tr><td><h6 className="card-title font-weight-bold">Application Status: {applicant.applicantStatus}</h6></td>
                                                         <td><Link to={`/updateStatus/${applicant._id}`} className='compnay-view-button ml-7'>Update Status</Link></td>
@@ -104,7 +104,7 @@ const ViewApplicants = ({
                                 </Fragment>: 
                                 <Fragment> 
                                 <h6 className='joblisting-title-company'>{companyjob? companyjob.title:''} &emsp;
-                                <Link className='compnay-view-button ml-7'> Update Status</Link> </h6>
+                                {/* <Link className='compnay-view-button ml-7'> Update Status</Link> */} </h6>
                                 <hr/>
                                 <div className='font-weight-bold'>Job Preference: </div>
                                 {profile? 
