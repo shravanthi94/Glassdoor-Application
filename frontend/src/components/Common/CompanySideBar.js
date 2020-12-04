@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import '../CSS/overview.css';
-
+import { BACKEND_URL } from '../../helpers/constants';
+import defaultImage from '../images/default_banner.jpg';
+import defaultLogo from '../images/default_logo.png';
 
 class CompanySideBar extends Component {
 
