@@ -17,6 +17,11 @@ const studentProfile = require('./services/student/profile');
 // Company files import
 const jobApplicant = require('./services/company/applicant');
 const jobs = require('./services/company/jobPosting');
+const interviews = require('./services/company/interview');
+const salary = require('./services/company/salary');
+const overview = require('./services/company/overview');
+const companyprofile = require('./services/company/profile');
+const companyreviews = require('./services/company/reviews');
 
 const { mongoURI } = require('./config/configuration');
 const mongoose = require('mongoose');
@@ -43,31 +48,29 @@ const mongoose = require('mongoose');
 connectDB();
 
 function handleTopicRequest(topic_name, fname) {
-  //var topic_name = 'root_topic';
-  var consumer = connection.getConsumer(topic_name);
-  var producer = connection.getProducer();
-  console.log('Kafka Server is running ');
-  consumer.on('message', function (message) {
-    console.log('Message received for ' + topic_name);
-    var data = JSON.parse(message.value);
+    //var topic_name = 'root_topic';
+    var consumer = connection.getConsumer(topic_name);
+    var producer = connection.getProducer();
+    console.log('Kafka Server is running ');
+    consumer.on('message', function(message) {
+        console.log('Message received for ' + topic_name);
+        var data = JSON.parse(message.value);
 
-    fname.handle_request(data.data, function (err, res) {
-      var payloads = [
-        {
-          topic: data.replyTo,
-          messages: JSON.stringify({
-            correlationId: data.correlationId,
-            data: res,
-          }),
-          partition: 0,
-        },
-      ];
-      producer.send(payloads, function (err, data) {
-        console.log('DATA', data);
-      });
-      return;
+        fname.handle_request(data.data, function(err, res) {
+            var payloads = [{
+                topic: data.replyTo,
+                messages: JSON.stringify({
+                    correlationId: data.correlationId,
+                    data: res,
+                }),
+                partition: 0,
+            }, ];
+            producer.send(payloads, function(err, data) {
+                console.log('DATA', data);
+            });
+            return;
+        });
     });
-  });
 }
 
 // Authorization
@@ -83,6 +86,12 @@ handleTopicRequest('adminReviews', AdminReviews);
 //Company topics Start
 handleTopicRequest('jobapplicant', jobApplicant);
 handleTopicRequest('companyJobPosting', jobs);
+handleTopicRequest('interviewStudent', interviews)
+handleTopicRequest('salaryStudent', salary)
+handleTopicRequest('overviewCompanyStudent', overview)
+handleTopicRequest('companyProfile', companyprofile)
+handleTopicRequest('companyReviews', companyreviews)
+
 //Company topics End
 
 //Student topics Start

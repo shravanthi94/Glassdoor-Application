@@ -1,9 +1,13 @@
 /* eslint-disable max-len */
+
+// Is this being used ???
+
 const express = require('express');
 
 const router = express.Router();
 const JobPosting = require('../../models/JobPostingModel');
 const { companyAuth, companyCheckAuth } = require('../../middleware/companyAuth');
+const kafka = require('../../kafka/client');
 
 companyAuth();
 // companyCheckAuth
@@ -12,23 +16,44 @@ companyAuth();
 // @Desc   Get all the salary details of company
 // @access Private
 
-router.get('/:id', companyCheckAuth, async (req, res) => {
-    try {
-        console.log("company id: ", req.params.id);
-        const jobPosting = await JobPosting.find({ "company": req.params.id });
+router.get('/:id', companyCheckAuth, async(req, res) => {
+    // try {
+    //     console.log("company id: ", req.params.id);
+    //     const jobPosting = await JobPosting.find({ "company": req.params.id });
 
-        if (!jobPosting) {
-            return res.status(400).json({ msg: 'No job posted yet!' });
-        }else{
+    //     if (!jobPosting) {
+    //         return res.status(400).json({ msg: 'No job posted yet!' });
+    //     }else{
 
-            console.log("company job postings: ", jobPosting);
-            res.status(200).json(jobPosting);
+    //         console.log("company job postings: ", jobPosting);
+    //         res.status(200).json(jobPosting);
+    //     }
+
+    // } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send('Server Error: Database');
+    // }
+
+    const payload = {
+        topic: 'getSalaryByCompanyId',
+        params: req.params,
+    };
+    console.log("get salraries by companyid", payload)
+    kafka.make_request('salaryStudent', payload, (err, results) => {
+        console.log('in result');
+        if (err) {
+            console.log('Inside err');
+            res.status(500).send('System Error, Try Again.');
+        } else {
+            if (results.status === 400) {
+                return res.status(400).json({ msg: results.message });
+            }
+            if (results.status === 500) {
+                return res.status(500).send('Server Error: Database');
+            }
+            res.status(200).json(results.message);
         }
-        
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error: Database');
-    }
+    });
 });
 
 
@@ -61,7 +86,7 @@ router.get('/:id', companyCheckAuth, async (req, res) => {
 //                 return res.status(200).json({ msg: "Salary detail successfully added" });
 //             }
 //         });
-        
+
 //     } catch (err) {
 //         console.error(err.message);
 //         res.status(500).send('Server Error: Database');
